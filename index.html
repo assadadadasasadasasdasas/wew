@@ -25,114 +25,73 @@
     letter-spacing: 10px;
     color: #d4b896;
   }
-  header span {
-    font-size: 12px;
-    color: #666;
-    letter-spacing: 2px;
-  }
-  .container {
-    max-width: 540px;
-    margin: 0 auto;
-    padding: 30px 20px;
-  }
-  .label {
-    font-size: 12px;
-    color: #888;
-    letter-spacing: 2px;
-    margin-bottom: 12px;
-  }
-  .hats {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 30px;
-  }
+  header span { font-size: 12px; color: #666; letter-spacing: 2px; }
+  .container { max-width: 540px; margin: 0 auto; padding: 30px 20px; }
+  .label { font-size: 12px; color: #888; letter-spacing: 2px; margin-bottom: 12px; }
+  .hats { display: flex; gap: 12px; margin-bottom: 30px; }
   .hat-card {
-    flex: 1;
-    padding: 16px;
-    border: 1px solid #333;
-    background: #111;
-    cursor: pointer;
-    text-align: center;
-    border-radius: 6px;
-    transition: all 0.2s;
+    flex: 1; padding: 16px;
+    border: 1px solid #333; background: #111;
+    cursor: pointer; text-align: center; border-radius: 6px;
   }
-  .hat-card.active {
-    border: 2px solid #d4b896;
-    background: rgba(212,184,150,0.05);
-  }
+  .hat-card.active { border: 2px solid #d4b896; background: rgba(212,184,150,0.05); }
   .hat-card p { margin-top: 8px; font-size: 14px; }
   .hat-card .price { font-size: 13px; color: #d4b896; margin-top: 4px; }
   .upload-box {
-    border: 2px dashed #333;
-    border-radius: 8px;
-    padding: 60px 20px;
-    text-align: center;
-    cursor: pointer;
-    background: #111;
-    transition: border-color 0.2s;
+    border: 2px dashed #333; border-radius: 8px;
+    padding: 60px 20px; text-align: center;
+    cursor: pointer; background: #111;
   }
   .upload-box:hover { border-color: #d4b896; }
-  .upload-box .icon { font-size: 40px; margin-bottom: 12px; }
-  .upload-box p { color: #aaa; font-size: 16px; }
-  .upload-box .sub { color: #666; font-size: 13px; margin-top: 8px; }
   #fileInput { display: none; }
-  .editor { display: none; }
-  .editor.show { display: block; }
   #canvas {
-    width: 100%;
-    border-radius: 8px;
-    border: 1px solid #222;
-    cursor: grab;
+    width: 100%; border-radius: 8px;
+    border: 1px solid #222; cursor: grab;
   }
   #canvas.grabbing { cursor: grabbing; }
   .size-controls {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-    margin-top: 16px;
+    display: flex; align-items: center;
+    justify-content: center; gap: 16px; margin-top: 16px;
   }
   .size-btn {
-    width: 36px; height: 36px;
-    border-radius: 50%;
-    background: #1a1a1a;
-    border: 1px solid #333;
-    color: #ddd;
-    font-size: 18px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 36px; height: 36px; border-radius: 50%;
+    background: #1a1a1a; border: 1px solid #333;
+    color: #ddd; font-size: 18px; cursor: pointer;
   }
   .size-btn:hover { border-color: #d4b896; }
-  .buttons {
-    display: flex;
-    gap: 12px;
-    margin-top: 20px;
-  }
+  .buttons { display: flex; gap: 12px; margin-top: 20px; }
   .btn-primary {
-    flex: 1; padding: 14px;
-    background: #d4b896; color: #0c0c0c;
-    border: none; border-radius: 6px;
-    font-size: 14px; font-weight: 600;
-    cursor: pointer; font-family: Georgia, serif;
+    flex: 1; padding: 14px; background: #d4b896; color: #0c0c0c;
+    border: none; border-radius: 6px; font-size: 14px;
+    font-weight: 600; cursor: pointer; font-family: Georgia, serif;
   }
-  .btn-primary:hover { background: #c4a886; }
   .btn-secondary {
-    flex: 1; padding: 14px;
-    background: transparent; color: #aaa;
+    flex: 1; padding: 14px; background: transparent; color: #aaa;
     border: 1px solid #333; border-radius: 6px;
-    font-size: 14px; cursor: pointer;
-    font-family: Georgia, serif;
+    font-size: 14px; cursor: pointer; font-family: Georgia, serif;
   }
-  .btn-secondary:hover { border-color: #666; }
+  .editor { display: none; }
+  .editor.show { display: block; }
+  .loading {
+    text-align: center; padding: 30px; color: #d4b896;
+  }
+  .spinner {
+    display: inline-block; width: 24px; height: 24px;
+    border: 2px solid #333; border-top-color: #d4b896;
+    border-radius: 50%; animation: spin 0.8s linear infinite;
+    margin-bottom: 12px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .status {
+    text-align: center; padding: 8px;
+    font-size: 12px; color: #666; letter-spacing: 1px;
+    margin-bottom: 16px;
+  }
+  .status.ready { color: #6a6; }
+  .status.error { color: #a66; }
   footer {
-    text-align: center;
-    font-size: 11px;
-    color: #444;
-    margin-top: 60px;
-    letter-spacing: 2px;
-    padding-bottom: 20px;
+    text-align: center; font-size: 11px; color: #444;
+    margin-top: 60px; letter-spacing: 2px; padding-bottom: 20px;
   }
 </style>
 </head>
@@ -144,6 +103,8 @@
 </header>
 
 <div class="container">
+
+  <div class="status" id="modelStatus">Yüz tanıma modeli yükleniyor...</div>
 
   <p class="label">ŞAPKA SEÇ</p>
   <div class="hats">
@@ -168,14 +129,19 @@
   </div>
 
   <div class="upload-box" id="uploadBox" onclick="document.getElementById('fileInput').click()">
-    <div class="icon">📷</div>
-    <p>Fotoğrafını Yükle</p>
-    <p class="sub">Tıkla veya sürükle bırak</p>
+    <p style="font-size:40px;margin-bottom:12px">📷</p>
+    <p style="font-size:16px;color:#aaa">Fotoğrafını Yükle</p>
+    <p style="font-size:13px;color:#666;margin-top:8px">AI yüzünü bulup şapkayı otomatik yerleştirecek</p>
   </div>
   <input type="file" id="fileInput" accept="image/*">
 
+  <div class="loading" id="loadingBox" style="display:none">
+    <div class="spinner"></div>
+    <p>Yüz algılanıyor...</p>
+  </div>
+
   <div class="editor" id="editor">
-    <p class="label">ŞAPKAYI SÜRÜKLE VE YERLEŞTİR</p>
+    <p class="label">ŞAPKAYI SÜRÜKLE VE AYARLA</p>
     <canvas id="canvas"></canvas>
     <div class="size-controls">
       <button class="size-btn" onclick="changeSize(-0.1)">−</button>
@@ -191,36 +157,54 @@
   <footer>© 2026 IANUS</footer>
 </div>
 
+<!-- MediaPipe kütüphanesi -->
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@latest/vision_bundle.js" crossorigin="anonymous"></script>
+
 <script>
+// ========== DEĞİŞKENLER ==========
 var currentHat = "black";
 var hatScale = 1;
 var hatX = 150, hatY = 30;
 var dragging = false;
-var offsetX = 0, offsetY = 0;
+var offX = 0, offY = 0;
 var userImage = null;
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
+var faceLandmarker = null;
+var modelReady = false;
 
-function selectHat(id) {
-  currentHat = id;
-  document.getElementById("card-black").className = id === "black" ? "hat-card active" : "hat-card";
-  document.getElementById("card-white").className = id === "white" ? "hat-card active" : "hat-card";
-  if (userImage) redraw();
+// ========== 1) MODEL YÜKLE ==========
+async function initModel() {
+  try {
+    var visionLib = window.vision || self.vision;
+    var resolver = await visionLib.FilesetResolver.forVisionTasks(
+      "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@latest/wasm"
+    );
+    faceLandmarker = await visionLib.FaceLandmarker.createFromOptions(resolver, {
+      baseOptions: {
+        modelAssetPath: "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task",
+        delegate: "GPU"
+      },
+      runningMode: "IMAGE",
+      numFaces: 1
+    });
+    modelReady = true;
+    document.getElementById("modelStatus").textContent = "✓ Yüz tanıma hazır";
+    document.getElementById("modelStatus").className = "status ready";
+  } catch (err) {
+    console.error("Model hatası:", err);
+    document.getElementById("modelStatus").textContent = "⚠ Model yüklenemedi — manuel mod";
+    document.getElementById("modelStatus").className = "status error";
+  }
 }
+initModel();
 
-function changeSize(d) {
-  hatScale = Math.max(0.3, Math.min(2.5, hatScale + d));
-  if (userImage) redraw();
-}
-
-function getHatSize() {
-  return { w: 140 * hatScale, h: 95 * hatScale };
-}
-
+// ========== 2) ŞAPKA ÇİZ ==========
 function drawHat() {
-  var s = getHatSize();
+  var w = 140 * hatScale;
+  var h = 95 * hatScale;
   var dark = currentHat === "black";
-  var x = hatX, y = hatY, w = s.w, h = s.h;
+  var x = hatX, y = hatY;
 
   ctx.save();
   ctx.shadowColor = "rgba(0,0,0,0.4)";
@@ -228,7 +212,6 @@ function drawHat() {
   ctx.shadowOffsetY = 5;
 
   var brimY = y + h * 0.72;
-
   ctx.beginPath();
   ctx.ellipse(x + w / 2, brimY, w * 0.65, h * 0.22, 0, 0, Math.PI * 2);
   ctx.fillStyle = dark ? "#222" : "#ddd";
@@ -255,40 +238,111 @@ function redraw() {
   drawHat();
 }
 
-function getEventPos(e) {
-  var rect = canvas.getBoundingClientRect();
-  var cx = e.touches ? e.touches[0].clientX : e.clientX;
-  var cy = e.touches ? e.touches[0].clientY : e.clientY;
-  var sx = canvas.width / rect.width;
-  var sy = canvas.height / rect.height;
-  return { x: (cx - rect.left) * sx, y: (cy - rect.top) * sy };
-}
+// ========== 3) YÜZ BUL + ŞAPKA YERLEŞTİR ==========
+function detectAndPlace(img) {
+  if (!faceLandmarker || !modelReady) {
+    hatX = canvas.width / 2 - 70;
+    hatY = 30;
+    hatScale = 1;
+    return;
+  }
 
-function onDown(e) {
-  e.preventDefault();
-  var p = getEventPos(e);
-  var s = getHatSize();
-  if (p.x >= hatX && p.x <= hatX + s.w && p.y >= hatY && p.y <= hatY + s.h) {
-    dragging = true;
-    offsetX = p.x - hatX;
-    offsetY = p.y - hatY;
-    canvas.className = "grabbing";
+  try {
+    var result = faceLandmarker.detect(img);
+    if (!result.faceLandmarks || result.faceLandmarks.length === 0) {
+      alert("Yüz bulunamadı! Yüzünüzün net göründüğü bir fotoğraf deneyin.");
+      hatX = canvas.width / 2 - 70;
+      hatY = 30;
+      hatScale = 1;
+      return;
+    }
+
+    var lm = result.faceLandmarks[0];
+
+    // Nokta 10 = alın tepesi, 152 = çene, 234 = sol şakak, 454 = sağ şakak
+    var topX = lm[10].x * canvas.width;
+    var topY = lm[10].y * canvas.height;
+    var chinY = lm[152].y * canvas.height;
+    var faceW = (lm[454].x - lm[234].x) * canvas.width;
+    var faceH = chinY - topY;
+
+    // Şapka boyutu = yüz genişliği × 1.3
+    var targetW = faceW * 1.3;
+    hatScale = targetW / 140;
+
+    var actualW = 140 * hatScale;
+    var actualH = 95 * hatScale;
+
+    // Şapkayı alının üstüne koy
+    hatX = topX - actualW / 2;
+    hatY = topY - actualH * 0.55;
+
+  } catch (err) {
+    console.error("Algılama hatası:", err);
+    hatX = canvas.width / 2 - 70;
+    hatY = 30;
+    hatScale = 1;
   }
 }
 
-function onMove(e) {
-  if (!dragging) return;
-  e.preventDefault();
-  var p = getEventPos(e);
-  hatX = p.x - offsetX;
-  hatY = p.y - offsetY;
-  redraw();
+// ========== 4) DOSYA YÜKLE ==========
+function loadFile(file) {
+  var reader = new FileReader();
+  reader.onload = function (ev) {
+    document.getElementById("uploadBox").style.display = "none";
+    document.getElementById("loadingBox").style.display = "block";
+
+    var img = new Image();
+    img.onload = function () {
+      userImage = img;
+      var maxW = Math.min(500, window.innerWidth - 40);
+      var sc = maxW / img.width;
+      canvas.width = maxW;
+      canvas.height = img.height * sc;
+
+      detectAndPlace(img);
+
+      document.getElementById("loadingBox").style.display = "none";
+      document.getElementById("editor").className = "editor show";
+      redraw();
+    };
+    img.src = ev.target.result;
+  };
+  reader.readAsDataURL(file);
 }
 
-function onUp() {
-  dragging = false;
-  canvas.className = "";
+document.getElementById("fileInput").addEventListener("change", function (e) {
+  if (e.target.files[0]) loadFile(e.target.files[0]);
+});
+
+var ub = document.getElementById("uploadBox");
+ub.addEventListener("dragover", function (e) { e.preventDefault(); ub.style.borderColor = "#d4b896"; });
+ub.addEventListener("dragleave", function () { ub.style.borderColor = "#333"; });
+ub.addEventListener("drop", function (e) {
+  e.preventDefault(); ub.style.borderColor = "#333";
+  if (e.dataTransfer.files[0]) loadFile(e.dataTransfer.files[0]);
+});
+
+// ========== 5) SÜRÜKLEME ==========
+function getPos(e) {
+  var r = canvas.getBoundingClientRect();
+  var cx = e.touches ? e.touches[0].clientX : e.clientX;
+  var cy = e.touches ? e.touches[0].clientY : e.clientY;
+  return { x: (cx - r.left) * (canvas.width / r.width), y: (cy - r.top) * (canvas.height / r.height) };
 }
+function onDown(e) {
+  e.preventDefault();
+  var p = getPos(e), w = 140 * hatScale, h = 95 * hatScale;
+  if (p.x >= hatX && p.x <= hatX + w && p.y >= hatY && p.y <= hatY + h) {
+    dragging = true; offX = p.x - hatX; offY = p.y - hatY;
+    canvas.className = "grabbing";
+  }
+}
+function onMove(e) {
+  if (!dragging) return; e.preventDefault();
+  var p = getPos(e); hatX = p.x - offX; hatY = p.y - offY; redraw();
+}
+function onUp() { dragging = false; canvas.className = ""; }
 
 canvas.addEventListener("mousedown", onDown);
 canvas.addEventListener("mousemove", onMove);
@@ -298,51 +352,21 @@ canvas.addEventListener("touchstart", onDown, { passive: false });
 canvas.addEventListener("touchmove", onMove, { passive: false });
 canvas.addEventListener("touchend", onUp);
 
-document.getElementById("fileInput").addEventListener("change", function (e) {
-  var file = e.target.files[0];
-  if (!file) return;
-  loadFile(file);
-});
-
-var uploadBox = document.getElementById("uploadBox");
-uploadBox.addEventListener("dragover", function (e) { e.preventDefault(); uploadBox.style.borderColor = "#d4b896"; });
-uploadBox.addEventListener("dragleave", function () { uploadBox.style.borderColor = "#333"; });
-uploadBox.addEventListener("drop", function (e) {
-  e.preventDefault();
-  uploadBox.style.borderColor = "#333";
-  var file = e.dataTransfer.files[0];
-  if (file) loadFile(file);
-});
-
-function loadFile(file) {
-  var reader = new FileReader();
-  reader.onload = function (ev) {
-    var img = new Image();
-    img.onload = function () {
-      userImage = img;
-      var maxW = Math.min(500, window.innerWidth - 40);
-      var scale = maxW / img.width;
-      canvas.width = maxW;
-      canvas.height = img.height * scale;
-      hatX = canvas.width / 2 - 70;
-      hatY = 30;
-      hatScale = 1;
-      document.getElementById("uploadBox").style.display = "none";
-      document.getElementById("editor").className = "editor show";
-      redraw();
-    };
-    img.src = ev.target.result;
-  };
-  reader.readAsDataURL(file);
+// ========== 6) BUTONLAR ==========
+function selectHat(id) {
+  currentHat = id;
+  document.getElementById("card-black").className = id === "black" ? "hat-card active" : "hat-card";
+  document.getElementById("card-white").className = id === "white" ? "hat-card active" : "hat-card";
+  if (userImage) redraw();
 }
-
+function changeSize(d) {
+  hatScale = Math.max(0.3, Math.min(2.5, hatScale + d));
+  if (userImage) redraw();
+}
 function downloadImage() {
-  var a = document.createElement("a");
-  a.download = "ianus-sapka.png";
-  a.href = canvas.toDataURL();
-  a.click();
+  var a = document.createElement("a"); a.download = "ianus-sapka.png";
+  a.href = canvas.toDataURL(); a.click();
 }
-
 function resetPhoto() {
   userImage = null;
   document.getElementById("uploadBox").style.display = "block";
@@ -350,6 +374,7 @@ function resetPhoto() {
   document.getElementById("fileInput").value = "";
 }
 </script>
-
+</body>
+</html>
 </body>
 </html>
