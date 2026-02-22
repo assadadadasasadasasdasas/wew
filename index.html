@@ -1,480 +1,255 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="tr" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CALEJON — Premium Şapka</title>
-<meta name="description" content="Calejon - Yapay zeka destekli sanal şapka deneme. Premium el yapımı şapkalar.">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg: #080706;
-  --surface: #0f0e0c;
-  --surface2: #161412;
-  --border: rgba(193,163,120,0.12);
-  --gold: #c1a378;
-  --gold-light: #d4bc96;
-  --gold-dim: rgba(193,163,120,0.4);
-  --text: #e8e2d8;
-  --text-dim: rgba(232,226,216,0.45);
-  --text-mid: rgba(232,226,216,0.65);
-  --accent: #8b3a3a;
-  --success: #5a8a5a;
-  --font-display: 'Playfair Display', serif;
-  --font-body: 'DM Sans', sans-serif;
-  --font-accent: 'Instrument Serif', serif;
+/* ====== THEME VARIABLES ====== */
+:root, [data-theme="dark"] {
+  --bg:#080706; --surface:#0f0e0c; --surface2:#161412;
+  --border:rgba(193,163,120,0.12); --gold:#c1a378; --gold-light:#d4bc96;
+  --gold-dim:rgba(193,163,120,0.4); --text:#e8e2d8;
+  --text-dim:rgba(232,226,216,0.45); --text-mid:rgba(232,226,216,0.65);
+  --accent:#8b3a3a; --success:#5a8a5a;
+  --card-bg:#0f0e0c; --input-bg:#111; --input-border:#222;
+  --shadow:rgba(0,0,0,0.4); --invert:0;
 }
+[data-theme="light"] {
+  --bg:#f5f2ed; --surface:#ffffff; --surface2:#f0ebe3;
+  --border:rgba(120,100,70,0.15); --gold:#8a6d3b; --gold-light:#a0813f;
+  --gold-dim:rgba(120,100,70,0.4); --text:#1a1714;
+  --text-dim:rgba(26,23,20,0.5); --text-mid:rgba(26,23,20,0.7);
+  --accent:#a04040; --success:#3a7a3a;
+  --card-bg:#fff; --input-bg:#f8f5f0; --input-border:#d5d0c8;
+  --shadow:rgba(0,0,0,0.08); --invert:1;
+}
+
 * { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior: smooth; }
-body { background:var(--bg); color:var(--text); font-family:var(--font-body); overflow-x:hidden; }
-::selection { background:rgba(193,163,120,0.25); }
+html { scroll-behavior:smooth; }
+body { background:var(--bg); color:var(--text); font-family:'DM Sans',sans-serif; overflow-x:hidden; transition:background .4s,color .4s; }
+::selection { background:rgba(193,163,120,.25); }
 ::-webkit-scrollbar { width:5px; }
 ::-webkit-scrollbar-track { background:var(--bg); }
-::-webkit-scrollbar-thumb { background:#2a2520; border-radius:3px; }
+::-webkit-scrollbar-thumb { background:var(--gold-dim); border-radius:3px; }
 
-/* ANIMATIONS */
-@keyframes fadeUp { from{opacity:0;transform:translateY(40px)} to{opacity:1;transform:translateY(0)} }
-@keyframes fadeIn { from{opacity:0} to{opacity:1} }
-@keyframes slideRight { from{opacity:0;transform:translateX(-30px)} to{opacity:1;transform:translateX(0)} }
-@keyframes float { 0%,100%{transform:translateY(0) rotate(-1deg)} 50%{transform:translateY(-14px) rotate(1deg)} }
-@keyframes pulse { 0%,100%{opacity:.3} 50%{opacity:.8} }
-@keyframes spin { to{transform:rotate(360deg)} }
-@keyframes shimmer { 0%{background-position:-200% 0} 100%{background-position:200% 0} }
-@keyframes grain { 0%,100%{transform:translate(0,0)} 20%{transform:translate(-5%,-10%)} 40%{transform:translate(3%,-15%)} 60%{transform:translate(12%,9%)} 80%{transform:translate(-1%,7%)} }
-@keyframes typewriter { from{width:0} to{width:100%} }
-@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
-
-.anim-fade { animation: fadeUp .8s ease-out both; }
-.anim-fade-d1 { animation-delay:.15s; }
-.anim-fade-d2 { animation-delay:.3s; }
-.anim-fade-d3 { animation-delay:.45s; }
-
-/* GRAIN */
-.grain {
-  position:fixed; top:-50%; left:-50%; width:200%; height:200%;
-  background:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.4'/%3E%3C/svg%3E");
-  opacity:.025; pointer-events:none; z-index:9999;
-  animation:grain 8s steps(10) infinite;
-}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes float{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-12px) rotate(1deg)}}
+@keyframes pulse{0%,100%{opacity:.3}50%{opacity:.8}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
 
 /* NAV */
 nav {
-  position:fixed; top:0; left:0; right:0; z-index:500;
-  padding:18px 36px;
-  display:flex; justify-content:space-between; align-items:center;
-  background:linear-gradient(to bottom,rgba(8,7,6,.97),rgba(8,7,6,.6),transparent);
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  padding:16px 32px;display:flex;justify-content:space-between;align-items:center;
+  background:linear-gradient(to bottom,var(--bg),transparent);
   backdrop-filter:blur(12px);
 }
 .logo {
-  font-family:var(--font-display); font-size:26px; font-weight:400;
-  letter-spacing:10px; cursor:pointer;
-  background:linear-gradient(135deg,var(--text),var(--gold));
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  font-family:'Playfair Display',serif;font-size:24px;letter-spacing:10px;cursor:pointer;
+  color:var(--gold);font-weight:400;
 }
-.nav-links { display:flex; gap:28px; align-items:center; }
+.nav-links { display:flex;gap:24px;align-items:center; }
 .nav-links a {
-  font-size:11px; letter-spacing:2.5px; color:var(--text-dim);
-  text-decoration:none; text-transform:uppercase; font-weight:400;
-  transition:color .3s; cursor:pointer;
+  font-size:10px;letter-spacing:2px;color:var(--text-dim);text-decoration:none;
+  text-transform:uppercase;cursor:pointer;transition:color .3s;
 }
 .nav-links a:hover { color:var(--gold); }
-.nav-links a.cta-nav {
-  padding:8px 20px; border:1px solid var(--gold-dim);
-  color:var(--gold); transition:all .3s;
+.theme-toggle {
+  width:36px;height:36px;border-radius:50%;background:var(--surface);
+  border:1px solid var(--border);color:var(--gold);font-size:16px;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s;
 }
-.nav-links a.cta-nav:hover { background:rgba(193,163,120,.1); }
-.hamburger { display:none; cursor:pointer; font-size:22px; color:var(--gold); }
-
-/* MOBILE NAV */
+.theme-toggle:hover { border-color:var(--gold); }
+.hamburger { display:none;cursor:pointer;font-size:20px;color:var(--gold);background:none;border:none; }
 .mobile-menu {
-  display:none; position:fixed; top:0; left:0; right:0; bottom:0;
-  background:rgba(8,7,6,.97); z-index:499;
-  flex-direction:column; align-items:center; justify-content:center; gap:24px;
+  display:none;position:fixed;top:0;left:0;right:0;bottom:0;
+  background:var(--bg);z-index:499;flex-direction:column;
+  align-items:center;justify-content:center;gap:20px;
 }
 .mobile-menu.open { display:flex; }
-.mobile-menu a {
-  font-size:16px; letter-spacing:4px; color:var(--text-mid);
-  text-decoration:none; text-transform:uppercase; padding:12px;
-}
+.mobile-menu a { font-size:15px;letter-spacing:3px;color:var(--text-mid);text-decoration:none;text-transform:uppercase;padding:10px;cursor:pointer; }
 
-/* SECTIONS */
-section { position:relative; }
-.section-label {
-  font-size:10px; letter-spacing:5px; color:var(--gold-dim);
-  text-transform:uppercase; margin-bottom:14px;
-}
-.section-title {
-  font-family:var(--font-display); font-weight:400; letter-spacing:3px;
-  line-height:1.2; margin-bottom:20px;
-}
-.section-desc {
-  color:var(--text-dim); font-size:15px; font-weight:300;
-  line-height:1.9; max-width:560px;
-}
-.divider {
-  width:60px; height:1px; background:linear-gradient(90deg,var(--gold),transparent);
-  margin:16px 0;
-}
+/* COMMON */
+.section-label { font-size:10px;letter-spacing:5px;color:var(--gold-dim);text-transform:uppercase;margin-bottom:12px; }
+.section-title { font-family:'Playfair Display',serif;font-weight:400;letter-spacing:2px;line-height:1.2;margin-bottom:16px; }
+.section-desc { color:var(--text-dim);font-size:14px;font-weight:300;line-height:1.9;max-width:520px; }
+.divider { width:50px;height:1px;background:linear-gradient(90deg,var(--gold),transparent);margin:12px 0; }
 
 /* HERO */
-.hero {
-  height:100vh; display:flex; align-items:center; justify-content:center;
-  text-align:center; position:relative; overflow:hidden;
-}
-.hero-bg {
-  position:absolute; inset:0;
-  background:radial-gradient(ellipse at 30% 20%,rgba(193,163,120,.06) 0%,transparent 60%),
-             radial-gradient(ellipse at 70% 80%,rgba(139,58,58,.04) 0%,transparent 50%);
-}
-.hero-circles {
-  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
-}
-.hero-circles div {
-  position:absolute; border-radius:50%;
-  border:1px solid var(--border);
-  top:50%; left:50%; transform:translate(-50%,-50%);
-}
-.hero-hat { animation:float 5s ease-in-out infinite; margin-bottom:32px; }
+.hero { height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative; }
+.hero-bg { position:absolute;inset:0;background:radial-gradient(ellipse at 30% 20%,rgba(193,163,120,.05) 0%,transparent 60%); }
+.hero-hat { animation:float 5s ease-in-out infinite;margin-bottom:28px; }
 .hero h1 {
-  font-family:var(--font-display); font-size:clamp(52px,9vw,110px);
-  font-weight:400; letter-spacing:16px; line-height:1;
-  background:linear-gradient(135deg,var(--text) 0%,var(--gold) 40%,var(--text) 80%);
-  background-size:200% 200%;
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  font-family:'Playfair Display',serif;font-size:clamp(48px,8vw,100px);
+  font-weight:400;letter-spacing:14px;
+  background:linear-gradient(135deg,var(--text),var(--gold),var(--text));
+  background-size:200%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;
   animation:shimmer 6s ease-in-out infinite;
 }
-.hero-sub {
-  font-size:13px; letter-spacing:7px; color:var(--gold-dim);
-  margin:20px 0 48px; text-transform:uppercase; font-weight:300;
-}
-.hero-btns { display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
+.hero-sub { font-size:12px;letter-spacing:6px;color:var(--gold-dim);margin:16px 0 40px;text-transform:uppercase;font-weight:300; }
 .btn-gold {
-  padding:15px 44px; background:linear-gradient(135deg,var(--gold),#a08050);
-  border:none; color:var(--bg); font-size:11px; letter-spacing:3px;
-  font-weight:600; cursor:pointer; text-transform:uppercase;
-  font-family:var(--font-body); transition:all .4s;
+  padding:14px 40px;background:linear-gradient(135deg,var(--gold),#a08050);border:none;
+  color:#080706;font-size:11px;letter-spacing:3px;font-weight:600;cursor:pointer;
+  text-transform:uppercase;font-family:'DM Sans',sans-serif;transition:all .4s;
 }
-.btn-gold:hover { transform:translateY(-2px); box-shadow:0 12px 40px rgba(193,163,120,.25); }
+.btn-gold:hover { transform:translateY(-2px);box-shadow:0 10px 30px rgba(193,163,120,.2); }
 .btn-outline {
-  padding:15px 44px; background:transparent;
-  border:1px solid var(--gold-dim); color:var(--gold);
-  font-size:11px; letter-spacing:3px; font-weight:400;
-  cursor:pointer; text-transform:uppercase;
-  font-family:var(--font-body); transition:all .4s;
+  padding:14px 40px;background:transparent;border:1px solid var(--gold-dim);color:var(--gold);
+  font-size:11px;letter-spacing:3px;cursor:pointer;text-transform:uppercase;
+  font-family:'DM Sans',sans-serif;transition:all .4s;
 }
-.btn-outline:hover { border-color:var(--gold); background:rgba(193,163,120,.06); }
-.scroll-ind {
-  position:absolute; bottom:36px; left:50%; transform:translateX(-50%);
-  display:flex; flex-direction:column; align-items:center; gap:8px;
-  animation:pulse 2.5s ease-in-out infinite;
-}
-.scroll-ind span { font-size:9px; letter-spacing:3px; color:rgba(255,255,255,.2); }
-.scroll-ind div { width:1px; height:28px; background:linear-gradient(to bottom,var(--gold-dim),transparent); }
+.btn-outline:hover { border-color:var(--gold);background:rgba(193,163,120,.06); }
 
 /* PRODUCTS */
-.products { padding:120px 40px; }
-.products-grid {
-  display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-  gap:28px; max-width:1100px; margin:48px auto 0;
-}
+.products { padding:100px 36px; }
+.products-grid { display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;max-width:1000px;margin:40px auto 0; }
 .product-card {
-  border:1px solid var(--border); background:var(--surface);
-  overflow:hidden; cursor:pointer; transition:all .5s;
-  position:relative;
+  border:1px solid var(--border);background:var(--card-bg);overflow:hidden;cursor:pointer;transition:all .4s;position:relative;
 }
-.product-card:hover { border-color:rgba(193,163,120,.3); transform:translateY(-4px); }
-.product-img {
-  padding:48px 0; text-align:center;
-  background:radial-gradient(circle,rgba(193,163,120,.03),transparent);
-}
-.product-info { padding:24px 28px 28px; }
-.product-name {
-  font-family:var(--font-display); font-size:20px; font-weight:400;
-  letter-spacing:2px; margin-bottom:6px;
-}
-.product-desc { font-size:13px; color:var(--text-dim); font-weight:300; margin-bottom:12px; }
-.product-bottom { display:flex; justify-content:space-between; align-items:center; }
-.product-price { font-size:18px; color:var(--gold); font-weight:300; font-family:var(--font-display); }
-.product-tag {
-  font-size:9px; letter-spacing:2px; color:var(--text-dim);
-  padding:4px 10px; border:1px solid var(--border); text-transform:uppercase;
-}
-.product-badge {
-  position:absolute; top:16px; right:16px;
-  font-size:9px; letter-spacing:2px; padding:4px 10px;
-  background:var(--accent); color:#fff; text-transform:uppercase;
-}
+.product-card:hover { border-color:rgba(193,163,120,.3);transform:translateY(-3px); }
+.product-img { padding:40px 0;text-align:center;background:radial-gradient(circle,rgba(193,163,120,.03),transparent); }
+.product-info { padding:20px 24px; }
+.product-name { font-family:'Playfair Display',serif;font-size:18px;letter-spacing:2px;margin-bottom:4px; }
+.product-desc { font-size:12px;color:var(--text-dim);font-weight:300;margin-bottom:10px; }
+.product-price { font-size:17px;color:var(--gold);font-family:'Playfair Display',serif; }
+.product-badge { position:absolute;top:12px;right:12px;font-size:9px;letter-spacing:2px;padding:3px 8px;background:var(--accent);color:#fff;text-transform:uppercase; }
 
-/* TRY-ON */
-.tryon { padding:100px 40px; background:var(--surface); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
-.tryon-wrap { max-width:700px; margin:0 auto; }
-.tryon-hats { display:flex; gap:12px; margin:24px 0; }
-.tryon-hat {
-  flex:1; padding:14px; border:1px solid #222; background:var(--bg);
-  cursor:pointer; text-align:center; border-radius:6px; transition:all .2s;
-}
-.tryon-hat.active { border-color:var(--gold); background:rgba(193,163,120,.04); }
-.tryon-hat p { font-size:12px; margin-top:6px; }
-.tryon-hat .pr { font-size:12px; color:var(--gold); margin-top:2px; }
-.upload-area {
-  border:2px dashed #252220; border-radius:8px; padding:56px 20px;
-  text-align:center; cursor:pointer; background:var(--bg); transition:border-color .3s;
-}
+/* TRY-ON + AI IMAGE GEN */
+.tryon { padding:80px 36px;background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border); }
+.tryon-wrap { max-width:680px;margin:0 auto; }
+.tryon-hats { display:flex;gap:10px;margin:20px 0; }
+.tryon-hat { flex:1;padding:12px;border:1px solid var(--input-border);background:var(--bg);cursor:pointer;text-align:center;border-radius:6px;transition:all .2s; }
+.tryon-hat.active { border-color:var(--gold);background:rgba(193,163,120,.04); }
+.tryon-hat p { font-size:11px;margin-top:4px; }
+.upload-area { border:2px dashed var(--input-border);border-radius:8px;padding:50px 20px;text-align:center;cursor:pointer;background:var(--bg);transition:border-color .3s; }
 .upload-area:hover { border-color:var(--gold-dim); }
-#tryonFile { display:none; }
-#tryonCanvas { width:100%; border-radius:8px; border:1px solid #1a1816; cursor:grab; }
-#tryonCanvas.grabbing { cursor:grabbing; }
-.tryon-controls { display:flex; align-items:center; justify-content:center; gap:14px; margin-top:14px; }
-.sz-btn {
-  width:34px; height:34px; border-radius:50%; background:var(--bg);
-  border:1px solid #2a2520; color:#ccc; font-size:16px; cursor:pointer;
-}
+#tryonFile,#aiFile { display:none; }
+#tryonCanvas { width:100%;border-radius:8px;border:1px solid var(--input-border);cursor:grab;display:block; }
+.tryon-controls { display:flex;align-items:center;justify-content:center;gap:12px;margin-top:12px; }
+.sz-btn { width:32px;height:32px;border-radius:50%;background:var(--bg);border:1px solid var(--input-border);color:var(--text);font-size:16px;cursor:pointer; }
 .sz-btn:hover { border-color:var(--gold-dim); }
-.tryon-btns { display:flex; gap:10px; margin-top:18px; }
-.tryon-btns button { flex:1; padding:13px; border-radius:6px; font-size:13px; cursor:pointer; font-family:var(--font-body); }
-.tryon-dl { background:var(--gold); color:var(--bg); border:none; font-weight:600; }
-.tryon-reset { background:transparent; color:var(--text-dim); border:1px solid #2a2520; }
-.tryon-share-row { display:flex; gap:8px; margin-top:12px; justify-content:center; }
-.share-btn {
-  padding:8px 16px; border-radius:4px; border:1px solid #2a2520;
-  background:var(--bg); color:var(--text-dim); font-size:11px;
-  cursor:pointer; letter-spacing:1px; transition:all .2s;
-}
-.share-btn:hover { border-color:var(--gold-dim); color:var(--gold); }
-.tryon-status { text-align:center; font-size:11px; color:#555; letter-spacing:1px; margin-bottom:14px; }
-.tryon-status.ok { color:var(--success); }
-.tryon-loading { text-align:center; padding:28px; color:var(--gold); display:none; }
-.spin { display:inline-block; width:20px; height:20px; border:2px solid #222; border-top-color:var(--gold); border-radius:50%; animation:spin .7s linear infinite; margin-bottom:10px; }
+.tryon-btns { display:flex;gap:10px;margin-top:14px; }
+.tryon-btns button { flex:1;padding:12px;border-radius:6px;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif; }
+.tryon-dl { background:var(--gold);color:#080706;border:none;font-weight:600; }
+.tryon-reset { background:transparent;color:var(--text-dim);border:1px solid var(--input-border); }
+.share-row { display:flex;gap:6px;margin-top:10px;justify-content:center;flex-wrap:wrap; }
+.share-btn { padding:6px 14px;border-radius:4px;border:1px solid var(--input-border);background:var(--bg);color:var(--text-dim);font-size:10px;cursor:pointer;letter-spacing:1px;transition:all .2s; }
+.share-btn:hover { border-color:var(--gold-dim);color:var(--gold); }
+.status-bar { text-align:center;font-size:11px;color:#555;letter-spacing:1px;margin-bottom:12px; }
+.status-bar.ok { color:var(--success); }
+.spin-sm { display:inline-block;width:18px;height:18px;border:2px solid var(--input-border);border-top-color:var(--gold);border-radius:50%;animation:spin .7s linear infinite; }
 .editor { display:none; }
 .editor.show { display:block; }
 
-/* AI ASSISTANT */
-.ai-section { padding:100px 40px; }
-.chat-container {
-  max-width:640px; margin:36px auto 0;
-  border:1px solid var(--border); background:var(--surface);
-  border-radius:8px; overflow:hidden;
-}
-.chat-header {
-  padding:16px 20px; border-bottom:1px solid var(--border);
-  display:flex; align-items:center; gap:10px;
-}
-.chat-dot { width:8px; height:8px; border-radius:50%; background:var(--success); }
-.chat-header span { font-size:12px; letter-spacing:2px; color:var(--text-mid); }
-.chat-messages {
-  height:320px; overflow-y:auto; padding:20px;
-  display:flex; flex-direction:column; gap:14px;
-}
-.msg {
-  max-width:82%; padding:12px 16px; border-radius:12px;
-  font-size:14px; line-height:1.7; font-weight:300;
-}
-.msg.bot {
-  align-self:flex-start; background:#1a1816;
-  border-bottom-left-radius:4px; color:var(--text-mid);
-}
-.msg.user {
-  align-self:flex-end; background:rgba(193,163,120,.12);
-  border-bottom-right-radius:4px; color:var(--text);
-}
-.msg.typing .dots { display:inline-flex; gap:4px; }
-.msg.typing .dots span {
-  width:6px; height:6px; border-radius:50%; background:var(--gold-dim);
-  animation:pulse 1.2s ease-in-out infinite;
-}
-.msg.typing .dots span:nth-child(2) { animation-delay:.2s; }
-.msg.typing .dots span:nth-child(3) { animation-delay:.4s; }
-.chat-input-row {
-  display:flex; border-top:1px solid var(--border);
-}
-.chat-input-row input {
-  flex:1; padding:16px 20px; background:transparent;
-  border:none; color:var(--text); font-size:14px;
-  font-family:var(--font-body); outline:none;
-}
-.chat-input-row input::placeholder { color:#444; }
-.chat-input-row button {
-  padding:16px 24px; background:transparent; border:none;
-  border-left:1px solid var(--border); color:var(--gold);
-  cursor:pointer; font-size:12px; letter-spacing:2px;
-  font-family:var(--font-body); transition:background .2s;
-}
-.chat-input-row button:hover { background:rgba(193,163,120,.06); }
+/* AI IMAGE GEN */
+.ai-gen { padding:80px 36px; }
+.ai-gen-wrap { max-width:600px;margin:0 auto; }
+.ai-result { margin-top:20px;text-align:center;display:none; }
+.ai-result img { max-width:100%;border-radius:8px;border:1px solid var(--border); }
+.ai-result.show { display:block; }
+.ai-loading { text-align:center;padding:40px;display:none; }
+.ai-loading.show { display:block; }
+
+/* AI CHAT */
+.ai-section { padding:80px 36px; }
+.chat-container { max-width:600px;margin:32px auto 0;border:1px solid var(--border);background:var(--card-bg);border-radius:8px;overflow:hidden; }
+.chat-header { padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px; }
+.chat-dot { width:8px;height:8px;border-radius:50%;background:#555; }
+.chat-header span { font-size:11px;letter-spacing:2px;color:var(--text-mid); }
+.chat-messages { height:280px;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px; }
+.msg { max-width:82%;padding:10px 14px;border-radius:12px;font-size:13px;line-height:1.7;font-weight:300; }
+.msg.bot { align-self:flex-start;background:var(--surface2);border-bottom-left-radius:4px;color:var(--text-mid); }
+.msg.user { align-self:flex-end;background:rgba(193,163,120,.12);border-bottom-right-radius:4px;color:var(--text); }
+.msg.typing .dots { display:inline-flex;gap:4px; }
+.msg.typing .dots span { width:5px;height:5px;border-radius:50%;background:var(--gold-dim);animation:pulse 1.2s ease-in-out infinite; }
+.msg.typing .dots span:nth-child(2){animation-delay:.2s}
+.msg.typing .dots span:nth-child(3){animation-delay:.4s}
+.chat-input-row { display:flex;border-top:1px solid var(--border); }
+.chat-input-row input { flex:1;padding:14px 16px;background:transparent;border:none;color:var(--text);font-size:13px;font-family:'DM Sans',sans-serif;outline:none; }
+.chat-input-row input::placeholder{color:var(--text-dim)}
+.chat-input-row button { padding:14px 20px;background:transparent;border:none;border-left:1px solid var(--border);color:var(--gold);cursor:pointer;font-size:11px;letter-spacing:2px;font-family:'DM Sans',sans-serif; }
 
 /* FORUM */
-.forum { padding:100px 40px; background:var(--surface); border-top:1px solid var(--border); }
-.forum-container { max-width:800px; margin:36px auto 0; }
-.forum-post-btn {
-  display:inline-block; padding:10px 28px;
-  border:1px solid var(--gold-dim); color:var(--gold);
-  font-size:11px; letter-spacing:2px; cursor:pointer;
-  background:transparent; font-family:var(--font-body);
-  margin-bottom:24px; transition:all .2s;
-}
-.forum-post-btn:hover { background:rgba(193,163,120,.08); }
-.forum-new {
-  display:none; padding:24px; border:1px solid var(--border);
-  background:var(--bg); border-radius:8px; margin-bottom:24px;
-}
-.forum-new.open { display:block; }
-.forum-new input, .forum-new textarea {
-  width:100%; padding:12px 14px; background:#111; border:1px solid #222;
-  border-radius:4px; color:var(--text); font-size:14px;
-  font-family:var(--font-body); margin-bottom:10px; outline:none;
-  resize:vertical;
-}
-.forum-new input:focus, .forum-new textarea:focus { border-color:var(--gold-dim); }
-.forum-new textarea { min-height:80px; }
-.forum-new button {
-  padding:10px 24px; background:var(--gold); color:var(--bg);
-  border:none; border-radius:4px; cursor:pointer; font-size:12px;
-  letter-spacing:1px; font-family:var(--font-body); font-weight:600;
-}
-.forum-thread {
-  border:1px solid var(--border); background:var(--bg);
-  border-radius:6px; margin-bottom:12px; overflow:hidden; transition:all .3s;
-}
-.forum-thread:hover { border-color:rgba(193,163,120,.2); }
-.thread-header {
-  padding:18px 20px; cursor:pointer;
-  display:flex; justify-content:space-between; align-items:center;
-}
-.thread-title { font-size:15px; font-weight:400; }
-.thread-meta { display:flex; gap:16px; align-items:center; }
-.thread-meta span { font-size:11px; color:var(--text-dim); }
-.thread-tag {
-  font-size:9px; padding:3px 8px; border:1px solid var(--border);
-  border-radius:3px; letter-spacing:1px; text-transform:uppercase; color:var(--gold-dim);
-}
-.thread-body { display:none; padding:0 20px 18px; }
-.thread-body.open { display:block; }
-.thread-body p { font-size:14px; color:var(--text-dim); line-height:1.8; font-weight:300; margin-bottom:12px; }
-.reply-box {
-  display:flex; gap:8px; margin-top:10px;
-}
-.reply-box input {
-  flex:1; padding:10px 12px; background:#111; border:1px solid #222;
-  border-radius:4px; color:var(--text); font-size:13px;
-  font-family:var(--font-body); outline:none;
-}
-.reply-box button {
-  padding:10px 16px; background:var(--gold); color:var(--bg);
-  border:none; border-radius:4px; cursor:pointer; font-size:11px;
-  font-family:var(--font-body); font-weight:600;
-}
-.reply-item {
-  padding:10px 14px; margin-top:8px; background:#111;
-  border-radius:4px; border-left:2px solid var(--gold-dim);
-}
-.reply-item .reply-author { font-size:11px; color:var(--gold); margin-bottom:4px; }
-.reply-item .reply-text { font-size:13px; color:var(--text-dim); line-height:1.6; }
+.forum { padding:80px 36px;background:var(--surface);border-top:1px solid var(--border); }
+.forum-container { max-width:760px;margin:32px auto 0; }
+.forum-post-btn { display:inline-block;padding:9px 24px;border:1px solid var(--gold-dim);color:var(--gold);font-size:10px;letter-spacing:2px;cursor:pointer;background:transparent;font-family:'DM Sans',sans-serif;margin-bottom:20px; }
+.forum-new { display:none;padding:20px;border:1px solid var(--border);background:var(--bg);border-radius:8px;margin-bottom:20px; }
+.forum-new.open{display:block}
+.forum-new input,.forum-new textarea { width:100%;padding:10px 12px;background:var(--input-bg);border:1px solid var(--input-border);border-radius:4px;color:var(--text);font-size:13px;font-family:'DM Sans',sans-serif;margin-bottom:8px;outline:none;resize:vertical; }
+.forum-new textarea{min-height:70px}
+.forum-new button { padding:9px 20px;background:var(--gold);color:#080706;border:none;border-radius:4px;cursor:pointer;font-size:11px;font-family:'DM Sans',sans-serif;font-weight:600; }
+.forum-thread { border:1px solid var(--border);background:var(--bg);border-radius:6px;margin-bottom:10px;overflow:hidden; }
+.thread-header { padding:14px 16px;cursor:pointer;display:flex;justify-content:space-between;align-items:center; }
+.thread-title { font-size:14px; }
+.thread-meta span { font-size:10px;color:var(--text-dim);margin-left:12px; }
+.thread-tag { font-size:8px;padding:2px 6px;border:1px solid var(--border);border-radius:3px;letter-spacing:1px;text-transform:uppercase;color:var(--gold-dim); }
+.thread-body { display:none;padding:0 16px 14px; }
+.thread-body.open{display:block}
+.thread-body p { font-size:13px;color:var(--text-dim);line-height:1.8;font-weight:300;margin-bottom:10px; }
+.reply-box { display:flex;gap:6px;margin-top:8px; }
+.reply-box input { flex:1;padding:8px 10px;background:var(--input-bg);border:1px solid var(--input-border);border-radius:4px;color:var(--text);font-size:12px;font-family:'DM Sans',sans-serif;outline:none; }
+.reply-box button { padding:8px 14px;background:var(--gold);color:#080706;border:none;border-radius:4px;cursor:pointer;font-size:10px;font-weight:600; }
+.reply-item { padding:8px 12px;margin-top:6px;background:var(--surface2);border-radius:4px;border-left:2px solid var(--gold-dim); }
+.reply-item .ra { font-size:10px;color:var(--gold);margin-bottom:2px; }
+.reply-item .rt { font-size:12px;color:var(--text-dim);line-height:1.6; }
+
+/* GAMES */
+.games { padding:80px 36px; }
+.games-grid { display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;max-width:1000px;margin:32px auto 0; }
+.game-card { border:1px solid var(--border);background:var(--card-bg);border-radius:8px;overflow:hidden;text-align:center; }
+.game-card h3 { font-family:'Playfair Display',serif;font-size:18px;padding:16px;letter-spacing:2px; }
+.game-card canvas { display:block;width:100%;background:#111;cursor:pointer; }
+.game-controls { padding:12px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap; }
+.game-btn { padding:8px 16px;background:var(--gold);color:#080706;border:none;border-radius:4px;font-size:11px;cursor:pointer;font-weight:600;font-family:'DM Sans',sans-serif; }
+.game-btn.sec { background:transparent;color:var(--text-dim);border:1px solid var(--input-border); }
+.game-score { font-size:12px;color:var(--gold);letter-spacing:2px;padding:4px 12px; }
 
 /* REVIEWS */
-.reviews { padding:100px 40px; }
-.reviews-grid {
-  display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:20px; max-width:1000px; margin:36px auto 0;
-}
-.review-card {
-  padding:28px; border:1px solid var(--border); background:var(--surface);
-}
-.review-stars { color:var(--gold); font-size:14px; letter-spacing:2px; margin-bottom:12px; }
-.review-text { font-size:14px; color:var(--text-dim); line-height:1.8; font-weight:300; font-style:italic; margin-bottom:14px; }
-.review-author { font-size:12px; color:var(--text-mid); letter-spacing:1px; }
+.reviews { padding:80px 36px;background:var(--surface);border-top:1px solid var(--border); }
+.reviews-grid { display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;max-width:900px;margin:32px auto 0; }
+.review-card { padding:24px;border:1px solid var(--border);background:var(--card-bg); }
+.review-stars { color:var(--gold);font-size:13px;margin-bottom:10px; }
+.review-text { font-size:13px;color:var(--text-dim);line-height:1.8;font-weight:300;font-style:italic;margin-bottom:12px; }
+.review-author { font-size:11px;color:var(--text-mid); }
 
 /* NEWSLETTER */
-.newsletter {
-  padding:80px 40px; text-align:center;
-  border-top:1px solid var(--border); border-bottom:1px solid var(--border);
-  background:var(--surface);
-}
-.newsletter-form {
-  display:flex; gap:0; max-width:440px; margin:28px auto 0;
-  border:1px solid var(--border); overflow:hidden;
-}
-.newsletter-form input {
-  flex:1; padding:14px 18px; background:transparent;
-  border:none; color:var(--text); font-size:14px;
-  font-family:var(--font-body); outline:none;
-}
-.newsletter-form input::placeholder { color:#444; }
-.newsletter-form button {
-  padding:14px 28px; background:var(--gold); color:var(--bg);
-  border:none; font-size:11px; letter-spacing:2px;
-  cursor:pointer; font-family:var(--font-body); font-weight:600;
-  text-transform:uppercase;
-}
+.newsletter { padding:60px 36px;text-align:center;border-top:1px solid var(--border);background:var(--surface); }
+.nl-form { display:flex;gap:0;max-width:400px;margin:24px auto 0;border:1px solid var(--border);overflow:hidden; }
+.nl-form input { flex:1;padding:12px 16px;background:transparent;border:none;color:var(--text);font-size:13px;font-family:'DM Sans',sans-serif;outline:none; }
+.nl-form button { padding:12px 24px;background:var(--gold);color:#080706;border:none;font-size:10px;letter-spacing:2px;cursor:pointer;font-weight:600;text-transform:uppercase; }
 
 /* LEGAL */
-.legal { padding:100px 40px; }
-.legal-container { max-width:760px; margin:0 auto; }
-.legal-tabs { display:flex; gap:0; margin:28px 0; border-bottom:1px solid var(--border); }
-.legal-tab {
-  padding:12px 24px; font-size:12px; letter-spacing:2px;
-  color:var(--text-dim); cursor:pointer; border-bottom:2px solid transparent;
-  transition:all .2s; background:none; border-top:none; border-left:none; border-right:none;
-  font-family:var(--font-body); text-transform:uppercase;
-}
-.legal-tab.active { color:var(--gold); border-bottom-color:var(--gold); }
+.legal { padding:80px 36px; }
+.legal-container { max-width:700px;margin:0 auto; }
+.legal-tabs { display:flex;gap:0;margin:24px 0;border-bottom:1px solid var(--border);flex-wrap:wrap; }
+.legal-tab { padding:10px 18px;font-size:11px;letter-spacing:1px;color:var(--text-dim);cursor:pointer;border:none;border-bottom:2px solid transparent;background:none;font-family:'DM Sans',sans-serif;text-transform:uppercase; }
+.legal-tab.active { color:var(--gold);border-bottom-color:var(--gold); }
 .legal-content { display:none; }
-.legal-content.active { display:block; }
-.legal-content h3 {
-  font-family:var(--font-display); font-size:18px; font-weight:400;
-  letter-spacing:1px; margin:28px 0 12px; color:var(--text);
-}
-.legal-content p {
-  font-size:14px; color:var(--text-dim); line-height:1.9; font-weight:300; margin-bottom:10px;
-}
+.legal-content.active{display:block}
+.legal-content h3 { font-family:'Playfair Display',serif;font-size:16px;margin:24px 0 10px;color:var(--text); }
+.legal-content p { font-size:13px;color:var(--text-dim);line-height:1.9;font-weight:300;margin-bottom:8px; }
 
 /* FOOTER */
-footer {
-  padding:60px 40px 30px;
-  border-top:1px solid var(--border);
-}
-.footer-grid {
-  display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-  gap:40px; max-width:1000px; margin:0 auto 40px;
-}
-.footer-col h4 {
-  font-size:11px; letter-spacing:3px; color:var(--gold-dim);
-  text-transform:uppercase; margin-bottom:16px;
-}
-.footer-col a {
-  display:block; font-size:13px; color:var(--text-dim);
-  text-decoration:none; margin-bottom:10px; font-weight:300;
-  transition:color .2s;
-}
-.footer-col a:hover { color:var(--gold); }
-.footer-bottom {
-  text-align:center; padding-top:24px;
-  border-top:1px solid var(--border);
-  font-size:11px; color:#333; letter-spacing:2px;
-}
-.footer-socials {
-  display:flex; gap:16px; margin-top:12px; justify-content:center;
-}
-.footer-socials a {
-  width:36px; height:36px; border-radius:50%;
-  border:1px solid #222; display:flex; align-items:center;
-  justify-content:center; color:var(--text-dim);
-  text-decoration:none; font-size:14px; transition:all .2s;
-}
-.footer-socials a:hover { border-color:var(--gold); color:var(--gold); }
+footer { padding:50px 36px 24px;border-top:1px solid var(--border); }
+.footer-grid { display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:32px;max-width:900px;margin:0 auto 32px; }
+.footer-col h4 { font-size:10px;letter-spacing:3px;color:var(--gold-dim);text-transform:uppercase;margin-bottom:12px; }
+.footer-col a { display:block;font-size:12px;color:var(--text-dim);text-decoration:none;margin-bottom:8px;font-weight:300;cursor:pointer; }
+.footer-col a:hover{color:var(--gold)}
+.footer-bottom { text-align:center;padding-top:20px;border-top:1px solid var(--border);font-size:10px;color:var(--text-dim);letter-spacing:2px; }
 
-/* RESPONSIVE */
 @media(max-width:768px) {
-  .nav-links { display:none; }
-  .hamburger { display:block; }
-  .hero h1 { letter-spacing:8px; }
-  .products-grid { grid-template-columns:1fr; }
-  .footer-grid { grid-template-columns:1fr 1fr; }
-  .legal-tabs { flex-wrap:wrap; }
+  .nav-links{display:none} .hamburger{display:block}
+  .products-grid,.games-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .legal-tabs{flex-wrap:wrap}
 }
 </style>
 </head>
 <body>
-
-<div class="grain"></div>
 
 <!-- NAV -->
 <nav>
@@ -482,51 +257,41 @@ footer {
   <div class="nav-links">
     <a onclick="goTo('products')">Koleksiyon</a>
     <a onclick="goTo('tryon')">Sanal Dene</a>
-    <a onclick="goTo('ai')">AI Asistan</a>
-    <a onclick="goTo('forum')">Topluluk</a>
-    <a onclick="goTo('legal')">Sözleşmeler</a>
-    <a class="cta-nav" onclick="goTo('tryon')">Şapka Dene</a>
+    <a onclick="goTo('aigen')">AI Görsel</a>
+    <a onclick="goTo('ai')">Asistan</a>
+    <a onclick="goTo('games')">Oyunlar</a>
+    <a onclick="goTo('forum')">Forum</a>
+    <a onclick="goTo('legal')">Yasal</a>
+    <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn" title="Tema Değiştir">☀</button>
   </div>
-  <div class="hamburger" onclick="toggleMenu()">☰</div>
+  <div style="display:flex;gap:10px;align-items:center;">
+    <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn2" title="Tema">☀</button>
+    <button class="hamburger" onclick="toggleMenu()">☰</button>
+  </div>
 </nav>
-
-<div class="mobile-menu" id="mobileMenu">
-  <a onclick="goTo('hero');toggleMenu()">Ana Sayfa</a>
+<div class="mobile-menu" id="mobMenu">
   <a onclick="goTo('products');toggleMenu()">Koleksiyon</a>
   <a onclick="goTo('tryon');toggleMenu()">Sanal Dene</a>
+  <a onclick="goTo('aigen');toggleMenu()">AI Görsel</a>
   <a onclick="goTo('ai');toggleMenu()">AI Asistan</a>
-  <a onclick="goTo('forum');toggleMenu()">Topluluk</a>
-  <a onclick="goTo('reviews');toggleMenu()">Yorumlar</a>
-  <a onclick="goTo('legal');toggleMenu()">Sözleşmeler</a>
+  <a onclick="goTo('games');toggleMenu()">Oyunlar</a>
+  <a onclick="goTo('forum');toggleMenu()">Forum</a>
+  <a onclick="goTo('legal');toggleMenu()">Yasal</a>
 </div>
 
 <!-- HERO -->
 <section class="hero" id="hero">
   <div class="hero-bg"></div>
-  <div class="hero-circles">
-    <div style="width:440px;height:440px;"></div>
-    <div style="width:660px;height:660px;"></div>
-    <div style="width:880px;height:880px;"></div>
-  </div>
   <div style="position:relative;z-index:2;">
-    <div class="hero-hat anim-fade">
-      <svg width="160" height="110" viewBox="0 0 180 130">
-        <ellipse cx="90" cy="98" rx="78" ry="22" fill="rgba(193,163,120,.12)"/>
-        <ellipse cx="90" cy="94" rx="73" ry="20" fill="#151310" stroke="rgba(193,163,120,.2)" stroke-width=".5"/>
-        <path d="M22,88 Q14,34 44,14 Q90,-12 136,14 Q166,34 158,88Z" fill="#151310" stroke="rgba(193,163,120,.15)" stroke-width=".5"/>
-        <rect x="22" y="74" width="136" height="10" rx="2" fill="rgba(193,163,120,.15)"/>
-      </svg>
+    <div class="hero-hat">
+      <svg width="140" height="100" viewBox="0 0 180 130"><ellipse cx="90" cy="98" rx="78" ry="22" fill="rgba(193,163,120,.12)"/><ellipse cx="90" cy="94" rx="73" ry="20" fill="var(--surface)" stroke="rgba(193,163,120,.2)" stroke-width=".5"/><path d="M22,88 Q14,34 44,14 Q90,-12 136,14 Q166,34 158,88Z" fill="var(--surface)" stroke="rgba(193,163,120,.15)" stroke-width=".5"/><rect x="22" y="74" width="136" height="10" rx="2" fill="rgba(193,163,120,.15)"/></svg>
     </div>
-    <h1 class="anim-fade anim-fade-d1">CALEJON</h1>
-    <p class="hero-sub anim-fade anim-fade-d2">Yapay Zeka ile Şapkanı Keşfet</p>
-    <div class="hero-btns anim-fade anim-fade-d3">
+    <h1>CALEJON</h1>
+    <p class="hero-sub">Yapay Zeka ile Şapkanı Keşfet</p>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
       <button class="btn-gold" onclick="goTo('tryon')">Şapka Dene</button>
-      <button class="btn-outline" onclick="goTo('products')">Koleksiyon</button>
+      <button class="btn-outline" onclick="goTo('aigen')">AI Görsel Üret</button>
     </div>
-  </div>
-  <div class="scroll-ind">
-    <span>KAYDIR</span>
-    <div></div>
   </div>
 </section>
 
@@ -534,116 +299,42 @@ footer {
 <section class="products" id="products">
   <div style="text-align:center;">
     <span class="section-label">KOLEKSİYON 2026</span>
-    <h2 class="section-title" style="font-size:clamp(32px,4vw,52px);">Essentials</h2>
-    <div class="divider" style="margin:16px auto;"></div>
-    <p class="section-desc" style="margin:0 auto;">Her biri el yapımı, premium kumaşlardan üretilen zamansız tasarımlar.</p>
+    <h2 class="section-title" style="font-size:clamp(28px,4vw,46px);">Essentials</h2>
   </div>
-  <div class="products-grid">
-    <div class="product-card" onclick="goTo('tryon')">
-      <div class="product-badge">YENİ</div>
-      <div class="product-img">
-        <svg width="140" height="90" viewBox="0 0 120 78">
-          <ellipse cx="60" cy="65" rx="55" ry="13" fill="#222"/>
-          <path d="M20,62 Q14,25 35,12 Q60,-2 85,12 Q106,25 100,62Z" fill="#1a1a1a"/>
-          <rect x="20" y="52" width="80" height="6" rx="1" fill="#444"/>
-        </svg>
-      </div>
-      <div class="product-info">
-        <p class="product-name">Midnight Classic</p>
-        <p class="product-desc">Saf siyah, zamansız şıklık. %100 organik pamuk.</p>
-        <div class="product-bottom">
-          <span class="product-price">₺890</span>
-          <span class="product-tag">Sanal Dene →</span>
-        </div>
-      </div>
-    </div>
-    <div class="product-card" onclick="goTo('tryon')">
-      <div class="product-img">
-        <svg width="140" height="90" viewBox="0 0 120 78">
-          <ellipse cx="60" cy="65" rx="55" ry="13" fill="#ddd"/>
-          <path d="M20,62 Q14,25 35,12 Q60,-2 85,12 Q106,25 100,62Z" fill="#f0f0f0"/>
-          <rect x="20" y="52" width="80" height="6" rx="1" fill="#bbb"/>
-        </svg>
-      </div>
-      <div class="product-info">
-        <p class="product-name">Arctic Essential</p>
-        <p class="product-desc">Saf beyaz, minimalist zarafet. %100 organik pamuk.</p>
-        <div class="product-bottom">
-          <span class="product-price">₺890</span>
-          <span class="product-tag">Sanal Dene →</span>
-        </div>
-      </div>
-    </div>
-    <div class="product-card" onclick="goTo('tryon')">
-      <div class="product-badge" style="background:#3a5a3a;">LİMİTED</div>
-      <div class="product-img" style="background:radial-gradient(circle,rgba(139,58,58,.06),transparent);">
-        <svg width="140" height="90" viewBox="0 0 120 78">
-          <ellipse cx="60" cy="65" rx="55" ry="13" fill="#4a3028"/>
-          <path d="M20,62 Q14,25 35,12 Q60,-2 85,12 Q106,25 100,62Z" fill="#5a3a2a"/>
-          <rect x="20" y="52" width="80" height="6" rx="1" fill="#7a5a42"/>
-        </svg>
-      </div>
-      <div class="product-info">
-        <p class="product-name">Terra Signature</p>
-        <p class="product-desc">Toprak tonu, doğal deri bant detayı. Limited edition.</p>
-        <div class="product-bottom">
-          <span class="product-price">₺1.290</span>
-          <span class="product-tag">Sanal Dene →</span>
-        </div>
-      </div>
-    </div>
-  </div>
+  <div class="products-grid" id="prodGrid"></div>
 </section>
 
 <!-- TRY-ON -->
 <section class="tryon" id="tryon">
   <div class="tryon-wrap">
     <div style="text-align:center;">
-      <span class="section-label">YAPAY ZEKA SANAL DENEME</span>
-      <h2 class="section-title" style="font-size:clamp(26px,3.5vw,42px);">Fotoğrafını Yükle, Şapkanı Dene</h2>
-      <p class="section-desc" style="margin:0 auto 8px;">AI yüzünü otomatik algılayıp şapkayı yerleştiriyor. Sonra ince ayar yapabilirsin.</p>
+      <span class="section-label">SANAL DENEME</span>
+      <h2 class="section-title" style="font-size:clamp(24px,3vw,38px);">Fotoğrafını Yükle, Şapkanı Dene</h2>
     </div>
-    <div class="tryon-status" id="modelStatus">Yüz tanıma modeli yükleniyor...</div>
-
-    <p class="label">ŞAPKA SEÇ</p>
-    <div class="tryon-hats">
-      <div class="tryon-hat active" onclick="pickHat('black',this)" id="hc-black">
-        <svg width="60" height="40" viewBox="0 0 120 78"><ellipse cx="60" cy="65" rx="55" ry="13" fill="#222"/><path d="M20,62 Q14,25 35,12 Q60,-2 85,12 Q106,25 100,62Z" fill="#1a1a1a"/><rect x="20" y="52" width="80" height="6" rx="1" fill="#444"/></svg>
-        <p>Siyah</p><p class="pr">₺890</p>
-      </div>
-      <div class="tryon-hat" onclick="pickHat('white',this)" id="hc-white">
-        <svg width="60" height="40" viewBox="0 0 120 78"><ellipse cx="60" cy="65" rx="55" ry="13" fill="#ddd"/><path d="M20,62 Q14,25 35,12 Q60,-2 85,12 Q106,25 100,62Z" fill="#f0f0f0"/><rect x="20" y="52" width="80" height="6" rx="1" fill="#bbb"/></svg>
-        <p>Beyaz</p><p class="pr">₺890</p>
-      </div>
-      <div class="tryon-hat" onclick="pickHat('brown',this)" id="hc-brown">
-        <svg width="60" height="40" viewBox="0 0 120 78"><ellipse cx="60" cy="65" rx="55" ry="13" fill="#4a3028"/><path d="M20,62 Q14,25 35,12 Q60,-2 85,12 Q106,25 100,62Z" fill="#5a3a2a"/><rect x="20" y="52" width="80" height="6" rx="1" fill="#7a5a42"/></svg>
-        <p>Kahve</p><p class="pr">₺1.290</p>
-      </div>
-    </div>
-
+    <div class="status-bar" id="modelStatus">Yüz tanıma yükleniyor...</div>
+    <p style="font-size:10px;letter-spacing:2px;color:var(--text-dim);margin-bottom:8px;">ŞAPKA SEÇ</p>
+    <div class="tryon-hats" id="tryonHats"></div>
     <div id="uploadArea" class="upload-area" onclick="document.getElementById('tryonFile').click()">
-      <p style="font-size:36px;margin-bottom:10px;">📷</p>
-      <p style="font-size:15px;color:#999;">Fotoğrafını Yükle</p>
-      <p style="font-size:12px;color:#555;margin-top:6px;">Tıkla veya sürükle bırak</p>
+      <p style="font-size:32px;margin-bottom:8px;">📷</p>
+      <p style="font-size:14px;color:var(--text-mid);">Fotoğrafını Yükle</p>
+      <p style="font-size:11px;color:var(--text-dim);margin-top:4px;">AI yüzünü bulup şapkayı otomatik yerleştirir</p>
     </div>
     <input type="file" id="tryonFile" accept="image/*">
-
-    <div class="tryon-loading" id="tryonLoading"><div class="spin"></div><p style="font-size:13px;">Yüz algılanıyor...</p></div>
-
+    <div id="tryonLoading" style="text-align:center;padding:24px;display:none;"><div class="spin-sm"></div><p style="font-size:12px;color:var(--gold);margin-top:8px;">Yüz algılanıyor...</p></div>
     <div class="editor" id="tryonEditor">
-      <p class="label">ŞAPKAYI SÜRÜKLE · BOYUTUNU AYARLA</p>
+      <p style="font-size:10px;letter-spacing:2px;color:var(--text-dim);margin-bottom:8px;">SÜRÜKLE · BOYUT AYARLA</p>
       <canvas id="tryonCanvas"></canvas>
       <div class="tryon-controls">
         <button class="sz-btn" onclick="chgSz(-0.1)">−</button>
-        <span style="font-size:11px;color:#555;">Boyut</span>
+        <span style="font-size:11px;color:var(--text-dim);">Boyut</span>
         <button class="sz-btn" onclick="chgSz(0.1)">+</button>
       </div>
       <div class="tryon-btns">
-        <button class="tryon-dl" onclick="dlImg()">Fotoğrafı İndir</button>
+        <button class="tryon-dl" onclick="dlImg()">İndir</button>
         <button class="tryon-reset" onclick="rstImg()">Yeni Fotoğraf</button>
       </div>
-      <div class="tryon-share-row">
-        <button class="share-btn" onclick="shareTo('twitter')">𝕏 Paylaş</button>
+      <div class="share-row">
+        <button class="share-btn" onclick="shareTo('twitter')">𝕏</button>
         <button class="share-btn" onclick="shareTo('facebook')">Facebook</button>
         <button class="share-btn" onclick="shareTo('whatsapp')">WhatsApp</button>
         <button class="share-btn" onclick="shareTo('copy')">Link Kopyala</button>
@@ -652,497 +343,422 @@ footer {
   </div>
 </section>
 
-<!-- AI ASSISTANT -->
+<!-- AI IMAGE GEN -->
+<section class="ai-gen" id="aigen">
+  <div class="ai-gen-wrap">
+    <div style="text-align:center;">
+      <span class="section-label">YAPAY ZEKA GÖRSEL ÜRETİCİ</span>
+      <h2 class="section-title" style="font-size:clamp(24px,3vw,38px);">AI ile Şapka Fotoğrafı Oluştur</h2>
+      <p class="section-desc" style="margin:0 auto 20px;">Yapay zeka sana özel şapka konsepti üretiyor — tamamen ücretsiz, API anahtarı gerekmez!</p>
+    </div>
+    <div style="margin-bottom:16px;">
+      <p style="font-size:10px;letter-spacing:2px;color:var(--text-dim);margin-bottom:8px;">ŞAPKA STİLİ SEÇ</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;" id="aiStyleBtns">
+        <button class="share-btn active" onclick="setAIStyle(this,'siyah klasik şapka')" style="border-color:var(--gold);color:var(--gold);">Siyah Klasik</button>
+        <button class="share-btn" onclick="setAIStyle(this,'beyaz minimalist şapka')">Beyaz Minimal</button>
+        <button class="share-btn" onclick="setAIStyle(this,'kahverengi vintage deri şapka')">Kahve Vintage</button>
+      </div>
+    </div>
+    <div style="margin-bottom:16px;">
+      <p style="font-size:10px;letter-spacing:2px;color:var(--text-dim);margin-bottom:8px;">EK DETAYLAR (opsiyonel)</p>
+      <input type="text" id="aiExtraPrompt" placeholder="Örn: stüdyo ışığı, güneşli park, şehir sokağı..." style="width:100%;padding:12px;background:var(--input-bg);border:1px solid var(--input-border);border-radius:6px;color:var(--text);font-size:13px;font-family:'DM Sans',sans-serif;outline:none;">
+    </div>
+    <div style="display:flex;gap:8px;">
+      <select id="aiGender" style="padding:12px;background:var(--input-bg);border:1px solid var(--input-border);border-radius:6px;color:var(--text);font-size:12px;font-family:'DM Sans',sans-serif;outline:none;">
+        <option value="erkek">Erkek Model</option>
+        <option value="kadın">Kadın Model</option>
+      </select>
+      <button class="btn-gold" onclick="generateAIImage()" style="flex:1;">✨ AI Görsel Üret</button>
+    </div>
+    <div class="ai-loading" id="aiLoading"><div class="spin-sm"></div><p style="font-size:12px;color:var(--gold);margin-top:10px;">AI görsel üretiyor... (10-20 sn)</p></div>
+    <div class="ai-result" id="aiResult">
+      <img id="aiResultImg" alt="AI Generated">
+      <div style="margin-top:12px;display:flex;gap:8px;justify-content:center;">
+        <button class="game-btn" onclick="generateAIImage()">🔄 Yeniden Üret</button>
+        <button class="game-btn sec" onclick="dlAIImg()">İndir</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI CHAT -->
 <section class="ai-section" id="ai">
   <div style="text-align:center;">
     <span class="section-label">YAPAY ZEKA STİL DANIŞMANI</span>
-    <h2 class="section-title" style="font-size:clamp(26px,3.5vw,42px);">Calejon AI Asistan</h2>
-    <p class="section-desc" style="margin:0 auto;">Şapka tavsiyeleri, stil önerileri, beden rehberliği — AI asistanımıza her şeyi sorabilirsin.</p>
+    <h2 class="section-title" style="font-size:clamp(24px,3vw,38px);">Calejon AI Asistan</h2>
+    <p class="section-desc" style="margin:0 auto;">Şapka, stil, beden — AI asistana her şeyi sor. Gemini API ile gerçek yapay zeka!</p>
   </div>
   <div class="chat-container">
     <div class="chat-header">
-      <div class="chat-dot"></div>
-      <span>CALEJON AI — Çevrimiçi</span>
+      <div class="chat-dot" id="chatDot"></div>
+      <span id="chatHeaderText">CALEJON AI</span>
     </div>
-    <div class="chat-messages" id="chatMessages">
-      <div class="msg bot">Merhaba! Ben Calejon AI stil danışmanınızım. 🎩 Şapka tavsiyeleri, stil önerileri veya beden bilgisi hakkında soru sorabilirsiniz.</div>
+    <div id="apiSetup" style="padding:18px;text-align:center;">
+      <p style="font-size:12px;color:var(--text-dim);line-height:1.8;margin-bottom:12px;">Gerçek AI chatbot için <a href="https://aistudio.google.com/apikey" target="_blank" style="color:var(--gold);">Google Gemini API anahtarı al</a> (ücretsiz)</p>
+      <div style="display:flex;gap:6px;"><input type="password" id="apiKeyInput" placeholder="API anahtarı yapıştır..." style="flex:1;padding:10px;background:var(--input-bg);border:1px solid var(--input-border);border-radius:4px;color:var(--text);font-size:12px;font-family:'DM Sans',sans-serif;outline:none;"><button onclick="connectAI()" style="padding:10px 16px;background:var(--gold);color:#080706;border:none;border-radius:4px;cursor:pointer;font-size:11px;font-weight:600;">Bağla</button></div>
+      <button onclick="skipAI()" style="margin-top:8px;background:none;border:none;color:#555;font-size:10px;cursor:pointer;text-decoration:underline;">API olmadan devam et</button>
     </div>
-    <div class="chat-input-row">
-      <input type="text" id="chatInput" placeholder="Mesajınızı yazın..." onkeydown="if(event.key==='Enter')sendChat()">
-      <button onclick="sendChat()">GÖNDER</button>
+    <div id="chatArea" style="display:none;">
+      <div class="chat-messages" id="chatMessages"><div class="msg bot">Merhaba! Ben Calejon AI stil danışmanınızım 🎩 Ne sormak istersin?</div></div>
+      <div class="chat-input-row"><input type="text" id="chatInput" placeholder="Mesajınızı yazın..." onkeydown="if(event.key==='Enter')sendChat()"><button onclick="sendChat()">GÖNDER</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- GAMES -->
+<section class="games" id="games">
+  <div style="text-align:center;">
+    <span class="section-label">EĞLENCE KÖŞESİ</span>
+    <h2 class="section-title" style="font-size:clamp(24px,3vw,38px);">Mini Oyunlar</h2>
+    <p class="section-desc" style="margin:0 auto;">Şapka denerken biraz da eğlen!</p>
+  </div>
+  <div class="games-grid">
+    <!-- AIR HOCKEY -->
+    <div class="game-card">
+      <h3>🏒 Masa Hokeyi</h3>
+      <canvas id="hockeyCanvas" width="360" height="500"></canvas>
+      <div class="game-score" id="hockeyScore">Sen: 0 — Rakip: 0</div>
+      <div class="game-controls"><button class="game-btn" onclick="startHockey()">Başlat</button><button class="game-btn sec" onclick="resetHockey()">Sıfırla</button></div>
+    </div>
+    <!-- PLATFORMER -->
+    <div class="game-card">
+      <h3>🎮 Platform Koşusu</h3>
+      <canvas id="platformCanvas" width="360" height="400"></canvas>
+      <div class="game-score" id="platformScore">Puan: 0</div>
+      <div class="game-controls"><button class="game-btn" onclick="startPlatform()">Başlat</button><button class="game-btn sec" onclick="resetPlatform()">Sıfırla</button></div>
+    </div>
+    <!-- FOOTBALL -->
+    <div class="game-card">
+      <h3>⚽ Penaltı Atışı</h3>
+      <canvas id="footballCanvas" width="360" height="400"></canvas>
+      <div class="game-score" id="footballScore">Gol: 0 / 5 — Kaçan: 0</div>
+      <div class="game-controls"><button class="game-btn" onclick="startFootball()">Başlat</button><button class="game-btn sec" onclick="resetFootball()">Sıfırla</button></div>
     </div>
   </div>
 </section>
 
 <!-- FORUM -->
 <section class="forum" id="forum">
-  <div style="text-align:center;">
-    <span class="section-label">TOPLULUK</span>
-    <h2 class="section-title" style="font-size:clamp(26px,3.5vw,42px);">Calejon Forum</h2>
-    <p class="section-desc" style="margin:0 auto;">Stil paylaşımları, kombinasyon önerileri, sorular ve daha fazlası.</p>
-  </div>
+  <div style="text-align:center;"><span class="section-label">TOPLULUK</span><h2 class="section-title" style="font-size:clamp(24px,3vw,38px);">Forum</h2></div>
   <div class="forum-container">
-    <button class="forum-post-btn" onclick="toggleForumNew()">+ Yeni Konu Aç</button>
-    <div class="forum-new" id="forumNew">
-      <input type="text" id="forumTitle" placeholder="Konu başlığı...">
-      <textarea id="forumBody" placeholder="Mesajınız..."></textarea>
-      <div style="display:flex;gap:8px;align-items:center;">
-        <select id="forumTag" style="padding:10px;background:#111;border:1px solid #222;color:#ccc;border-radius:4px;font-family:var(--font-body);font-size:12px;">
-          <option value="Stil">Stil</option>
-          <option value="Soru">Soru</option>
-          <option value="Kombinasyon">Kombinasyon</option>
-          <option value="Genel">Genel</option>
-        </select>
-        <button onclick="postThread()">Paylaş</button>
-      </div>
-    </div>
-    <div id="forumThreads">
-      <!-- Default threads -->
-    </div>
+    <button class="forum-post-btn" onclick="toggleForumNew()">+ Yeni Konu</button>
+    <div class="forum-new" id="forumNew"><input type="text" id="fTitle" placeholder="Başlık..."><textarea id="fBody" placeholder="Mesaj..."></textarea><button onclick="postThread()">Paylaş</button></div>
+    <div id="forumThreads"></div>
   </div>
 </section>
 
 <!-- REVIEWS -->
 <section class="reviews" id="reviews">
-  <div style="text-align:center;">
-    <span class="section-label">MÜŞTERI YORUMLARI</span>
-    <h2 class="section-title" style="font-size:clamp(26px,3.5vw,42px);">Neler Diyorlar?</h2>
-  </div>
+  <div style="text-align:center;"><span class="section-label">YORUMLAR</span><h2 class="section-title" style="font-size:clamp(24px,3vw,38px);">Neler Diyorlar?</h2></div>
   <div class="reviews-grid">
-    <div class="review-card">
-      <div class="review-stars">★★★★★</div>
-      <p class="review-text">"Sanal deneme özelliği harika, almadan önce nasıl durduğunu görmek çok güzel. Kalitesi de mükemmel."</p>
-      <p class="review-author">— Elif K.</p>
-    </div>
-    <div class="review-card">
-      <div class="review-stars">★★★★★</div>
-      <p class="review-text">"Midnight Classic modelini aldım, kumaşı çok yumuşak. Paketleme de çok şık geldi."</p>
-      <p class="review-author">— Mert A.</p>
-    </div>
-    <div class="review-card">
-      <div class="review-stars">★★★★☆</div>
-      <p class="review-text">"AI asistan bana en uygun şapkayı önerdi. Terra Signature tam aradığım tarz çıktı."</p>
-      <p class="review-author">— Selin D.</p>
-    </div>
+    <div class="review-card"><div class="review-stars">★★★★★</div><p class="review-text">"Sanal deneme harika, kalite mükemmel."</p><p class="review-author">— Elif K.</p></div>
+    <div class="review-card"><div class="review-stars">★★★★★</div><p class="review-text">"Midnight Classic kumaşı çok yumuşak. Paketleme şık."</p><p class="review-author">— Mert A.</p></div>
+    <div class="review-card"><div class="review-stars">★★★★☆</div><p class="review-text">"AI asistan bana Terra Signature önerdi, tam isabetli."</p><p class="review-author">— Selin D.</p></div>
   </div>
 </section>
 
 <!-- NEWSLETTER -->
-<section class="newsletter" id="newsletter">
-  <span class="section-label">BÜLTEN</span>
-  <h2 class="section-title" style="font-size:clamp(22px,3vw,36px);">Yeni Koleksiyonlardan Haberdar Ol</h2>
-  <p class="section-desc" style="margin:0 auto;">Özel kampanyalar, erken erişim ve stil ilhamları için kayıt ol.</p>
-  <div class="newsletter-form">
-    <input type="email" id="nlEmail" placeholder="E-posta adresiniz...">
-    <button onclick="subscribeNL()">KAYIT OL</button>
-  </div>
-  <p id="nlMsg" style="margin-top:12px;font-size:12px;color:var(--success);display:none;"></p>
+<section class="newsletter"><span class="section-label">BÜLTEN</span><h2 class="section-title" style="font-size:clamp(20px,3vw,32px);">Haberdar Ol</h2>
+  <div class="nl-form"><input type="email" id="nlEmail" placeholder="E-posta..."><button onclick="subNL()">KAYIT</button></div>
+  <p id="nlMsg" style="margin-top:10px;font-size:11px;color:var(--success);display:none;"></p>
 </section>
 
 <!-- LEGAL -->
 <section class="legal" id="legal">
   <div class="legal-container">
-    <div style="text-align:center;">
-      <span class="section-label">YASAL</span>
-      <h2 class="section-title" style="font-size:clamp(26px,3.5vw,42px);">Sözleşmeler & Politikalar</h2>
-    </div>
+    <div style="text-align:center;"><span class="section-label">YASAL</span><h2 class="section-title" style="font-size:clamp(24px,3vw,38px);">Sözleşmeler</h2></div>
     <div class="legal-tabs">
-      <button class="legal-tab active" onclick="showLegal(0,this)">Kullanım Şartları</button>
+      <button class="legal-tab active" onclick="showLegal(0,this)">Kullanım</button>
       <button class="legal-tab" onclick="showLegal(1,this)">Gizlilik</button>
-      <button class="legal-tab" onclick="showLegal(2,this)">İade Politikası</button>
+      <button class="legal-tab" onclick="showLegal(2,this)">İade</button>
       <button class="legal-tab" onclick="showLegal(3,this)">KVKK</button>
       <button class="legal-tab" onclick="showLegal(4,this)">Çerez</button>
     </div>
-
-    <div class="legal-content active" id="legalTab0">
-      <h3>1. Genel Hükümler</h3>
-      <p>İşbu Kullanım Şartları, Calejon markası tarafından sunulan web sitesi ve ilgili hizmetlerin kullanımına ilişkin koşulları düzenler. Siteyi kullanarak bu şartları kabul etmiş sayılırsınız.</p>
-      <h3>2. Hizmet Tanımı</h3>
-      <p>Calejon, yapay zeka destekli sanal şapka deneme hizmeti, e-ticaret, topluluk forumu ve stil danışmanlığı hizmetlerini sunar. Hizmetler "olduğu gibi" sunulmakta olup, kesintisiz veya hatasız olacağı garanti edilmemektedir.</p>
-      <h3>3. Kullanıcı Yükümlülükleri</h3>
-      <p>Kullanıcılar siteyi yalnızca yasal amaçlarla kullanmayı kabul eder. Forum ve topluluk alanlarında hakaret, ayrımcılık, spam ve yanıltıcı içerik paylaşımı yasaktır. Calejon, uygunsuz içerikleri önceden bildirimsiz kaldırma hakkını saklı tutar.</p>
-      <h3>4. Fikri Mülkiyet</h3>
-      <p>Sitedeki tüm içerikler — tasarımlar, logolar, metinler, görseller ve yazılımlar — Calejon'un fikri mülkiyetindedir. İzinsiz kopyalama, dağıtma veya ticari kullanım yasaktır.</p>
-      <h3>5. Sorumluluk Sınırlaması</h3>
-      <p>Calejon, yapay zeka tabanlı hizmetlerin sonuçlarının doğruluğunu garanti etmez. Sanal deneme sonuçları tahmini olup, gerçek ürünle birebir uyum sağlamayabilir.</p>
-    </div>
-
-    <div class="legal-content" id="legalTab1">
-      <h3>Gizlilik Politikası</h3>
-      <p>Calejon olarak kişisel verilerinizin korunmasına büyük önem veriyoruz.</p>
-      <h3>Toplanan Veriler</h3>
-      <p>Sanal deneme özelliğinde yüklenen fotoğraflar sunucuya gönderilmez, tamamen tarayıcınızda işlenir. Forum ve hesap oluşturma sırasında ad, e-posta ve isteğe bağlı profil bilgileri toplanır.</p>
-      <h3>Verilerin Kullanımı</h3>
-      <p>Toplanan veriler yalnızca hizmet sunumu, müşteri iletişimi ve site iyileştirmeleri amacıyla kullanılır. Verileriniz üçüncü taraflarla pazarlama amaçlı paylaşılmaz.</p>
-      <h3>Veri Güvenliği</h3>
-      <p>Tüm veriler SSL şifreleme ile korunur. Ödeme bilgileri Calejon tarafından saklanmaz; güvenli ödeme altyapısı üçüncü taraf hizmet sağlayıcılar tarafından yönetilir.</p>
-    </div>
-
-    <div class="legal-content" id="legalTab2">
-      <h3>İade ve Değişim Politikası</h3>
-      <p>Calejon ürünlerini teslim tarihinden itibaren 14 gün içinde iade edebilirsiniz.</p>
-      <h3>İade Koşulları</h3>
-      <p>Ürün kullanılmamış, etiketleri sökülmemiş ve orijinal ambalajında olmalıdır. İade kargo ücreti müşteriye aittir. Limited edition ürünler yalnızca değişim yapılabilir, iade kabul edilmez.</p>
-      <h3>Değişim</h3>
-      <p>Beden veya renk değişimi için müşteri hizmetlerimizle iletişime geçebilirsiniz. Değişim talepleri 3-5 iş günü içinde işleme alınır.</p>
-      <h3>İade Süreci</h3>
-      <p>İade talebi onaylandıktan sonra ödeme iadesi 5-10 iş günü içinde orijinal ödeme yöntemine yapılır.</p>
-    </div>
-
-    <div class="legal-content" id="legalTab3">
-      <h3>KVKK Aydınlatma Metni</h3>
-      <p>6698 sayılı Kişisel Verilerin Korunması Kanunu kapsamında, veri sorumlusu sıfatıyla Calejon olarak aşağıdaki bilgilendirmeyi sunarız.</p>
-      <h3>Veri Sorumlusu</h3>
-      <p>Calejon Tekstil ve Teknoloji A.Ş., Türkiye'de kurulu olup KVKK kapsamında veri sorumlusu sıfatını taşımaktadır.</p>
-      <h3>İşlenen Kişisel Veriler</h3>
-      <p>Kimlik bilgileri (ad, soyad), iletişim bilgileri (e-posta, telefon), müşteri işlem bilgileri (sipariş, ödeme), pazarlama bilgileri (tercihler, çerez verileri). Sanal deneme fotoğrafları işlenmez ve saklanmaz.</p>
-      <h3>Haklarınız</h3>
-      <p>KVKK'nın 11. maddesi uyarınca; verilerinizin işlenip işlenmediğini öğrenme, düzeltme, silme, aktarılmasını isteme ve itiraz haklarına sahipsiniz. Başvurularınızı kvkk@calejon.com adresine iletebilirsiniz.</p>
-    </div>
-
-    <div class="legal-content" id="legalTab4">
-      <h3>Çerez Politikası</h3>
-      <p>Sitemiz, kullanıcı deneyimini iyileştirmek amacıyla çerezler kullanmaktadır.</p>
-      <h3>Kullanılan Çerez Türleri</h3>
-      <p>Zorunlu çerezler: Sitenin temel işlevleri için gereklidir. Analiz çerezleri: Ziyaretçi istatistiklerini toplar. Tercih çerezleri: Dil ve tema seçimlerinizi hatırlar.</p>
-      <h3>Çerez Yönetimi</h3>
-      <p>Tarayıcı ayarlarınızdan çerezleri kapatabilir veya silebilirsiniz. Ancak bu durumda bazı site özellikleri düzgün çalışmayabilir.</p>
-    </div>
+    <div class="legal-content active" id="lt0"><h3>Kullanım Şartları</h3><p>İşbu şartlar Calejon web sitesi ve hizmetlerinin kullanımını düzenler. Siteyi kullanarak şartları kabul etmiş sayılırsınız. Site "olduğu gibi" sunulur. Forum ve topluluklarda hakaret, spam ve yanıltıcı içerik yasaktır.</p><h3>Fikri Mülkiyet</h3><p>Sitedeki tüm içerikler Calejon'un mülkiyetindedir. İzinsiz kopyalama ve ticari kullanım yasaktır. AI tarafından üretilen görseller kişisel kullanım içindir.</p></div>
+    <div class="legal-content" id="lt1"><h3>Gizlilik Politikası</h3><p>Fotoğraflarınız sunucuya gönderilmez, tarayıcınızda işlenir. Forum ve hesap bilgileri (ad, e-posta) yalnızca hizmet sunumu için kullanılır. Veriler üçüncü taraflarla paylaşılmaz. SSL şifreleme ile korunur.</p></div>
+    <div class="legal-content" id="lt2"><h3>İade Politikası</h3><p>14 gün içinde koşulsuz iade. Ürün kullanılmamış ve etiketli olmalı. Limited edition yalnızca değişim. İade kargo müşteriye ait. Ödeme iadesi 5-10 iş günü.</p></div>
+    <div class="legal-content" id="lt3"><h3>KVKK Aydınlatma</h3><p>6698 sayılı KVKK kapsamında veri sorumlusu Calejon Tekstil A.Ş.'dir. Kimlik, iletişim, işlem bilgileri işlenir. Fotoğraflar saklanmaz. Haklarınız: öğrenme, düzeltme, silme, itiraz. Başvuru: kvkk@calejon.com</p></div>
+    <div class="legal-content" id="lt4"><h3>Çerez Politikası</h3><p>Zorunlu, analiz ve tercih çerezleri kullanılır. Tarayıcı ayarlarından yönetebilirsiniz. Bazı özellikler çerez olmadan çalışmayabilir.</p></div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
   <div class="footer-grid">
-    <div class="footer-col">
-      <h4>Marka</h4>
-      <a onclick="goTo('hero')">Ana Sayfa</a>
-      <a onclick="goTo('products')">Koleksiyon</a>
-      <a href="#">Hikayemiz</a>
-      <a href="#">Kariyer</a>
-    </div>
-    <div class="footer-col">
-      <h4>Destek</h4>
-      <a href="#">Sıkça Sorulanlar</a>
-      <a href="#">Beden Rehberi</a>
-      <a href="#">Kargo & Teslimat</a>
-      <a href="mailto:destek@calejon.com">destek@calejon.com</a>
-    </div>
-    <div class="footer-col">
-      <h4>Yasal</h4>
-      <a onclick="goTo('legal')">Kullanım Şartları</a>
-      <a onclick="goTo('legal')">Gizlilik Politikası</a>
-      <a onclick="goTo('legal')">KVKK</a>
-      <a onclick="goTo('legal')">Çerez Politikası</a>
-    </div>
-    <div class="footer-col">
-      <h4>İletişim</h4>
-      <a href="mailto:info@calejon.com">info@calejon.com</a>
-      <a href="tel:+902121234567">+90 212 123 45 67</a>
-      <a href="#">İstanbul, Türkiye</a>
-    </div>
+    <div class="footer-col"><h4>Marka</h4><a onclick="goTo('hero')">Ana Sayfa</a><a onclick="goTo('products')">Koleksiyon</a><a onclick="goTo('aigen')">AI Görsel</a></div>
+    <div class="footer-col"><h4>Destek</h4><a href="#">SSS</a><a href="#">Beden Rehberi</a><a href="mailto:destek@calejon.com">destek@calejon.com</a></div>
+    <div class="footer-col"><h4>Yasal</h4><a onclick="goTo('legal')">Kullanım Şartları</a><a onclick="goTo('legal')">Gizlilik</a><a onclick="goTo('legal')">KVKK</a></div>
+    <div class="footer-col"><h4>İletişim</h4><a href="mailto:info@calejon.com">info@calejon.com</a><a href="#">İstanbul, Türkiye</a></div>
   </div>
-  <div class="footer-bottom">
-    <div class="footer-socials">
-      <a href="#" title="Instagram">IG</a>
-      <a href="#" title="X/Twitter">𝕏</a>
-      <a href="#" title="TikTok">TT</a>
-      <a href="#" title="Pinterest">Pi</a>
-    </div>
-    <p style="margin-top:16px;">© 2026 CALEJON — TÜM HAKLARI SAKLIDIR</p>
-  </div>
+  <div class="footer-bottom">© 2026 CALEJON — TÜM HAKLARI SAKLIDIR</div>
 </footer>
 
-<!-- MEDIAPIPE -->
 <script src="https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@latest/vision_bundle.js" crossorigin="anonymous"></script>
-
 <script>
-// ===========================
-// NAVIGATION
-// ===========================
-function goTo(id) { document.getElementById(id).scrollIntoView({behavior:'smooth'}); }
-function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+// ====================== UTILS ======================
+function goTo(id){document.getElementById(id).scrollIntoView({behavior:'smooth'});}
+function toggleMenu(){document.getElementById('mobMenu').classList.toggle('open');}
 
-// ===========================
-// TRY-ON ENGINE
-// ===========================
-var curHat="black", hScale=1, hX=150, hY=30;
-var drag=false, oX=0, oY=0, uImg=null;
-var cv=document.getElementById("tryonCanvas");
-var cx=cv.getContext("2d");
-var fLM=null, mReady=false;
+// ====================== THEME ======================
+function toggleTheme(){
+  var t=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';
+  document.documentElement.setAttribute('data-theme',t);
+  var icon=t==='dark'?'☀':'🌙';
+  document.getElementById('themeBtn').textContent=icon;
+  document.getElementById('themeBtn2').textContent=icon;
+}
 
-var hatColors = {
-  black: {brim:"#222",crown:"#1a1a1a",band:"#444"},
-  white: {brim:"#ddd",crown:"#f0f0f0",band:"#bbb"},
-  brown: {brim:"#4a3028",crown:"#5a3a2a",band:"#7a5a42"}
-};
+// ====================== PRODUCTS ======================
+var HATS=[
+  {id:'black',name:'Midnight Classic',price:'₺890',desc:'Saf siyah, zamansız şıklık',brim:'#222',crown:'#1a1a1a',band:'#444',badge:'YENİ'},
+  {id:'white',name:'Arctic Essential',price:'₺890',desc:'Beyaz, minimalist zarafet',brim:'#ddd',crown:'#f0f0f0',band:'#bbb',badge:''},
+  {id:'brown',name:'Terra Signature',price:'₺1.290',desc:'Limited edition, doğal deri bant',brim:'#4a3028',crown:'#5a3a2a',band:'#7a5a42',badge:'LİMİTED'}
+];
+function renderProducts(){
+  var g=document.getElementById('prodGrid');g.innerHTML='';
+  HATS.forEach(function(h){
+    g.innerHTML+='<div class="product-card" onclick="goTo(\'tryon\')">'+(h.badge?'<div class="product-badge">'+h.badge+'</div>':'')+'<div class="product-img"><svg width="130" height="84" viewBox="0 0 120 78"><ellipse cx="60" cy="65" rx="55" ry="13" fill="'+h.brim+'"/><path d="M20,62 Q14,25 35,12 Q60,-2 85,12 Q106,25 100,62Z" fill="'+h.crown+'"/><rect x="20" y="52" width="80" height="6" rx="1" fill="'+h.band+'"/></svg></div><div class="product-info"><p class="product-name">'+h.name+'</p><p class="product-desc">'+h.desc+'</p><span class="product-price">'+h.price+'</span></div></div>';
+  });
+}
+renderProducts();
 
-async function initModel() {
-  try {
+// ====================== TRY-ON ======================
+var curHat='black',hScale=1,hX=150,hY=30,drag=false,oX=0,oY=0,uImg=null;
+var cv=document.getElementById('tryonCanvas'),cx=cv.getContext('2d');
+var fLM=null,mReady=false;
+
+function renderTryonHats(){
+  var c=document.getElementById('tryonHats');c.innerHTML='';
+  HATS.forEach(function(h){
+    c.innerHTML+='<div class="tryon-hat'+(curHat===h.id?' active':'')+'" onclick="pickHat(\''+h.id+'\',this)"><svg width="50" height="33" viewBox="0 0 120 78"><ellipse cx="60" cy="65" rx="55" ry="13" fill="'+h.brim+'"/><path d="M20,62 Q14,25 35,12 Q60,-2 85,12 Q106,25 100,62Z" fill="'+h.crown+'"/><rect x="20" y="52" width="80" height="6" rx="1" fill="'+h.band+'"/></svg><p>'+h.name.split(' ')[0]+'</p></div>';
+  });
+}
+renderTryonHats();
+
+async function initModel(){
+  try{
     var v=window.vision;
     var r=await v.FilesetResolver.forVisionTasks("https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@latest/wasm");
-    fLM=await v.FaceLandmarker.createFromOptions(r,{
-      baseOptions:{modelAssetPath:"https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task",delegate:"GPU"},
-      runningMode:"IMAGE",numFaces:1
-    });
-    mReady=true;
-    var s=document.getElementById("modelStatus");
-    s.textContent="✓ Yüz tanıma hazır"; s.className="tryon-status ok";
-  } catch(e) {
-    console.error(e);
-    var s=document.getElementById("modelStatus");
-    s.textContent="⚠ Model yüklenemedi — manuel mod"; s.className="tryon-status";
-    s.style.color="#a66";
-  }
+    fLM=await v.FaceLandmarker.createFromOptions(r,{baseOptions:{modelAssetPath:"https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task",delegate:"GPU"},runningMode:"IMAGE",numFaces:1});
+    mReady=true;var s=document.getElementById('modelStatus');s.textContent='✓ Yüz tanıma hazır';s.className='status-bar ok';
+  }catch(e){console.error(e);var s=document.getElementById('modelStatus');s.textContent='⚠ Model yüklenemedi — manuel mod';s.style.color='var(--accent)';}
 }
 initModel();
 
-function drwHat() {
-  var w=140*hScale, h=95*hScale, c=hatColors[curHat];
-  var x=hX, y=hY;
-  cx.save();
-  cx.shadowColor="rgba(0,0,0,.4)"; cx.shadowBlur=14; cx.shadowOffsetY=5;
+function getHatCol(){return HATS.find(function(h){return h.id===curHat;})||HATS[0];}
+function drwHat(){
+  var w=140*hScale,h=95*hScale,c=getHatCol(),x=hX,y=hY;
+  cx.save();cx.shadowColor='rgba(0,0,0,.4)';cx.shadowBlur=14;cx.shadowOffsetY=5;
   var by=y+h*.72;
-  cx.beginPath(); cx.ellipse(x+w/2,by,w*.65,h*.22,0,0,Math.PI*2); cx.fillStyle=c.brim; cx.fill();
-  cx.beginPath();
-  cx.moveTo(x+w*.14,by-2);
-  cx.quadraticCurveTo(x+w*.08,y+h*.15,x+w*.27,y+h*.05);
-  cx.quadraticCurveTo(x+w*.5,y-h*.06,x+w*.73,y+h*.05);
-  cx.quadraticCurveTo(x+w*.92,y+h*.15,x+w*.86,by-2);
-  cx.closePath(); cx.fillStyle=c.crown; cx.fill();
-  cx.fillStyle=c.band; cx.fillRect(x+w*.14,by-h*.14,w*.72,h*.08);
-  cx.restore();
+  cx.beginPath();cx.ellipse(x+w/2,by,w*.65,h*.22,0,0,Math.PI*2);cx.fillStyle=c.brim;cx.fill();
+  cx.beginPath();cx.moveTo(x+w*.14,by-2);cx.quadraticCurveTo(x+w*.08,y+h*.15,x+w*.27,y+h*.05);cx.quadraticCurveTo(x+w*.5,y-h*.06,x+w*.73,y+h*.05);cx.quadraticCurveTo(x+w*.92,y+h*.15,x+w*.86,by-2);cx.closePath();cx.fillStyle=c.crown;cx.fill();
+  cx.fillStyle=c.band;cx.fillRect(x+w*.14,by-h*.14,w*.72,h*.08);cx.restore();
 }
-function redraw() { if(!uImg)return; cx.clearRect(0,0,cv.width,cv.height); cx.drawImage(uImg,0,0,cv.width,cv.height); drwHat(); }
-
-function detect(img) {
-  if(!fLM||!mReady) { hX=cv.width/2-70; hY=30; hScale=1; return; }
-  try {
-    var res=fLM.detect(img);
-    if(!res.faceLandmarks||!res.faceLandmarks.length) { alert("Yüz bulunamadı! Net bir selfie deneyin."); hX=cv.width/2-70; hY=30; hScale=1; return; }
-    var lm=res.faceLandmarks[0];
-    var tX=lm[10].x*cv.width, tY=lm[10].y*cv.height;
-    var cY=lm[152].y*cv.height;
-    var fW=(lm[454].x-lm[234].x)*cv.width;
-    var tw=fW*1.3; hScale=tw/140;
-    var aw=140*hScale, ah=95*hScale;
-    hX=tX-aw/2; hY=tY-ah*.55;
-  } catch(e) { console.error(e); hX=cv.width/2-70; hY=30; hScale=1; }
+function redraw(){if(!uImg)return;cx.clearRect(0,0,cv.width,cv.height);cx.drawImage(uImg,0,0,cv.width,cv.height);drwHat();}
+function detect(img){
+  if(!fLM||!mReady){hX=cv.width/2-70;hY=30;hScale=1;return;}
+  try{var res=fLM.detect(img);if(!res.faceLandmarks||!res.faceLandmarks.length){alert('Yüz bulunamadı!');hX=cv.width/2-70;hY=30;hScale=1;return;}
+  var lm=res.faceLandmarks[0],tX=lm[10].x*cv.width,tY=lm[10].y*cv.height,cY=lm[152].y*cv.height,fW=(lm[454].x-lm[234].x)*cv.width;
+  var tw=fW*1.3;hScale=tw/140;var aw=140*hScale,ah=95*hScale;hX=tX-aw/2;hY=tY-ah*.55;
+  }catch(e){hX=cv.width/2-70;hY=30;hScale=1;}
 }
-
-function loadF(f) {
-  var rd=new FileReader();
-  rd.onload=function(ev) {
-    document.getElementById("uploadArea").style.display="none";
-    document.getElementById("tryonLoading").style.display="block";
-    var im=new Image();
-    im.onload=function() {
-      uImg=im;
-      var mw=Math.min(500,window.innerWidth-40), sc=mw/im.width;
-      cv.width=mw; cv.height=im.height*sc;
-      detect(im);
-      document.getElementById("tryonLoading").style.display="none";
-      document.getElementById("tryonEditor").className="editor show";
-      redraw();
-    };
-    im.src=ev.target.result;
-  };
-  rd.readAsDataURL(f);
-}
-
-document.getElementById("tryonFile").addEventListener("change",function(e){ if(e.target.files[0])loadF(e.target.files[0]); });
-var ua=document.getElementById("uploadArea");
-ua.addEventListener("dragover",function(e){e.preventDefault();ua.style.borderColor="var(--gold-dim)";});
-ua.addEventListener("dragleave",function(){ua.style.borderColor="#252220";});
-ua.addEventListener("drop",function(e){e.preventDefault();ua.style.borderColor="#252220";if(e.dataTransfer.files[0])loadF(e.dataTransfer.files[0]);});
-
+function loadF(f){var rd=new FileReader();rd.onload=function(ev){document.getElementById('uploadArea').style.display='none';document.getElementById('tryonLoading').style.display='block';var im=new Image();im.onload=function(){uImg=im;var mw=Math.min(500,window.innerWidth-80),sc=mw/im.width;cv.width=mw;cv.height=im.height*sc;detect(im);document.getElementById('tryonLoading').style.display='none';document.getElementById('tryonEditor').className='editor show';redraw();};im.src=ev.target.result;};rd.readAsDataURL(f);}
+document.getElementById('tryonFile').addEventListener('change',function(e){if(e.target.files[0])loadF(e.target.files[0]);});
+var ua=document.getElementById('uploadArea');
+ua.addEventListener('dragover',function(e){e.preventDefault();});
+ua.addEventListener('drop',function(e){e.preventDefault();if(e.dataTransfer.files[0])loadF(e.dataTransfer.files[0]);});
 function gp(e){var r=cv.getBoundingClientRect();var px=e.touches?e.touches[0].clientX:e.clientX;var py=e.touches?e.touches[0].clientY:e.clientY;return{x:(px-r.left)*(cv.width/r.width),y:(py-r.top)*(cv.height/r.height)};}
-function mD(e){e.preventDefault();var p=gp(e),w=140*hScale,h=95*hScale;if(p.x>=hX&&p.x<=hX+w&&p.y>=hY&&p.y<=hY+h){drag=true;oX=p.x-hX;oY=p.y-hY;cv.className="grabbing";}}
-function mM(e){if(!drag)return;e.preventDefault();var p=gp(e);hX=p.x-oX;hY=p.y-oY;redraw();}
-function mU(){drag=false;cv.className="";}
-cv.addEventListener("mousedown",mD);cv.addEventListener("mousemove",mM);cv.addEventListener("mouseup",mU);cv.addEventListener("mouseleave",mU);
-cv.addEventListener("touchstart",mD,{passive:false});cv.addEventListener("touchmove",mM,{passive:false});cv.addEventListener("touchend",mU);
+cv.addEventListener('mousedown',function(e){e.preventDefault();var p=gp(e),w=140*hScale,h=95*hScale;if(p.x>=hX&&p.x<=hX+w&&p.y>=hY&&p.y<=hY+h){drag=true;oX=p.x-hX;oY=p.y-hY;}});
+cv.addEventListener('mousemove',function(e){if(!drag)return;var p=gp(e);hX=p.x-oX;hY=p.y-oY;redraw();});
+cv.addEventListener('mouseup',function(){drag=false;});
+cv.addEventListener('mouseleave',function(){drag=false;});
+cv.addEventListener('touchstart',function(e){e.preventDefault();var p=gp(e),w=140*hScale,h=95*hScale;if(p.x>=hX&&p.x<=hX+w&&p.y>=hY&&p.y<=hY+h){drag=true;oX=p.x-hX;oY=p.y-hY;}},{passive:false});
+cv.addEventListener('touchmove',function(e){if(!drag)return;e.preventDefault();var p=gp(e);hX=p.x-oX;hY=p.y-oY;redraw();},{passive:false});
+cv.addEventListener('touchend',function(){drag=false;});
+function pickHat(id){curHat=id;renderTryonHats();if(uImg)redraw();}
+function chgSz(d){hScale=Math.max(.3,Math.min(2.5,hScale+d));if(uImg)redraw();}
+function dlImg(){var a=document.createElement('a');a.download='calejon-sapka.png';a.href=cv.toDataURL();a.click();}
+function rstImg(){uImg=null;document.getElementById('uploadArea').style.display='block';document.getElementById('tryonEditor').className='editor';document.getElementById('tryonFile').value='';}
+function shareTo(p){var u=encodeURIComponent(location.href),t=encodeURIComponent("Calejon'da AI ile şapka denedim! 🎩");if(p==='copy'){navigator.clipboard.writeText(location.href);alert('Link kopyalandı!');}else{var m={twitter:'https://twitter.com/intent/tweet?text='+t+'&url='+u,facebook:'https://www.facebook.com/sharer/sharer.php?u='+u,whatsapp:'https://wa.me/?text='+t+'%20'+u};window.open(m[p],'_blank','width=600,height=400');}}
 
-function pickHat(id,el) {
-  curHat=id;
-  document.querySelectorAll(".tryon-hat").forEach(function(e){e.className="tryon-hat";});
-  el.className="tryon-hat active";
-  if(uImg)redraw();
+// ====================== AI IMAGE GEN (Pollinations.ai - FREE) ======================
+var aiHatStyle='siyah klasik şapka';
+function setAIStyle(btn,style){aiHatStyle=style;document.querySelectorAll('#aiStyleBtns .share-btn').forEach(function(b){b.style.borderColor='var(--input-border)';b.style.color='var(--text-dim)';});btn.style.borderColor='var(--gold)';btn.style.color='var(--gold)';}
+function generateAIImage(){
+  var gender=document.getElementById('aiGender').value;
+  var extra=document.getElementById('aiExtraPrompt').value.trim();
+  var prompt='fashion photography, '+gender+' model wearing a stylish '+aiHatStyle+', premium hat brand Calejon, elegant pose, professional studio lighting, high end fashion editorial, 8k quality';
+  if(extra) prompt+=', '+extra;
+  prompt+=', photorealistic, detailed face, sharp focus';
+  document.getElementById('aiLoading').className='ai-loading show';
+  document.getElementById('aiResult').className='ai-result';
+  var url='https://image.pollinations.ai/prompt/'+encodeURIComponent(prompt)+'?width=768&height=1024&seed='+Math.floor(Math.random()*999999)+'&nologo=true&model=flux';
+  var img=document.getElementById('aiResultImg');
+  img.onload=function(){document.getElementById('aiLoading').className='ai-loading';document.getElementById('aiResult').className='ai-result show';};
+  img.onerror=function(){document.getElementById('aiLoading').className='ai-loading';alert('Görsel üretilemedi, tekrar deneyin.');};
+  img.src=url;
 }
-function chgSz(d) { hScale=Math.max(.3,Math.min(2.5,hScale+d)); if(uImg)redraw(); }
-function dlImg() { var a=document.createElement("a"); a.download="calejon-sapka.png"; a.href=cv.toDataURL(); a.click(); }
-function rstImg() {
-  uImg=null;
-  document.getElementById("uploadArea").style.display="block";
-  document.getElementById("tryonEditor").className="editor";
-  document.getElementById("tryonFile").value="";
+function dlAIImg(){var img=document.getElementById('aiResultImg');var a=document.createElement('a');a.href=img.src;a.download='calejon-ai.png';a.target='_blank';a.click();}
+
+// ====================== AI CHATBOT (Gemini) ======================
+var geminiKey=null,aiMode='none',chatHist=[];
+var SYS="Sen Calejon şapka markasının AI stil danışmanısın. Türkçe, samimi, kısa yanıtla (2-3 cümle). Ürünler: Midnight Classic (siyah ₺890), Arctic Essential (beyaz ₺890), Terra Signature (kahve ₺1290 limited). %100 organik pamuk. Bedenler: S(54-55) M(56-57) L(58-59) XL(60-61). Kargo 1-3 gün, 500₺+ ücretsiz. 14 gün iade. Kampanya: CALEJON10 ile %10.";
+var KB={beden:"S(54-55cm) M(56-57cm) L(58-59cm) XL(60-61cm). Kaşların 1cm üstünden ölç.",fiyat:"Siyah/Beyaz ₺890, Terra ₺1.290. KDV dahil.",kargo:"1-3 iş günü. 500₺+ ücretsiz.",iade:"14 gün koşulsuz. Limited'da sadece değişim.",stil:"Yuvarlak yüz→yüksek kubbe. Uzun yüz→geniş kenar.",merhaba:"Merhaba! Beden, fiyat, stil — ne sorarsan! 🎩",selam:"Selam! Hoş geldin!",kombinasyon:"Siyah: deri ceket+beyaz tişört. Beyaz: yazlık. Kahve: toprak tonları.",kampanya:"CALEJON10 kodu ile %10 indirim! 2 al 3. %50!"};
+function basicAns(m){m=m.toLowerCase();for(var k in KB)if(m.indexOf(k)!==-1)return KB[k];if(m.indexOf('fiyat')!==-1||m.indexOf('kaç')!==-1)return KB.fiyat;if(m.indexOf('kargo')!==-1||m.indexOf('teslimat')!==-1)return KB.kargo;if(m.indexOf('iade')!==-1)return KB.iade;if(m.indexOf('ölçü')!==-1||m.indexOf('boyut')!==-1)return KB.beden;return"destek@calejon.com'a yazabilirsin veya beden/fiyat/kargo sor! 🎩";}
+function connectAI(){var k=document.getElementById('apiKeyInput').value.trim();if(!k)return;geminiKey=k;aiMode='gemini';document.getElementById('apiSetup').style.display='none';document.getElementById('chatArea').style.display='block';document.getElementById('chatDot').style.background='var(--success)';document.getElementById('chatHeaderText').textContent='CALEJON AI — Gemini ✓';callGemini('Merhaba, kısaca tanıt kendini.').then(function(r){if(r)addBot(r);}).catch(function(){addBot('⚠ Bağlantı hatası.');aiMode='basic';});}
+function skipAI(){aiMode='basic';document.getElementById('apiSetup').style.display='none';document.getElementById('chatArea').style.display='block';document.getElementById('chatDot').style.background='#a86a3a';document.getElementById('chatHeaderText').textContent='CALEJON AI — Basit mod';}
+async function callGemini(msg){chatHist.push({role:'user',parts:[{text:msg}]});var c=[{role:'user',parts:[{text:SYS}]},{role:'model',parts:[{text:'Anladım! Calejon AI hazırım 🎩'}]}].concat(chatHist);var r=await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key='+geminiKey,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contents:c,generationConfig:{temperature:.7,maxOutputTokens:200}})});if(!r.ok)throw new Error(r.status);var d=await r.json();var t=d.candidates[0].content.parts[0].text;chatHist.push({role:'model',parts:[{text:t}]});if(chatHist.length>20)chatHist=chatHist.slice(-14);return t;}
+function addBot(t){var b=document.getElementById('chatMessages');var m=document.createElement('div');m.className='msg bot';m.textContent=t;b.appendChild(m);b.scrollTop=b.scrollHeight;}
+function sendChat(){var inp=document.getElementById('chatInput'),msg=inp.value.trim();if(!msg)return;inp.value='';var b=document.getElementById('chatMessages');var u=document.createElement('div');u.className='msg user';u.textContent=msg;b.appendChild(u);b.scrollTop=b.scrollHeight;var tp=document.createElement('div');tp.className='msg bot typing';tp.innerHTML='<div class="dots"><span></span><span></span><span></span></div>';b.appendChild(tp);b.scrollTop=b.scrollHeight;if(aiMode==='gemini'){callGemini(msg).then(function(r){b.removeChild(tp);addBot(r);}).catch(function(){b.removeChild(tp);addBot(basicAns(msg));});}else{setTimeout(function(){b.removeChild(tp);addBot(basicAns(msg));},400+Math.random()*300);}}
+
+// ====================== FORUM ======================
+var threads=[{title:'Midnight Classic kombin önerileri',author:'AhmetS',body:'Siyah şapkamı nasıl kombine edeyim?',replies:[{a:'ZeynepK',t:'Deri ceket + beyaz tişört harika!'},{a:'CanD',t:'Oversize hoodie ile de çok iyi.'}]},{title:'57cm S mi M mi?',author:'MelisBT',body:'Kafam 57cm, hangisi?',replies:[{a:'CalejonDestek',t:'57cm = M beden. Rahat istersen M, sıkı fit istersen S.'}]},{title:'Terra Signature stokta kaç tane?',author:'BurakE',body:'Kaçırmak istemiyorum.',replies:[]}];
+function renderThreads(){var c=document.getElementById('forumThreads');c.innerHTML='';threads.forEach(function(t,i){var rh='';t.replies.forEach(function(r){rh+='<div class="reply-item"><div class="ra">'+r.a+'</div><div class="rt">'+r.t+'</div></div>';});c.innerHTML+='<div class="forum-thread"><div class="thread-header" onclick="togT('+i+')"><span class="thread-title">'+t.title+'</span><span class="thread-meta"><span>'+t.author+'</span><span>'+t.replies.length+' yanıt</span></span></div><div class="thread-body" id="tb'+i+'"><p>'+t.body+'</p>'+rh+'<div class="reply-box"><input id="rp'+i+'" placeholder="Yanıt..."><button onclick="addRp('+i+')">Yanıtla</button></div></div></div>';});}
+renderThreads();
+function togT(i){document.getElementById('tb'+i).classList.toggle('open');}
+function addRp(i){var inp=document.getElementById('rp'+i),t=inp.value.trim();if(!t)return;threads[i].replies.push({a:'Sen',t:t});renderThreads();document.getElementById('tb'+i).classList.add('open');}
+function toggleForumNew(){document.getElementById('forumNew').classList.toggle('open');}
+function postThread(){var t=document.getElementById('fTitle').value.trim(),b=document.getElementById('fBody').value.trim();if(!t||!b)return;threads.unshift({title:t,author:'Sen',body:b,replies:[]});document.getElementById('fTitle').value='';document.getElementById('fBody').value='';toggleForumNew();renderThreads();}
+function subNL(){var e=document.getElementById('nlEmail').value.trim();if(!e||e.indexOf('@')===-1)return;document.getElementById('nlMsg').textContent='✓ Kayıt yapıldı! İndirim kodu: CALEJON10';document.getElementById('nlMsg').style.display='block';document.getElementById('nlEmail').value='';}
+function showLegal(i,el){for(var n=0;n<5;n++)document.getElementById('lt'+n).classList.remove('active');document.querySelectorAll('.legal-tab').forEach(function(e){e.classList.remove('active');});document.getElementById('lt'+i).classList.add('active');el.classList.add('active');}
+
+// ====================== GAME 1: AIR HOCKEY ======================
+var hkCv=document.getElementById('hockeyCanvas'),hkCx=hkCv.getContext('2d');
+var hkW=360,hkH=500,hkBall,hkP,hkAI,hkScore,hkRunning=false,hkAnim;
+function rstHockeyState(){hkBall={x:180,y:250,vx:3,vy:3,r:10};hkP={x:180,y:440,r:24};hkAI={x:180,y:60,r:24};hkScore={p:0,ai:0};}
+function drawHockey(){
+  hkCx.fillStyle='#1a2a1a';hkCx.fillRect(0,0,hkW,hkH);
+  hkCx.strokeStyle='rgba(193,163,120,.2)';hkCx.lineWidth=2;hkCx.beginPath();hkCx.moveTo(0,hkH/2);hkCx.lineTo(hkW,hkH/2);hkCx.stroke();
+  hkCx.beginPath();hkCx.arc(hkW/2,hkH/2,50,0,Math.PI*2);hkCx.stroke();
+  // Goals
+  hkCx.fillStyle='rgba(193,163,120,.15)';hkCx.fillRect(120,0,120,6);hkCx.fillRect(120,hkH-6,120,6);
+  // Ball
+  hkCx.beginPath();hkCx.arc(hkBall.x,hkBall.y,hkBall.r,0,Math.PI*2);hkCx.fillStyle='#e8e2d8';hkCx.fill();
+  // Player
+  hkCx.beginPath();hkCx.arc(hkP.x,hkP.y,hkP.r,0,Math.PI*2);hkCx.fillStyle='#c1a378';hkCx.fill();
+  // AI
+  hkCx.beginPath();hkCx.arc(hkAI.x,hkAI.y,hkAI.r,0,Math.PI*2);hkCx.fillStyle='#8b3a3a';hkCx.fill();
 }
-
-// SOCIAL SHARING
-function shareTo(platform) {
-  var url=encodeURIComponent(window.location.href);
-  var text=encodeURIComponent("Calejon'da yapay zeka ile şapka denedim! 🎩");
-  var links = {
-    twitter: "https://twitter.com/intent/tweet?text="+text+"&url="+url,
-    facebook: "https://www.facebook.com/sharer/sharer.php?u="+url,
-    whatsapp: "https://wa.me/?text="+text+"%20"+url,
-    copy: null
-  };
-  if(platform==="copy") {
-    navigator.clipboard.writeText(window.location.href).then(function(){alert("Link kopyalandı!");});
-  } else {
-    window.open(links[platform],"_blank","width=600,height=400");
-  }
+function updateHockey(){
+  hkBall.x+=hkBall.vx;hkBall.y+=hkBall.vy;
+  if(hkBall.x<hkBall.r||hkBall.x>hkW-hkBall.r)hkBall.vx*=-1;
+  // Goal check
+  if(hkBall.y<0){if(hkBall.x>120&&hkBall.x<240){hkScore.p++;hkBall.x=180;hkBall.y=250;hkBall.vx=3*(Math.random()>.5?1:-1);hkBall.vy=3;}else hkBall.vy*=-1;}
+  if(hkBall.y>hkH){if(hkBall.x>120&&hkBall.x<240){hkScore.ai++;hkBall.x=180;hkBall.y=250;hkBall.vx=3*(Math.random()>.5?1:-1);hkBall.vy=-3;}else hkBall.vy*=-1;}
+  // Paddle collision
+  [hkP,hkAI].forEach(function(p){var dx=hkBall.x-p.x,dy=hkBall.y-p.y,d=Math.sqrt(dx*dx+dy*dy);if(d<p.r+hkBall.r){var a=Math.atan2(dy,dx);var sp=Math.sqrt(hkBall.vx*hkBall.vx+hkBall.vy*hkBall.vy)*1.02;hkBall.vx=Math.cos(a)*sp;hkBall.vy=Math.sin(a)*sp;hkBall.x=p.x+Math.cos(a)*(p.r+hkBall.r+1);hkBall.y=p.y+Math.sin(a)*(p.r+hkBall.r+1);}});
+  // AI movement
+  var diff=hkBall.x-hkAI.x;hkAI.x+=diff*.04;hkAI.x=Math.max(hkAI.r,Math.min(hkW-hkAI.r,hkAI.x));
+  hkAI.y=Math.max(hkAI.r,Math.min(hkH/2-20,hkAI.y));
+  // Speed cap
+  var ms=7;hkBall.vx=Math.max(-ms,Math.min(ms,hkBall.vx));hkBall.vy=Math.max(-ms,Math.min(ms,hkBall.vy));
+  document.getElementById('hockeyScore').textContent='Sen: '+hkScore.p+' — Rakip: '+hkScore.ai;
 }
+function hockeyLoop(){if(!hkRunning)return;updateHockey();drawHockey();hkAnim=requestAnimationFrame(hockeyLoop);}
+function startHockey(){if(hkRunning)return;rstHockeyState();hkRunning=true;hockeyLoop();}
+function resetHockey(){hkRunning=false;cancelAnimationFrame(hkAnim);rstHockeyState();drawHockey();document.getElementById('hockeyScore').textContent='Sen: 0 — Rakip: 0';}
+hkCv.addEventListener('mousemove',function(e){var r=hkCv.getBoundingClientRect();hkP.x=(e.clientX-r.left)*(hkW/r.width);hkP.y=Math.max(hkH/2+30,Math.min(hkH-hkP.r,(e.clientY-r.top)*(hkH/r.height)));});
+hkCv.addEventListener('touchmove',function(e){e.preventDefault();var r=hkCv.getBoundingClientRect();hkP.x=(e.touches[0].clientX-r.left)*(hkW/r.width);hkP.y=Math.max(hkH/2+30,Math.min(hkH-hkP.r,(e.touches[0].clientY-r.top)*(hkH/r.height)));},{passive:false});
+rstHockeyState();drawHockey();
 
-// ===========================
-// AI CHATBOT (Free - no API needed, rule-based + smart)
-// ===========================
-var chatKB = {
-  beden: "Şapka bedenleri: S (54-55cm), M (56-57cm), L (58-59cm), XL (60-61cm). Kafanızın çevresini ölçmek için kaşlarınızın 1cm üzerinden esnek bir mezura ile ölçüm yapabilirsiniz.",
-  fiyat: "Siyah ve Beyaz şapkalarımız ₺890, Terra Signature limited edition modelimiz ₺1.290'dır. Tüm fiyatlara KDV dahildir.",
-  kargo: "Siparişler 1-3 iş günü içinde kargoya verilir. İstanbul içi teslimat 1 gün, diğer iller 2-4 iş günüdür. 500₺ üzeri siparişlerde kargo ücretsizdir.",
-  iade: "14 gün içinde koşulsuz iade hakkınız bulunmaktadır. Ürün kullanılmamış ve etiketleri sökülmemiş olmalıdır. Limited edition ürünlerde yalnızca değişim yapılabilir.",
-  malzeme: "Tüm şapkalarımız %100 organik pamuktan üretilmektedir. Terra Signature modelinde ek olarak doğal deri bant detayı bulunur. Üretim tamamen el yapımıdır.",
-  siyah: "Midnight Classic — saf siyah, zamansız bir tasarım. %100 organik pamuk, ayarlanabilir arka klips. Her tarza uyum sağlar, günlük ve özel günlerde kullanabilirsiniz.",
-  beyaz: "Arctic Essential — minimalist beyaz şapka. Yazlık kullanım için ideal, hafif ve nefes alabilir kumaş. Casual ve smart-casual kombinlere mükemmel uyum.",
-  kahve: "Terra Signature — limited edition toprak tonlu şapka. Doğal deri bant detayı ile premium his. Sonbahar/kış sezonu için ideal.",
-  stil: "Şapka seçerken yüz şeklinize dikkat edin: Yuvarlak yüzler için yüksek kubbeli şapkalar, uzun yüzler için geniş kenarlı modeller önerilir. Kıyafetinizin genel tonuyla uyumlu renk seçmek önemlidir.",
-  merhaba: "Merhaba! Size nasıl yardımcı olabilirim? Şapka tavsiyeleri, beden bilgisi, kargo veya iade hakkında sorularınızı yanıtlayabilirim. 🎩",
-  selam: "Selam! Hoş geldiniz! Calejon hakkında merak ettiklerinizi sorabilirsiniz.",
-  yardım: "Size şu konularda yardımcı olabilirim: şapka tavsiyeleri, beden rehberliği, fiyat bilgisi, kargo & teslimat, iade politikası, malzeme bilgisi ve stil önerileri.",
-  kombinasyon: "Siyah şapka: Deri ceket, beyaz tişört ve jean ile harika durur. Beyaz şapka: Yazlık elbise veya şort-tişört kombini ile mükemmel. Kahverengi: Toprak tonları, bej ve haki ile doğal bir görünüm.",
-  kampanya: "Şu anda bültenimize kayıt olanlara ilk siparişte %10 indirim sunuyoruz. Ayrıca 2 şapka alana 3. şapka %50 indirimli!",
-  hediye: "Şapkalarımız özel hediye kutusu seçeneği ile gönderilir. Sipariş sırasında 'Hediye paketi' seçeneğini işaretleyebilirsiniz. Kişiye özel not da ekleyebilirsiniz."
-};
+// ====================== GAME 2: PLATFORMER ======================
+var pfCv=document.getElementById('platformCanvas'),pfCx=pfCv.getContext('2d');
+var pfW=360,pfH=400,pfPlayer,pfPlats,pfCoins,pfPScore,pfRunning2=false,pfAnim2,pfKeys={},pfGrav=.5,pfFrame=0;
+function rstPlatform(){
+  pfPlayer={x:170,y:340,w:20,h:24,vy:0,onGround:false};pfPScore=0;pfFrame=0;
+  pfPlats=[{x:0,y:380,w:360,h:20},{x:60,y:310,w:80,h:12},{x:200,y:260,w:90,h:12},{x:30,y:200,w:70,h:12},{x:160,y:150,w:100,h:12},{x:260,y:100,w:80,h:12},{x:60,y:60,w:90,h:12}];
+  pfCoins=[];pfPlats.forEach(function(p,i){if(i>0)pfCoins.push({x:p.x+p.w/2-6,y:p.y-20,w:12,h:12,got:false});});
+}
+function drawPlatform(){
+  pfCx.fillStyle='#0a0a14';pfCx.fillRect(0,0,pfW,pfH);
+  pfPlats.forEach(function(p){pfCx.fillStyle='#2a2520';pfCx.fillRect(p.x,p.y,p.w,p.h);pfCx.fillStyle='rgba(193,163,120,.3)';pfCx.fillRect(p.x,p.y,p.w,2);});
+  pfCoins.forEach(function(c){if(!c.got){pfCx.fillStyle='#c1a378';pfCx.beginPath();pfCx.arc(c.x+6,c.y+6,6,0,Math.PI*2);pfCx.fill();}});
+  // Player (hat-wearing character)
+  pfCx.fillStyle='#c1a378';pfCx.fillRect(pfPlayer.x,pfPlayer.y,pfPlayer.w,pfPlayer.h);
+  // tiny hat on player
+  pfCx.fillStyle='#1a1a1a';pfCx.fillRect(pfPlayer.x-3,pfPlayer.y-6,pfPlayer.w+6,5);pfCx.fillRect(pfPlayer.x+2,pfPlayer.y-12,pfPlayer.w-4,8);
+}
+function updatePlatform(){
+  pfFrame++;
+  if(pfKeys['ArrowLeft']||pfKeys['a'])pfPlayer.x-=4;
+  if(pfKeys['ArrowRight']||pfKeys['d'])pfPlayer.x+=4;
+  if((pfKeys['ArrowUp']||pfKeys['w']||pfKeys[' '])&&pfPlayer.onGround){pfPlayer.vy=-10;pfPlayer.onGround=false;}
+  pfPlayer.vy+=pfGrav;pfPlayer.y+=pfPlayer.vy;pfPlayer.onGround=false;
+  pfPlats.forEach(function(p){if(pfPlayer.vy>=0&&pfPlayer.x+pfPlayer.w>p.x&&pfPlayer.x<p.x+p.w&&pfPlayer.y+pfPlayer.h>=p.y&&pfPlayer.y+pfPlayer.h<=p.y+p.h+10){pfPlayer.y=p.y-pfPlayer.h;pfPlayer.vy=0;pfPlayer.onGround=true;}});
+  pfCoins.forEach(function(c){if(!c.got&&pfPlayer.x+pfPlayer.w>c.x&&pfPlayer.x<c.x+c.w&&pfPlayer.y+pfPlayer.h>c.y&&pfPlayer.y<c.y+c.h){c.got=true;pfPScore+=10;}});
+  if(pfPlayer.x<0)pfPlayer.x=0;if(pfPlayer.x>pfW-pfPlayer.w)pfPlayer.x=pfW-pfPlayer.w;
+  if(pfPlayer.y>pfH){rstPlatform();}
+  document.getElementById('platformScore').textContent='Puan: '+pfPScore;
+}
+function platformLoop(){if(!pfRunning2)return;updatePlatform();drawPlatform();pfAnim2=requestAnimationFrame(platformLoop);}
+function startPlatform(){if(pfRunning2)return;rstPlatform();pfRunning2=true;platformLoop();}
+function resetPlatform(){pfRunning2=false;cancelAnimationFrame(pfAnim2);rstPlatform();drawPlatform();document.getElementById('platformScore').textContent='Puan: 0';}
+document.addEventListener('keydown',function(e){pfKeys[e.key]=true;});
+document.addEventListener('keyup',function(e){pfKeys[e.key]=false;});
+rstPlatform();drawPlatform();
 
-function findAnswer(msg) {
-  var m = msg.toLowerCase().replace(/[?!.,]/g,"");
-  var bestMatch = null;
-  var bestScore = 0;
-  var keys = Object.keys(chatKB);
-  for(var i=0; i<keys.length; i++) {
-    var k = keys[i];
-    if(m.indexOf(k) !== -1) {
-      if(k.length > bestScore) { bestScore = k.length; bestMatch = k; }
+// ====================== GAME 3: PENALTY SHOOTOUT ======================
+var fbCv=document.getElementById('footballCanvas'),fbCx=fbCv.getContext('2d');
+var fbW=360,fbH=400,fbBall,fbGK,fbState,fbGoals,fbMisses,fbShots,fbAnim3;
+function rstFootball(){fbBall={x:180,y:340,r:10,vx:0,vy:0,shot:false};fbGK={x:155,y:120,w:50,h:40,tx:155};fbState='aim';fbGoals=0;fbMisses=0;fbShots=0;}
+function drawFootball(){
+  // Pitch
+  fbCx.fillStyle='#1a3a1a';fbCx.fillRect(0,0,fbW,fbH);
+  // Goal posts
+  fbCx.fillStyle='#eee';fbCx.fillRect(80,80,8,80);fbCx.fillRect(272,80,8,80);fbCx.fillRect(80,80,200,6);
+  // Net
+  fbCx.fillStyle='rgba(255,255,255,.05)';fbCx.fillRect(88,86,184,74);
+  // Goal line
+  fbCx.strokeStyle='rgba(255,255,255,.3)';fbCx.lineWidth=2;fbCx.beginPath();fbCx.moveTo(88,160);fbCx.lineTo(272,160);fbCx.stroke();
+  // GK
+  fbCx.fillStyle='#c1a378';fbCx.fillRect(fbGK.x,fbGK.y,fbGK.w,fbGK.h);
+  // ball hat detail
+  fbCx.fillStyle='#222';fbCx.fillRect(fbGK.x+5,fbGK.y-5,fbGK.w-10,8);
+  // Ball
+  fbCx.beginPath();fbCx.arc(fbBall.x,fbBall.y,fbBall.r,0,Math.PI*2);fbCx.fillStyle='#fff';fbCx.fill();fbCx.strokeStyle='#333';fbCx.lineWidth=1;fbCx.stroke();
+  // Aim line
+  if(fbState==='aim'){fbCx.strokeStyle='rgba(193,163,120,.3)';fbCx.setLineDash([4,4]);fbCx.beginPath();fbCx.moveTo(fbBall.x,fbBall.y);fbCx.lineTo(fbBall.x,90);fbCx.stroke();fbCx.setLineDash([]);}
+  // Status
+  fbCx.fillStyle='rgba(255,255,255,.5)';fbCx.font='14px DM Sans';fbCx.textAlign='center';
+  if(fbState==='goal')fbCx.fillText('GOL! 🎉',180,220);
+  if(fbState==='miss')fbCx.fillText('Kaçtı!',180,220);
+  if(fbState==='saved')fbCx.fillText('Kurtardı!',180,220);
+  if(fbShots>=5&&fbState!=='shooting'){fbCx.fillStyle='var(--gold)';fbCx.font='18px Playfair Display';fbCx.fillText('Sonuç: '+fbGoals+'/5 Gol!',180,240);}
+}
+function updateFootball(){
+  if(fbState==='shooting'){
+    fbBall.x+=fbBall.vx;fbBall.y+=fbBall.vy;
+    // GK move
+    fbGK.x+=(fbGK.tx-fbGK.x)*.12;
+    // Check goal
+    if(fbBall.y<=160){
+      if(fbBall.x>88&&fbBall.x<272){
+        if(fbBall.x>fbGK.x&&fbBall.x<fbGK.x+fbGK.w&&fbBall.y<fbGK.y+fbGK.h){fbState='saved';fbMisses++;}
+        else{fbState='goal';fbGoals++;}
+      }else{fbState='miss';fbMisses++;}
+      fbShots++;
+      document.getElementById('footballScore').textContent='Gol: '+fbGoals+' / '+fbShots+' — Kaçan: '+fbMisses;
+      setTimeout(function(){if(fbShots<5){fbBall.x=180;fbBall.y=340;fbBall.vx=0;fbBall.vy=0;fbBall.shot=false;fbState='aim';fbGK.x=155;fbGK.tx=155;}},1200);
     }
   }
-  // Keyword synonyms
-  if(!bestMatch) {
-    if(m.indexOf("ölçü")!==-1||m.indexOf("numara")!==-1||m.indexOf("boyut")!==-1) bestMatch="beden";
-    else if(m.indexOf("fiyat")!==-1||m.indexOf("para")!==-1||m.indexOf("ne kadar")!==-1||m.indexOf("kaç")!==-1) bestMatch="fiyat";
-    else if(m.indexOf("teslimat")!==-1||m.indexOf("gönderi")!==-1) bestMatch="kargo";
-    else if(m.indexOf("geri")!==-1||m.indexOf("değiş")!==-1) bestMatch="iade";
-    else if(m.indexOf("pamuk")!==-1||m.indexOf("kumaş")!==-1||m.indexOf("neden")!==-1) bestMatch="malzeme";
-    else if(m.indexOf("tavsiye")!==-1||m.indexOf("öner")!==-1||m.indexOf("hangisi")!==-1) bestMatch="stil";
-    else if(m.indexOf("kombin")!==-1||m.indexOf("giy")!==-1||m.indexOf("nasıl")!==-1) bestMatch="kombinasyon";
-    else if(m.indexOf("indirim")!==-1||m.indexOf("kampanya")!==-1||m.indexOf("promosyon")!==-1) bestMatch="kampanya";
-    else if(m.indexOf("hediye")!==-1) bestMatch="hediye";
-    else if(m.indexOf("ne yapabilir")!==-1||m.indexOf("yardım")!==-1) bestMatch="yardım";
-  }
-  if(bestMatch) return chatKB[bestMatch];
-  return "Bu konuda size en iyi yardımı müşteri hizmetlerimiz sağlayabilir. destek@calejon.com adresine yazabilir veya beden, fiyat, kargo, iade, stil gibi konularda bana soru sorabilirsiniz! 🎩";
 }
-
-function sendChat() {
-  var inp=document.getElementById("chatInput");
-  var msg=inp.value.trim();
-  if(!msg) return;
-  inp.value="";
-  var box=document.getElementById("chatMessages");
-  // User message
-  var um=document.createElement("div"); um.className="msg user"; um.textContent=msg; box.appendChild(um);
-  box.scrollTop=box.scrollHeight;
-  // Typing indicator
-  var tp=document.createElement("div"); tp.className="msg bot typing";
-  tp.innerHTML='<div class="dots"><span></span><span></span><span></span></div>';
-  box.appendChild(tp); box.scrollTop=box.scrollHeight;
-  // Reply after delay
-  setTimeout(function() {
-    box.removeChild(tp);
-    var bm=document.createElement("div"); bm.className="msg bot";
-    bm.textContent=findAnswer(msg);
-    box.appendChild(bm); box.scrollTop=box.scrollHeight;
-  }, 800 + Math.random()*600);
-}
-
-// ===========================
-// FORUM
-// ===========================
-var threads = [
-  {title:"Midnight Classic ile en iyi kombinasyon önerileri",author:"AhmetS",tag:"Kombinasyon",date:"22 Şub 2026",body:"Siyah şapkamı aldım ama nasıl kombine edeceğimi bilemiyorum. Önerisi olan?",replies:[
-    {author:"ZeynepK",text:"Ben deri ceket + beyaz tişört ile kullanıyorum, çok şık duruyor!"},
-    {author:"CanD",text:"Oversize hoodie ile de çok iyi gidiyor, streetwear tarzı."}
-  ]},
-  {title:"Beden seçiminde kafam karıştı - 57cm S mi M mi?",author:"MelisBT",tag:"Soru",date:"21 Şub 2026",body:"Kafam 57cm ölçtüm ama S ile M arası kalıyorum. Hangisini almalıyım?",replies:[
-    {author:"CalejonDestek",text:"57cm tam M bedenimize denk gelir. Rahat kullanım isterseniz M, sıkı fit isterseniz S alabilirsiniz."}
-  ]},
-  {title:"Terra Signature gerçekten limited mı?",author:"BurakE",tag:"Genel",date:"20 Şub 2026",body:"Stokta kaç tane kaldığını bilen var mı? Kaçırmak istemiyorum.",replies:[]}
-];
-
-function renderThreads() {
-  var c=document.getElementById("forumThreads"); c.innerHTML="";
-  threads.forEach(function(t,i) {
-    var d=document.createElement("div"); d.className="forum-thread";
-    var rhtml="";
-    t.replies.forEach(function(r){
-      rhtml+='<div class="reply-item"><div class="reply-author">'+r.author+'</div><div class="reply-text">'+r.text+'</div></div>';
-    });
-    d.innerHTML='<div class="thread-header" onclick="togThread('+i+')"><div><div class="thread-title">'+t.title+'</div><div style="margin-top:4px;"><span class="thread-tag">'+t.tag+'</span></div></div><div class="thread-meta"><span>'+t.author+'</span><span>'+t.date+'</span><span>'+t.replies.length+' yanıt</span></div></div><div class="thread-body" id="tbody'+i+'"><p>'+t.body+'</p>'+rhtml+'<div class="reply-box"><input type="text" id="reply'+i+'" placeholder="Yanıt yaz..."><button onclick="addReply('+i+')">Yanıtla</button></div></div>';
-    c.appendChild(d);
-  });
-}
-renderThreads();
-
-function togThread(i) {
-  var el=document.getElementById("tbody"+i);
-  el.classList.toggle("open");
-}
-function addReply(i) {
-  var inp=document.getElementById("reply"+i);
-  var txt=inp.value.trim();
-  if(!txt) return;
-  threads[i].replies.push({author:"Sen",text:txt});
-  inp.value="";
-  renderThreads();
-  // Re-open the thread
-  document.getElementById("tbody"+i).classList.add("open");
-}
-function toggleForumNew() { document.getElementById("forumNew").classList.toggle("open"); }
-function postThread() {
-  var title=document.getElementById("forumTitle").value.trim();
-  var body=document.getElementById("forumBody").value.trim();
-  var tag=document.getElementById("forumTag").value;
-  if(!title||!body) { alert("Başlık ve mesaj gerekli."); return; }
-  threads.unshift({title:title,author:"Sen",tag:tag,date:"22 Şub 2026",body:body,replies:[]});
-  document.getElementById("forumTitle").value="";
-  document.getElementById("forumBody").value="";
-  toggleForumNew();
-  renderThreads();
-}
-
-// ===========================
-// NEWSLETTER
-// ===========================
-function subscribeNL() {
-  var email=document.getElementById("nlEmail").value.trim();
-  if(!email||email.indexOf("@")===-1) { alert("Geçerli bir e-posta girin."); return; }
-  document.getElementById("nlMsg").textContent="✓ "+email+" adresine kayıt yapıldı! İlk siparişinizde %10 indirim kodunuz: CALEJON10";
-  document.getElementById("nlMsg").style.display="block";
-  document.getElementById("nlEmail").value="";
-}
-
-// ===========================
-// LEGAL TABS
-// ===========================
-function showLegal(idx,el) {
-  document.querySelectorAll(".legal-content").forEach(function(e){e.classList.remove("active");});
-  document.querySelectorAll(".legal-tab").forEach(function(e){e.classList.remove("active");});
-  document.getElementById("legalTab"+idx).classList.add("active");
-  el.classList.add("active");
-}
+function fbLoop(){updateFootball();drawFootball();fbAnim3=requestAnimationFrame(fbLoop);}
+fbCv.addEventListener('click',function(e){
+  if(fbState!=='aim'||fbShots>=5)return;
+  var r=fbCv.getBoundingClientRect();
+  var tx=(e.clientX-r.left)*(fbW/r.width);
+  var ty=(e.clientY-r.top)*(fbH/r.height);
+  var dx=tx-fbBall.x,dy=ty-fbBall.y;
+  var sp=12,a=Math.atan2(-Math.abs(dy),dx);
+  fbBall.vx=Math.cos(a)*sp*.4+(tx-180)*.03;
+  fbBall.vy=-sp;
+  fbState='shooting';
+  // GK guess
+  fbGK.tx=80+Math.random()*200;
+});
+function startFootball(){cancelAnimationFrame(fbAnim3);rstFootball();fbLoop();}
+function resetFootball(){cancelAnimationFrame(fbAnim3);rstFootball();drawFootball();document.getElementById('footballScore').textContent='Gol: 0 / 5 — Kaçan: 0';}
+rstFootball();drawFootball();
 </script>
-
 </body>
 </html>
