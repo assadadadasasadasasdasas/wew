@@ -117,6 +117,40 @@ nav {
 .product-desc { font-size:12px;color:var(--text-dim);font-weight:300;margin-bottom:10px; }
 .product-price { font-size:17px;color:var(--gold);font-family:'Playfair Display',serif; }
 .product-badge { position:absolute;top:12px;right:12px;font-size:9px;letter-spacing:2px;padding:3px 8px;background:var(--accent);color:#fff;text-transform:uppercase; }
+.filter-btn {
+  padding:7px 16px;border:1px solid var(--input-border);border-radius:4px;
+  background:var(--bg);color:var(--text-dim);font-size:11px;cursor:pointer;
+  font-family:'DM Sans',sans-serif;letter-spacing:1px;transition:all .2s;
+}
+.filter-btn.active,.filter-btn:hover { border-color:var(--gold);color:var(--gold);background:rgba(193,163,120,.06); }
+.product-card .add-cart {
+  padding:8px 16px;background:var(--gold);color:#080706;border:none;border-radius:4px;
+  font-size:10px;cursor:pointer;font-weight:600;font-family:'DM Sans',sans-serif;
+  letter-spacing:1px;transition:all .2s;
+}
+.product-card .add-cart:hover { opacity:.85; }
+.product-card .add-cart.added { background:var(--success);color:#fff; }
+.qty-ctrl { display:flex;align-items:center;gap:4px; }
+.qty-ctrl button {
+  width:24px;height:24px;border-radius:50%;border:1px solid var(--input-border);
+  background:var(--bg);color:var(--text);font-size:13px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+}
+.qty-ctrl span { font-size:12px;min-width:20px;text-align:center; }
+.page-btn {
+  padding:6px 14px;border:1px solid var(--input-border);border-radius:4px;
+  background:var(--bg);color:var(--text-dim);font-size:11px;cursor:pointer;margin:0 3px;
+  font-family:'DM Sans',sans-serif;
+}
+.page-btn.active { border-color:var(--gold);color:var(--gold);background:rgba(193,163,120,.06); }
+.bulk-item {
+  display:flex;justify-content:space-between;align-items:center;
+  padding:10px 0;border-bottom:1px solid var(--border);font-size:13px;
+}
+.bulk-item .bi-name { flex:1;color:var(--text); }
+.bulk-item .bi-qty { color:var(--text-dim);margin:0 12px; }
+.bulk-item .bi-price { color:var(--gold);min-width:70px;text-align:right; }
+.bulk-item .bi-remove { background:none;border:none;color:var(--accent);cursor:pointer;font-size:14px;margin-left:8px; }
 
 /* TRY-ON + AI IMAGE GEN */
 .tryon { padding:80px 36px;background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border); }
@@ -419,14 +453,92 @@ footer { padding:50px 36px 24px;border-top:1px solid var(--border); }
   </div>
 </section>
 
-<!-- PRODUCTS -->
+<!-- PRODUCTS CATALOG -->
 <section class="products" id="products">
   <div style="text-align:center;">
     <span class="section-label">KOLEKSİYON 2026</span>
-    <h2 class="section-title" style="font-size:clamp(28px,4vw,46px);">Essentials</h2>
+    <h2 class="section-title" style="font-size:clamp(28px,4vw,46px);">Ürün Kataloğu</h2>
+    <p class="section-desc" style="margin:0 auto 20px;">100 şapka + 100 tişört — Her desende, her tarza uygun.</p>
   </div>
-  <div class="products-grid" id="prodGrid"></div>
+  <!-- Filters -->
+  <div style="max-width:1100px;margin:0 auto 20px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;">
+    <button class="filter-btn active" onclick="filterCat('all',this)">Tümü (200)</button>
+    <button class="filter-btn" onclick="filterCat('hat',this)">🎩 Şapkalar (100)</button>
+    <button class="filter-btn" onclick="filterCat('tshirt',this)">👕 Tişörtler (100)</button>
+    <span style="color:var(--text-dim);font-size:11px;margin:0 8px;">|</span>
+    <input type="text" id="prodSearch" placeholder="Ürün ara..." oninput="searchProducts()" style="padding:8px 14px;background:var(--input-bg);border:1px solid var(--input-border);border-radius:4px;color:var(--text);font-size:12px;width:180px;font-family:'DM Sans',sans-serif;outline:none;">
+    <select id="prodSort" onchange="sortProducts()" style="padding:8px 12px;background:var(--input-bg);border:1px solid var(--input-border);border-radius:4px;color:var(--text);font-size:12px;font-family:'DM Sans',sans-serif;outline:none;">
+      <option value="default">Sırala</option>
+      <option value="price-asc">Fiyat ↑</option>
+      <option value="price-desc">Fiyat ↓</option>
+      <option value="name">İsim A-Z</option>
+    </select>
+    <select id="prodColor" onchange="filterColor()" style="padding:8px 12px;background:var(--input-bg);border:1px solid var(--input-border);border-radius:4px;color:var(--text);font-size:12px;font-family:'DM Sans',sans-serif;outline:none;">
+      <option value="all">Tüm Renkler</option>
+      <option value="siyah">Siyah</option>
+      <option value="beyaz">Beyaz</option>
+      <option value="kırmızı">Kırmızı</option>
+      <option value="mavi">Mavi</option>
+      <option value="yeşil">Yeşil</option>
+      <option value="kahve">Kahverengi</option>
+      <option value="gri">Gri</option>
+      <option value="lacivert">Lacivert</option>
+      <option value="turuncu">Turuncu</option>
+      <option value="pembe">Pembe</option>
+    </select>
+  </div>
+  <!-- Cart bar -->
+  <div id="cartBar" style="display:none;max-width:1100px;margin:0 auto 16px;padding:12px 18px;background:var(--surface);border:1px solid var(--gold-dim);border-radius:8px;display:none;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+    <span style="font-size:13px;">🛒 Sepet: <strong id="cartCount">0</strong> ürün — <strong id="cartTotal">₺0</strong></span>
+    <div style="display:flex;gap:8px;">
+      <button class="game-btn sec" onclick="clearCart()" style="font-size:10px;">Temizle</button>
+      <button class="game-btn" onclick="showBulkOrder()" style="font-size:10px;">Toplu Sipariş Ver →</button>
+    </div>
+  </div>
+  <!-- Grid -->
+  <div class="products-grid" id="prodGrid" style="grid-template-columns:repeat(auto-fill,minmax(200px,1fr));max-width:1100px;"></div>
+  <!-- Pagination -->
+  <div style="text-align:center;margin-top:24px;" id="pagination"></div>
+  <!-- Showing count -->
+  <p style="text-align:center;margin-top:8px;font-size:11px;color:var(--text-dim);" id="prodCount"></p>
 </section>
+
+<!-- BULK ORDER MODAL -->
+<div id="bulkModal" style="display:none;position:fixed;inset:0;z-index:8000;background:rgba(0,0,0,.9);backdrop-filter:blur(10px);overflow-y:auto;">
+  <div style="max-width:600px;margin:60px auto;padding:28px;background:var(--surface);border:1px solid var(--border);border-radius:8px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+      <h3 style="font-family:'Playfair Display',serif;font-size:22px;letter-spacing:2px;">Toplu Sipariş</h3>
+      <button onclick="closeBulk()" style="background:none;border:none;color:var(--text-dim);font-size:22px;cursor:pointer;">✕</button>
+    </div>
+    <!-- Bulk discount info -->
+    <div style="padding:14px;background:rgba(193,163,120,.06);border:1px solid var(--border);border-radius:6px;margin-bottom:16px;">
+      <p style="font-size:12px;color:var(--gold);font-weight:600;letter-spacing:1px;margin-bottom:6px;">TOPLU SİPARİŞ İNDİRİMLERİ</p>
+      <p style="font-size:12px;color:var(--text-dim);line-height:1.8;">
+        5-9 adet → <strong style="color:var(--gold);">%10</strong> indirim &nbsp;|&nbsp;
+        10-24 adet → <strong style="color:var(--gold);">%15</strong> indirim &nbsp;|&nbsp;
+        25-49 adet → <strong style="color:var(--gold);">%20</strong> indirim &nbsp;|&nbsp;
+        50+ adet → <strong style="color:var(--gold);">%25</strong> indirim
+      </p>
+    </div>
+    <!-- Cart items -->
+    <div id="bulkItems"></div>
+    <!-- Totals -->
+    <div style="border-top:1px solid var(--border);padding-top:14px;margin-top:14px;">
+      <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--text-dim);margin-bottom:6px;"><span>Ara Toplam:</span><span id="bulkSubtotal">₺0</span></div>
+      <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--success);margin-bottom:6px;"><span>Toplu İndirim:</span><span id="bulkDiscount">-₺0</span></div>
+      <div style="display:flex;justify-content:space-between;font-size:16px;font-weight:600;color:var(--gold);"><span>Toplam:</span><span id="bulkTotal">₺0</span></div>
+    </div>
+    <!-- Form -->
+    <div style="margin-top:16px;display:flex;flex-direction:column;gap:8px;">
+      <input type="text" id="bulkName" placeholder="Ad Soyad" style="padding:12px;background:var(--input-bg);border:1px solid var(--input-border);border-radius:4px;color:var(--text);font-size:13px;font-family:'DM Sans',sans-serif;outline:none;">
+      <input type="email" id="bulkEmail" placeholder="E-posta" style="padding:12px;background:var(--input-bg);border:1px solid var(--input-border);border-radius:4px;color:var(--text);font-size:13px;font-family:'DM Sans',sans-serif;outline:none;">
+      <input type="tel" id="bulkPhone" placeholder="Telefon" style="padding:12px;background:var(--input-bg);border:1px solid var(--input-border);border-radius:4px;color:var(--text);font-size:13px;font-family:'DM Sans',sans-serif;outline:none;">
+      <textarea id="bulkNote" placeholder="Not (opsiyonel — özel baskı, logo, kurumsal talep)" rows="3" style="padding:12px;background:var(--input-bg);border:1px solid var(--input-border);border-radius:4px;color:var(--text);font-size:13px;font-family:'DM Sans',sans-serif;outline:none;resize:vertical;"></textarea>
+      <button onclick="submitBulk()" class="btn-gold" style="width:100%;border-radius:4px;">SİPARİŞ GÖNDER</button>
+    </div>
+    <p id="bulkMsg" style="text-align:center;margin-top:10px;font-size:12px;display:none;"></p>
+  </div>
+</div>
 
 <!-- TRY-ON -->
 <section class="tryon" id="tryon">
@@ -632,18 +744,172 @@ function toggleTheme(){
   document.getElementById('themeBtn2').textContent=icon;
 }
 
-// ====================== PRODUCTS ======================
-var HATS=[
-  {id:'black',name:'Midnight Classic',price:'₺890',desc:'Saf siyah, zamansız şıklık',brim:'#222',crown:'#1a1a1a',band:'#444',badge:'YENİ'},
-  {id:'white',name:'Arctic Essential',price:'₺890',desc:'Beyaz, minimalist zarafet',brim:'#ddd',crown:'#f0f0f0',band:'#bbb',badge:''},
-  {id:'brown',name:'Terra Signature',price:'₺1.290',desc:'Limited edition, doğal deri bant',brim:'#4a3028',crown:'#5a3a2a',band:'#7a5a42',badge:'LİMİTED'}
+// ====================== 200 PRODUCTS + CART + BULK ======================
+var hatPatterns=['Düz','Çizgili','Ekose','Kamuflaj','Paisley','Puantiye','Geometrik','Çiçekli','Batik','Denim'];
+var hatTypes=['Beyzbol Şapka','Bucket Şapka','Fedora','Snapback','Dad Hat','Bere','Trucker','Beanie','Flat Cap','Newsboy'];
+var tshirtTypes=['Oversize','Slim Fit','Regular','Crop','Polo','Henley','V-Yaka','Uzun Kol','Tank Top','Raglan'];
+var colors=[
+  {name:'Siyah',hex:'#1a1a1a',light:'#333'},{name:'Beyaz',hex:'#f0f0f0',light:'#ddd'},
+  {name:'Kırmızı',hex:'#8b2020',light:'#b03030'},{name:'Mavi',hex:'#1a3a6a',light:'#2a5a9a'},
+  {name:'Yeşil',hex:'#1a4a2a',light:'#2a6a3a'},{name:'Kahve',hex:'#5a3a2a',light:'#7a5a42'},
+  {name:'Gri',hex:'#4a4a4a',light:'#6a6a6a'},{name:'Lacivert',hex:'#0a1a3a',light:'#1a2a5a'},
+  {name:'Turuncu',hex:'#a04010',light:'#c06020'},{name:'Pembe',hex:'#a03060',light:'#c04080'}
 ];
-function renderProducts(){
-  var g=document.getElementById('prodGrid');g.innerHTML='';
-  HATS.forEach(function(h){
-    g.innerHTML+='<div class="product-card" onclick="goTo(\'tryon\')">'+(h.badge?'<div class="product-badge">'+h.badge+'</div>':'')+'<div class="product-img"><svg width="130" height="84" viewBox="0 0 120 78"><ellipse cx="60" cy="65" rx="55" ry="13" fill="'+h.brim+'"/><path d="M20,62 Q14,25 35,12 Q60,-2 85,12 Q106,25 100,62Z" fill="'+h.crown+'"/><rect x="20" y="52" width="80" height="6" rx="1" fill="'+h.band+'"/></svg></div><div class="product-info"><p class="product-name">'+h.name+'</p><p class="product-desc">'+h.desc+'</p><span class="product-price">'+h.price+'</span></div></div>';
+var allProducts=[];
+// Generate 100 hats
+for(var i=0;i<100;i++){
+  var c=colors[i%10],pat=hatPatterns[i%10],typ=hatTypes[Math.floor(i/10)%10];
+  var price=590+Math.floor(Math.random()*8)*100;
+  allProducts.push({
+    id:'H'+(i+1),cat:'hat',name:pat+' '+typ,color:c.name,colorKey:c.name.toLowerCase(),
+    hex:c.hex,hex2:c.light,price:price,
+    pattern:pat,type:typ,badge:i<3?'YENİ':i<6?'POPÜLER':i>=97?'LİMİTED':'',
+    icon:'hat'
   });
 }
+// Generate 100 tshirts
+for(var i=0;i<100;i++){
+  var c=colors[i%10],pat=hatPatterns[i%10],typ=tshirtTypes[Math.floor(i/10)%10];
+  var price=390+Math.floor(Math.random()*6)*100;
+  allProducts.push({
+    id:'T'+(i+1),cat:'tshirt',name:pat+' '+typ+' Tişört',color:c.name,colorKey:c.name.toLowerCase(),
+    hex:c.hex,hex2:c.light,price:price,
+    pattern:pat,type:typ,badge:i<3?'YENİ':i<6?'TREND':i>=97?'LİMİTED':'',
+    icon:'tshirt'
+  });
+}
+
+var filteredProducts=allProducts.slice();
+var currentCat='all';var currentPage=1;var perPage=24;
+var cart={};
+
+function drawProdSVG(p){
+  if(p.icon==='hat'){
+    return '<svg width="80" height="52" viewBox="0 0 120 78"><ellipse cx="60" cy="65" rx="55" ry="13" fill="'+p.hex2+'"/><path d="M20,62 Q14,25 35,12 Q60,-2 85,12 Q106,25 100,62Z" fill="'+p.hex+'"/><rect x="20" y="52" width="80" height="6" rx="1" fill="'+p.hex2+'"/></svg>';
+  }
+  // tshirt svg
+  return '<svg width="70" height="70" viewBox="0 0 100 100"><path d="M30,15 L20,15 L5,30 L18,38 L22,28 L22,85 L78,85 L78,28 L82,38 L95,30 L80,15 L70,15 C70,25 60,32 50,32 C40,32 30,25 30,15Z" fill="'+p.hex+'" stroke="'+p.hex2+'" stroke-width="1"/></svg>';
+}
+
+function renderProducts(){
+  var g=document.getElementById('prodGrid');g.innerHTML='';
+  var start=(currentPage-1)*perPage,end=Math.min(start+perPage,filteredProducts.length);
+  for(var i=start;i<end;i++){
+    var p=filteredProducts[i],inCart=cart[p.id]||0;
+    var cardHTML='<div class="product-card" data-id="'+p.id+'">';
+    if(p.badge)cardHTML+='<div class="product-badge"'+(p.badge==='LİMİTED'?' style="background:#3a5a3a"':p.badge==='TREND'?' style="background:#3a4a6a"':'')+'>'+p.badge+'</div>';
+    cardHTML+='<div class="product-img" style="padding:28px 0;">'+drawProdSVG(p)+'</div>';
+    cardHTML+='<div class="product-info" style="padding:14px 16px;">';
+    cardHTML+='<p class="product-name" style="font-size:14px;letter-spacing:1px;">'+p.name+'</p>';
+    cardHTML+='<p class="product-desc" style="font-size:11px;">'+p.color+' · '+(p.cat==='hat'?'Şapka':'Tişört')+'</p>';
+    cardHTML+='<div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;">';
+    cardHTML+='<span class="product-price" style="font-size:15px;">₺'+p.price.toLocaleString('tr')+'</span>';
+    if(inCart>0){
+      cardHTML+='<div class="qty-ctrl"><button onclick="changeQty(\''+p.id+'\',-1)">−</button><span>'+inCart+'</span><button onclick="changeQty(\''+p.id+'\',1)">+</button></div>';
+    } else {
+      cardHTML+='<button class="add-cart" onclick="addToCart(\''+p.id+'\')">+ Sepet</button>';
+    }
+    cardHTML+='</div></div></div>';
+    g.innerHTML+=cardHTML;
+  }
+  document.getElementById('prodCount').textContent=filteredProducts.length+' ürün gösteriliyor (sayfa '+currentPage+'/'+Math.ceil(filteredProducts.length/perPage)+')';
+  renderPagination();
+}
+
+function renderPagination(){
+  var total=Math.ceil(filteredProducts.length/perPage);
+  var pg=document.getElementById('pagination');pg.innerHTML='';
+  if(total<=1)return;
+  if(currentPage>1)pg.innerHTML+='<button class="page-btn" onclick="goPage('+(currentPage-1)+')">←</button>';
+  var start=Math.max(1,currentPage-3),end=Math.min(total,currentPage+3);
+  for(var i=start;i<=end;i++){
+    pg.innerHTML+='<button class="page-btn'+(i===currentPage?' active':'')+'" onclick="goPage('+i+')">'+i+'</button>';
+  }
+  if(currentPage<total)pg.innerHTML+='<button class="page-btn" onclick="goPage('+(currentPage+1)+')">→</button>';
+}
+function goPage(n){currentPage=n;renderProducts();document.getElementById('products').scrollIntoView({behavior:'smooth'});}
+
+function filterCat(cat,btn){
+  currentCat=cat;currentPage=1;
+  document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active');});
+  if(btn)btn.classList.add('active');
+  applyFilters();
+}
+function searchProducts(){currentPage=1;applyFilters();}
+function sortProducts(){applyFilters();}
+function filterColor(){currentPage=1;applyFilters();}
+
+function applyFilters(){
+  var q=document.getElementById('prodSearch').value.toLowerCase().trim();
+  var sort=document.getElementById('prodSort').value;
+  var col=document.getElementById('prodColor').value;
+  filteredProducts=allProducts.filter(function(p){
+    if(currentCat!=='all'&&p.cat!==currentCat)return false;
+    if(col!=='all'&&p.colorKey!==col)return false;
+    if(q&&p.name.toLowerCase().indexOf(q)===-1&&p.color.toLowerCase().indexOf(q)===-1&&p.pattern.toLowerCase().indexOf(q)===-1)return false;
+    return true;
+  });
+  if(sort==='price-asc')filteredProducts.sort(function(a,b){return a.price-b.price;});
+  else if(sort==='price-desc')filteredProducts.sort(function(a,b){return b.price-a.price;});
+  else if(sort==='name')filteredProducts.sort(function(a,b){return a.name.localeCompare(b.name);});
+  renderProducts();
+}
+
+// Cart
+function addToCart(id){cart[id]=(cart[id]||0)+1;updateCart();renderProducts();}
+function changeQty(id,d){cart[id]=(cart[id]||0)+d;if(cart[id]<=0)delete cart[id];updateCart();renderProducts();}
+function clearCart(){cart={};updateCart();renderProducts();}
+function updateCart(){
+  var count=0,total=0;
+  for(var id in cart){
+    var p=allProducts.find(function(x){return x.id===id;});
+    if(p){count+=cart[id];total+=p.price*cart[id];}
+  }
+  var bar=document.getElementById('cartBar');
+  if(count>0){bar.style.display='flex';document.getElementById('cartCount').textContent=count;document.getElementById('cartTotal').textContent='₺'+total.toLocaleString('tr');}
+  else{bar.style.display='none';}
+}
+
+function getBulkDiscount(count){
+  if(count>=50)return 0.25;if(count>=25)return 0.20;if(count>=10)return 0.15;if(count>=5)return 0.10;return 0;
+}
+
+function showBulkOrder(){
+  var items=document.getElementById('bulkItems');items.innerHTML='';
+  var count=0,subtotal=0;
+  for(var id in cart){
+    var p=allProducts.find(function(x){return x.id===id;});
+    if(!p)continue;var q=cart[id];count+=q;subtotal+=p.price*q;
+    items.innerHTML+='<div class="bulk-item"><span class="bi-name">'+p.name+' ('+p.color+')</span><span class="bi-qty">×'+q+'</span><span class="bi-price">₺'+(p.price*q).toLocaleString('tr')+'</span><button class="bi-remove" onclick="changeQty(\''+id+'\',-'+q+');showBulkOrder();">✕</button></div>';
+  }
+  var disc=getBulkDiscount(count);var discAmt=Math.round(subtotal*disc);
+  document.getElementById('bulkSubtotal').textContent='₺'+subtotal.toLocaleString('tr');
+  document.getElementById('bulkDiscount').textContent=disc>0?'-₺'+discAmt.toLocaleString('tr')+' ('+Math.round(disc*100)+'%)':'₺0';
+  document.getElementById('bulkTotal').textContent='₺'+(subtotal-discAmt).toLocaleString('tr');
+  document.getElementById('bulkModal').style.display='block';
+}
+function closeBulk(){document.getElementById('bulkModal').style.display='none';}
+function submitBulk(){
+  var name=document.getElementById('bulkName').value.trim();
+  var email=document.getElementById('bulkEmail').value.trim();
+  if(!name||!email){alert('Ad ve e-posta gerekli.');return;}
+  var msg=document.getElementById('bulkMsg');
+  msg.style.color='var(--success)';msg.textContent='✓ Sipariş alındı! En kısa sürede '+email+' adresine dönüş yapılacak.';msg.style.display='block';
+  // Save order
+  var orders=JSON.parse(localStorage.getItem('clj_orders')||'[]');
+  orders.push({name:name,email:email,phone:document.getElementById('bulkPhone').value,note:document.getElementById('bulkNote').value,cart:JSON.parse(JSON.stringify(cart)),date:new Date().toISOString()});
+  localStorage.setItem('clj_orders',JSON.stringify(orders));
+  cart={};updateCart();
+  setTimeout(function(){closeBulk();renderProducts();},2500);
+}
+
+// Also keep HATS array for try-on
+var HATS=[
+  {id:'black',name:'Midnight Classic',price:'₺890',desc:'Saf siyah',brim:'#222',crown:'#1a1a1a',band:'#444',badge:'YENİ'},
+  {id:'white',name:'Arctic Essential',price:'₺890',desc:'Beyaz',brim:'#ddd',crown:'#f0f0f0',band:'#bbb',badge:''},
+  {id:'brown',name:'Terra Signature',price:'₺1.290',desc:'Limited edition',brim:'#4a3028',crown:'#5a3a2a',band:'#7a5a42',badge:'LİMİTED'}
+];
+
 renderProducts();
 
 // ====================== TRY-ON ======================
