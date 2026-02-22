@@ -269,6 +269,23 @@ nav {
 
 /* FOOTER */
 footer { padding:50px 36px 24px;border-top:1px solid var(--border); }
+
+/* BLOG */
+.blog-card {
+  border:1px solid var(--border);background:var(--card-bg);border-radius:6px;
+  overflow:hidden;cursor:pointer;transition:all .3s;
+}
+.blog-card:hover { border-color:rgba(193,163,120,.3);transform:translateY(-2px); }
+.blog-card-img {
+  height:120px;display:flex;align-items:center;justify-content:center;
+  font-size:40px;background:var(--surface2);
+}
+.blog-card-body { padding:14px 16px; }
+.blog-card-cat { font-size:9px;letter-spacing:2px;color:var(--gold-dim);text-transform:uppercase;margin-bottom:4px; }
+.blog-card-title { font-family:'Playfair Display',serif;font-size:15px;line-height:1.4;margin-bottom:6px;letter-spacing:.5px; }
+.blog-card-excerpt { font-size:12px;color:var(--text-dim);line-height:1.7;font-weight:300; }
+.blog-card-date { font-size:10px;color:var(--text-dim);margin-top:8px; }
+.blog-tag { display:inline-block;padding:3px 8px;font-size:9px;border:1px solid var(--border);border-radius:3px;color:var(--gold-dim);letter-spacing:1px;margin:2px; }
 .footer-grid { display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:32px;max-width:900px;margin:0 auto 32px; }
 .footer-col h4 { font-size:10px;letter-spacing:3px;color:var(--gold-dim);text-transform:uppercase;margin-bottom:12px; }
 .footer-col a { display:block;font-size:12px;color:var(--text-dim);text-decoration:none;margin-bottom:8px;font-weight:300;cursor:pointer; }
@@ -418,6 +435,7 @@ footer { padding:50px 36px 24px;border-top:1px solid var(--border); }
     <a onclick="goTo('aigen')">AI Görsel</a>
     <a onclick="goTo('ai')">Asistan</a>
     <a onclick="goTo('games')">Oyunlar</a>
+    <a onclick="goTo('blog')">Blog</a>
     <a onclick="goTo('forum')">Forum</a>
     <a onclick="goTo('legal')">Yasal</a>
     <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn" title="Tema Değiştir">☀</button>
@@ -433,6 +451,7 @@ footer { padding:50px 36px 24px;border-top:1px solid var(--border); }
   <a onclick="goTo('aigen');toggleMenu()">AI Görsel</a>
   <a onclick="goTo('ai');toggleMenu()">AI Asistan</a>
   <a onclick="goTo('games');toggleMenu()">Oyunlar</a>
+  <a onclick="goTo('blog');toggleMenu()">Blog</a>
   <a onclick="goTo('forum');toggleMenu()">Forum</a>
   <a onclick="goTo('legal');toggleMenu()">Yasal</a>
 </div>
@@ -673,6 +692,51 @@ footer { padding:50px 36px 24px;border-top:1px solid var(--border); }
   </div>
 </section>
 
+<!-- SEO BLOG -->
+<section class="blog" id="blog" style="padding:80px 36px;">
+  <div style="text-align:center;">
+    <span class="section-label">CALEJON BLOG</span>
+    <h2 class="section-title" style="font-size:clamp(24px,3vw,38px);">Şapka Dünyası</h2>
+    <p class="section-desc" style="margin:0 auto 24px;">Stil rehberleri, bakım ipuçları, trend analizleri ve daha fazlası.</p>
+  </div>
+  <div style="max-width:900px;margin:0 auto;">
+    <!-- Blog Filters -->
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;align-items:center;justify-content:center;">
+      <button class="filter-btn active" onclick="filterBlog('all',this)">Tümü</button>
+      <button class="filter-btn" onclick="filterBlog('stil',this)">Stil</button>
+      <button class="filter-btn" onclick="filterBlog('bakım',this)">Bakım</button>
+      <button class="filter-btn" onclick="filterBlog('trend',this)">Trend</button>
+      <button class="filter-btn" onclick="filterBlog('rehber',this)">Rehber</button>
+      <button class="filter-btn" onclick="filterBlog('tarih',this)">Tarih</button>
+      <button class="filter-btn" onclick="filterBlog('kombinasyon',this)">Kombinasyon</button>
+      <button class="filter-btn" onclick="filterBlog('sağlık',this)">Sağlık</button>
+      <button class="filter-btn" onclick="filterBlog('mevsim',this)">Mevsimsel</button>
+      <input type="text" id="blogSearch" placeholder="Blog ara..." oninput="searchBlog()" style="padding:8px 14px;background:var(--input-bg);border:1px solid var(--input-border);border-radius:4px;color:var(--text);font-size:12px;width:180px;font-family:'DM Sans',sans-serif;outline:none;">
+    </div>
+    <p style="font-size:11px;color:var(--text-dim);text-align:center;margin-bottom:16px;" id="blogCount"></p>
+    <!-- Blog Grid -->
+    <div id="blogGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px;"></div>
+    <!-- Blog Pagination -->
+    <div style="text-align:center;margin-top:20px;" id="blogPag"></div>
+  </div>
+  <!-- Blog Detail Modal -->
+  <div id="blogModal" style="display:none;position:fixed;inset:0;z-index:7000;background:rgba(0,0,0,.92);backdrop-filter:blur(12px);overflow-y:auto;">
+    <div style="max-width:720px;margin:50px auto;padding:32px;background:var(--surface);border:1px solid var(--border);border-radius:8px;position:relative;">
+      <button onclick="closeBlog()" style="position:absolute;top:16px;right:16px;background:none;border:none;color:var(--text-dim);font-size:20px;cursor:pointer;">✕</button>
+      <span class="section-label" id="bmCat"></span>
+      <h2 class="section-title" style="font-size:22px;margin-top:8px;" id="bmTitle"></h2>
+      <p style="font-size:11px;color:var(--text-dim);margin-bottom:20px;" id="bmMeta"></p>
+      <div id="bmBody" style="font-size:14px;color:var(--text-mid);line-height:2;font-weight:300;"></div>
+      <div style="margin-top:24px;padding-top:16px;border-top:1px solid var(--border);display:flex;gap:8px;flex-wrap:wrap;" id="bmTags"></div>
+      <div style="margin-top:16px;display:flex;gap:8px;">
+        <button class="share-btn" onclick="shareBlog('twitter')">𝕏 Paylaş</button>
+        <button class="share-btn" onclick="shareBlog('facebook')">Facebook</button>
+        <button class="share-btn" onclick="shareBlog('whatsapp')">WhatsApp</button>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- FORUM -->
 <section class="forum" id="forum">
   <div style="text-align:center;"><span class="section-label">TOPLULUK</span><h2 class="section-title" style="font-size:clamp(24px,3vw,38px);">Forum</h2></div>
@@ -713,7 +777,7 @@ footer { padding:50px 36px 24px;border-top:1px solid var(--border); }
     <div class="legal-content active" id="lt0"><h3>Kullanım Şartları</h3><p>İşbu şartlar Calejon web sitesi ve hizmetlerinin kullanımını düzenler. Siteyi kullanarak şartları kabul etmiş sayılırsınız. Site "olduğu gibi" sunulur. Forum ve topluluklarda hakaret, spam ve yanıltıcı içerik yasaktır.</p><h3>Fikri Mülkiyet</h3><p>Sitedeki tüm içerikler Calejon'un mülkiyetindedir. İzinsiz kopyalama ve ticari kullanım yasaktır. AI tarafından üretilen görseller kişisel kullanım içindir.</p></div>
     <div class="legal-content" id="lt1"><h3>Gizlilik Politikası</h3><p>Fotoğraflarınız sunucuya gönderilmez, tarayıcınızda işlenir. Forum ve hesap bilgileri (ad, e-posta) yalnızca hizmet sunumu için kullanılır. Veriler üçüncü taraflarla paylaşılmaz. SSL şifreleme ile korunur.</p></div>
     <div class="legal-content" id="lt2"><h3>İade Politikası</h3><p>14 gün içinde koşulsuz iade. Ürün kullanılmamış ve etiketli olmalı. Limited edition yalnızca değişim. İade kargo müşteriye ait. Ödeme iadesi 5-10 iş günü.</p></div>
-    <div class="legal-content" id="lt3"><h3>KVKK Aydınlatma</h3><p>6698 sayılı KVKK kapsamında veri sorumlusu Calejon Tekstil A.Ş.'dir. Kimlik, iletişim, işlem bilgileri işlenir. Fotoğraflar saklanmaz. Haklarınız: öğrenme, düzeltme, silme, itiraz. Başvuru: kvkk@calejon.com</p></div>
+    <div class="legal-content" id="lt3"><h3>KVKK Aydınlatma</h3><p>6698 sayılı KVKK kapsamında veri sorumlusu Calejon Tekstil A.Ş.'dir. Kimlik, iletişim, işlem bilgileri işlenir. Fotoğraflar saklanmaz. Haklarınız: öğrenme, düzeltme, silme, itiraz. Başvuru: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="49223f2222092a28252c232627672a2624">[email&#160;protected]</a></p></div>
     <div class="legal-content" id="lt4"><h3>Çerez Politikası</h3><p>Zorunlu, analiz ve tercih çerezleri kullanılır. Tarayıcı ayarlarından yönetebilirsiniz. Bazı özellikler çerez olmadan çalışmayabilir.</p></div>
   </div>
 </section>
@@ -722,14 +786,14 @@ footer { padding:50px 36px 24px;border-top:1px solid var(--border); }
 <footer>
   <div class="footer-grid">
     <div class="footer-col"><h4>Marka</h4><a onclick="goTo('hero')">Ana Sayfa</a><a onclick="goTo('products')">Koleksiyon</a><a onclick="goTo('aigen')">AI Görsel</a></div>
-    <div class="footer-col"><h4>Destek</h4><a href="#">SSS</a><a href="#">Beden Rehberi</a><a href="mailto:destek@calejon.com">destek@calejon.com</a></div>
+    <div class="footer-col"><h4>Destek</h4><a href="#">SSS</a><a href="#">Beden Rehberi</a><a href="/cdn-cgi/l/email-protection#6703021413020c2704060b020d08094904080a"><span class="__cf_email__" data-cfemail="e581809691808ea5868489808f8a8bcb868a88">[email&#160;protected]</span></a></div>
     <div class="footer-col"><h4>Yasal</h4><a onclick="goTo('legal')">Kullanım Şartları</a><a onclick="goTo('legal')">Gizlilik</a><a onclick="goTo('legal')">KVKK</a></div>
-    <div class="footer-col"><h4>İletişim</h4><a href="mailto:info@calejon.com">info@calejon.com</a><a href="#">İstanbul, Türkiye</a></div>
+    <div class="footer-col"><h4>İletişim</h4><a href="/cdn-cgi/l/email-protection#fe97909891be9d9f929b949190d09d9193"><span class="__cf_email__" data-cfemail="d4bdbab2bb94b7b5b8b1bebbbafab7bbb9">[email&#160;protected]</span></a><a href="#">İstanbul, Türkiye</a></div>
   </div>
   <div class="footer-bottom">© 2026 CALEJON — TÜM HAKLARI SAKLIDIR</div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@latest/vision_bundle.js" crossorigin="anonymous"></script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@latest/vision_bundle.js" crossorigin="anonymous"></script>
 <script>
 // ====================== UTILS ======================
 function goTo(id){document.getElementById(id).scrollIntoView({behavior:'smooth'});}
@@ -1000,6 +1064,214 @@ function skipAI(){aiMode='basic';document.getElementById('apiSetup').style.displ
 async function callGemini(msg){chatHist.push({role:'user',parts:[{text:msg}]});var c=[{role:'user',parts:[{text:SYS}]},{role:'model',parts:[{text:'Anladım! Calejon AI hazırım 🎩'}]}].concat(chatHist);var r=await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key='+geminiKey,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contents:c,generationConfig:{temperature:.7,maxOutputTokens:200}})});if(!r.ok)throw new Error(r.status);var d=await r.json();var t=d.candidates[0].content.parts[0].text;chatHist.push({role:'model',parts:[{text:t}]});if(chatHist.length>20)chatHist=chatHist.slice(-14);return t;}
 function addBot(t){var b=document.getElementById('chatMessages');var m=document.createElement('div');m.className='msg bot';m.textContent=t;b.appendChild(m);b.scrollTop=b.scrollHeight;}
 function sendChat(){var inp=document.getElementById('chatInput'),msg=inp.value.trim();if(!msg)return;inp.value='';var b=document.getElementById('chatMessages');var u=document.createElement('div');u.className='msg user';u.textContent=msg;b.appendChild(u);b.scrollTop=b.scrollHeight;var tp=document.createElement('div');tp.className='msg bot typing';tp.innerHTML='<div class="dots"><span></span><span></span><span></span></div>';b.appendChild(tp);b.scrollTop=b.scrollHeight;if(aiMode==='gemini'){callGemini(msg).then(function(r){b.removeChild(tp);addBot(r);}).catch(function(){b.removeChild(tp);addBot(basicAns(msg));});}else{setTimeout(function(){b.removeChild(tp);addBot(basicAns(msg));},400+Math.random()*300);}}
+
+// ====================== 250 SEO BLOG POSTS ======================
+var blogPosts=[];
+var blogCat='all';var blogPage=1;var blogPer=12;var blogFiltered=[];
+
+// Content templates for generating unique SEO posts
+var blogData={
+stil:[
+{t:'Yüz Şekline Göre Şapka Seçimi: Kapsamlı Rehber',e:'Yuvarlak, oval, kare ve kalp şeklindeki yüzler için en uygun şapka modellerini keşfedin.',b:'Şapka seçimi sadece zevk meselesi değildir; yüz şeklinizle uyum sağlayan bir model, görünümünüzü tamamen dönüştürebilir. Yuvarlak yüzler için açılı kenarlı fedora ve newsboy modelleri idealdir çünkü yüze uzunluk katar. Oval yüz şekli en şanslı gruptur — neredeyse her model yakışır, ancak bere ve bucket özellikle zarif durur. Kare çene hattına sahipseniz yumuşak, yuvarlak kenarlı şapkalar tercih edin. Kalp şeklindeki yüzler için orta genişlikte kenarlı şapkalar en dengeli görünümü sağlar. Calejon koleksiyonundaki her model, farklı yüz tiplerine hitap edecek şekilde tasarlanmıştır.',tags:['yüz şekli','şapka seçimi','stil rehberi']},
+{t:'Erkekler İçin Şapka Stili: 2026 Trendleri',e:'Bu yılın erkek şapka trendlerini ve nasıl kombinleneceklerini öğrenin.',b:'2026 yılında erkek şapka modası cesur ve çeşitli. Oversized bucket şapkalar sokak stilinin vazgeçilmezi olmaya devam ediyor. Vintage dad hat modelleri retro dalgasıyla geri dönüş yapıyor. Fedora artık sadece resmi değil; casual kombinlerde de sıklıkla görülüyor. Minimalist düz beyzbol şapkalar lüks markalarla buluşunca yeni bir estetik ortaya çıkıyor. Denim ve batik desenler bu sezonun öne çıkan pattern trendleri. Renk olarak toprak tonları, sage yeşil ve pastel lavanta dikkat çekiyor. Calejon Terra Signature ile bu trendin öncüsü olabilirsiniz.',tags:['erkek moda','2026 trend','şapka stili']},
+{t:'Kadınlar İçin Şapka Kombinleri: Her Ortama Uygun',e:'İş, günlük, plaj ve gece çıkışları için kadın şapka kombin önerileri.',b:'Kadın modasında şapka artık sadece bir aksesuar değil, kombinin temel parçası. İş ortamı için yapılandırılmış fedora veya flat cap modelleri profesyonel bir görüntü sunar. Günlük kullanımda bucket şapka ve dad hat rahat ama şık bir seçenek. Plaj için geniş kenarlı hasır şapkalar klasik bir tercih olsa da bu sezon bucket modeller de sahilde trend. Gece çıkışlarında kadife veya saten detaylı beanie modelleri fark yaratıyor. Her kombinin altın kuralı: şapkanın rengi ayakkabı veya çantayla uyum sağlamalı.',tags:['kadın moda','kombinasyon','her mevsim']},
+{t:'Snapback vs Dad Hat: Hangi Model Size Uygun?',e:'İki popüler şapka modelini her açıdan karşılaştırıyoruz.',b:'Snapback ve dad hat günlük şapka stilinin iki devi. Snapback düz siperliği ve arkadaki ayarlanabilir klipsiyle sporcu estetiği yansıtır. Genellikle daha yapılandırılmış ve kasıntısız bir havası vardır. Dad hat ise kavisli siperli, yumuşak kumaşlı ve rahat formlu bir modeldir. Vintage, effortless şıklık arayanlar dad hat tercih eder. Snapback daha genç ve sokak stili ile uyumlu iken, dad hat her yaş grubuna hitap eder. Yüzünüz yuvarlaksa snapback, uzunsa dad hat daha dengeli görünür.',tags:['snapback','dad hat','karşılaştırma']},
+{t:'Monokrom Şapka Stili: Tek Renkle Etki Yaratmak',e:'Siyah, beyaz veya tek tonluk şapka kombinlerinin gücünü keşfedin.',b:'Monokrom giyim sanatında şapka taç noktasıdır — hem kelimenin gerçek hem mecazi anlamıyla. Tamamen siyah bir kombinin üzerine siyah bir Calejon Midnight Classic taktığınızda otorite ve zarafet bir araya gelir. All-white yazlık bir kombinle Arctic Essential birleştiğinde minimalist ve ferah bir görünüm elde edersiniz. Monokrom stilin sırrı doku farklılıklarında saklıdır: mat kumaş üzerine parlak detay, düz yüzey üzerine dokulu şapka. Tek ton giyerken aksesuarların malzeme çeşitliliği sizi sıkıcı olmaktan kurtarır.',tags:['monokrom','minimalist','stil']},
+{t:'Şapka ile Saç Modeli Uyumu: Ne Zaman Hangi Model?',e:'Saç uzunluğu ve modeline göre en uygun şapka tiplerini bulun.',b:'Saç modeliniz şapka seçiminde belirleyici bir faktördür. Kısa saçlılar beanie ve fitted şapkalarla çok şık görünür çünkü yüz hatları ön plana çıkar. Uzun saçlılar bucket şapka veya geniş kenarlı modellerde saçlarını aşağı bırakarak bohem bir görünüm elde edebilir. Topuz veya at kuyruğu yapıyorsanız dad hat veya beyzbol şapkanın ayarlanabilir arkası çok işlevseldir. Kıvırcık saçlılar için gevşek yapılı trucker şapkalar hem saçı ezmez hem de harika görünür. Pixie kesim ile newsboy şapka kombinasyonu ise vintage şıklığın zirvesidir.',tags:['saç modeli','uyum','pratik ipucu']},
+{t:'Resmi Etkinliklerde Şapka: Ne Giyilir, Ne Giyilmez?',e:'Düğün, kokteyl ve iş toplantılarında şapka protokolü rehberi.',b:'Resmi etkinliklerde şapka takmak cesur ama doğru yapıldığında son derece şık bir tercihtir. Düğünlerde kadınlar için yapılandırılmış fedora veya fascinator tarzı şapkalar uygundur; erkeklerde ise klasik fedora veya Panama şapka tercih edilir. Kokteyl partilerinde küçük bere veya pillbox şapka zarif durur. İş toplantılarında genellikle şapka çıkarılması beklenir, ancak yaratıcı sektörlerde minimal bir dad hat kabul görebilir. Altın kural: şapkanız kombininize uygun ve bakımlı olmalı. Calejon şapkalarının premium malzemesi resmi ortamlarda fark yaratır.',tags:['resmi etkinlik','protokol','düğün']},
+{t:'Streetwear ve Şapka: Sokak Stilinin Vazgeçilmezi',e:'Streetwear kültüründe şapkanın yerini ve kombinasyon ipuçlarını keşfedin.',b:'Streetwear kültürü ve şapka ayrılmaz bir ikilidir. Hip-hop kültüründen doğan düz siperli snapback, skateboard sahnesindeki trucker ve Japon streetwear estetiğindeki bucket — her alt kültürün kendi şapka kimliği vardır. 2026 streetwear trendlerinde oversize silüetlerle minimalist şapkalar ön plana çıkıyor. Grafik baskılı hoodie üzerine düz siyah şapka; wide-leg pantolon ve crop top ile bucket şapka kombinleri sokakta en çok görülen stiller. Calejon Snapback modelleri clean streetwear estetiğinin temsilcisidir.',tags:['streetwear','sokak stili','hip-hop']},
+{t:'İş Hayatında Şapka: Profesyonel Görünüm Rehberi',e:'Ofiste ve iş toplantılarında şapka takan profesyoneller için stil ipuçları.',b:'İş dünyasında şapka takmak geçmişte tabu sayılsa da modern iş kültürü bunu değiştirdi. Özellikle yaratıcı sektörlerde, startup ekosisteminde ve uzaktan çalışma döneminde şapka iş gardırobunun doğal bir parçası haline geldi. Flat cap klasik ve entelektüel bir görünüm sunar. Dad hat casual Friday için idealdir. Beanie teknoloji sektöründe neredeyse bir üniforma. Önemli olan şapkanın temiz, bakımlı ve kombine uygun olmasıdır. Nötr renkler (siyah, lacivert, gri) en güvenli seçimlerdir.',tags:['iş hayatı','profesyonel','ofis stili']},
+{t:'Minimalist Şapka Koleksiyonu: Az Ama Öz',e:'Kapsül gardırop mantığıyla 5 şapkayla tüm ihtiyaçlarınızı karşılayın.',b:'Minimalist yaşam felsefesiyle şapka koleksiyonunuz da sadeleşebilir. İdeal 5 şapkalık kapsül koleksiyon: 1) Siyah beyzbol şapka — her gün, her kombin. 2) Beyaz bucket — yaz mevsimi vazgeçilmezi. 3) Kahverengi fedora — sonbahar ve resmi ortamlar. 4) Gri beanie — kış ve casual. 5) Lacivert flat cap — smart casual geçişler. Bu beşli ile yılın 365 günü, her ortamda şapkalı olabilirsiniz. Calejon\'un üç temel modeli (Midnight Classic, Arctic Essential, Terra Signature) bu minimalist yaklaşımın temelini oluşturur.',tags:['minimalist','kapsül gardırop','temel parçalar']}
+],
+bakım:[
+{t:'Şapka Bakım Rehberi: Uzun Ömürlü Kullanım İçin',e:'Şapkanızı yıllarca yeni gibi tutmanın profesyonel yöntemleri.',b:'Kaliteli bir şapkanın ömrü bakımına bağlıdır. Pamuklu şapkaları elde, ılık su ve hafif deterjanla yıkayın — çamaşır makinesi şapkanın formunu bozar. Kuruturken şapkanın içine havlu koyarak formunu koruyun. Güneşte değil, gölgede kurutun; direkt güneş renk solmasına neden olur. Deri bantlı modellerde özel deri bakım kremi kullanın. Terleme lekeleri için beyaz sirke ve su karışımı etkilidir. Şapkaları asla katlayarak saklamayın; düz yüzeyde veya şapka standında muhafaza edin. Calejon organik pamuk şapkalarında düzenli havalandırma yeterlidir.',tags:['bakım','temizlik','uzun ömür']},
+{t:'Beyaz Şapka Nasıl Temizlenir: Adım Adım',e:'Beyaz şapkalarınızı sararma ve leke sorunlarından kurtarın.',b:'Beyaz şapkalar zarifliğiyle dikkat çeker ama bakımı özen ister. İlk kural: lekelere hemen müdahale edin, kurumasını beklemeyin. Hafif lekeler için karbonat ve su macunu yapıp yumuşak diş fırçasıyla dairesel hareketlerle temizleyin. Yağ lekeleri için bulaşık deterjanı etkilidir. Genel sararmalar için oksijenli ağartıcıyla ılık suda 30 dakika bekletin. Ter lekelerinde sirke ve karbonat kombinasyonu işe yarar. Calejon Arctic Essential modelinin organik pamuk kumaşı yıkamaya dayanıklıdır ancak klorik ağartıcıdan kaçının.',tags:['beyaz şapka','leke çıkarma','temizlik']},
+{t:'Şapka Saklama Yöntemleri: Form Kaybını Önleyin',e:'Şapkalarınızın şeklini koruyan en etkili saklama teknikleri.',b:'Doğru saklama, şapka bakımının yarısıdır. Beyzbol şapkalar ve snapback\'ler için duvar askısı veya özel şapka rafı idealdir. Fedora ve geniş kenarlı şapkaları kutu içinde, kenarları düz şekilde saklayın; içine kağıt doldurmak formunu korur. Beanie ve bereler katlanarak çekmecede saklanabilir. Bucket şapkalar esnek yapısı sayesinde düz yüzeyde istiflenebilir. Nemli ortamlardan uzak tutun — küf riski vardır. İdeal saklama ortamı serin, kuru ve karanlıktır. Mevsim dışı şapkalar için pamuklu torba kullanın, naylon poşet havalandırmayı engeller.',tags:['saklama','form koruma','organizasyon']},
+{t:'Şapkadaki Ter Lekesi Nasıl Çıkar?',e:'Şapka bandındaki inatçı ter lekelerini temizlemenin en etkili yolları.',b:'Ter lekeleri şapkaların en yaygın sorunu ve zamanla kumaşı zayıflatabilir. Önleme en iyi stratejidir: her kullanımdan sonra şapkayı havalandırın. Mevcut lekeler için: 1) Beyaz sirke ve ılık su (1:1) karışımına 15 dakika batırın. 2) Eski diş fırçasıyla nazikçe ovalayın. 3) Soğuk suyla durulayın. 4) Havlu ile formunu koruyarak gölgede kurutun. İnatçı lekeler için karbonat macunu uygulayıp 30 dakika bekletin. Koyu renkli şapkalarda leke daha az görünür ama bakım yine şarttır.',tags:['ter lekesi','temizlik','pratik ipucu']},
+{t:'Organik Pamuk Şapka Bakımı: Bilmeniz Gerekenler',e:'Organik pamuk şapkalarınızın dokusunu ve rengini koruma rehberi.',b:'Organik pamuk, sentetik kumaşlara göre daha hassas ama çok daha konforludur. Yıkama suyu 30 derece üzerinde olmamalıdır — sıcak su organik lifleri zayıflatır. Doğal sabun veya organik deterjan tercih edin. Kumaş yumuşatıcı kullanmayın; pamuk liflerinin doğal yumuşaklığını bozar. İlk yıkamada az miktarda renk akması normaldir, bu kimyasal boya kullanılmadığının göstergesidir. Organik pamuk UV ışınlarına dayanıklı değildir, uzun süre güneşte bırakmayın. Calejon şapkalarının tamamı GOTS sertifikalı organik pamuktan üretilir.',tags:['organik pamuk','doğal bakım','çevreci']},
+{t:'Şapka Yıkama Sıklığı: Ne Zaman Yıkamalı?',e:'Şapkalarınızı ne sıklıkla yıkamanız gerektiğini ve uyarı işaretlerini öğrenin.',b:'Şapka yıkama sıklığı kullanım yoğunluğuna göre değişir. Günlük kullandığınız spor şapkaları 2-3 haftada bir yıkayın. Haftada birkaç kez taktığınız casual şapkalar ayda bir yeterlidir. Nadiren kullandıklarınız mevsimde bir kez yıkamak yeterli. Yıkama zamanı geldiğinin işaretleri: görünür lekeler, hoş olmayan koku, bant kısmında tuz birikintisi, kumaşın sertleşmesi. Her yıkama şapkayı bir miktar yıpratır, bu yüzden gereksiz yıkamadan kaçının. Kullanım arası havalandırma yıkama ihtiyacını azaltır.',tags:['yıkama','bakım sıklığı','hijyen']},
+{t:'Deri Şapka Bakımı: Premium Malzeme Rehberi',e:'Deri bantlı ve deri şapkaların özel bakım gereksinimleri.',b:'Deri detaylı şapkalar özel ilgi ister. Deri bantları ayda bir deri bakım kremiyle besleyin — bu çatlamayı önler. Islanan deri şapkayı asla saç kurutma makinesiyle kurutmayın; oda sıcaklığında doğal kurumasını bekleyin. Deri kokusu için karbonat serpip bir gece bekletin, sonra fırçalayın. Çizikler için aynı renk ayakkabı cilası hafifçe sürülebilir. Calejon Terra Signature modelinin deri bandı İtalyan tabakhanelerinden temin edilen doğal deriden üretilir ve minimum bakımla yıllarca dayanır.',tags:['deri bakım','premium','Terra Signature']},
+{t:'Şapka Kokusu Nasıl Giderilir?',e:'Şapkanızdaki istenmeyen kokuları doğal yöntemlerle giderin.',b:'Şapka kokusu genellikle bakteri birikiminden kaynaklanır. Doğal çözümler: 1) Karbonat — şapkanın içine serpin, bir gece bekletin, silkeleyin. 2) Dondurma — kapalı poşette dondurucu, koku yapan bakterileri öldürür. 3) Sirke spreyi — eşit oranda su ve sirke karışımını püskürtün, havalandırın. 4) Güneş — UV ışınları doğal dezenfektandır, 30 dakika yeterli. 5) Aktif kömür — şapka kutusuna koyun, kokuyu emer. Sentetik kumaşlar organik pamuğa göre daha fazla koku tutar, bu yüzden Calejon\'un organik pamuk tercihinin bir avantajı da budur.',tags:['koku giderme','doğal yöntem','hijyen']}
+],
+trend:[
+{t:'2026 Şapka Trendleri: Sezonun En Popüler Modelleri',e:'Moda dünyasının önde gelen trendlerinden şapka modası analizi.',b:'2026 yılı şapka modası için çığır açan bir yıl. Podyumlardan sokaklara yayılan trendler: 1) Oversize bucket — her zamankinden büyük ve dikkat çekici. 2) Retro beyzbol — 90\'lar nostaljisi devam ediyor. 3) Artisanal fedora — el yapımı, doğal malzeme. 4) Tech beanie — akıllı kumaş teknolojisiyle ısı düzenleyen. 5) Gender-fluid modeller — cinsiyet ayrımı olmayan tasarımlar. 6) Earth tone — toprak tonları hakim renk paleti. 7) Micro bucket — küçük bucket şapka trendi başlıyor. Calejon bu trendlerin birçoğunu koleksiyonuna yansıtıyor.',tags:['2026','trend','moda analizi']},
+{t:'Sürdürülebilir Şapka Modası: Geleceğin Trendi',e:'Çevreci üretim ve sürdürülebilir şapka markalarının yükselişi.',b:'Sürdürülebilirlik artık moda endüstrisinin merkezinde ve şapka sektörü de bu dönüşümün parçası. Organik pamuk, geri dönüştürülmüş polyester, hemp ve bambu lifi gibi çevreci malzemeler ön plana çıkıyor. Slow fashion hareketi az ama kaliteli şapka satın almayı teşvik ediyor. Yerel üretim, düşük karbon ayak izi ve adil ticaret sertifikaları tüketici tercihlerini belirliyor. Calejon olarak %100 organik pamuk kullanımımız, el yapımı üretimimiz ve dayanıklı tasarımımızla sürdürülebilir modanın öncülerinden olmaktan gurur duyuyoruz.',tags:['sürdürülebilir','çevreci','organik']},
+{t:'Sosyal Medyada Şapka Trendleri: TikTok ve Instagram',e:'Viral şapka trendlerini ve influencer stillerini analiz ediyoruz.',b:'Sosyal medya şapka trendlerinin yayılmasında en güçlü kanal. TikTok\'ta #HatCheck hashtag\'i milyarlarca görüntülenmeye ulaştı. Instagram\'da flat lay şapka fotoğrafçılığı ve #OOTD paylaşımlarında şapka vazgeçilmez aksesuar. 2026\'da viral olan stiller: backwards snapback comebacki, mini bucket challenge, hat swap videoları ve vintage thrift şapka bulma videoları. Influencer\'lar artık sponsor şapka partnerlikleri yapıyor. Calejon\'un AI sanal deneme özelliği sosyal medya içerik üretimi için mükemmel bir araç.',tags:['sosyal medya','TikTok','Instagram']},
+{t:'Unisex Şapka Trendi: Cinsiyet Ayrımı Kalkıyor',e:'Gender-fluid moda akımının şapka dünyasındaki yansımaları.',b:'Moda dünyasında cinsiyet sınırları hızla eriyor ve şapka kategorisi bu değişimin öncülerinden. Büyük moda evleri artık erkek/kadın ayrımı yapmadan şapka koleksiyonları sunuyor. Bucket şapka, dad hat ve beanie zaten doğası gereği unisex modellerdir. Fedora ve flat cap gibi geleneksel olarak erkek modellerinde kadın kullanımı artıyor. Bu trend hem pratiklik hem de kapsayıcılık açısından önemli. Calejon koleksiyonunun tamamı unisex tasarımdır — ayarlanabilir boyutlarla her kafaya uyum sağlar.',tags:['unisex','gender-fluid','kapsayıcı moda']},
+{t:'Y2K Şapka Trendinin Geri Dönüşü',e:'2000\'ler başı şapka estetiğinin modern yorumu.',b:'Y2K nostaljisi şapka modasını da etkisi altına aldı. Velvet bucket şapkalar, rhinestone detaylı beyzbol şapkalar, pastel renkli trucker modeller ve tüylü beanie\'ler 2000\'lerin ikonik parçalarıydı ve şimdi geri dönüyorlar. Modern Y2K yorumunda orijinaline göre daha rafine bir yaklaşım var — daha az bling, daha çok ironi. Vintage mağazalarda 2000\'ler şapkalarına talep patladı. Yeni üretim markaları ise Y2K estetiğini sürdürülebilir malzemelerle buluşturuyor.',tags:['Y2K','retro','nostalji','2000ler']}
+],
+rehber:[
+{t:'Şapka Beden Rehberi: Doğru Ölçüyü Bulma',e:'Kafa ölçüsünü alma, beden tablosu ve ipuçları.',b:'Doğru beden şapka konforunun temelidir. Ölçüm için esnek bir mezura kullanın. Kaşlarınızın yaklaşık 1 cm üzerinden, kulaklarınızın üstünden geçirerek kafanızın en geniş noktasını ölçün. Ölçüm sonucu: S = 54-55 cm, M = 56-57 cm, L = 58-59 cm, XL = 60-61 cm. İki beden arasında kalırsanız büyük bedeni tercih edin — çoğu şapka zamanla hafifçe oturur. Kalın saç modeli veya topuz yapıyorsanız bir üst bedeni düşünün. Calejon şapkalarının tamamında ayarlanabilir klips bulunur, bu da ince ayar yapmanızı sağlar.',tags:['beden rehberi','ölçüm','nasıl yapılır']},
+{t:'İlk Şapka Alımı: Yeni Başlayanlar İçin Rehber',e:'Şapka almayı düşünüyorsanız nereden başlamalısınız.',b:'Şapka dünyasına yeni adım atıyorsanız, basit ve çok yönlü modellerle başlayın. İlk şapkanız siyah bir dad hat veya beyzbol şapka olsun — neredeyse her kombinle uyum sağlar. İkinci şapkanız olarak beyaz veya açık renk bir model ekleyin. Üçüncü şapkayla karakterinizi yansıtın: fedora cesur bir seçim, bucket genç ve dinamik, flat cap entelektüel. Bütçe ne olursa olsun kaliteli malzeme tercih edin — ucuz şapkalar çabuk deforme olur ve terletir. Calejon Midnight Classic, minimalist başlangıç için mükemmeldir.',tags:['başlangıç rehberi','ilk şapka','tavsiye']},
+{t:'Online Şapka Alışverişi: Dikkat Edilmesi Gerekenler',e:'İnternetten şapka alırken doğru seçim yapmanın yolları.',b:'Online şapka alışverişi doğru yaklaşımla avantajlı olabilir. Önce kafa ölçünüzü alın ve markanın beden tablosunu kontrol edin. Ürün fotoğraflarını dikkatle inceleyin — yan, ön ve arka açılardan görseller önemli. Malzeme bilgisini okuyun; %100 pamuk ile polyester arasında büyük fark vardır. Müşteri yorumlarını mutlaka okuyun, özellikle beden yorumlarına dikkat edin. İade politikasını kontrol edin — Calejon 14 gün koşulsuz iade sunuyor. AI sanal deneme özelliğimizle fotoğrafınızda şapkayı önceden görebilirsiniz.',tags:['online alışveriş','ipuçları','rehber']},
+{t:'Kurumsal Şapka Siparişi: Markalı Şapka Rehberi',e:'Şirketiniz için toplu şapka siparişi vermenin A\'dan Z\'ye rehberi.',b:'Kurumsal şapka siparişi; promosyon, etkinlik, personel kıyafeti ve müşteri hediyesi için popüler bir seçenektir. Sipariş süreci: 1) Model seçimi — hedef kitlenize uygun tip belirleyin. 2) Renk ve logo — kurumsal renk uyumu ve logo yerleşimi. 3) Adet belirleme — toplu indirimlerden yararlanın. 4) Numune onayı — üretim öncesi örnek kontrol edin. 5) Üretim ve teslimat. Calejon toplu sipariş programı: 5+ adette %10, 25+ adette %20, 50+ adette %25 indirim sunar. Kurumsal logonuz şapkalara nakış veya baskı olarak eklenebilir.',tags:['kurumsal','toplu sipariş','promosyon','markalı']},
+{t:'Şapka Hediye Etme Rehberi: En İyi Seçimler',e:'Sevdiklerinize şapka hediye ederken dikkat edilecekler.',b:'Şapka hediye etmek kişisel ve pratik bir tercih. Karşı tarafın stilini bilmiyorsanız nötr renklerde (siyah, lacivert, gri) klasik modeller en güvenli seçimdir. Beden konusunda endişelenmeyin — ayarlanabilir modeller beden hatasını ortadan kaldırır. Hediye kutusu ve kişisel not fark yaratır; Calejon hediye paketi seçeneği sunuyor. Bütçeye göre seçenekler: ekonomik (tek şapka), premium (şapka + bakım kiti), lüks (limited edition + hediye kutusu). Sanal deneme linkini hediyeyle birlikte paylaşmak modern ve eğlenceli bir dokunuş olur.',tags:['hediye','özel gün','seçim rehberi']}
+],
+tarih:[
+{t:'Şapkanın Tarihi: Antik Çağlardan Günümüze',e:'Binlerce yıllık şapka tarihinin kısa bir yolculuğu.',b:'Şapka insanlık tarihinin en eski aksesuar türlerinden biridir. MÖ 3200 yıllarına ait Mısır duvar resimlerinde şapka tasviri bulunur. Orta Çağ\'da şapka sosyal statünün göstergesiydi. 16. yüzyılda İngiltere\'de şapka takmayan vatandaşlara ceza kesiliyordu. 18. yüzyılda silindir şapka viktorya döneminin simgesi oldu. 20. yüzyılda beyzbol şapka spor dünyasından günlük modaya geçti. 1990\'larda hip-hop kültürü snapback\'i dünyaya tanıttı. 2020\'lerde bucket şapkanın geri dönüşü oldu. Bugün şapka hem fonksiyonel hem moda öğesidir.',tags:['tarih','kültür','şapka tarihi']},
+{t:'Fedora\'nın Hikayesi: Bir Şapkanın Evrimi',e:'Tiyatro sahnesinden Hollywood\'a, sokak stiline fedoranın yolculuğu.',b:'Fedora adını 1882 yılında sahnelenen bir tiyatro oyunundan alır. Başrol oyuncusu Sarah Bernhardt\'ın taktığı yumuşak kenarlı şapka, önce kadın hakları hareketinin simgesi oldu. 1920\'lerde gangsterler ve Hollywood yıldızları fedorayı erkek modasına taşıdı. Humphrey Bogart ve Indiana Jones fedorayı popüler kültüre kazıdı. 2000\'lerde hipster kültürüyle yeniden canlandı. Bugün fedora hem vintage hem modern yorumlarıyla farklı alt kültürlere hitap ediyor.',tags:['fedora','tarih','Hollywood']},
+{t:'Beyzbol Şapkanın Doğuşu ve Küresel Yayılımı',e:'Bir spor aksesuarından küresel moda ikonuna dönüşen beyzbol şapkanın hikayesi.',b:'Beyzbol şapka 1860\'larda Brooklyn Excelsiors takımıyla ortaya çıktı. Başlangıçta sadece güneşten korunma amaçlıyordu. 1954\'te New Era\'nın 59FIFTY modeli standart haline geldi. 1990\'larda hip-hop müzisyenleri beyzbol şapkayı stüdyolardan sokaklara taşıdı. Etiketini sökmeme trendi Minnie Riperton ile başladı. Düz siperli snapback trendi 2000\'lerde patladı. Bugün beyzbol şapka dünyanın her ülkesinde, her yaş grubunda giyilen en yaygın şapka tipidir.',tags:['beyzbol şapka','tarih','New Era','kültür']},
+{t:'Bere Kültürü: Sanatçılardan Askerlere',e:'Berenin sanat, askerlik ve moda tarihindeki önemli rolü.',b:'Bere 15. yüzyılda Avrupa köylülerinin günlük başlığıydı. Zaman içinde Fransız kültürünün simgesi haline geldi. Askeri berelerin renkleri birlik ve rütbeyi belirtir: kırmızı = paraşütçü, yeşil = komando, mavi = barış gücü. Sanat dünyasında bere yaratıcılığın ve bohemliğin sembolüdür — Rembrandt birçok otoportresinde bere takarak poz verdi. Che Guevara\'nın yıldızlı beresi devrim sembolü oldu. Günümüzde bere hem vintage şıklığın hem politik ifadenin aracı olmaya devam ediyor.',tags:['bere','kültür','sanat','askerlik']},
+{t:'Osmanlı\'dan Cumhuriyet\'e: Türk Şapka Devrimi',e:'Türkiye\'de şapka tarihinin en önemli dönüm noktası olan 1925 Şapka İnkılabı.',b:'Osmanlı İmparatorluğu\'nda fes 19. yüzyılın simgesiydi — 1826\'da Mahmut II tarafından zorunlu kılınmıştı. Cumhuriyet\'in ilanından sonra 25 Kasım 1925\'te kabul edilen Şapka Kanunu ile Batılı tarz şapkalar zorunlu hale geldi. Bu reform Atatürk\'ün modernleşme vizyonunun önemli bir parçasıydı. İlk dönemde fötr şapka (fedora benzeri) ve kasket en popüler modellerdi. Zaman içinde Türkiye kendi şapka kültürünü geliştirdi. Bugün Türk markaları küresel şapka pazarında kalite ve tasarımla iddialı konumdadır.',tags:['Türkiye','tarih','şapka devrimi','kültür']}
+],
+kombinasyon:[
+{t:'Şapka + Ceket Kombinleri: Her Mevsim Şık',e:'Farklı ceket tipleriyle en uygun şapka eşleştirmelerini keşfedin.',b:'Şapka ve ceket kombinasyonu gardırobunuzun omurgasını oluşturur. Deri ceket + siyah beyzbol şapka = klasik bad boy stili. Trençkot + fedora = film noir zarafeti. Bomber ceket + snapback = streetwear enerjisi. Blazer + flat cap = İngiliz şıklığı. Parka + beanie = kış pragmatizmi. Denim ceket + dad hat = Amerikan kasualı. Puffer ceket + bucket şapka = modern sokak stili. Her kombinasyonda ortak kural: şapka ve ceket renk paleti birbiriyle konuşmalı. Tonal uyum her zaman cesur kontrasttan daha güvenlidir.',tags:['ceket','kombinasyon','mevsimsel']},
+{t:'All-Black Kombin: Siyah Şapkayla Mükemmel Uyum',e:'Baştan aşağı siyah giyinmenin ve siyah şapkanın sırları.',b:'All-black kombin modasının kralı siyah şapkadır. Calejon Midnight Classic bu stilin temel taşı. Siyah kombinin sıkıcı olmaktan kurtulmasının sırrı doku çeşitliliğidir: mat pamuk şapka + parlak deri ceket + örgü kazak + mat pantolon. Farklı siyah tonlarını da kullanabilirsiniz — simsiyah, kömür, antrasit. Aksesuarlarla kırmak da mümkün: gümüş zincir, beyaz sneaker, veya şapkanın bandında minimal bir metalik detay. All-black asla modası geçmez ve her vücut tipine yakışır.',tags:['all-black','siyah','Midnight Classic']},
+{t:'Yazlık Şapka Kombinleri: Sıcak Havalarda Şık Kal',e:'Yaz mevsiminde hem serin hem şık görünmenin yolları.',b:'Yaz sıcağında şapka hem güneşten korunma hem stil aracıdır. Sahil kombini: beyaz bucket + linen gömlek + şort. Şehir yazı: açık renk dad hat + hafif tişört + chino. Yazlık akşam yemeği: hasır fedora + beyaz elbise/gömlek. Festival: batik bucket + crop top + mom jean. Önemli kumaş detayı: yazın nefes alabilir pamuk veya keten tercih edin, polyester terletir. Açık renkler güneşi yansıtır ve daha serin tutar. Calejon Arctic Essential yazın en çok satanı — organik pamuğu nefes alır ve beyaz rengi her yazlık kombinle uyumludur.',tags:['yaz','sıcak hava','sahil','kombinasyon']},
+{t:'Kış Şapka Kombinleri: Sıcak ve Şık',e:'Soğuk havalarda stil sahibi kalmanın şapka formülleri.',b:'Kışın şapka zorunlu bir aksesuar haline gelir. Beanie + overcoat + atkı = klasik kış şıklığı. Kürk detaylı ushanka + parka = aşırı soğuk günler. Yün fedora + uzun palto = sofistike kış stili. Kaşmir beanie + puffer ceket = modern pragmatizm. Kışın şapka seçiminde sıcaklık önceliklidir: yün, kaşmir ve kalın pamuk en iyi ısı yalıtımını sağlar. Koyu renkler kış tonlarıyla uyumludur ama bordo, hardal ve koyu yeşil gibi mevsimsel renkler de çok şık durur.',tags:['kış','soğuk hava','beanie','kombinasyon']},
+{t:'Spor Şapka Kombinleri: Antrenmandan Sokağa',e:'Sportif şapka stilini günlük hayata taşımanın yolları.',b:'Athleisure trendi spor şapkalarını sokaklara taşıdı. Antrenman: performance beyzbol şapka + dri-fit tişört + eşofman. Koşu sonrası: dad hat + oversize hoodie + jogger. Spor-şık: snapback + blazer + sneaker. Yoga sonrası: bucket + crop hoodie + biker shorts. Basketbol izlerken: takım snapback + jersey + baggy jean. Spor şapkalarında nefes alabilen kumaş ve ter emici bant arayın. Calejon şapkalarının organik pamuk yapısı spor sonrası nem yönetiminde sentetiklere göre daha konforludur.',tags:['spor','athleisure','aktif yaşam']}
+],
+sağlık:[
+{t:'Güneşten Korunmada Şapkanın Önemi',e:'UV ışınlarından korunmak için şapka seçimi ve dermatoloji tavsiyeleri.',b:'Dermatologlara göre şapka güneşten korunmanın en etkili fiziksel yöntemlerinden biridir. 7 cm veya daha geniş kenarlı şapkalar yüz, kulak ve boynu UV ışınlarından korur. Koyu renkli, sık dokulu kumaşlar daha iyi UV koruması sağlar. UPF (Ultraviolet Protection Factor) değeri 50+ olan şapkalar en yüksek korumayı sunar. Güneş kremiyle birlikte kullanıldığında cilt kanseri riskini önemli ölçüde azaltır. Çocuklarda şapka alışkanlığı erken yaşta kazandırılmalı. Calejon organik pamuk şapkalarının sıkı dokusu doğal UV bariyeri oluşturur.',tags:['güneş koruması','UV','sağlık','dermatoloji']},
+{t:'Saç Dökülmesi ve Şapka: Mit mi Gerçek mi?',e:'Şapka takmanın saç dökülmesine neden olup olmadığını bilimsel olarak inceliyoruz.',b:'Şapka takmanın saç dökülmesine neden olduğu yaygın bir mittir. Dermatolojik çalışmalar, normal kullanımda şapkanın saç dökülmesine yol açmadığını göstermektedir. Genetik yatkınlık, hormonal değişimler ve beslenme saç dökülmesinin asıl nedenleridir. Ancak aşırı sıkı şapkaları çok uzun süre takmak traksiyon alopesisine neden olabilir. Bu nedenle doğru beden şapka seçimi önemlidir. Temiz şapka kullanmak kafa derisinin sağlığı için gereklidir. Organik pamuk şapkalar sentetiklere göre kafa derisini daha az tahriş eder.',tags:['saç sağlığı','mit','bilim','dermatoloji']},
+{t:'Kafa Derisi Sağlığı: Doğru Şapka Seçimi',e:'Hassas kafa derisi, egzama ve seboreik dermatit için şapka tavsiyeleri.',b:'Kafa derisi sorunları olan kişiler için şapka malzemesi kritik önemdedir. Hassas ciltler için %100 organik pamuk en güvenli seçenektir — kimyasal kalıntı içermez. Sentetik kumaşlar alerjik reaksiyonlara yol açabilir. Egzama hastaları yumuşak, dikişsiz iç astar tercih etmeli. Seboreik dermatit için havalandırma önemli — mesh panelli şapkalar tercih edin. Ter birikimini önlemek için şapkayı düzenli aralıklarla çıkarın. Her kullanımdan sonra havalandırın. Calejon şapkalarının GOTS sertifikalı organik pamuğu hassas ciltler için uygundur.',tags:['kafa derisi','hassas cilt','sağlık']},
+{t:'Şapka ve Baş Ağrısı: Sıkı Şapka Sendromu',e:'Yanlış beden şapkaların baş ağrısına etkisi ve çözümleri.',b:'Sıkı şapkalar temporal bölgedeki sinirleri baskılayarak gerilim tipi baş ağrısına neden olabilir. External compression headache olarak bilinen bu durum şapka çıkarıldıktan sonra genellikle 30 dakika içinde geçer. Önleme: doğru beden seçin, şüphe durumunda büyük bedeni tercih edin. Ayarlanabilir modeller en güvenli seçenektir. Ağır metal tokaları olan şapkalar baş ağrısını artırabilir; hafif plastik klipsler tercih edin. Eğer sık baş ağrısı yaşıyorsanız şapkanızın boyutunu kontrol edin — belki de sorun şapkanızda.',tags:['baş ağrısı','sağlık','beden seçimi']}
+],
+mevsim:[
+{t:'İlkbahar Şapka Rehberi: Geçiş Mevsiminin Stili',e:'İlkbahar gardırobunuz için şapka önerileri ve kombinasyonlar.',b:'İlkbahar şapka gardırobunun yenilenme zamanıdır. Kışın ağır beanie\'lerinden hafif modellere geçiş yapın. İlkbaharın ideal şapkaları: hafif pamuklu dad hat, ince beanie, denim beyzbol şapka ve ilk sıcaklarda bucket. Renk olarak pastel tonlar, açık mavi, mint yeşili ve soft pembe ilkbahar enerjisini yansıtır. Yağmurlu günler için su geçirmez kaplama önemli — wax kaplı bucket şapkalar hem şık hem fonksiyonel. Calejon koleksiyonunun pamuklu modelleri ilkbahar geçişi için idealdir.',tags:['ilkbahar','mevsim geçişi','hafif modeller']},
+{t:'Yaz Şapkaları: Güneşten Korunmanın Şık Yolu',e:'Sıcak yaz günleri için en uygun şapka modelleri ve kumaşları.',b:'Yaz mevsiminde şapka seçimi hem sağlık hem stil açısından kritiktir. En iyi yaz şapka kumaşları: pamuk (nefes alır), keten (hafif ve serin), straw/hasır (havalandırma), ve hafif polyester blend. Kaçınılması gerekenler: kalın yün, kadife, ağır denim. Model olarak geniş kenarlı bucket geniş gölge sağlar. Ventilasyonlu trucker sıcakta rahat tutar. Açık renkli dad hat güneşi yansıtır. Sahilde hasır fedora klasik şıklık sunar. SPF koruma şapkayla birleştirilmeli — şapka güneş kreminin yerini almaz, tamamlar.',tags:['yaz','güneş','serin kumaş']},
+{t:'Sonbahar Şapkaları: Sıcak Tonların Sezonu',e:'Sonbahar gardırobunuz için en uygun şapka modelleri ve renkleri.',b:'Sonbahar şapka modasının en zengin mevsimi. Toprak tonları, hardal, bordo, koyu yeşil ve kahverengi bu mevsimin renk paletini oluşturur. Model olarak: yün fedora sonbaharın klasik parçası; kalın pamuk beanie ilk soğuklarda rahat tutar; corduroy dad hat retro bir hava katar; tweed flat cap İngiliz sonbahar şıklığı yansıtır. Calejon Terra Signature toprak tonuyla sonbahar kombinlerinin vazgeçilmez parçası. Sonbaharda katmanlı giyim ön planda — şapka bu katmanların taçlandırıcısıdır.',tags:['sonbahar','toprak tonları','yün']},
+{t:'Kış Şapkaları: Isı Yalıtımı ve Stil Bir Arada',e:'Soğuk kış günlerinde kafanızı sıcak tutacak en iyi şapka modelleri.',b:'Kışın şapka tercihinde ısı yalıtımı önceliklidir. En sıcak tutan malzemeler: merino yün, kaşmir, sherpa astarlı pamuk ve polar fleece. Model bazında: beanie en yaygın kış şapkasıdır; ushanka/trapper kulak koruması sağlar; balaklava aşırı soğuklarda yüzü korur; kaşmir bere zarif görünüm sunar. Kış şapkasını seçerken kulaklarınızı kapattığından emin olun — vücut ısısının %10\'u baştan kaybedilir. Rüzgar geçirmez modeller ekstra koruma sağlar. İç astarın yumuşak olması cildi tahriş etmez.',tags:['kış','soğuk hava','ısı yalıtımı','yün']}
+]
+};
+
+// Expand with variations to reach 250 posts
+var xtraTopics=[
+'Şapka ile Güneş Gözlüğü Kombinasyonu','Şapka Koleksiyonculuğu: Nasıl Başlanır','Dünyanın En İkonik Şapkaları','Şapka Boyama ve Customize Etme','Çocuklar İçin Şapka Seçim Rehberi','Seyahatte Şapka: Bavul Hazırlama','Şapka Fotoğrafçılığı: En İyi Pozlar','Şapka ve Kişilik: Ne Giydiğin Kim Olduğunu Söyler','Vintage Şapka Bulma Rehberi','Şapka Dikimi: Evde Yapabilir misiniz?','Dünyada Şapka Festivalleri','Ünlülerin Şapka Stili Analizi','Şapka Hediye Paketleme Fikirleri','Şapka ve Müzik Kültürü','Şapkada Nakış ve Baskı Teknikleri',
+'Yağmurda Şapka: Su Geçirmez Modeller','Rüzgarlı Günlerde Şapka Tutturma','Şapka ve Gözlük Uyumu','Kulaklıklı Şapka Kullanımı','Şapka Altı Saç Bakımı','Spor Müsabakalarında Şapka Kültürü','Şapka ile Maske Uyumu','Şapka Markaları Tarihçesi','El Yapımı Şapka Avantajları','Şapka Malzemeleri: Pamuk vs Polyester',
+'Şapka Trendi: Oversized Modeller','Şapka ile Takı Kombinasyonu','Şapka Boyut Ayarlama İpuçları','Şapka Alerjisi: Nedenleri ve Çözümleri','Deniz Kenarında Şapka Seçimi','Kayak Şapkası Rehberi','Bisiklet Şapkası ve Kask Uyumu','Şapka ile Eşarp Kombinasyonu','Düğünde Şapka: Gelin ve Davetli','Şapka Koleksiyonunuzu Düzenleme',
+'Kot Kumaştan Şapkalar','Kadife Şapka Trendi','Şapka ile Çanta Uyumu','Siyah Beyaz Şapka Kombinleri','Neon Renkli Şapkalar','Desenli Şapka Giyme Sanatı','Şapka ve Ayakkabı Renk Uyumu','Şapka ile Kemer Kombinasyonu','Metalik Detaylı Şapkalar','Şapka Aksesuarları: Pin ve Rozet',
+'Yoga ve Pilates İçin Şapka','Koşu Şapkası Seçimi','Trekking Şapkası Rehberi','Golf Şapkası Modelleri','Tenis Vizörü vs Şapka','Kamp İçin En İyi Şapkalar','Balıkçı Şapkası Stili','Avcı Şapkası Tarihi','Kovboy Şapkası Kültürü','Panama Şapka Hikayesi',
+'Baskılı Tişört ve Şapka Uyumu','Oversize Tişört + Şapka Stili','Polo Tişört ile Şapka','Tişört Katmanlaması ve Şapka','Şapka ile Hoodie Birlikte Giyilir mi?','Grafik Tişört ve Düz Şapka','Çizgili Tişört + Şapka Stili','Renk Bloklama: Tişört ve Şapka','Crop Tişört ile Bucket Şapka','Uzun Kollu Tişört ve Beanie',
+'Hediyelik Şapka Setleri','Şapka Bakım Kiti İçeriği','Şapka Standı ve Askı Modelleri','Şapka Kutusu Tasarımı','Şapka Kişiselleştirme Fikirleri','İsme Özel Şapka Siparişi','Logo Tasarımı ve Şapka','Şapka Etiket Tasarımı','Ambalaj ve Paketleme Trendleri','Unboxing Deneyimi Nasıl İyileştirilir',
+'Türkiye Şapka Pazarı Analizi','Dünya Şapka Pazarı Büyüklüğü','E-Ticaret ve Şapka Satışı','Şapka Mağazası Açma Rehberi','Dropshipping ile Şapka Satışı','Instagram Şapka Satış Stratejileri','TikTok Şapka Pazarlaması','Influencer Şapka Kampanyaları','Şapka SEO: Dijital Pazarlama','Müşteri Sadakati ve Şapka Markaları',
+'Şapka Terminolojisi Sözlüğü','Şapka Anatomisi: Parçaların Adları','Dünyanın En Pahalı Şapkaları','Şapka Rekorları Guinness Kitabında','Film ve Dizilerde İkonik Şapkalar','Şapka Tasarımcısı Olmak','Şapka ve Mimari: Form Benzerlikleri','Şapka Koleksiyonerleri Kulübü','Şapka ve Psikoloji: İlk İzlenim','100 Yılda Şapka Modası Değişimi',
+'Beyzbol Şapka Beden Karşılaştırma','Bucket Şapkanın Pop Kültür Tarihi','Fedora Nasıl Doğru Şekilde Takılır','Snapback Orijinal mi Taklit mi Anlamak','Dad Hat ile Günlük Şıklık','Bere ile Kış Stili Oluşturma','Trucker Şapka Neden Tekrar Trend','Beanie Takan Ünlüler ve Stilleri','Flat Cap ile Gentleman Stili','Newsboy Şapka Modern Yorumlar',
+'Siyah Şapkanın Psikolojisi','Beyaz Şapka Giymek Cesaret İster mi','Kırmızı Şapka ile Dikkat Çekmek','Mavi Tonlarda Şapka Seçimi','Yeşil Şapka ve Doğa Teması','Kahverengi Şapkaların Sıcaklığı','Gri Şapka Nötr Ama Etkili','Lacivert Şapka Profesyonel Görünüm','Turuncu Şapka Cesur Bir Tercih','Pembe Şapka Kalıpları Kırmak',
+'Çocuk Şapka Bedeni Nasıl Seçilir','Bebek İçin Güneş Şapkası','Genç Kız Şapka Trendleri','Genç Erkek Şapka Modelleri','Aile Şapka Kombini Fikirleri','Okul İçin Şapka Seçimi','Mezuniyet Şapka Geleneği','Asker Şapkası Çeşitleri','Polis Şapkası Tarihi','Şef Şapkasının Hikayesi',
+'Şapka ile Seyahat Fotoğrafı Çekme','Şapka için En İyi Selfie Açıları','Flat Lay Şapka Fotoğrafçılığı','Şapka Ürün Fotoğrafçılığı İpuçları','Şapka Koleksiyonu Fotoğrafı Nasıl Çekilir','Instagram İçin Şapka İçerik Fikirleri','Şapka Unboxing Video Nasıl Çekilir','Şapka Review Yazma Rehberi','Şapka Blog Açma ve SEO','Şapka YouTube Kanalı Başlatmak',
+'Yün Şapka Keçeleşirse Ne Yapılır','Şapkadaki Tüy Detayı Bakımı','Metal Aksesuar Paslanma Önleme','Şapka Siperliği Eğrildi Nasıl Düzeltilir','Ütülenebilen Şapka Türleri','Şapka Deformasyonu Nasıl Önlenir','Su Değmiş Şapka Kurtarma Rehberi','Yeni Şapkayı İlk Kullanıma Hazırlama','Şapka Parfümü ve Koku Ekleme','Şapka İçin Antibakteriyel Sprey Kullanımı',
+'Japon Şapka Modası Wabi-Sabi Estetiği','Kore Şapka Trendleri K-Pop Etkisi','İtalyan Şapka Geleneği Borsalino','İngiliz Şapka Kültürü Royal Ascot','Amerikan Şapka Kültürü Beyzboldan Sokağa','Fransız Bere Estetiği Paris Sokakları','Avustralya Akubra Şapka Geleneği','Meksika Sombrero ve Kültürel Önemi','Küba ve Panama Şapka İlişkisi','Afrika Şapka Gelenekleri Renkler ve Anlamlar'
+];
+var xtraCats=['stil','kombinasyon','rehber','trend','tarih','sağlık','bakım','mevsim'];
+var xtraBodies=[
+'Şapka modasında bu konu giderek daha fazla önem kazanıyor. Uzmanlar, doğru şapka seçiminin kişisel stili tamamen dönüştürebileceğini belirtiyor. Malzeme kalitesi, renk uyumu ve model seçimi üç temel faktördür. Organik pamuk şapkalar hem çevre dostu hem de konforludur. Calejon koleksiyonu bu alandaki en güncel trendleri yansıtmaktadır. Stil sahibi olmak pahalı olmak zorunda değil — doğru bilgiyle herkes şık görünebilir.',
+'Bu konuda dikkat edilmesi gereken birçok detay bulunuyor. Öncelikle kişisel tarz ve yaşam stilinizi belirlemelisiniz. Şapka seçimi yüz şekli, saç modeli ve giyim tarzıyla doğrudan ilişkilidir. Premium malzemeler uzun vadede daha ekonomiktir çünkü dayanıklılıkları çok daha yüksektir. Calejon şapkalarının el yapımı üretimi her detayda kaliteyi garanti eder.',
+'Şapka dünyasında sürekli yenilikler yaşanıyor. Teknoloji ve moda birleştiğinde ortaya çıkan sonuçlar etkileyici. Akıllı kumaşlar, sürdürülebilir üretim ve dijital deneme teknolojileri sektörü dönüştürüyor. Calejon AI sanal deneme özelliği bu yeniliklerin öncüsü. Gelecekte şapka sadece bir aksesuar değil, teknolojik bir ürün olacak.',
+'Doğru şapka seçimi ve bakımı konusunda bilgili olmak önemlidir. Her mevsimin kendine özgü gereksinimleri vardır. Kaliteli bir şapka yıllarca kullanılabilir — yeter ki doğru bakım uygulansın. Organik pamuk, doğal boyalar ve el yapımı üretim sürdürülebilir modanın temel prensipleridir. Calejon bu prensipleri her üründe hayata geçirmektedir.',
+'Bu alanda trend ve stil sürekli değişiyor ama bazı kurallar zamansızdır. Kaliteli malzeme her zaman fark yaratır. Doğru beden konforu sağlar. Renk uyumu şıklığın temelidir. Calejon koleksiyonu zamansız tasarımlarıyla her dönemin stiline uyum sağlar. Az ama öz bir şapka koleksiyonu, dolu bir gardıroptan daha etkilidir.'
+];
+
+// Build all blog posts
+var months=['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'];
+var emojis=['🎩','👒','🧢','🎭','✨','💎','🌟','📌','🔥','💡'];
+var postId=0;
+
+// Add curated posts from blogData
+for(var cat in blogData){
+  blogData[cat].forEach(function(p){
+    postId++;
+    var d=new Date(2025,Math.floor(Math.random()*12),1+Math.floor(Math.random()*28));
+    blogPosts.push({
+      id:postId,title:p.t,excerpt:p.e,body:p.b,
+      cat:cat,tags:p.tags,emoji:emojis[postId%10],
+      date:d.getDate()+' '+months[d.getMonth()]+' '+d.getFullYear(),
+      dateSort:d.getTime(),readMin:Math.ceil(p.b.length/800)
+    });
+  });
+}
+
+// Add extra generated posts
+xtraTopics.forEach(function(topic,idx){
+  postId++;
+  var cat=xtraCats[idx%xtraCats.length];
+  var body=xtraBodies[idx%xtraBodies.length];
+  var d=new Date(2025,Math.floor(Math.random()*12),1+Math.floor(Math.random()*28));
+  var tags=[cat,topic.split(' ')[0].toLowerCase(),topic.split(' ').pop().toLowerCase()];
+  blogPosts.push({
+    id:postId,title:topic,
+    excerpt:topic+' hakkında detaylı rehber ve ipuçları.',
+    body:body.replace(/Bu konu/,topic)+' '+topic+' konusunda daha fazla bilgi için Calejon blog sayfasını takip edin.',
+    cat:cat,tags:tags,emoji:emojis[postId%10],
+    date:d.getDate()+' '+months[d.getMonth()]+' '+d.getFullYear(),
+    dateSort:d.getTime(),readMin:2+Math.floor(Math.random()*4)
+  });
+});
+
+// Sort by date
+blogPosts.sort(function(a,b){return b.dateSort-a.dateSort;});
+blogFiltered=blogPosts.slice();
+
+function renderBlog(){
+  var g=document.getElementById('blogGrid');g.innerHTML='';
+  var start=(blogPage-1)*blogPer,end=Math.min(start+blogPer,blogFiltered.length);
+  for(var i=start;i<end;i++){
+    var p=blogFiltered[i];
+    g.innerHTML+='<div class="blog-card" onclick="openBlog('+p.id+')">'+
+      '<div class="blog-card-img">'+p.emoji+'</div>'+
+      '<div class="blog-card-body">'+
+        '<div class="blog-card-cat">'+p.cat+'</div>'+
+        '<div class="blog-card-title">'+p.title+'</div>'+
+        '<div class="blog-card-excerpt">'+p.excerpt+'</div>'+
+        '<div class="blog-card-date">'+p.date+' · '+p.readMin+' dk okuma</div>'+
+      '</div></div>';
+  }
+  document.getElementById('blogCount').textContent=blogFiltered.length+' yazı · Sayfa '+blogPage+'/'+Math.ceil(blogFiltered.length/blogPer);
+  renderBlogPag();
+}
+function renderBlogPag(){
+  var total=Math.ceil(blogFiltered.length/blogPer),pg=document.getElementById('blogPag');pg.innerHTML='';
+  if(total<=1)return;
+  if(blogPage>1)pg.innerHTML+='<button class="page-btn" onclick="goBlogPage('+(blogPage-1)+')">←</button>';
+  var s=Math.max(1,blogPage-3),e=Math.min(total,blogPage+3);
+  for(var i=s;i<=e;i++)pg.innerHTML+='<button class="page-btn'+(i===blogPage?' active':'')+'" onclick="goBlogPage('+i+')">'+i+'</button>';
+  if(blogPage<total)pg.innerHTML+='<button class="page-btn" onclick="goBlogPage('+(blogPage+1)+')">→</button>';
+}
+function goBlogPage(n){blogPage=n;renderBlog();document.getElementById('blog').scrollIntoView({behavior:'smooth'});}
+function filterBlog(cat,btn){
+  blogCat=cat;blogPage=1;
+  document.querySelectorAll('#blog .filter-btn').forEach(function(b){b.classList.remove('active');});
+  if(btn)btn.classList.add('active');
+  applyBlogFilters();
+}
+function searchBlog(){blogPage=1;applyBlogFilters();}
+function applyBlogFilters(){
+  var q=document.getElementById('blogSearch').value.toLowerCase().trim();
+  blogFiltered=blogPosts.filter(function(p){
+    if(blogCat!=='all'&&p.cat!==blogCat)return false;
+    if(q&&p.title.toLowerCase().indexOf(q)===-1&&p.excerpt.toLowerCase().indexOf(q)===-1&&p.tags.join(' ').indexOf(q)===-1)return false;
+    return true;
+  });
+  renderBlog();
+}
+function openBlog(id){
+  var p=blogPosts.find(function(x){return x.id===id;});
+  if(!p)return;
+  document.getElementById('bmCat').textContent=p.cat.toUpperCase();
+  document.getElementById('bmTitle').textContent=p.title;
+  document.getElementById('bmMeta').textContent=p.date+' · '+p.readMin+' dk okuma';
+  // Split body into paragraphs
+  var paras=p.body.split('. ');
+  var html='';
+  for(var i=0;i<paras.length;i+=2){
+    html+='<p>'+paras.slice(i,i+2).join('. ');
+    if(!html.endsWith('.'))html+='.';
+    html+='</p>';
+  }
+  document.getElementById('bmBody').innerHTML=html;
+  var tagsHtml='';p.tags.forEach(function(t){tagsHtml+='<span class="blog-tag">#'+t+'</span>';});
+  document.getElementById('bmTags').innerHTML=tagsHtml;
+  document.getElementById('blogModal').style.display='block';
+}
+function closeBlog(){document.getElementById('blogModal').style.display='none';}
+function shareBlog(platform){
+  var title=document.getElementById('bmTitle').textContent;
+  var url=encodeURIComponent(location.href+'#blog');
+  var text=encodeURIComponent(title+' — Calejon Blog');
+  var links={twitter:'https://twitter.com/intent/tweet?text='+text+'&url='+url,facebook:'https://www.facebook.com/sharer/sharer.php?u='+url,whatsapp:'https://wa.me/?text='+text+'%20'+url};
+  window.open(links[platform],'_blank','width=600,height=400');
+}
+renderBlog();
 
 // ====================== FORUM ======================
 var threads=[{title:'Midnight Classic kombin önerileri',author:'AhmetS',body:'Siyah şapkamı nasıl kombine edeyim?',replies:[{a:'ZeynepK',t:'Deri ceket + beyaz tişört harika!'},{a:'CanD',t:'Oversize hoodie ile de çok iyi.'}]},{title:'57cm S mi M mi?',author:'MelisBT',body:'Kafam 57cm, hangisi?',replies:[{a:'CalejonDestek',t:'57cm = M beden. Rahat istersen M, sıkı fit istersen S.'}]},{title:'Terra Signature stokta kaç tane?',author:'BurakE',body:'Kaçırmak istemiyorum.',replies:[]}];
