@@ -1,885 +1,355 @@
-import { useState, useRef, useEffect, useCallback } from "react";
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IANUS - Şapka</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    min-height: 100vh;
+    background: #0c0c0c;
+    color: #eee;
+    font-family: Georgia, serif;
+  }
+  header {
+    padding: 20px 24px;
+    border-bottom: 1px solid #222;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  header h1 {
+    font-size: 28px;
+    font-weight: 400;
+    letter-spacing: 10px;
+    color: #d4b896;
+  }
+  header span {
+    font-size: 12px;
+    color: #666;
+    letter-spacing: 2px;
+  }
+  .container {
+    max-width: 540px;
+    margin: 0 auto;
+    padding: 30px 20px;
+  }
+  .label {
+    font-size: 12px;
+    color: #888;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+  }
+  .hats {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 30px;
+  }
+  .hat-card {
+    flex: 1;
+    padding: 16px;
+    border: 1px solid #333;
+    background: #111;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 6px;
+    transition: all 0.2s;
+  }
+  .hat-card.active {
+    border: 2px solid #d4b896;
+    background: rgba(212,184,150,0.05);
+  }
+  .hat-card p { margin-top: 8px; font-size: 14px; }
+  .hat-card .price { font-size: 13px; color: #d4b896; margin-top: 4px; }
+  .upload-box {
+    border: 2px dashed #333;
+    border-radius: 8px;
+    padding: 60px 20px;
+    text-align: center;
+    cursor: pointer;
+    background: #111;
+    transition: border-color 0.2s;
+  }
+  .upload-box:hover { border-color: #d4b896; }
+  .upload-box .icon { font-size: 40px; margin-bottom: 12px; }
+  .upload-box p { color: #aaa; font-size: 16px; }
+  .upload-box .sub { color: #666; font-size: 13px; margin-top: 8px; }
+  #fileInput { display: none; }
+  .editor { display: none; }
+  .editor.show { display: block; }
+  #canvas {
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid #222;
+    cursor: grab;
+  }
+  #canvas.grabbing { cursor: grabbing; }
+  .size-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 16px;
+  }
+  .size-btn {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    color: #ddd;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .size-btn:hover { border-color: #d4b896; }
+  .buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+  }
+  .btn-primary {
+    flex: 1; padding: 14px;
+    background: #d4b896; color: #0c0c0c;
+    border: none; border-radius: 6px;
+    font-size: 14px; font-weight: 600;
+    cursor: pointer; font-family: Georgia, serif;
+  }
+  .btn-primary:hover { background: #c4a886; }
+  .btn-secondary {
+    flex: 1; padding: 14px;
+    background: transparent; color: #aaa;
+    border: 1px solid #333; border-radius: 6px;
+    font-size: 14px; cursor: pointer;
+    font-family: Georgia, serif;
+  }
+  .btn-secondary:hover { border-color: #666; }
+  footer {
+    text-align: center;
+    font-size: 11px;
+    color: #444;
+    margin-top: 60px;
+    letter-spacing: 2px;
+    padding-bottom: 20px;
+  }
+</style>
+</head>
+<body>
 
-const HATS = [
-  {
-    id: "black",
-    name: "Midnight Classic",
-    price: "₺890",
-    color: "#1a1a1a",
-    accent: "#333",
-    brim: "#111",
-    description: "Saf siyah, zamansız şıklık",
-  },
-  {
-    id: "white",
-    name: "Arctic Essential",
-    price: "₺890",
-    color: "#f5f5f0",
-    accent: "#e8e8e0",
-    brim: "#ddd",
-    description: "Saf beyaz, minimalist zarafet",
-  },
-];
+<header>
+  <h1>IANUS</h1>
+  <span>ŞAPKA</span>
+</header>
 
-function drawHatOnCanvas(ctx, hat, x, y, width, height) {
-  const isBlack = hat.id === "black";
-  const crownTop = y;
-  const crownBottom = y + height * 0.7;
-  const brimY = crownBottom;
-  const brimHeight = height * 0.3;
+<div class="container">
 
-  // Shadow
+  <p class="label">ŞAPKA SEÇ</p>
+  <div class="hats">
+    <div class="hat-card active" onclick="selectHat('black')" id="card-black">
+      <svg width="70" height="46" viewBox="0 0 120 78">
+        <ellipse cx="60" cy="65" rx="55" ry="13" fill="#222"/>
+        <path d="M20,62 Q14,25 35,12 Q60,-2 85,12 Q106,25 100,62Z" fill="#1a1a1a"/>
+        <rect x="20" y="52" width="80" height="6" rx="1" fill="#444"/>
+      </svg>
+      <p>Siyah Şapka</p>
+      <p class="price">₺890</p>
+    </div>
+    <div class="hat-card" onclick="selectHat('white')" id="card-white">
+      <svg width="70" height="46" viewBox="0 0 120 78">
+        <ellipse cx="60" cy="65" rx="55" ry="13" fill="#ddd"/>
+        <path d="M20,62 Q14,25 35,12 Q60,-2 85,12 Q106,25 100,62Z" fill="#f0f0f0"/>
+        <rect x="20" y="52" width="80" height="6" rx="1" fill="#bbb"/>
+      </svg>
+      <p>Beyaz Şapka</p>
+      <p class="price">₺890</p>
+    </div>
+  </div>
+
+  <div class="upload-box" id="uploadBox" onclick="document.getElementById('fileInput').click()">
+    <div class="icon">📷</div>
+    <p>Fotoğrafını Yükle</p>
+    <p class="sub">Tıkla veya sürükle bırak</p>
+  </div>
+  <input type="file" id="fileInput" accept="image/*">
+
+  <div class="editor" id="editor">
+    <p class="label">ŞAPKAYI SÜRÜKLE VE YERLEŞTİR</p>
+    <canvas id="canvas"></canvas>
+    <div class="size-controls">
+      <button class="size-btn" onclick="changeSize(-0.1)">−</button>
+      <span style="font-size:12px;color:#888">Boyut</span>
+      <button class="size-btn" onclick="changeSize(0.1)">+</button>
+    </div>
+    <div class="buttons">
+      <button class="btn-primary" onclick="downloadImage()">Fotoğrafı İndir</button>
+      <button class="btn-secondary" onclick="resetPhoto()">Yeni Fotoğraf</button>
+    </div>
+  </div>
+
+  <footer>© 2026 IANUS</footer>
+</div>
+
+<script>
+var currentHat = "black";
+var hatScale = 1;
+var hatX = 150, hatY = 30;
+var dragging = false;
+var offsetX = 0, offsetY = 0;
+var userImage = null;
+var canvas = document.getElementById("canvas");
+var ctx = canvas.getContext("2d");
+
+function selectHat(id) {
+  currentHat = id;
+  document.getElementById("card-black").className = id === "black" ? "hat-card active" : "hat-card";
+  document.getElementById("card-white").className = id === "white" ? "hat-card active" : "hat-card";
+  if (userImage) redraw();
+}
+
+function changeSize(d) {
+  hatScale = Math.max(0.3, Math.min(2.5, hatScale + d));
+  if (userImage) redraw();
+}
+
+function getHatSize() {
+  return { w: 140 * hatScale, h: 95 * hatScale };
+}
+
+function drawHat() {
+  var s = getHatSize();
+  var dark = currentHat === "black";
+  var x = hatX, y = hatY, w = s.w, h = s.h;
+
   ctx.save();
-  ctx.shadowColor = "rgba(0,0,0,0.3)";
-  ctx.shadowBlur = 15;
+  ctx.shadowColor = "rgba(0,0,0,0.4)";
+  ctx.shadowBlur = 14;
   ctx.shadowOffsetY = 5;
 
-  // Brim
+  var brimY = y + h * 0.72;
+
   ctx.beginPath();
-  ctx.ellipse(
-    x + width / 2,
-    brimY + brimHeight * 0.3,
-    width * 0.7,
-    brimHeight * 0.6,
-    0,
-    0,
-    Math.PI * 2
-  );
-  ctx.fillStyle = isBlack ? "#111" : "#ddd";
+  ctx.ellipse(x + w / 2, brimY, w * 0.65, h * 0.22, 0, 0, Math.PI * 2);
+  ctx.fillStyle = dark ? "#222" : "#ddd";
   ctx.fill();
 
-  // Crown
   ctx.beginPath();
-  ctx.moveTo(x + width * 0.15, crownBottom);
-  ctx.quadraticCurveTo(x + width * 0.1, crownTop + height * 0.15, x + width * 0.25, crownTop + height * 0.05);
-  ctx.quadraticCurveTo(x + width * 0.5, crownTop - height * 0.08, x + width * 0.75, crownTop + height * 0.05);
-  ctx.quadraticCurveTo(x + width * 0.9, crownTop + height * 0.15, x + width * 0.85, crownBottom);
+  ctx.moveTo(x + w * 0.14, brimY - 2);
+  ctx.quadraticCurveTo(x + w * 0.08, y + h * 0.15, x + w * 0.27, y + h * 0.05);
+  ctx.quadraticCurveTo(x + w * 0.5, y - h * 0.06, x + w * 0.73, y + h * 0.05);
+  ctx.quadraticCurveTo(x + w * 0.92, y + h * 0.15, x + w * 0.86, brimY - 2);
   ctx.closePath();
-  ctx.fillStyle = isBlack ? "#1a1a1a" : "#f5f5f0";
+  ctx.fillStyle = dark ? "#1a1a1a" : "#f0f0f0";
   ctx.fill();
 
-  // Crown highlight
-  ctx.beginPath();
-  ctx.moveTo(x + width * 0.25, crownTop + height * 0.15);
-  ctx.quadraticCurveTo(x + width * 0.5, crownTop - height * 0.02, x + width * 0.75, crownTop + height * 0.15);
-  ctx.strokeStyle = isBlack ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.05)";
-  ctx.lineWidth = 2;
-  ctx.stroke();
-
-  // Band
-  ctx.fillStyle = isBlack ? "#333" : "#ccc";
-  ctx.fillRect(x + width * 0.15, crownBottom - height * 0.12, width * 0.7, height * 0.08);
+  ctx.fillStyle = dark ? "#444" : "#bbb";
+  ctx.fillRect(x + w * 0.14, brimY - h * 0.14, w * 0.72, h * 0.08);
   ctx.restore();
 }
 
-function HatSVG({ hat, size = 120 }) {
-  const isBlack = hat.id === "black";
-  return (
-    <svg width={size} height={size * 0.75} viewBox="0 0 120 90">
-      {/* Brim */}
-      <ellipse cx="60" cy="68" rx="55" ry="18" fill={isBlack ? "#111" : "#ddd"} />
-      {/* Crown */}
-      <path
-        d={`M 18,65 Q 12,25 30,12 Q 60,-5 90,12 Q 108,25 102,65 Z`}
-        fill={isBlack ? "#1a1a1a" : "#f5f5f0"}
-      />
-      {/* Highlight */}
-      <path
-        d={`M 30,18 Q 60,2 90,18`}
-        fill="none"
-        stroke={isBlack ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.06)"}
-        strokeWidth="2"
-      />
-      {/* Band */}
-      <rect x="18" y="55" width="84" height="7" rx="1" fill={isBlack ? "#333" : "#bbb"} />
-    </svg>
-  );
+function redraw() {
+  if (!userImage) return;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.drawImage(userImage, 0, 0, canvas.width, canvas.height);
+  drawHat();
 }
 
-function TryOnCanvas({ selectedHat, uploadedImage }) {
-  const canvasRef = useRef(null);
-  const [hatPos, setHatPos] = useState({ x: 0, y: 0 });
-  const [hatSize, setHatSize] = useState({ w: 150, h: 100 });
-  const [dragging, setDragging] = useState(false);
-  const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
-  const [imgLoaded, setImgLoaded] = useState(false);
-  const imgRef = useRef(null);
-  const containerRef = useRef(null);
+function getEventPos(e) {
+  var rect = canvas.getBoundingClientRect();
+  var cx = e.touches ? e.touches[0].clientX : e.clientX;
+  var cy = e.touches ? e.touches[0].clientY : e.clientY;
+  var sx = canvas.width / rect.width;
+  var sy = canvas.height / rect.height;
+  return { x: (cx - rect.left) * sx, y: (cy - rect.top) * sy };
+}
 
-  useEffect(() => {
-    if (uploadedImage) {
-      const img = new Image();
-      img.onload = () => {
-        imgRef.current = img;
-        setImgLoaded(true);
-        const canvas = canvasRef.current;
-        if (!canvas) return;
-        const container = containerRef.current;
-        const maxW = container.clientWidth;
-        const maxH = container.clientHeight;
-        const scale = Math.min(maxW / img.width, maxH / img.height);
-        canvas.width = img.width * scale;
-        canvas.height = img.height * scale;
-        const hw = canvas.width * 0.25;
-        const hh = hw * 0.67;
-        setHatSize({ w: hw, h: hh });
-        setHatPos({ x: canvas.width / 2 - hw / 2, y: canvas.height * 0.08 });
-      };
-      img.src = uploadedImage;
-    }
-  }, [uploadedImage]);
+function onDown(e) {
+  e.preventDefault();
+  var p = getEventPos(e);
+  var s = getHatSize();
+  if (p.x >= hatX && p.x <= hatX + s.w && p.y >= hatY && p.y <= hatY + s.h) {
+    dragging = true;
+    offsetX = p.x - hatX;
+    offsetY = p.y - hatY;
+    canvas.className = "grabbing";
+  }
+}
 
-  const redraw = useCallback(() => {
-    const canvas = canvasRef.current;
-    const img = imgRef.current;
-    if (!canvas || !img) return;
-    const ctx = canvas.getContext("2d");
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-    if (selectedHat) {
-      drawHatOnCanvas(ctx, selectedHat, hatPos.x, hatPos.y, hatSize.w, hatSize.h);
-    }
-  }, [hatPos, hatSize, selectedHat]);
+function onMove(e) {
+  if (!dragging) return;
+  e.preventDefault();
+  var p = getEventPos(e);
+  hatX = p.x - offsetX;
+  hatY = p.y - offsetY;
+  redraw();
+}
 
-  useEffect(() => {
-    if (imgLoaded) redraw();
-  }, [imgLoaded, redraw]);
+function onUp() {
+  dragging = false;
+  canvas.className = "";
+}
 
-  const getEventPos = (e) => {
-    const canvas = canvasRef.current;
-    const rect = canvas.getBoundingClientRect();
-    const scaleX = canvas.width / rect.width;
-    const scaleY = canvas.height / rect.height;
-    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-    return {
-      x: (clientX - rect.left) * scaleX,
-      y: (clientY - rect.top) * scaleY,
+canvas.addEventListener("mousedown", onDown);
+canvas.addEventListener("mousemove", onMove);
+canvas.addEventListener("mouseup", onUp);
+canvas.addEventListener("mouseleave", onUp);
+canvas.addEventListener("touchstart", onDown, { passive: false });
+canvas.addEventListener("touchmove", onMove, { passive: false });
+canvas.addEventListener("touchend", onUp);
+
+document.getElementById("fileInput").addEventListener("change", function (e) {
+  var file = e.target.files[0];
+  if (!file) return;
+  loadFile(file);
+});
+
+var uploadBox = document.getElementById("uploadBox");
+uploadBox.addEventListener("dragover", function (e) { e.preventDefault(); uploadBox.style.borderColor = "#d4b896"; });
+uploadBox.addEventListener("dragleave", function () { uploadBox.style.borderColor = "#333"; });
+uploadBox.addEventListener("drop", function (e) {
+  e.preventDefault();
+  uploadBox.style.borderColor = "#333";
+  var file = e.dataTransfer.files[0];
+  if (file) loadFile(file);
+});
+
+function loadFile(file) {
+  var reader = new FileReader();
+  reader.onload = function (ev) {
+    var img = new Image();
+    img.onload = function () {
+      userImage = img;
+      var maxW = Math.min(500, window.innerWidth - 40);
+      var scale = maxW / img.width;
+      canvas.width = maxW;
+      canvas.height = img.height * scale;
+      hatX = canvas.width / 2 - 70;
+      hatY = 30;
+      hatScale = 1;
+      document.getElementById("uploadBox").style.display = "none";
+      document.getElementById("editor").className = "editor show";
+      redraw();
     };
+    img.src = ev.target.result;
   };
-
-  const handleDown = (e) => {
-    e.preventDefault();
-    const pos = getEventPos(e);
-    if (
-      pos.x >= hatPos.x &&
-      pos.x <= hatPos.x + hatSize.w &&
-      pos.y >= hatPos.y &&
-      pos.y <= hatPos.y + hatSize.h
-    ) {
-      setDragging(true);
-      setDragOffset({ x: pos.x - hatPos.x, y: pos.y - hatPos.y });
-    }
-  };
-
-  const handleMove = (e) => {
-    if (!dragging) return;
-    e.preventDefault();
-    const pos = getEventPos(e);
-    setHatPos({ x: pos.x - dragOffset.x, y: pos.y - dragOffset.y });
-  };
-
-  const handleUp = () => setDragging(false);
-
-  const handleResize = (delta) => {
-    setHatSize((prev) => {
-      const newW = Math.max(60, Math.min(400, prev.w + delta));
-      return { w: newW, h: newW * 0.67 };
-    });
-  };
-
-  return (
-    <div ref={containerRef} style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", alignItems: "center", gap: 12 }}>
-      <canvas
-        ref={canvasRef}
-        onMouseDown={handleDown}
-        onMouseMove={handleMove}
-        onMouseUp={handleUp}
-        onMouseLeave={handleUp}
-        onTouchStart={handleDown}
-        onTouchMove={handleMove}
-        onTouchEnd={handleUp}
-        style={{
-          maxWidth: "100%",
-          maxHeight: "calc(100% - 60px)",
-          objectFit: "contain",
-          cursor: dragging ? "grabbing" : "grab",
-          borderRadius: 8,
-        }}
-      />
-      <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
-        <button
-          onClick={() => handleResize(-15)}
-          style={{
-            width: 36, height: 36, borderRadius: "50%",
-            background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.2)",
-            color: "#fff", fontSize: 18, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center",
-          }}
-        >−</button>
-        <span style={{ color: "rgba(255,255,255,0.5)", fontSize: 12, fontFamily: "monospace" }}>BOYUT</span>
-        <button
-          onClick={() => handleResize(15)}
-          style={{
-            width: 36, height: 36, borderRadius: "50%",
-            background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.2)",
-            color: "#fff", fontSize: 18, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center",
-          }}
-        >+</button>
-      </div>
-    </div>
-  );
+  reader.readAsDataURL(file);
 }
 
-function DownloadButton({ canvasRef }) {
-  const handleDownload = () => {
-    const canvas = document.querySelector("canvas");
-    if (!canvas) return;
-    const link = document.createElement("a");
-    link.download = "sapka-deneme.png";
-    link.href = canvas.toDataURL();
-    link.click();
-  };
-  return (
-    <button onClick={handleDownload} style={{
-      padding: "10px 24px", background: "transparent", border: "1px solid rgba(255,255,255,0.3)",
-      color: "#fff", fontSize: 13, cursor: "pointer", letterSpacing: 2, fontFamily: "'Cormorant Garamond', serif",
-      transition: "all 0.3s",
-    }}
-    onMouseEnter={e => { e.target.style.background = "rgba(255,255,255,0.1)"; }}
-    onMouseLeave={e => { e.target.style.background = "transparent"; }}
-    >
-      FOTOĞRAFI İNDİR
-    </button>
-  );
+function downloadImage() {
+  var a = document.createElement("a");
+  a.download = "ianus-sapka.png";
+  a.href = canvas.toDataURL();
+  a.click();
 }
 
-export default function HatBrandSite() {
-  const [page, setPage] = useState("home");
-  const [selectedHat, setSelectedHat] = useState(HATS[0]);
-  const [uploadedImage, setUploadedImage] = useState(null);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const fileInputRef = useRef(null);
-
-  const handleUpload = (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = (ev) => {
-      setUploadedImage(ev.target.result);
-      setPage("tryon");
-    };
-    reader.readAsDataURL(file);
-  };
-
-  const fonts = `
-    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Outfit:wght@200;300;400;500&display=swap');
-  `;
-
-  const globalStyle = `
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { overflow-x: hidden; }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    @keyframes slideIn {
-      from { opacity: 0; transform: translateX(-20px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
-    @keyframes grain {
-      0%, 100% { transform: translate(0, 0); }
-      10% { transform: translate(-5%, -10%); }
-      30% { transform: translate(3%, -15%); }
-      50% { transform: translate(12%, 9%); }
-      70% { transform: translate(9%, 4%); }
-      90% { transform: translate(-1%, 7%); }
-    }
-    @keyframes floatHat {
-      0%, 100% { transform: translateY(0) rotate(-2deg); }
-      50% { transform: translateY(-12px) rotate(2deg); }
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 0.4; }
-      50% { opacity: 1; }
-    }
-    ::selection { background: rgba(200,170,120,0.3); }
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: #0a0a0a; }
-    ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
-  `;
-
-  return (
-    <div style={{
-      fontFamily: "'Outfit', sans-serif",
-      background: "#0a0a0a",
-      color: "#f0ece4",
-      minHeight: "100vh",
-      position: "relative",
-      overflow: "hidden",
-    }}>
-      <style>{fonts}</style>
-      <style>{globalStyle}</style>
-
-      {/* Grain overlay */}
-      <div style={{
-        position: "fixed", top: "-50%", left: "-50%", width: "200%", height: "200%",
-        background: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.4'/%3E%3C/svg%3E")`,
-        opacity: 0.03, pointerEvents: "none", zIndex: 1000,
-        animation: "grain 8s steps(10) infinite",
-      }} />
-
-      {/* NAV */}
-      <nav style={{
-        position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
-        padding: "20px 40px",
-        display: "flex", justifyContent: "space-between", alignItems: "center",
-        background: "linear-gradient(to bottom, rgba(10,10,10,0.95), transparent)",
-        backdropFilter: "blur(10px)",
-      }}>
-        <div
-          onClick={() => { setPage("home"); setUploadedImage(null); }}
-          style={{
-            fontFamily: "'Cormorant Garamond', serif",
-            fontSize: 28, fontWeight: 300, letterSpacing: 8,
-            cursor: "pointer", textTransform: "uppercase",
-            background: "linear-gradient(135deg, #f0ece4, #c8aa78)",
-            WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",
-          }}
-        >
-          IANUS
-        </div>
-        <div style={{ display: "flex", gap: 32, alignItems: "center" }}>
-          {["Koleksiyon", "Sanal Deneme", "Hakkımızda"].map((item, i) => (
-            <span
-              key={i}
-              onClick={() => {
-                if (i === 0) setPage("collection");
-                if (i === 1) setPage("upload");
-                if (i === 2) setPage("about");
-              }}
-              style={{
-                fontSize: 12, letterSpacing: 3, cursor: "pointer",
-                color: "rgba(240,236,228,0.6)", textTransform: "uppercase",
-                transition: "color 0.3s", fontWeight: 300,
-              }}
-              onMouseEnter={(e) => (e.target.style.color = "#c8aa78")}
-              onMouseLeave={(e) => (e.target.style.color = "rgba(240,236,228,0.6)")}
-            >
-              {item}
-            </span>
-          ))}
-        </div>
-      </nav>
-
-      {/* HOME */}
-      {page === "home" && (
-        <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
-          {/* Hero */}
-          <section style={{
-            height: "100vh", display: "flex", alignItems: "center", justifyContent: "center",
-            position: "relative",
-          }}>
-            {/* Decorative circles */}
-            <div style={{
-              position: "absolute", width: 500, height: 500, borderRadius: "50%",
-              border: "1px solid rgba(200,170,120,0.08)",
-              top: "50%", left: "50%", transform: "translate(-50%, -50%)",
-            }} />
-            <div style={{
-              position: "absolute", width: 700, height: 700, borderRadius: "50%",
-              border: "1px solid rgba(200,170,120,0.04)",
-              top: "50%", left: "50%", transform: "translate(-50%, -50%)",
-            }} />
-
-            <div style={{
-              textAlign: "center", zIndex: 2,
-              animation: "fadeUp 1.2s ease-out",
-            }}>
-              {/* Floating hat illustration */}
-              <div style={{
-                animation: "floatHat 4s ease-in-out infinite",
-                marginBottom: 40,
-              }}>
-                <svg width="180" height="130" viewBox="0 0 180 130">
-                  <ellipse cx="90" cy="100" rx="80" ry="24" fill="rgba(200,170,120,0.15)" />
-                  <ellipse cx="90" cy="95" rx="75" ry="22" fill="#1a1a1a" stroke="rgba(200,170,120,0.3)" strokeWidth="0.5" />
-                  <path d="M 25,90 Q 15,35 45,15 Q 90,-10 135,15 Q 165,35 155,90 Z" fill="#1a1a1a" stroke="rgba(200,170,120,0.2)" strokeWidth="0.5" />
-                  <rect x="25" y="75" width="130" height="10" rx="2" fill="rgba(200,170,120,0.2)" />
-                  <path d="M 45,22 Q 90,0 135,22" fill="none" stroke="rgba(200,170,120,0.15)" strokeWidth="1.5" />
-                </svg>
-              </div>
-
-              <h1 style={{
-                fontFamily: "'Cormorant Garamond', serif",
-                fontSize: "clamp(48px, 8vw, 96px)",
-                fontWeight: 300, letterSpacing: 12,
-                lineHeight: 1, marginBottom: 24,
-                background: "linear-gradient(135deg, #f0ece4 0%, #c8aa78 50%, #f0ece4 100%)",
-                WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",
-              }}>
-                IANUS
-              </h1>
-              <p style={{
-                fontSize: 13, letterSpacing: 6, fontWeight: 200,
-                color: "rgba(200,170,120,0.6)", marginBottom: 48,
-                textTransform: "uppercase",
-              }}>
-                Yapay Zeka ile Şapkanızı Deneyin
-              </p>
-              <div style={{ display: "flex", gap: 20, justifyContent: "center", flexWrap: "wrap" }}>
-                <button
-                  onClick={() => setPage("upload")}
-                  style={{
-                    padding: "16px 48px",
-                    background: "linear-gradient(135deg, #c8aa78, #a08050)",
-                    border: "none", color: "#0a0a0a",
-                    fontSize: 12, letterSpacing: 4, fontWeight: 500,
-                    cursor: "pointer", textTransform: "uppercase",
-                    fontFamily: "'Outfit', sans-serif",
-                    transition: "all 0.4s",
-                  }}
-                  onMouseEnter={(e) => { e.target.style.transform = "translateY(-2px)"; e.target.style.boxShadow = "0 10px 40px rgba(200,170,120,0.3)"; }}
-                  onMouseLeave={(e) => { e.target.style.transform = "translateY(0)"; e.target.style.boxShadow = "none"; }}
-                >
-                  Şapka Dene
-                </button>
-                <button
-                  onClick={() => setPage("collection")}
-                  style={{
-                    padding: "16px 48px",
-                    background: "transparent",
-                    border: "1px solid rgba(200,170,120,0.3)",
-                    color: "#c8aa78",
-                    fontSize: 12, letterSpacing: 4, fontWeight: 300,
-                    cursor: "pointer", textTransform: "uppercase",
-                    fontFamily: "'Outfit', sans-serif",
-                    transition: "all 0.4s",
-                  }}
-                  onMouseEnter={(e) => { e.target.style.borderColor = "rgba(200,170,120,0.7)"; }}
-                  onMouseLeave={(e) => { e.target.style.borderColor = "rgba(200,170,120,0.3)"; }}
-                >
-                  Koleksiyon
-                </button>
-              </div>
-            </div>
-
-            {/* Scroll indicator */}
-            <div style={{
-              position: "absolute", bottom: 40, left: "50%", transform: "translateX(-50%)",
-              display: "flex", flexDirection: "column", alignItems: "center", gap: 8,
-              animation: "pulse 2s ease-in-out infinite",
-            }}>
-              <span style={{ fontSize: 10, letterSpacing: 3, color: "rgba(255,255,255,0.3)" }}>KAYDIR</span>
-              <div style={{ width: 1, height: 30, background: "linear-gradient(to bottom, rgba(200,170,120,0.5), transparent)" }} />
-            </div>
-          </section>
-
-          {/* Features */}
-          <section style={{
-            padding: "120px 40px",
-            display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-            gap: 60, maxWidth: 1200, margin: "0 auto", width: "100%",
-          }}>
-            {[
-              { icon: "◎", title: "Sanal Deneme", desc: "Fotoğrafınızı yükleyin, yapay zeka ile şapkayı anında deneyin" },
-              { icon: "◈", title: "Premium Kalite", desc: "El yapımı, %100 organik pamuk şapkalar" },
-              { icon: "◇", title: "Kişiye Özel", desc: "Size en uygun şapkayı bulun, tarzınızı yansıtın" },
-            ].map((f, i) => (
-              <div key={i} style={{
-                padding: 40, textAlign: "center",
-                border: "1px solid rgba(200,170,120,0.08)",
-                background: "rgba(200,170,120,0.02)",
-                animation: `fadeUp 0.8s ease-out ${i * 0.2}s both`,
-              }}>
-                <div style={{ fontSize: 32, color: "#c8aa78", marginBottom: 20 }}>{f.icon}</div>
-                <h3 style={{
-                  fontFamily: "'Cormorant Garamond', serif",
-                  fontSize: 22, fontWeight: 400, marginBottom: 12, letterSpacing: 2,
-                }}>{f.title}</h3>
-                <p style={{ fontSize: 14, color: "rgba(240,236,228,0.5)", lineHeight: 1.8, fontWeight: 200 }}>{f.desc}</p>
-              </div>
-            ))}
-          </section>
-
-          {/* CTA */}
-          <section style={{
-            padding: "100px 40px", textAlign: "center",
-            borderTop: "1px solid rgba(200,170,120,0.08)",
-          }}>
-            <h2 style={{
-              fontFamily: "'Cormorant Garamond', serif",
-              fontSize: "clamp(28px, 4vw, 48px)",
-              fontWeight: 300, letterSpacing: 4, marginBottom: 20,
-            }}>
-              Tarzınızı Keşfedin
-            </h2>
-            <p style={{
-              color: "rgba(240,236,228,0.4)", fontSize: 14, fontWeight: 200,
-              maxWidth: 500, margin: "0 auto 40px", lineHeight: 1.8,
-            }}>
-              Fotoğrafınızı yükleyin, yapay zeka destekli sanal deneme ile mükemmel şapkanızı bulun.
-            </p>
-            <button
-              onClick={() => setPage("upload")}
-              style={{
-                padding: "18px 56px",
-                background: "linear-gradient(135deg, #c8aa78, #a08050)",
-                border: "none", color: "#0a0a0a",
-                fontSize: 13, letterSpacing: 4, fontWeight: 500,
-                cursor: "pointer", textTransform: "uppercase",
-                fontFamily: "'Outfit', sans-serif",
-              }}
-            >
-              Hemen Deneyin →
-            </button>
-          </section>
-
-          {/* Footer */}
-          <footer style={{
-            padding: "40px", textAlign: "center",
-            borderTop: "1px solid rgba(200,170,120,0.06)",
-          }}>
-            <p style={{ fontSize: 11, color: "rgba(255,255,255,0.2)", letterSpacing: 3 }}>
-              © 2026 IANUS — TÜM HAKLARI SAKLIDIR
-            </p>
-          </footer>
-        </div>
-      )}
-
-      {/* COLLECTION PAGE */}
-      {page === "collection" && (
-        <div style={{
-          minHeight: "100vh", paddingTop: 100, padding: "100px 40px 60px",
-          maxWidth: 1000, margin: "0 auto",
-          animation: "fadeIn 0.6s ease-out",
-        }}>
-          <div style={{ textAlign: "center", marginBottom: 80 }}>
-            <span style={{ fontSize: 11, letterSpacing: 6, color: "rgba(200,170,120,0.5)", display: "block", marginBottom: 16 }}>
-              KOLEKSİYON 2026
-            </span>
-            <h2 style={{
-              fontFamily: "'Cormorant Garamond', serif",
-              fontSize: "clamp(36px, 5vw, 64px)",
-              fontWeight: 300, letterSpacing: 6,
-            }}>
-              Essentials
-            </h2>
-          </div>
-
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))", gap: 40 }}>
-            {HATS.map((hat, i) => (
-              <div
-                key={hat.id}
-                style={{
-                  border: "1px solid rgba(200,170,120,0.1)",
-                  background: "rgba(200,170,120,0.02)",
-                  padding: 50, textAlign: "center",
-                  cursor: "pointer",
-                  transition: "all 0.5s",
-                  animation: `fadeUp 0.8s ease-out ${i * 0.15}s both`,
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = "rgba(200,170,120,0.3)";
-                  e.currentTarget.style.background = "rgba(200,170,120,0.05)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = "rgba(200,170,120,0.1)";
-                  e.currentTarget.style.background = "rgba(200,170,120,0.02)";
-                }}
-                onClick={() => {
-                  setSelectedHat(hat);
-                  setPage("upload");
-                }}
-              >
-                <div style={{
-                  background: hat.id === "black"
-                    ? "radial-gradient(circle, #1a1a1a 0%, #0a0a0a 100%)"
-                    : "radial-gradient(circle, #2a2a28 0%, #151514 100%)",
-                  padding: "50px 0", marginBottom: 30, borderRadius: 4,
-                }}>
-                  <HatSVG hat={hat} size={160} />
-                </div>
-                <h3 style={{
-                  fontFamily: "'Cormorant Garamond', serif",
-                  fontSize: 26, fontWeight: 400, letterSpacing: 3,
-                  marginBottom: 8,
-                }}>{hat.name}</h3>
-                <p style={{
-                  fontSize: 13, color: "rgba(240,236,228,0.4)",
-                  fontWeight: 200, marginBottom: 16, fontStyle: "italic",
-                }}>{hat.description}</p>
-                <span style={{
-                  fontSize: 18, color: "#c8aa78", fontWeight: 300,
-                  fontFamily: "'Cormorant Garamond', serif", letterSpacing: 2,
-                }}>{hat.price}</span>
-                <div style={{ marginTop: 24 }}>
-                  <span style={{
-                    fontSize: 11, letterSpacing: 4, color: "rgba(200,170,120,0.5)",
-                    textTransform: "uppercase",
-                  }}>
-                    Sanal Dene →
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* UPLOAD PAGE */}
-      {page === "upload" && (
-        <div style={{
-          minHeight: "100vh", display: "flex", flexDirection: "column",
-          alignItems: "center", justifyContent: "center",
-          padding: "100px 40px 60px",
-          animation: "fadeIn 0.6s ease-out",
-        }}>
-          <span style={{ fontSize: 11, letterSpacing: 6, color: "rgba(200,170,120,0.5)", marginBottom: 16 }}>
-            YAPAY ZEKA SANAL DENEME
-          </span>
-          <h2 style={{
-            fontFamily: "'Cormorant Garamond', serif",
-            fontSize: "clamp(28px, 4vw, 48px)",
-            fontWeight: 300, letterSpacing: 4, marginBottom: 16, textAlign: "center",
-          }}>
-            Fotoğrafınızı Yükleyin
-          </h2>
-          <p style={{
-            color: "rgba(240,236,228,0.4)", fontSize: 14, fontWeight: 200,
-            marginBottom: 50, textAlign: "center", maxWidth: 400, lineHeight: 1.8,
-          }}>
-            Yüzünüzün net göründüğü, önden çekilmiş bir fotoğraf en iyi sonucu verir.
-          </p>
-
-          {/* Hat selection */}
-          <div style={{ display: "flex", gap: 20, marginBottom: 40 }}>
-            {HATS.map((hat) => (
-              <div
-                key={hat.id}
-                onClick={() => setSelectedHat(hat)}
-                style={{
-                  padding: "20px 30px",
-                  border: selectedHat.id === hat.id
-                    ? "1px solid rgba(200,170,120,0.6)"
-                    : "1px solid rgba(200,170,120,0.1)",
-                  background: selectedHat.id === hat.id
-                    ? "rgba(200,170,120,0.08)"
-                    : "rgba(200,170,120,0.02)",
-                  cursor: "pointer", textAlign: "center",
-                  transition: "all 0.3s",
-                }}
-              >
-                <HatSVG hat={hat} size={70} />
-                <p style={{
-                  fontSize: 11, letterSpacing: 2, marginTop: 8,
-                  color: selectedHat.id === hat.id ? "#c8aa78" : "rgba(240,236,228,0.4)",
-                }}>{hat.name}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* Upload area */}
-          <div
-            onClick={() => fileInputRef.current?.click()}
-            style={{
-              width: "100%", maxWidth: 440, aspectRatio: "1",
-              border: "2px dashed rgba(200,170,120,0.2)",
-              display: "flex", flexDirection: "column",
-              alignItems: "center", justifyContent: "center",
-              cursor: "pointer", transition: "all 0.4s",
-              background: "rgba(200,170,120,0.02)",
-              position: "relative", overflow: "hidden",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = "rgba(200,170,120,0.5)";
-              e.currentTarget.style.background = "rgba(200,170,120,0.05)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = "rgba(200,170,120,0.2)";
-              e.currentTarget.style.background = "rgba(200,170,120,0.02)";
-            }}
-            onDragOver={(e) => { e.preventDefault(); e.currentTarget.style.borderColor = "rgba(200,170,120,0.7)"; }}
-            onDragLeave={(e) => { e.currentTarget.style.borderColor = "rgba(200,170,120,0.2)"; }}
-            onDrop={(e) => {
-              e.preventDefault();
-              const file = e.dataTransfer.files[0];
-              if (file && file.type.startsWith("image/")) {
-                const reader = new FileReader();
-                reader.onload = (ev) => {
-                  setUploadedImage(ev.target.result);
-                  setPage("tryon");
-                };
-                reader.readAsDataURL(file);
-              }
-            }}
-          >
-            <div style={{
-              width: 70, height: 70, borderRadius: "50%",
-              border: "1px solid rgba(200,170,120,0.2)",
-              display: "flex", alignItems: "center", justifyContent: "center",
-              marginBottom: 20,
-            }}>
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(200,170,120,0.5)" strokeWidth="1.5">
-                <path d="M12 5v14M5 12h14" />
-              </svg>
-            </div>
-            <p style={{ fontSize: 14, color: "rgba(240,236,228,0.6)", fontWeight: 300, marginBottom: 8 }}>
-              Fotoğraf yüklemek için tıklayın
-            </p>
-            <p style={{ fontSize: 12, color: "rgba(240,236,228,0.3)", fontWeight: 200 }}>
-              veya sürükleyip bırakın
-            </p>
-          </div>
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept="image/*"
-            onChange={handleUpload}
-            style={{ display: "none" }}
-          />
-        </div>
-      )}
-
-      {/* TRY-ON PAGE */}
-      {page === "tryon" && uploadedImage && (
-        <div style={{
-          minHeight: "100vh", paddingTop: 80,
-          display: "flex", flexDirection: "column",
-          animation: "fadeIn 0.6s ease-out",
-        }}>
-          <div style={{
-            display: "flex", flex: 1, gap: 0,
-            flexDirection: window.innerWidth < 768 ? "column" : "row",
-          }}>
-            {/* Canvas area */}
-            <div style={{
-              flex: 1, display: "flex", flexDirection: "column",
-              alignItems: "center", justifyContent: "center",
-              padding: 30,
-              borderRight: "1px solid rgba(200,170,120,0.08)",
-              minHeight: "calc(100vh - 80px)",
-            }}>
-              <div style={{
-                fontSize: 10, letterSpacing: 4, color: "rgba(200,170,120,0.4)",
-                marginBottom: 16, textAlign: "center",
-              }}>
-                ŞAPKAYI SÜRÜKLE & KONUMLANDIR
-              </div>
-              <div style={{ flex: 1, width: "100%", maxWidth: 600 }}>
-                <TryOnCanvas selectedHat={selectedHat} uploadedImage={uploadedImage} />
-              </div>
-            </div>
-
-            {/* Sidebar */}
-            <div style={{
-              width: window.innerWidth < 768 ? "100%" : 300,
-              padding: "30px 24px",
-              display: "flex", flexDirection: "column", gap: 24,
-              background: "rgba(200,170,120,0.02)",
-            }}>
-              <div>
-                <span style={{ fontSize: 10, letterSpacing: 4, color: "rgba(200,170,120,0.4)" }}>
-                  ŞAPKA SEÇ
-                </span>
-              </div>
-              {HATS.map((hat) => (
-                <div
-                  key={hat.id}
-                  onClick={() => setSelectedHat(hat)}
-                  style={{
-                    display: "flex", alignItems: "center", gap: 16,
-                    padding: 16,
-                    border: selectedHat.id === hat.id
-                      ? "1px solid rgba(200,170,120,0.4)"
-                      : "1px solid rgba(200,170,120,0.08)",
-                    background: selectedHat.id === hat.id
-                      ? "rgba(200,170,120,0.06)"
-                      : "transparent",
-                    cursor: "pointer", transition: "all 0.3s",
-                  }}
-                >
-                  <HatSVG hat={hat} size={50} />
-                  <div>
-                    <p style={{
-                      fontFamily: "'Cormorant Garamond', serif",
-                      fontSize: 16, fontWeight: 400, letterSpacing: 1,
-                    }}>{hat.name}</p>
-                    <p style={{ fontSize: 13, color: "#c8aa78", fontWeight: 300 }}>{hat.price}</p>
-                  </div>
-                </div>
-              ))}
-
-              <div style={{ marginTop: "auto", display: "flex", flexDirection: "column", gap: 12 }}>
-                <DownloadButton />
-                <button
-                  onClick={() => {
-                    setUploadedImage(null);
-                    setPage("upload");
-                  }}
-                  style={{
-                    padding: "10px 24px", background: "transparent",
-                    border: "1px solid rgba(255,255,255,0.15)",
-                    color: "rgba(255,255,255,0.5)", fontSize: 13, cursor: "pointer",
-                    letterSpacing: 2, fontFamily: "'Cormorant Garamond', serif",
-                  }}
-                >
-                  YENİ FOTOĞRAF
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* ABOUT PAGE */}
-      {page === "about" && (
-        <div style={{
-          minHeight: "100vh", display: "flex", flexDirection: "column",
-          alignItems: "center", justifyContent: "center",
-          padding: "100px 40px 60px",
-          animation: "fadeIn 0.6s ease-out",
-          maxWidth: 700, margin: "0 auto",
-        }}>
-          <span style={{ fontSize: 11, letterSpacing: 6, color: "rgba(200,170,120,0.5)", marginBottom: 16 }}>
-            HAKKIMIZDA
-          </span>
-          <h2 style={{
-            fontFamily: "'Cormorant Garamond', serif",
-            fontSize: "clamp(32px, 5vw, 56px)",
-            fontWeight: 300, letterSpacing: 4, marginBottom: 40, textAlign: "center",
-          }}>
-            Ianus Şapka
-          </h2>
-          <div style={{
-            color: "rgba(240,236,228,0.5)", fontSize: 15,
-            lineHeight: 2, fontWeight: 200, textAlign: "center",
-          }}>
-            <p style={{ marginBottom: 24 }}>
-              Ianus, minimalist tasarım ile premium kaliteyi bir araya getiren bir şapka markasıdır. 
-              Her şapkamız, en kaliteli malzemelerden özenle üretilmektedir.
-            </p>
-            <p style={{ marginBottom: 24 }}>
-              Yapay zeka destekli sanal deneme teknolojimiz sayesinde, satın almadan önce şapkalarımızı 
-              dijital olarak deneyebilir ve size en uygun modeli keşfedebilirsiniz.
-            </p>
-            <p>
-              Sadelik. Kalite. Teknoloji.
-            </p>
-          </div>
-          <div style={{
-            marginTop: 60, padding: "30px 50px",
-            border: "1px solid rgba(200,170,120,0.1)",
-          }}>
-            <p style={{ fontSize: 12, letterSpacing: 4, color: "rgba(200,170,120,0.4)", textAlign: "center" }}>
-              İLETİŞİM: INFO@IANUS.COM
-            </p>
-          </div>
-        </div>
-      )}
-    </div>
-  );
+function resetPhoto() {
+  userImage = null;
+  document.getElementById("uploadBox").style.display = "block";
+  document.getElementById("editor").className = "editor";
+  document.getElementById("fileInput").value = "";
 }
+</script>
+
+</body>
+</html>
