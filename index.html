@@ -296,17 +296,70 @@ footer { padding:50px 36px 24px;border-top:1px solid var(--border); }
 .blog-card-excerpt { font-size:12px;color:var(--text-dim);line-height:1.7;font-weight:300; }
 .blog-card-date { font-size:10px;color:var(--text-dim);margin-top:8px; }
 .blog-tag { display:inline-block;padding:3px 8px;font-size:9px;border:1px solid var(--border);border-radius:3px;color:var(--gold-dim);letter-spacing:1px;margin:2px; }
+
+/* ANI DEFTERİ */
+.ani-card {
+  padding:12px 14px;background:var(--surface2);border-radius:6px;
+  border-left:3px solid var(--gold-dim);position:relative;
+  transition:all .2s;
+}
+.ani-card:hover { border-left-color:var(--gold); }
+.ani-card-header { display:flex;justify-content:space-between;align-items:center;margin-bottom:4px; }
+.ani-card-title { font-size:13px;font-weight:500;color:var(--text); }
+.ani-card-mood { font-size:16px; }
+.ani-card-body { font-size:12px;color:var(--text-dim);line-height:1.7;margin-bottom:4px; }
+.ani-card-date { font-size:10px;color:var(--text-dim); }
+.ani-card-del {
+  position:absolute;top:8px;right:8px;background:none;border:none;
+  color:var(--text-dim);font-size:12px;cursor:pointer;opacity:0;transition:opacity .2s;
+}
+.ani-card:hover .ani-card-del { opacity:1; }
 .footer-grid { display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:32px;max-width:900px;margin:0 auto 32px; }
 .footer-col h4 { font-size:10px;letter-spacing:3px;color:var(--gold-dim);text-transform:uppercase;margin-bottom:12px; }
 .footer-col a { display:block;font-size:12px;color:var(--text-dim);text-decoration:none;margin-bottom:8px;font-weight:300;cursor:pointer; }
 .footer-col a:hover{color:var(--gold)}
 .footer-bottom { text-align:center;padding-top:20px;border-top:1px solid var(--border);font-size:10px;color:var(--text-dim);letter-spacing:2px; }
 
+/* SNAKE GAME */
+.snake-section { padding:20px 36px 60px;text-align:center; }
+.snake-wrap { max-width:480px;margin:0 auto;border:1px solid var(--border);background:var(--card-bg);border-radius:12px;overflow:hidden; }
+.snake-header { padding:16px 20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center; }
+.snake-header h3 { font-family:'Playfair Display',serif;font-size:18px;letter-spacing:2px; }
+.snake-stats { display:flex;gap:16px;font-size:12px;color:var(--text-dim);letter-spacing:1px; }
+.snake-stats strong { color:var(--gold); }
+#snakeCanvas { display:block;width:100%;background:#0a0a0a;cursor:pointer; }
+.snake-controls { padding:14px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap; }
+.snake-dir { width:48px;height:48px;border-radius:8px;border:1px solid var(--input-border);background:var(--bg);color:var(--gold);font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center; }
+.snake-dir:active { background:rgba(193,163,120,.1); }
+.snake-dpad { display:grid;grid-template-columns:48px 48px 48px;grid-template-rows:48px 48px;gap:4px;margin:0 auto; }
+.snake-info { padding:8px 14px;font-size:10px;color:var(--text-dim);letter-spacing:1px;border-top:1px solid var(--border); }
+
+/* SHOP MODAL */
+.shop-modal { display:none;position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,.94);backdrop-filter:blur(14px);overflow-y:auto; }
+.shop-modal.open { display:block;animation:fadeIn .3s ease-out; }
+.shop-inner { max-width:800px;margin:40px auto;padding:32px;background:var(--surface);border:1px solid var(--border);border-radius:12px;display:grid;grid-template-columns:1fr 1fr;gap:28px; }
+.shop-visual { display:flex;align-items:center;justify-content:center;background:var(--surface2);border-radius:8px;min-height:400px;padding:20px; }
+.shop-details { display:flex;flex-direction:column;gap:14px; }
+.shop-close { position:absolute;top:20px;right:24px;background:none;border:none;color:var(--text-dim);font-size:28px;cursor:pointer;z-index:2; }
+.shop-name { font-family:'Playfair Display',serif;font-size:26px;letter-spacing:2px;line-height:1.3; }
+.shop-price { font-size:28px;color:var(--gold);font-family:'Playfair Display',serif; }
+.shop-meta { font-size:12px;color:var(--text-dim);line-height:1.8; }
+.shop-sizes { display:flex;gap:6px; }
+.shop-size { width:42px;height:42px;border:1px solid var(--input-border);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px;cursor:pointer;color:var(--text-dim);transition:all .2s; }
+.shop-size.active,.shop-size:hover { border-color:var(--gold);color:var(--gold);background:rgba(193,163,120,.06); }
+.shop-colors { display:flex;gap:6px;flex-wrap:wrap; }
+.shop-color { width:28px;height:28px;border-radius:50%;border:2px solid transparent;cursor:pointer;transition:all .2s; }
+.shop-color.active { border-color:var(--gold);box-shadow:0 0 0 2px var(--gold); }
+.shop-add-btn { padding:16px;background:linear-gradient(135deg,var(--gold),#a08050);border:none;border-radius:8px;color:#080706;font-size:13px;letter-spacing:2px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .3s; }
+.shop-add-btn:hover { transform:translateY(-1px);box-shadow:0 6px 20px rgba(193,163,120,.25); }
+
 @media(max-width:768px) {
   .nav-links{display:none} .hamburger{display:block}
   .products-grid,.games-grid{grid-template-columns:1fr}
   .footer-grid{grid-template-columns:1fr 1fr}
   .legal-tabs{flex-wrap:wrap}
+  #quickbar > div { grid-template-columns:1fr !important; }
+  .shop-inner { grid-template-columns:1fr !important;margin:20px 12px; }
 }
 
 /* ====== SPIN WHEEL POPUP ====== */
@@ -440,13 +493,14 @@ footer { padding:50px 36px 24px;border-top:1px solid var(--border); }
 <nav>
   <div class="logo" onclick="goTo('hero')">CALEJON</div>
   <div class="nav-links">
+    <a onclick="goTo('snake')" style="color:#4ecdc4;">🐍 Yılan</a>
+    <a onclick="goTo('quickbar')">Anı Defteri</a>
+    <a href="https://youtube.com/@calejon" target="_blank" style="color:#ff4444;">▶ YouTube</a>
     <a onclick="goTo('products')">Koleksiyon</a>
     <a onclick="goTo('tryon')">Sanal Dene</a>
-    <a onclick="goTo('aigen')">AI Görsel</a>
     <a onclick="goTo('ai')">Asistan</a>
     <a onclick="goTo('games')">Oyunlar</a>
     <a onclick="goTo('blog')">Blog</a>
-    <a onclick="goTo('forum')">Forum</a>
     <a onclick="goTo('legal')">Yasal</a>
     <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn" title="Tema Değiştir">☀</button>
   </div>
@@ -456,6 +510,9 @@ footer { padding:50px 36px 24px;border-top:1px solid var(--border); }
   </div>
 </nav>
 <div class="mobile-menu" id="mobMenu">
+  <a onclick="goTo('snake');toggleMenu()" style="color:#4ecdc4;">🐍 Yılan Oyunu</a>
+  <a onclick="goTo('quickbar');toggleMenu()">📓 Anı Defteri</a>
+  <a href="https://youtube.com/@calejon" target="_blank" style="color:#ff4444;">▶ YouTube</a>
   <a onclick="goTo('products');toggleMenu()">Koleksiyon</a>
   <a onclick="goTo('tryon');toggleMenu()">Sanal Dene</a>
   <a onclick="goTo('aigen');toggleMenu()">AI Görsel</a>
@@ -479,6 +536,151 @@ footer { padding:50px 36px 24px;border-top:1px solid var(--border); }
       <button class="btn-gold" onclick="goTo('tryon')">Şapka Dene</button>
       <button class="btn-outline" onclick="goTo('aigen')">AI Görsel Üret</button>
     </div>
+  </div>
+</section>
+
+<!-- SNAKE GAME -->
+<section class="snake-section" id="snake">
+  <span class="section-label">🐍 CALEJON YILAN OYUNU</span>
+  <h2 class="section-title" style="font-size:clamp(22px,3vw,34px);">Şapka Topla, Skor Kır!</h2>
+  <p class="section-desc" style="margin:0 auto 20px;">Yılanı yönlendir, altın şapkaları topla. Her 5 şapkada hız artar!</p>
+  <div class="snake-wrap">
+    <div class="snake-header">
+      <h3>🐍 Yılan</h3>
+      <div class="snake-stats">
+        <span>Skor: <strong id="snkScore">0</strong></span>
+        <span>Rekor: <strong id="snkHigh">0</strong></span>
+        <span>Hız: <strong id="snkSpeed">1</strong></span>
+      </div>
+    </div>
+    <canvas id="snakeCanvas" width="480" height="480"></canvas>
+    <div class="snake-info" id="snkInfo">Başlamak için BAŞLAT'a bas veya SPACE tuşu. Yön: ok tuşları veya WASD</div>
+    <div class="snake-dpad">
+      <div></div><button class="snake-dir" onclick="setSnkDir(0,-1)">▲</button><div></div>
+      <button class="snake-dir" onclick="setSnkDir(-1,0)">◄</button>
+      <button class="snake-dir" onclick="setSnkDir(0,1)" style="font-size:12px;letter-spacing:1px;" id="snkStartBtn">BAŞLAT</button>
+      <button class="snake-dir" onclick="setSnkDir(1,0)">►</button>
+    </div>
+  </div>
+</section>
+
+<!-- SHOP MODAL -->
+<div class="shop-modal" id="shopModal">
+  <button class="shop-close" onclick="closeShop()">✕</button>
+  <div class="shop-inner" style="position:relative;">
+    <div class="shop-visual" id="shopVisual"></div>
+    <div class="shop-details">
+      <div>
+        <span class="section-label" id="shopCat"></span>
+        <h2 class="shop-name" id="shopName"></h2>
+      </div>
+      <div class="shop-price" id="shopPrice"></div>
+      <div class="shop-meta" id="shopMeta"></div>
+      <div>
+        <p style="font-size:10px;letter-spacing:2px;color:var(--text-dim);margin-bottom:6px;">BEDEN</p>
+        <div class="shop-sizes" id="shopSizes"></div>
+      </div>
+      <div>
+        <p style="font-size:10px;letter-spacing:2px;color:var(--text-dim);margin-bottom:6px;">RENK</p>
+        <div class="shop-colors" id="shopColors"></div>
+      </div>
+      <div style="padding:12px;background:var(--surface2);border-radius:6px;font-size:11px;color:var(--text-dim);line-height:1.8;">
+        ✓ %100 Organik Pamuk &nbsp;·&nbsp; ✓ Ücretsiz Kargo (500₺+) &nbsp;·&nbsp; ✓ 14 Gün İade<br>
+        ✓ El Yapımı Üretim &nbsp;·&nbsp; ✓ GOTS Sertifikalı
+      </div>
+      <div style="display:flex;gap:8px;">
+        <button class="shop-add-btn" style="flex:1;" id="shopAddBtn">SEPETE EKLE</button>
+        <button class="shop-add-btn" style="flex:0;padding:16px 20px;background:transparent;border:1px solid var(--gold-dim);color:var(--gold);" onclick="closeShop();goTo('tryon');">DENE</button>
+      </div>
+      <div id="shopQtyCtrl" style="display:none;text-align:center;">
+        <div class="qty-ctrl" style="justify-content:center;gap:12px;">
+          <button onclick="shopQty(-1)" style="width:36px;height:36px;border-radius:8px;border:1px solid var(--input-border);background:var(--bg);color:var(--text);font-size:18px;cursor:pointer;">−</button>
+          <span style="font-size:16px;min-width:30px;" id="shopQtyNum">1</span>
+          <button onclick="shopQty(1)" style="width:36px;height:36px;border-radius:8px;border:1px solid var(--input-border);background:var(--bg);color:var(--text);font-size:18px;cursor:pointer;">+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- QUICKBAR: YOUTUBE + ANI DEFTERİ -->
+<section id="quickbar" style="padding:60px 36px;">
+  <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+
+    <!-- YOUTUBE BLOCK -->
+    <div style="border:1px solid var(--border);background:var(--card-bg);border-radius:8px;overflow:hidden;">
+      <div style="padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;">
+        <span style="color:#ff4444;font-size:20px;">▶</span>
+        <span style="font-size:12px;letter-spacing:2px;color:var(--text-mid);">CALEJON YOUTUBE</span>
+      </div>
+      <div style="padding:24px 20px;text-align:center;">
+        <div style="font-size:56px;margin-bottom:16px;">🎬</div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:20px;margin-bottom:10px;">Calejon TV</h3>
+        <p style="font-size:13px;color:var(--text-dim);line-height:1.8;margin-bottom:20px;">
+          Stil rehberleri, şapka incelemeleri, kombinasyon videoları, backstage ve daha fazlası YouTube kanalımızda!
+        </p>
+        <a href="https://youtube.com/@calejon" target="_blank" style="display:inline-block;padding:14px 36px;background:#ff4444;color:#fff;text-decoration:none;font-size:12px;letter-spacing:2px;font-weight:700;border-radius:6px;transition:all .3s;">
+          ▶ YOUTUBE'A GİT
+        </a>
+        <div style="margin-top:20px;display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+          <div style="padding:14px;background:var(--surface2);border-radius:6px;text-align:center;">
+            <div style="font-size:20px;color:var(--gold);font-family:'Playfair Display',serif;">150+</div>
+            <div style="font-size:10px;color:var(--text-dim);letter-spacing:1px;margin-top:2px;">VİDEO</div>
+          </div>
+          <div style="padding:14px;background:var(--surface2);border-radius:6px;text-align:center;">
+            <div style="font-size:20px;color:var(--gold);font-family:'Playfair Display',serif;">50K+</div>
+            <div style="font-size:10px;color:var(--text-dim);letter-spacing:1px;margin-top:2px;">ABONE</div>
+          </div>
+        </div>
+        <div style="margin-top:14px;">
+          <p style="font-size:10px;letter-spacing:2px;color:var(--text-dim);margin-bottom:8px;">POPÜLER SERİLER</p>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center;">
+            <span style="padding:4px 10px;background:var(--surface2);border-radius:4px;font-size:10px;color:var(--text-dim);">🎩 Şapka 101</span>
+            <span style="padding:4px 10px;background:var(--surface2);border-radius:4px;font-size:10px;color:var(--text-dim);">👔 Stil Rehberi</span>
+            <span style="padding:4px 10px;background:var(--surface2);border-radius:4px;font-size:10px;color:var(--text-dim);">🔥 Trend Alert</span>
+            <span style="padding:4px 10px;background:var(--surface2);border-radius:4px;font-size:10px;color:var(--text-dim);">📦 Unboxing</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ANI DEFTERİ BLOCK -->
+    <div style="border:1px solid var(--border);background:var(--card-bg);border-radius:8px;overflow:hidden;display:flex;flex-direction:column;">
+      <div style="padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span style="font-size:20px;">📓</span>
+          <span style="font-size:12px;letter-spacing:2px;color:var(--text-mid);">ANI DEFTERİ</span>
+        </div>
+        <span style="font-size:10px;color:var(--text-dim);" id="aniCount">0 anı</span>
+      </div>
+      <div style="padding:16px 20px;flex:1;display:flex;flex-direction:column;">
+        <p style="font-size:12px;color:var(--text-dim);line-height:1.7;margin-bottom:14px;">
+          Calejon ile anılarını yaz, burada kalsın. Notların sadece sana ait — tarayıcında saklanır.
+        </p>
+        <!-- Yeni not formu -->
+        <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px;">
+          <input type="text" id="aniTitle" placeholder="Anının başlığı..." style="padding:10px 12px;background:var(--input-bg);border:1px solid var(--input-border);border-radius:4px;color:var(--text);font-size:13px;font-family:'DM Sans',sans-serif;outline:none;">
+          <textarea id="aniBody" placeholder="Bugün ne yaşadın? Hangi şapkayı taktın? Nasıl hissettin?..." rows="3" style="padding:10px 12px;background:var(--input-bg);border:1px solid var(--input-border);border-radius:4px;color:var(--text);font-size:13px;font-family:'DM Sans',sans-serif;outline:none;resize:vertical;"></textarea>
+          <div style="display:flex;gap:6px;">
+            <select id="aniMood" style="padding:8px 10px;background:var(--input-bg);border:1px solid var(--input-border);border-radius:4px;color:var(--text);font-size:12px;font-family:'DM Sans',sans-serif;outline:none;">
+              <option value="😊">😊 Mutlu</option>
+              <option value="🥰">🥰 Aşık</option>
+              <option value="😎">😎 Havalı</option>
+              <option value="🤩">🤩 Heyecanlı</option>
+              <option value="😌">😌 Huzurlu</option>
+              <option value="🎉">🎉 Kutlama</option>
+              <option value="💭">💭 Düşünceli</option>
+              <option value="🎩">🎩 Şapkalı</option>
+            </select>
+            <button onclick="saveAni()" style="flex:1;padding:8px;background:var(--gold);color:#080706;border:none;border-radius:4px;font-size:11px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;letter-spacing:1px;">KAYDET</button>
+          </div>
+        </div>
+        <!-- Anı listesi -->
+        <div id="aniList" style="flex:1;overflow-y:auto;max-height:240px;display:flex;flex-direction:column;gap:8px;">
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -525,7 +727,7 @@ footer { padding:50px 36px 24px;border-top:1px solid var(--border); }
     </div>
   </div>
   <!-- Grid -->
-  <div class="products-grid" id="prodGrid" style="grid-template-columns:repeat(auto-fill,minmax(200px,1fr));max-width:1100px;"></div>
+  <div class="products-grid" id="prodGrid" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr));max-width:1200px;"></div>
   <!-- Pagination -->
   <div style="text-align:center;margin-top:24px;" id="pagination"></div>
   <!-- Showing count -->
@@ -818,6 +1020,119 @@ function toggleTheme(){
   document.getElementById('themeBtn2').textContent=icon;
 }
 
+// ====================== ANI DEFTERİ ======================
+var anilar=JSON.parse(localStorage.getItem('clj_anilar')||'[]');
+function renderAnilar(){
+  var list=document.getElementById('aniList');list.innerHTML='';
+  document.getElementById('aniCount').textContent=anilar.length+' anı';
+  if(anilar.length===0){
+    list.innerHTML='<div style="text-align:center;padding:30px 10px;color:var(--text-dim);font-size:12px;">Henüz anı yok. İlk anını yaz! ✨</div>';
+    return;
+  }
+  for(var i=anilar.length-1;i>=0;i--){
+    var a=anilar[i];
+    list.innerHTML+='<div class="ani-card">'+
+      '<button class="ani-card-del" onclick="delAni('+i+')" title="Sil">✕</button>'+
+      '<div class="ani-card-header">'+
+        '<span class="ani-card-title">'+a.title+'</span>'+
+        '<span class="ani-card-mood">'+a.mood+'</span>'+
+      '</div>'+
+      '<div class="ani-card-body">'+a.body+'</div>'+
+      '<div class="ani-card-date">'+a.date+'</div>'+
+    '</div>';
+  }
+}
+function saveAni(){
+  var title=document.getElementById('aniTitle').value.trim();
+  var body=document.getElementById('aniBody').value.trim();
+  var mood=document.getElementById('aniMood').value;
+  if(!title&&!body){alert('Bir şeyler yaz!');return;}
+  if(!title)title='Anı #'+(anilar.length+1);
+  var now=new Date();
+  var months=['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'];
+  var dateStr=now.getDate()+' '+months[now.getMonth()]+' '+now.getFullYear()+' · '+now.getHours().toString().padStart(2,'0')+':'+now.getMinutes().toString().padStart(2,'0');
+  anilar.push({title:title,body:body,mood:mood,date:dateStr});
+  localStorage.setItem('clj_anilar',JSON.stringify(anilar));
+  document.getElementById('aniTitle').value='';
+  document.getElementById('aniBody').value='';
+  renderAnilar();
+}
+function delAni(idx){
+  if(!confirm('Bu anıyı silmek istediğine emin misin?'))return;
+  anilar.splice(idx,1);
+  localStorage.setItem('clj_anilar',JSON.stringify(anilar));
+  renderAnilar();
+}
+renderAnilar();
+
+// ====================== SHOP MODAL ======================
+var shopCurrentId=null;
+function openShop(id){
+  var p=allProducts.find(function(x){return x.id===id;});
+  if(!p)return;shopCurrentId=id;
+  document.getElementById('shopCat').textContent=(p.cat==='hat'?'ŞAPKA':'TİŞÖRT')+' · '+p.material;
+  document.getElementById('shopName').textContent=p.name;
+  document.getElementById('shopPrice').textContent='₺'+p.price.toLocaleString('tr');
+  document.getElementById('shopMeta').innerHTML='<strong>Renk:</strong> '+p.color+' · <strong>Desen:</strong> '+p.pattern+' · <strong>Malzeme:</strong> '+p.material+'<br><strong>Mevsim:</strong> '+p.season+' · <strong>Kod:</strong> '+p.id;
+  document.getElementById('shopVisual').innerHTML=drawProdSVG(p,true);
+  var sizes=p.cat==='hat'?['S','M','L','XL']:['XS','S','M','L','XL','XXL'];
+  var sh='';sizes.forEach(function(s,i){sh+='<div class="shop-size'+(i===1?' active':'')+'" onclick="pickSize(this)">'+s+'</div>';});
+  document.getElementById('shopSizes').innerHTML=sh;
+  var ch='';colors.forEach(function(c){ch+='<div class="shop-color'+(c.name===p.color?' active':'')+'" style="background:'+c.hex+';" onclick="pickColor(this)" title="'+c.name+'"></div>';});
+  document.getElementById('shopColors').innerHTML=ch;
+  var inCart=cart[id]||0;
+  if(inCart>0){document.getElementById('shopAddBtn').textContent='SEPETTE ✓';document.getElementById('shopQtyCtrl').style.display='block';document.getElementById('shopQtyNum').textContent=inCart;}
+  else{document.getElementById('shopAddBtn').textContent='SEPETE EKLE';document.getElementById('shopQtyCtrl').style.display='none';}
+  document.getElementById('shopAddBtn').onclick=function(){addToCart(id);document.getElementById('shopAddBtn').textContent='SEPETTE ✓';document.getElementById('shopQtyCtrl').style.display='block';document.getElementById('shopQtyNum').textContent=cart[id];renderProducts();};
+  document.getElementById('shopModal').className='shop-modal open';
+}
+function closeShop(){document.getElementById('shopModal').className='shop-modal';}
+function pickSize(el){el.parentNode.querySelectorAll('.shop-size').forEach(function(s){s.classList.remove('active');});el.classList.add('active');}
+function pickColor(el){el.parentNode.querySelectorAll('.shop-color').forEach(function(s){s.classList.remove('active');});el.classList.add('active');}
+function shopQty(d){if(!shopCurrentId)return;changeQty(shopCurrentId,d);var q=cart[shopCurrentId]||0;if(q<=0){document.getElementById('shopQtyCtrl').style.display='none';document.getElementById('shopAddBtn').textContent='SEPETE EKLE';}else{document.getElementById('shopQtyNum').textContent=q;}renderProducts();}
+
+// ====================== SNAKE GAME ======================
+var snkCv=document.getElementById('snakeCanvas'),snkCx=snkCv.getContext('2d');
+var GRID=24,COLS=20,ROWS=20;
+var snk,food,foodType,sdir,ndir,sscore,speed,gameOn2,snkLoop2,ticks2;
+var highScore2=parseInt(localStorage.getItem('clj_snk_hi')||'0');
+document.getElementById('snkHigh').textContent=highScore2;
+var pwups=['🎩','👒','🧢','💎','⭐'];
+function rstSnk(){snk=[{x:10,y:10},{x:9,y:10},{x:8,y:10}];sdir={x:1,y:0};ndir={x:1,y:0};sscore=0;speed=1;ticks2=0;placeF();document.getElementById('snkScore').textContent='0';document.getElementById('snkSpeed').textContent='1';}
+function placeF(){var ok=false;while(!ok){food={x:Math.floor(Math.random()*COLS),y:Math.floor(Math.random()*ROWS)};ok=true;for(var i=0;i<snk.length;i++)if(snk[i].x===food.x&&snk[i].y===food.y){ok=false;break;}}foodType=Math.floor(Math.random()*pwups.length);}
+function drawSnk(){
+  snkCx.fillStyle='#0a0a0a';snkCx.fillRect(0,0,480,480);
+  snkCx.strokeStyle='rgba(193,163,120,.04)';snkCx.lineWidth=.5;
+  for(var i=0;i<=COLS;i++){snkCx.beginPath();snkCx.moveTo(i*GRID,0);snkCx.lineTo(i*GRID,480);snkCx.stroke();}
+  for(var i=0;i<=ROWS;i++){snkCx.beginPath();snkCx.moveTo(0,i*GRID);snkCx.lineTo(480,i*GRID);snkCx.stroke();}
+  snkCx.font='18px serif';snkCx.textAlign='center';snkCx.textBaseline='middle';
+  snkCx.fillText(pwups[foodType],food.x*GRID+GRID/2,food.y*GRID+GRID/2);
+  snkCx.beginPath();snkCx.arc(food.x*GRID+GRID/2,food.y*GRID+GRID/2,14,0,Math.PI*2);
+  snkCx.fillStyle='rgba(193,163,120,'+(0.05+Math.sin(ticks2*.1)*.04)+')';snkCx.fill();
+  for(var i=snk.length-1;i>=0;i--){
+    var s=snk[i],op=1-i/(snk.length*1.5);
+    if(i===0){snkCx.fillStyle='#c1a378';snkCx.beginPath();snkCx.roundRect(s.x*GRID+1,s.y*GRID+1,GRID-2,GRID-2,6);snkCx.fill();snkCx.fillStyle='#080706';var ex1=s.x*GRID+GRID*.3,ex2=s.x*GRID+GRID*.7,ey=s.y*GRID+GRID*.4;snkCx.beginPath();snkCx.arc(ex1,ey,2.5,0,Math.PI*2);snkCx.fill();snkCx.beginPath();snkCx.arc(ex2,ey,2.5,0,Math.PI*2);snkCx.fill();snkCx.fillStyle='#1a1a1a';snkCx.fillRect(s.x*GRID+3,s.y*GRID-2,GRID-6,5);snkCx.fillRect(s.x*GRID+6,s.y*GRID-7,GRID-12,7);}
+    else{var g=snkCx.createLinearGradient(s.x*GRID,s.y*GRID,s.x*GRID+GRID,s.y*GRID+GRID);g.addColorStop(0,'rgba(193,163,120,'+op+')');g.addColorStop(1,'rgba(160,128,80,'+op+')');snkCx.fillStyle=g;snkCx.beginPath();snkCx.roundRect(s.x*GRID+2,s.y*GRID+2,GRID-4,GRID-4,4);snkCx.fill();}
+  }
+  if(!gameOn2&&sscore>0){snkCx.fillStyle='rgba(0,0,0,.7)';snkCx.fillRect(0,180,480,120);snkCx.fillStyle='#c1a378';snkCx.font='bold 28px Playfair Display';snkCx.textAlign='center';snkCx.fillText('OYUN BİTTİ!',240,220);snkCx.font='16px DM Sans';snkCx.fillStyle='rgba(232,226,216,.6)';snkCx.fillText('Skor: '+sscore+(sscore>=highScore2?' — YENİ REKOR! 🏆':''),240,252);}
+}
+function updSnk(){
+  ticks2++;sdir=ndir;var head={x:snk[0].x+sdir.x,y:snk[0].y+sdir.y};
+  if(head.x<0)head.x=COLS-1;if(head.x>=COLS)head.x=0;if(head.y<0)head.y=ROWS-1;if(head.y>=ROWS)head.y=0;
+  for(var i=0;i<snk.length;i++){if(snk[i].x===head.x&&snk[i].y===head.y){endSnk();return;}}
+  snk.unshift(head);
+  if(head.x===food.x&&head.y===food.y){var pts=foodType===3?3:foodType===4?5:1;sscore+=pts;document.getElementById('snkScore').textContent=sscore;if(sscore%5===0&&speed<10){speed++;document.getElementById('snkSpeed').textContent=speed;clearInterval(snkLoop2);snkLoop2=setInterval(function(){updSnk();drawSnk();},Math.max(40,150-speed*11));}placeF();}else{snk.pop();}
+}
+function endSnk(){gameOn2=false;clearInterval(snkLoop2);if(sscore>highScore2){highScore2=sscore;localStorage.setItem('clj_snk_hi',highScore2);document.getElementById('snkHigh').textContent=highScore2;}document.getElementById('snkInfo').textContent='Skor: '+sscore+' | Rekor: '+highScore2;document.getElementById('snkStartBtn').textContent='BAŞLAT';drawSnk();}
+function startSnk(){if(gameOn2)return;rstSnk();gameOn2=true;document.getElementById('snkStartBtn').textContent='▼';document.getElementById('snkInfo').textContent='Oynuyor... Şapkaları topla!';snkLoop2=setInterval(function(){updSnk();drawSnk();},150);}
+function setSnkDir(dx,dy){if(!gameOn2){if(dx===0&&dy===1)startSnk();return;}if(sdir.x===-dx&&sdir.y===-dy)return;ndir={x:dx,y:dy};}
+document.addEventListener('keydown',function(e){if(e.key==='ArrowUp'||e.key==='w')setSnkDir(0,-1);else if(e.key==='ArrowDown'||e.key==='s')setSnkDir(0,1);else if(e.key==='ArrowLeft'||e.key==='a')setSnkDir(-1,0);else if(e.key==='ArrowRight'||e.key==='d')setSnkDir(1,0);else if(e.key===' '){e.preventDefault();if(!gameOn2)startSnk();}});
+var snkTx,snkTy;
+snkCv.addEventListener('touchstart',function(e){snkTx=e.touches[0].clientX;snkTy=e.touches[0].clientY;},{passive:true});
+snkCv.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-snkTx,dy=e.changedTouches[0].clientY-snkTy;if(Math.abs(dx)<10&&Math.abs(dy)<10){if(!gameOn2)startSnk();return;}if(Math.abs(dx)>Math.abs(dy))setSnkDir(dx>0?1:-1,0);else setSnkDir(0,dy>0?1:-1);},{passive:true});
+snkCv.addEventListener('click',function(){if(!gameOn2)startSnk();});
+rstSnk();drawSnk();
+
 // ====================== 1000 PRODUCTS + CART + BULK ======================
 var hatPatterns=['Düz','Çizgili','Ekose','Kamuflaj','Paisley','Puantiye','Geometrik','Çiçekli','Batik','Denim'];
 var hatTypes=['Beyzbol Şapka','Bucket Şapka','Fedora','Snapback','Dad Hat','Bere','Trucker','Beanie','Flat Cap','Newsboy'];
@@ -862,12 +1177,30 @@ var filteredProducts=allProducts.slice();
 var currentCat='all';var currentPage=1;var perPage=36;
 var cart={};
 
-function drawProdSVG(p){
+function drawProdSVG(p,big){
+  var w=big?200:90,h=big?260:120;
   if(p.icon==='hat'){
-    return '<svg width="80" height="52" viewBox="0 0 120 78"><ellipse cx="60" cy="65" rx="55" ry="13" fill="'+p.hex2+'"/><path d="M20,62 Q14,25 35,12 Q60,-2 85,12 Q106,25 100,62Z" fill="'+p.hex+'"/><rect x="20" y="52" width="80" height="6" rx="1" fill="'+p.hex2+'"/></svg>';
+    return '<svg width="'+w+'" height="'+h+'" viewBox="0 0 200 260">'+
+      '<line x1="100" y1="230" x2="80" y2="258" stroke="'+p.hex2+'" stroke-width="3"/>'+
+      '<line x1="100" y1="230" x2="120" y2="258" stroke="'+p.hex2+'" stroke-width="3"/>'+
+      '<rect x="75" y="140" width="50" height="92" rx="6" fill="'+p.hex2+'" opacity=".7"/>'+
+      '<rect x="82" y="150" width="36" height="40" rx="4" fill="'+p.hex+'" opacity=".3"/>'+
+      '<line x1="72" y1="172" x2="55" y2="200" stroke="'+p.hex2+'" stroke-width="3"/>'+
+      '<line x1="128" y1="172" x2="145" y2="200" stroke="'+p.hex2+'" stroke-width="3"/>'+
+      '<circle cx="100" cy="115" r="28" fill="'+p.hex2+'" opacity=".6"/>'+
+      '<circle cx="92" cy="110" r="2" fill="'+p.hex+'"/><circle cx="108" cy="110" r="2" fill="'+p.hex+'"/>'+
+      '<ellipse cx="100" cy="90" rx="44" ry="12" fill="'+p.hex2+'"/>'+
+      '<path d="M60,86 Q54,50 72,38 Q100,22 128,38 Q146,50 140,86Z" fill="'+p.hex+'"/>'+
+      '<rect x="60" y="78" width="80" height="6" rx="1" fill="'+p.hex2+'"/>'+
+      '</svg>';
   }
-  // tshirt svg
-  return '<svg width="70" height="70" viewBox="0 0 100 100"><path d="M30,15 L20,15 L5,30 L18,38 L22,28 L22,85 L78,85 L78,28 L82,38 L95,30 L80,15 L70,15 C70,25 60,32 50,32 C40,32 30,25 30,15Z" fill="'+p.hex+'" stroke="'+p.hex2+'" stroke-width="1"/></svg>';
+  return '<svg width="'+w+'" height="'+h+'" viewBox="0 0 200 260">'+
+    '<line x1="100" y1="230" x2="80" y2="258" stroke="'+p.hex2+'" stroke-width="3"/>'+
+    '<line x1="100" y1="230" x2="120" y2="258" stroke="'+p.hex2+'" stroke-width="3"/>'+
+    '<circle cx="100" cy="80" r="22" fill="'+p.hex2+'" opacity=".5"/>'+
+    '<circle cx="93" cy="76" r="2" fill="'+p.hex+'"/><circle cx="107" cy="76" r="2" fill="'+p.hex+'"/>'+
+    '<path d="M72,100 L62,100 L48,118 L58,126 L65,112 L65,230 L135,230 L135,112 L142,126 L152,118 L138,100 L128,100 C128,114 116,124 100,124 C84,124 72,114 72,100Z" fill="'+p.hex+'" stroke="'+p.hex2+'" stroke-width=".5"/>'+
+    '</svg>';
 }
 
 function renderProducts(){
@@ -875,18 +1208,18 @@ function renderProducts(){
   var start=(currentPage-1)*perPage,end=Math.min(start+perPage,filteredProducts.length);
   for(var i=start;i<end;i++){
     var p=filteredProducts[i],inCart=cart[p.id]||0;
-    var cardHTML='<div class="product-card" data-id="'+p.id+'">';
+    var cardHTML='<div class="product-card" data-id="'+p.id+'" onclick="openShop(\''+p.id+'\')">';
     if(p.badge)cardHTML+='<div class="product-badge"'+(p.badge==='LİMİTED'?' style="background:#3a5a3a"':p.badge==='TREND'?' style="background:#3a4a6a"':p.badge==='İNDİRİM'?' style="background:#6a5a10"':p.badge==='SON STOK'?' style="background:#6a2020"':'')+'>'+p.badge+'</div>';
-    cardHTML+='<div class="product-img" style="padding:28px 0;">'+drawProdSVG(p)+'</div>';
+    cardHTML+='<div class="product-img" style="padding:16px 0;">'+drawProdSVG(p,false)+'</div>';
     cardHTML+='<div class="product-info" style="padding:14px 16px;">';
     cardHTML+='<p class="product-name" style="font-size:14px;letter-spacing:1px;">'+p.name+'</p>';
     cardHTML+='<p class="product-desc" style="font-size:11px;">'+p.color+' · '+p.material+' · '+(p.cat==='hat'?'Şapka':'Tişört')+'</p>';
     cardHTML+='<div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;">';
     cardHTML+='<span class="product-price" style="font-size:15px;">₺'+p.price.toLocaleString('tr')+'</span>';
     if(inCart>0){
-      cardHTML+='<div class="qty-ctrl"><button onclick="changeQty(\''+p.id+'\',-1)">−</button><span>'+inCart+'</span><button onclick="changeQty(\''+p.id+'\',1)">+</button></div>';
+      cardHTML+='<div class="qty-ctrl" onclick="event.stopPropagation()"><button onclick="event.stopPropagation();changeQty(\''+p.id+'\',-1)">−</button><span>'+inCart+'</span><button onclick="event.stopPropagation();changeQty(\''+p.id+'\',1)">+</button></div>';
     } else {
-      cardHTML+='<button class="add-cart" onclick="addToCart(\''+p.id+'\')">+ Sepet</button>';
+      cardHTML+='<button class="add-cart" onclick="event.stopPropagation();addToCart(\''+p.id+'\')">+ Sepet</button>';
     }
     cardHTML+='</div></div></div>';
     g.innerHTML+=cardHTML;
