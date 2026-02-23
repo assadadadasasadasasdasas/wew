@@ -4,36 +4,37 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CALEJON | Headwear Co.</title>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#F5F0EB;--bg2:#EDE8E2;--bg3:#E5DED6;--text:#111;--text2:#555;--text3:#999;--border:#D5CEC6;--white:#fff;--accent:#111;--danger:#B91C1C;--success:#15803D;--blue:#1D4ED8}
+:root{--bg:#0a0b14;--bg2:#12131f;--bg3:#1a1c2e;--text:#e8e2da;--text2:#9a9494;--text3:#5a5a6a;--border:#1e2035;--white:#14152a;--accent:#0d0e1a;--danger:#ef4444;--success:#22c55e;--blue:#3b82f6;--glow:rgba(180,120,60,.08)}
 html{scroll-behavior:smooth}
-body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased}
-::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border);border-radius:8px}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased;position:relative}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 20% 20%,rgba(60,30,80,.12) 0%,transparent 50%),radial-gradient(ellipse at 80% 80%,rgba(120,50,20,.08) 0%,transparent 50%),radial-gradient(ellipse at 50% 50%,rgba(20,20,60,.06) 0%,transparent 70%);pointer-events:none;z-index:0}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:#2a2c45;border-radius:8px}
 a{text-decoration:none;color:inherit}button{cursor:pointer;font-family:inherit}
 
 /* TICKER */
-.ticker{background:var(--accent);color:var(--bg);padding:9px 0;overflow:hidden;white-space:nowrap;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:2.5px;text-transform:uppercase}
+.ticker{background:#08091a;color:var(--text);padding:9px 0;overflow:hidden;white-space:nowrap;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:2.5px;text-transform:uppercase;position:relative;z-index:1;border-bottom:1px solid rgba(255,255,255,.03)}
 .ticker-track{display:inline-flex;animation:tickScroll 35s linear infinite}
 .ticker-track span{padding:0 36px;opacity:.85}
 .ticker-track span::before{content:'✦';margin-right:14px;opacity:.4}
 @keyframes tickScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
 /* HEADER */
-header{position:sticky;top:0;z-index:100;background:rgba(245,240,235,.94);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+header{position:sticky;top:0;z-index:100;background:rgba(10,11,20,.92);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid rgba(255,255,255,.04)}
 .h-inner{max-width:1440px;margin:0 auto;padding:0 48px;height:68px;display:flex;align-items:center;justify-content:space-between}
 .logo-a{display:flex;align-items:center;gap:12px;cursor:pointer}
 .logo-star{width:32px;height:32px}
-.logo-t{font-weight:800;font-size:21px;letter-spacing:7px;text-transform:uppercase}
+.logo-t{font-family:'Orbitron',sans-serif;font-weight:800;font-size:21px;letter-spacing:7px;text-transform:uppercase}
 nav{display:flex;align-items:center;gap:32px}
 nav a{font-size:11.5px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;position:relative;padding:4px 0;transition:opacity .3s;cursor:pointer}
 nav a:hover{opacity:.5}
 nav a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1.5px;background:var(--text);transition:width .3s}
 nav a:hover::after{width:100%}
 .h-right{display:flex;align-items:center;gap:12px}
-.cart-btn,.user-btn{position:relative;background:none;border:1.5px solid var(--text);width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;transition:all .3s;color:var(--text)}
-.cart-btn:hover,.user-btn:hover{background:var(--text);color:var(--bg)}
+.cart-btn,.user-btn{position:relative;background:none;border:1.5px solid rgba(255,255,255,.15);width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;transition:all .3s;color:var(--text)}
+.cart-btn:hover,.user-btn:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.3)}
 .cart-badge{position:absolute;top:-5px;right:-5px;background:var(--danger);color:#fff;font-size:9px;font-weight:700;width:17px;height:17px;border-radius:50%;display:none;align-items:center;justify-content:center}
 .hamburger{display:none;background:none;border:none;width:28px;height:20px;position:relative;flex-direction:column;justify-content:space-between}
 .hamburger span{display:block;width:100%;height:1.5px;background:var(--text);transition:all .3s}
@@ -47,27 +48,34 @@ nav a:hover::after{width:100%}
 .mob-close{position:absolute;top:22px;right:28px;background:none;border:none;font-size:26px;color:var(--text)}
 
 /* HERO */
-.hero{min-height:94vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden}
-.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 25% 15%,rgba(190,180,165,.18) 0%,transparent 55%),radial-gradient(ellipse at 75% 85%,rgba(170,160,145,.12) 0%,transparent 55%)}
+.hero{min-height:94vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;z-index:1}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 25% 15%,rgba(100,40,120,.1) 0%,transparent 55%),radial-gradient(ellipse at 75% 85%,rgba(180,80,30,.06) 0%,transparent 55%),radial-gradient(circle at 85% 20%,rgba(200,100,40,.08) 0%,transparent 25%),radial-gradient(circle at 15% 80%,rgba(80,40,120,.06) 0%,transparent 25%)}
 .hero-c{position:relative;z-index:2;animation:fadeUp .9s ease-out}
 @keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
 .hero-star-wrap{width:220px;height:220px;margin:0 auto 44px;animation:spinSlow 80s linear infinite}
 @keyframes spinSlow{to{transform:rotate(360deg)}}
-.hero h1{font-size:clamp(42px,7.5vw,88px);font-weight:900;letter-spacing:14px;text-transform:uppercase;margin-bottom:14px}
+.hero h1{font-family:'Orbitron',sans-serif;font-size:clamp(42px,7.5vw,88px);font-weight:900;letter-spacing:14px;text-transform:uppercase;margin-bottom:14px}
 .hero p{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:7px;text-transform:uppercase;color:var(--text2);margin-bottom:52px}
 .hero-cta{display:inline-block;font-size:12px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--bg);background:var(--text);padding:17px 52px;border:none;transition:all .4s}
-.hero-cta:hover{background:#333;letter-spacing:6px}
+.hero-cta:hover{background:rgba(255,255,255,.85);letter-spacing:6px}
 
 /* SECTION HEADER */
-.sec-h{text-align:center;padding:88px 40px 52px}
-.sec-h .bar{width:40px;height:2px;background:var(--text);margin:0 auto 14px}
-.sec-h h2{font-size:32px;font-weight:800;letter-spacing:8px;text-transform:uppercase;margin-bottom:10px}
+.sec-h{text-align:center;padding:88px 40px 52px;position:relative;z-index:1}
+.sec-h .bar{width:40px;height:2px;background:var(--text);margin:0 auto 14px;opacity:.3}
+.sec-h h2{font-family:'Orbitron',sans-serif;font-size:32px;font-weight:800;letter-spacing:8px;text-transform:uppercase;margin-bottom:10px}
 .sec-h p{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text3);letter-spacing:4px;text-transform:uppercase}
 
+/* LANG TOGGLE */
+.lang-btn{background:none;border:1.5px solid rgba(255,255,255,.15);color:var(--text);font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:2px;padding:6px 10px;border-radius:4px;transition:all .3s;cursor:pointer}
+.lang-btn:hover{border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.05)}
+
+/* STAR FIELD CANVAS */
+#starField{position:fixed;inset:0;z-index:0;pointer-events:none}
+
 /* PRODUCTS */
-.p-grid{max-width:1440px;margin:0 auto;padding:0 48px 88px;display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.p-grid{max-width:1440px;margin:0 auto;padding:0 48px 88px;display:grid;grid-template-columns:repeat(4,1fr);gap:20px;position:relative;z-index:1}
 .p-card{background:var(--white);border:1px solid var(--border);overflow:hidden;transition:all .4s;position:relative}
-.p-card:hover{transform:translateY(-5px);box-shadow:0 24px 48px rgba(0,0,0,.07)}
+.p-card:hover{transform:translateY(-5px);box-shadow:0 24px 48px rgba(0,0,0,.3),0 0 40px rgba(180,80,30,.04)}
 .p-img{width:100%;aspect-ratio:1;background:var(--bg2);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
 .p-img svg{width:55%;opacity:.12;transition:all .5s}
 .p-card:hover .p-img svg{opacity:.22;transform:scale(1.06) rotate(4deg)}
@@ -81,10 +89,10 @@ nav a:hover::after{width:100%}
 .p-add:hover{background:#333}
 
 /* ABOUT */
-.about-sec{max-width:1440px;margin:0 auto;padding:0 48px 100px;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+.about-sec{max-width:1440px;margin:0 auto;padding:0 48px 100px;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;position:relative;z-index:1}
 .about-vis{aspect-ratio:4/5;background:var(--bg2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;position:relative}
-.about-vis svg{width:45%;opacity:.1}
-.about-vis::after{content:'CALEJON';position:absolute;bottom:20px;right:20px;font-size:11px;font-weight:600;letter-spacing:5px;color:var(--text3)}
+.about-vis svg{width:45%;opacity:.08}
+.about-vis::after{content:'CALEJON';position:absolute;bottom:20px;right:20px;font-family:'Orbitron',sans-serif;font-size:11px;font-weight:600;letter-spacing:5px;color:var(--text3)}
 .about-txt h3{font-size:26px;font-weight:800;letter-spacing:5px;text-transform:uppercase;margin-bottom:24px}
 .about-txt p{font-size:15px;line-height:1.85;color:var(--text2);margin-bottom:14px}
 .about-txt .sig{margin-top:24px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--text3);text-transform:uppercase}
@@ -111,7 +119,7 @@ nav a:hover::after{width:100%}
 .blog-detail .bd-content p{margin-bottom:16px}
 
 /* PAGES */
-.pg{display:none;max-width:820px;margin:0 auto;padding:80px 48px 100px;animation:fadeUp .5s ease-out}
+.pg{display:none;max-width:820px;margin:0 auto;padding:80px 48px 100px;animation:fadeUp .5s ease-out;position:relative;z-index:1}
 .pg.active{display:block}
 .pg-wide{max-width:1440px;padding-left:48px;padding-right:48px}
 .pg h2{font-size:26px;font-weight:800;letter-spacing:4px;text-transform:uppercase;margin-bottom:28px}
@@ -121,17 +129,17 @@ nav a:hover::after{width:100%}
 .pg-back:hover{opacity:.5}
 
 /* FOOTER */
-footer{background:var(--accent);color:var(--bg);padding:60px 48px 0}
-.ft-inner{max-width:1440px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;padding-bottom:44px;border-bottom:1px solid rgba(255,255,255,.08)}
-.ft-brand .ft-logo{font-size:22px;font-weight:800;letter-spacing:7px;margin-bottom:14px}
-.ft-brand p{font-size:12.5px;color:rgba(245,240,235,.45);line-height:1.7;max-width:260px}
-.ft-col h4{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:18px;opacity:.5}
-.ft-col a{display:block;font-size:12.5px;color:rgba(245,240,235,.55);margin-bottom:9px;cursor:pointer;transition:color .3s}
-.ft-col a:hover{color:var(--bg)}
-.ft-mid{max-width:1440px;margin:0 auto;padding:20px 0;display:flex;justify-content:center;border-bottom:1px solid rgba(255,255,255,.05)}
-.ft-admin{opacity:.15;transition:all .3s;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;background:none;border:1px solid rgba(255,255,255,.08);color:rgba(245,240,235,.25);padding:8px 20px}
-.ft-admin:hover{opacity:.5;border-color:rgba(255,255,255,.2)}
-.ft-bottom{max-width:1440px;margin:0 auto;padding:16px 0;display:flex;justify-content:space-between;align-items:center;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(245,240,235,.2);letter-spacing:1.5px}
+footer{background:#060710;color:var(--text);padding:60px 48px 0;border-top:1px solid rgba(255,255,255,.03);position:relative;z-index:1}
+.ft-inner{max-width:1440px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;padding-bottom:44px;border-bottom:1px solid rgba(255,255,255,.04)}
+.ft-brand .ft-logo{font-family:'Orbitron',sans-serif;font-size:22px;font-weight:800;letter-spacing:7px;margin-bottom:14px}
+.ft-brand p{font-size:12.5px;color:var(--text3);line-height:1.7;max-width:260px}
+.ft-col h4{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:18px;color:var(--text3)}
+.ft-col a{display:block;font-size:12.5px;color:var(--text2);margin-bottom:9px;cursor:pointer;transition:color .3s}
+.ft-col a:hover{color:var(--text)}
+.ft-mid{max-width:1440px;margin:0 auto;padding:20px 0;display:flex;justify-content:center;border-bottom:1px solid rgba(255,255,255,.03)}
+.ft-admin{opacity:.3;transition:all .3s;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;background:none;border:1px solid rgba(255,255,255,.06);color:var(--text3);padding:8px 20px}
+.ft-admin:hover{opacity:.7;border-color:rgba(255,255,255,.15)}
+.ft-bottom{max-width:1440px;margin:0 auto;padding:16px 0;display:flex;justify-content:space-between;align-items:center;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text3);letter-spacing:1.5px}
 
 /* CART DRAWER */
 .c-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:300}.c-overlay.open{display:block}
@@ -163,7 +171,7 @@ footer{background:var(--accent);color:var(--bg);padding:60px 48px 0}
 
 /* EMAIL POPUP */
 .email-popup{width:440px;max-width:92vw;overflow:hidden;display:flex;flex-direction:column}
-.ep-top{background:var(--accent);color:var(--bg);padding:36px 32px;text-align:center}
+.ep-top{background:#0d0e1a;color:#e8ddd4;padding:36px 32px;text-align:center}
 .ep-top svg{width:56px;height:56px;margin-bottom:16px}
 .ep-top h3{font-size:22px;font-weight:800;letter-spacing:6px;text-transform:uppercase;margin-bottom:6px}
 .ep-top p{font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:700;letter-spacing:2px;margin-bottom:4px}
@@ -314,31 +322,32 @@ footer{background:var(--accent);color:var(--bg);padding:60px 48px 0}
 .login-err{color:var(--danger);font-size:11px;margin-top:4px;display:none}
 
 /* SITE LOCK */
-.site-lock{position:fixed;inset:0;background:var(--accent);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:28px;transition:opacity .5s,visibility .5s}
+.site-lock{position:fixed;inset:0;background:#040510;z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:28px;transition:opacity .5s,visibility .5s}
 .site-lock.unlocked{opacity:0;visibility:hidden;pointer-events:none}
 .site-lock-inner{text-align:center;animation:fadeUp .6s ease-out}
 .site-lock svg{width:80px;height:80px;margin-bottom:24px;animation:spinSlow 80s linear infinite}
-.site-lock h2{color:var(--bg);font-size:28px;font-weight:900;letter-spacing:10px;text-transform:uppercase;margin-bottom:6px}
-.site-lock .sl-sub{font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(245,240,235,.35);letter-spacing:4px;text-transform:uppercase;margin-bottom:36px}
+.site-lock h2{color:#e8ddd4;font-family:'Orbitron',sans-serif;font-size:28px;font-weight:900;letter-spacing:10px;text-transform:uppercase;margin-bottom:6px}
+.site-lock .sl-sub{font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(232,221,218,.35);letter-spacing:4px;text-transform:uppercase;margin-bottom:36px}
 .site-lock .sl-input-wrap{display:flex;gap:10px;justify-content:center;margin-bottom:14px}
-.site-lock .sl-digit{width:52px;height:60px;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);color:var(--bg);font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:700;text-align:center;outline:none;transition:border .3s;letter-spacing:2px;-webkit-appearance:none;-moz-appearance:textfield}
+.site-lock .sl-digit{width:52px;height:60px;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);color:#e8ddd4;font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:700;text-align:center;outline:none;transition:border .3s;letter-spacing:2px;-webkit-appearance:none;-moz-appearance:textfield}
 .site-lock .sl-digit:focus{border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.1)}
-.site-lock .sl-digit::placeholder{color:rgba(245,240,235,.15)}
-.site-lock .sl-btn{padding:14px 48px;background:var(--bg);color:var(--text);border:none;font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;transition:all .3s;margin-top:8px}
-.site-lock .sl-btn:hover{background:var(--bg2);letter-spacing:6px}
+.site-lock .sl-digit::placeholder{color:rgba(232,221,218,.15)}
+.site-lock .sl-btn{padding:14px 48px;background:#e8ddd4;color:#0a0b14;border:none;font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;transition:all .3s;margin-top:8px}
+.site-lock .sl-btn:hover{background:#d5cec4;letter-spacing:6px}
 .site-lock .sl-err{color:#F87171;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:2px;height:18px;margin-top:10px;transition:opacity .3s}
-.site-lock .sl-hint{font-size:10px;color:rgba(245,240,235,.15);letter-spacing:2px;margin-top:28px;font-family:'JetBrains Mono',monospace}
+.site-lock .sl-hint{font-size:10px;color:rgba(232,221,218,.15);letter-spacing:2px;margin-top:28px;font-family:'JetBrains Mono',monospace}
 @keyframes lockShake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
 
-.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--text);color:var(--bg);padding:13px 28px;font-size:12px;font-weight:500;letter-spacing:2px;z-index:700;transition:transform .4s cubic-bezier(.4,0,.2,1);pointer-events:none;white-space:nowrap}.toast.show{transform:translateX(-50%) translateY(0)}
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(100px);background:#e8ddd4;color:#0a0b14;padding:13px 28px;font-size:12px;font-weight:500;letter-spacing:2px;z-index:700;transition:transform .4s cubic-bezier(.4,0,.2,1);pointer-events:none;white-space:nowrap}.toast.show{transform:translateX(-50%) translateY(0)}
 
 /* AI CHAT WIDGET */
-.chat-fab{position:fixed;bottom:28px;right:28px;width:56px;height:56px;background:var(--text);color:var(--bg);border:none;border-radius:50%;font-size:22px;display:flex;align-items:center;justify-content:center;z-index:250;box-shadow:0 6px 24px rgba(0,0,0,.2);transition:all .3s}
-.chat-fab:hover{transform:scale(1.08);box-shadow:0 8px 32px rgba(0,0,0,.3)}
-.chat-fab.open{transform:rotate(90deg) scale(1)}
-.chat-panel{position:fixed;bottom:96px;right:28px;width:400px;max-height:560px;background:var(--bg);border:1px solid var(--border);z-index:250;display:none;flex-direction:column;box-shadow:0 16px 48px rgba(0,0,0,.12);animation:fadeUp .25s ease-out}
+.chat-fab{position:fixed;bottom:28px;right:28px;width:60px;height:60px;background:#000;color:#e8ddd4;border:1.5px solid rgba(255,255,255,.1);border-radius:50%;font-size:22px;display:flex;align-items:center;justify-content:center;z-index:250;box-shadow:0 6px 24px rgba(0,0,0,.5),0 0 40px rgba(180,60,20,.1);transition:all .3s}
+.chat-fab:hover{transform:scale(1.08);box-shadow:0 8px 32px rgba(0,0,0,.6),0 0 60px rgba(180,60,20,.15);border-color:rgba(255,255,255,.2)}
+.chat-fab.open{transform:rotate(90deg) scale(1);background:#111}
+.chat-panel{position:fixed;bottom:96px;right:28px;width:420px;max-height:580px;background:#0a0a12;border:1px solid rgba(255,120,50,.15);z-index:250;display:none;flex-direction:column;box-shadow:0 16px 48px rgba(0,0,0,.4),0 0 80px rgba(180,60,20,.08);animation:fadeUp .25s ease-out;border-radius:16px;overflow:hidden}
 .chat-panel.open{display:flex}
-.chat-hdr{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--border);background:var(--text);color:var(--bg)}
+.chat-hdr{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid rgba(255,255,255,.06);background:linear-gradient(135deg,#1a0a0a 0%,#0d0d1a 50%,#0a0a12 100%);color:#F5F0EB;position:relative;overflow:hidden}
+.chat-hdr::before{content:'';position:absolute;inset:0;background:url("https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/OSIRIS_Mars_true_color.jpg/600px-OSIRIS_Mars_true_color.jpg") no-repeat right -40px top -20px/120px 120px;opacity:.12;pointer-events:none}
 .chat-hdr-left{display:flex;align-items:center;gap:10px}
 .chat-hdr-dot{width:8px;height:8px;border-radius:50%;background:var(--success);animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
@@ -346,33 +355,54 @@ footer{background:var(--accent);color:var(--bg);padding:60px 48px 0}
 .chat-hdr-sub{font-family:'JetBrains Mono',monospace;font-size:9px;opacity:.5;letter-spacing:1px}
 .chat-hdr button{background:none;border:none;color:var(--bg);font-size:16px;opacity:.6;transition:opacity .3s}
 .chat-hdr button:hover{opacity:1}
-.chat-msgs{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px;min-height:300px;max-height:400px}
-.chat-msg{max-width:85%;padding:11px 15px;font-size:13px;line-height:1.6;word-break:break-word}
-.chat-msg.bot{align-self:flex-start;background:var(--white);border:1px solid var(--border);border-radius:2px 14px 14px 14px}
-.chat-msg.user{align-self:flex-end;background:var(--text);color:var(--bg);border-radius:14px 2px 14px 14px}
-.chat-msg .msg-time{font-family:'JetBrains Mono',monospace;font-size:9px;opacity:.4;margin-top:4px;display:block}
-.chat-typing{align-self:flex-start;padding:11px 18px;background:var(--white);border:1px solid var(--border);border-radius:2px 14px 14px 14px;display:none}
-.chat-typing span{display:inline-block;width:6px;height:6px;background:var(--text3);border-radius:50%;margin:0 2px;animation:typDot 1.2s infinite}
+.chat-msgs{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px;min-height:300px;max-height:400px;background:#0a0a14 url("https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/OSIRIS_Mars_true_color.jpg/600px-OSIRIS_Mars_true_color.jpg") no-repeat center bottom/cover;position:relative}
+.chat-msgs::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,20,.92) 0%,rgba(10,10,20,.7) 40%,rgba(30,15,10,.55) 100%);pointer-events:none;z-index:0}
+.chat-msgs>*{position:relative;z-index:1}
+.chat-msg{max-width:85%;padding:11px 15px;font-size:13px;line-height:1.6;word-break:break-word;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.chat-msg.bot{align-self:flex-start;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.08);border-radius:2px 14px 14px 14px;color:#e8ddd4}
+.chat-msg.user{align-self:flex-end;background:linear-gradient(135deg,rgba(180,80,30,.5),rgba(140,50,20,.4));color:#f5e8df;border:1px solid rgba(255,120,50,.15);border-radius:14px 2px 14px 14px}
+.chat-msg .msg-time{font-family:'JetBrains Mono',monospace;font-size:9px;opacity:.35;margin-top:4px;display:block;color:#ccc}
+.chat-typing{align-self:flex-start;padding:11px 18px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.06);border-radius:2px 14px 14px 14px;display:none;position:relative;z-index:1}
+.chat-typing span{display:inline-block;width:6px;height:6px;background:rgba(255,150,80,.6);border-radius:50%;margin:0 2px;animation:typDot 1.2s infinite}
 .chat-typing span:nth-child(2){animation-delay:.2s}
 .chat-typing span:nth-child(3){animation-delay:.4s}
 @keyframes typDot{0%,60%,100%{transform:translateY(0);opacity:.3}30%{transform:translateY(-6px);opacity:1}}
-.chat-input{display:flex;gap:0;border-top:1px solid var(--border);padding:10px 12px;background:var(--white)}
-.chat-input input{flex:1;padding:10px 14px;border:1px solid var(--border);font-size:13px;font-family:'Outfit',sans-serif;outline:none;background:var(--bg);transition:border .3s}
-.chat-input input:focus{border-color:var(--text)}
-.chat-input button{padding:10px 18px;background:var(--text);color:var(--bg);border:none;font-size:12px;font-weight:600;letter-spacing:1px;transition:background .3s}
-.chat-input button:hover{background:#333}
-.chat-lock{padding:28px;text-align:center;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px}
-.chat-lock-icon{font-size:40px;opacity:.2}
-.chat-lock h5{font-size:14px;font-weight:700;letter-spacing:2px;text-transform:uppercase}
-.chat-lock p{font-size:12px;color:var(--text3);line-height:1.6}
+.chat-input{display:flex;gap:0;border-top:1px solid rgba(255,255,255,.06);padding:10px 12px;background:#0d0d18}
+.chat-input input{flex:1;padding:10px 14px;border:1px solid rgba(255,255,255,.1);font-size:13px;font-family:'Outfit',sans-serif;outline:none;background:rgba(255,255,255,.05);transition:border .3s;color:#e8ddd4;border-radius:8px 0 0 8px}
+.chat-input input::placeholder{color:rgba(255,255,255,.25)}
+.chat-input input:focus{border-color:rgba(255,120,50,.4)}
+.chat-input button{padding:10px 18px;background:linear-gradient(135deg,#b34a1e,#8c3214);color:#f5e8df;border:none;font-size:12px;font-weight:600;letter-spacing:1px;transition:all .3s;border-radius:0 8px 8px 0}
+.chat-input button:hover{background:linear-gradient(135deg,#cc5522,#a0401a)}
+.chat-lock{padding:28px;text-align:center;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;position:relative;z-index:1}
+.chat-lock-icon{font-size:40px;opacity:.3}
+.chat-lock h5{font-size:14px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#e8ddd4}
+.chat-lock p{font-size:12px;color:rgba(255,255,255,.35);line-height:1.6}
 
 /* RESPONSIVE */
 @media(max-width:1024px){.p-grid,.blog-grid{grid-template-columns:repeat(2,1fr)}.about-sec{grid-template-columns:1fr;gap:40px}.ft-inner{grid-template-columns:1fr 1fr}.dash-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:768px){.h-inner{padding:0 20px}nav{display:none}.hamburger{display:flex}.p-grid,.blog-grid{grid-template-columns:repeat(2,1fr);gap:10px;padding:0 16px 60px}.sec-h{padding:60px 20px 36px}.about-sec{padding:0 20px 60px}.hero-star-wrap{width:160px;height:160px}.ft-inner{grid-template-columns:1fr;gap:28px}footer{padding:48px 20px 0}.c-drawer{width:100%;right:-100%}.p-add{opacity:1;transform:translateY(0)}.fr{grid-template-columns:1fr}.adm{width:100%;max-height:100vh;height:100vh}.api{grid-template-columns:34px 50px 1fr 60px 40px!important}.api .st{display:none}.dash-grid{grid-template-columns:1fr 1fr}.member-item{grid-template-columns:1fr 1fr}.blog-grid{grid-template-columns:1fr}.user-name-badge{display:none!important}}
-@media(max-width:480px){.chat-panel{right:0;left:0;bottom:0;width:100%;max-height:100vh;border:none}.chat-fab{bottom:16px;right:16px;width:50px;height:50px;font-size:20px}}
+@media(max-width:480px){.chat-panel{right:0;left:0;bottom:0;width:100%;max-height:100vh;border:none;border-radius:0}.chat-fab{bottom:16px;right:16px;width:50px;height:50px;font-size:20px}}
+
+/* Star particles for chat */
+@keyframes floatStar{0%{transform:translateY(0) scale(1);opacity:.6}50%{transform:translateY(-20px) scale(1.2);opacity:1}100%{transform:translateY(-40px) scale(.8);opacity:0}}
+.chat-star{position:absolute;width:3px;height:3px;background:#fff;border-radius:50%;animation:floatStar 3s infinite;z-index:0;pointer-events:none}
+
+/* SEO Blog responsive */
+@media(max-width:768px){#seoBlogSection{padding:0 16px 16px}#seoBlogGrid{grid-template-columns:1fr!important;gap:10px}}
+
+/* Contact form */
+.contact-form{margin-top:24px;display:flex;flex-direction:column;gap:12px}
+.contact-form input,.contact-form textarea{width:100%;padding:14px;background:var(--bg2);border:1px solid var(--border);color:var(--text);font-family:'Outfit',sans-serif;font-size:14px;outline:none;transition:border .3s}
+.contact-form input:focus,.contact-form textarea:focus{border-color:rgba(255,255,255,.2)}
+.contact-form textarea{min-height:100px;resize:vertical}
+.contact-send{padding:14px;background:var(--text);color:var(--bg);border:none;font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;transition:all .3s;cursor:pointer}
+.contact-send:hover{opacity:.85}
 </style>
 </head>
 <body>
+
+<!-- STAR FIELD -->
+<canvas id="starField"></canvas>
 
 <!-- SITE LOCK SCREEN -->
 <div class="site-lock" id="siteLock">
@@ -399,17 +429,17 @@ footer{background:var(--accent);color:var(--bg);padding:60px 48px 0}
 <header>
   <div class="h-inner">
     <div class="logo-a" onclick="go('home')">
-      <svg class="logo-star" viewBox="0 0 500 500"><g transform="translate(250,240)"><polygon points="0,-185 38,-62 155,-95 72,-12 120,105 8,52 -95,130 -52,18 -170,-55 -48,-52" fill="#1A1A1A" stroke="#000" stroke-width="2"/><polygon points="5,-120 30,-42 105,-60 52,-5 82,72 10,36 -60,88 -35,14 -115,-32 -32,-35" fill="#F5F0EB" stroke="#C8C0B8" stroke-width="1"/><polygon points="0,-35 22,0 0,35 -22,0" fill="#1A1A1A"/><circle cx="0" cy="0" r="5" fill="#F5F0EB"/></g></svg>
+      <svg class="logo-star" viewBox="0 0 500 500"><g transform="translate(250,240)"><polygon points="0,-185 38,-62 155,-95 72,-12 120,105 8,52 -95,130 -52,18 -170,-55 -48,-52" fill="#e8ddd4" stroke="#c0b8a8" stroke-width="2"/><polygon points="5,-120 30,-42 105,-60 52,-5 82,72 10,36 -60,88 -35,14 -115,-32 -32,-35" fill="#2a2a3a" stroke="#3a3a50" stroke-width="1"/><polygon points="0,-35 22,0 0,35 -22,0" fill="#e8ddd4"/><circle cx="0" cy="0" r="5" fill="#2a2a3a"/></g></svg>
       <span class="logo-t">Calejon</span>
     </div>
     <nav>
-      <a onclick="go('home')">Ana Sayfa</a>
-      <a onclick="go('shop')">Mağaza</a>
-      <a onclick="go('blog')">Blog</a>
-      <a onclick="go('about')">Hakkımızda</a>
-      <a onclick="go('contact')">İletişim</a>
+      <a onclick="go('home')" data-i18n="nav_home">Ana Sayfa</a>
+      <a onclick="go('shop')" data-i18n="nav_shop">Mağaza</a>
+      <a onclick="go('about')" data-i18n="nav_about">Hakkımızda</a>
+      <a onclick="go('contact')" data-i18n="nav_contact">İletişim</a>
     </nav>
     <div class="h-right">
+      <button class="lang-btn" id="langBtn" onclick="toggleLang()" title="TR / EN">TR</button>
       <span class="user-name-badge" id="userNameBadge"></span>
       <div style="position:relative">
         <button class="user-btn" id="userBtn" onclick="handleUserBtn()">👤</button>
@@ -431,32 +461,30 @@ footer{background:var(--accent);color:var(--bg);padding:60px 48px 0}
 <!-- MOBILE NAV -->
 <div class="mob-nav" id="mobNav">
   <button class="mob-close" onclick="toggleMob()">✕</button>
-  <a onclick="go('home');toggleMob()">Ana Sayfa</a>
-  <a onclick="go('shop');toggleMob()">Mağaza</a>
-  <a onclick="go('blog');toggleMob()">Blog</a>
-  <a onclick="go('about');toggleMob()">Hakkımızda</a>
-  <a onclick="go('contact');toggleMob()">İletişim</a>
+  <a onclick="go('home');toggleMob()" data-i18n="nav_home">Ana Sayfa</a>
+  <a onclick="go('shop');toggleMob()" data-i18n="nav_shop">Mağaza</a>
+  <a onclick="go('about');toggleMob()" data-i18n="nav_about">Hakkımızda</a>
+  <a onclick="go('contact');toggleMob()" data-i18n="nav_contact">İletişim</a>
+  <a onclick="toggleLang();toggleMob()" id="mobLangLink">🌐 English</a>
   <a onclick="handleUserBtn();toggleMob()" id="mobUserLink">Giriş Yap</a>
 </div>
 
 <!-- ===== HOME ===== -->
-<div id="pg-home">
+<div id="pg-home" style="position:relative;z-index:1">
   <section class="hero">
     <div class="hero-bg"></div>
     <div class="hero-c">
       <div class="hero-star-wrap">
-        <svg viewBox="0 0 500 500" width="100%" height="100%"><g transform="translate(250,250)"><polygon points="0,-185 38,-62 155,-95 72,-12 120,105 8,52 -95,130 -52,18 -170,-55 -48,-52" fill="#1A1A1A" stroke="#000" stroke-width="2.5"/><polygon points="5,-120 30,-42 105,-60 52,-5 82,72 10,36 -60,88 -35,14 -115,-32 -32,-35" fill="#F5F0EB" stroke="#C8C0B8" stroke-width="1"/><polygon points="0,-35 22,0 0,35 -22,0" fill="#1A1A1A"/><circle cx="0" cy="0" r="5" fill="#F5F0EB"/></g></svg>
+        <svg viewBox="0 0 500 500" width="100%" height="100%"><g transform="translate(250,250)"><polygon points="0,-185 38,-62 155,-95 72,-12 120,105 8,52 -95,130 -52,18 -170,-55 -48,-52" fill="#e8ddd4" stroke="#c0b8a8" stroke-width="2.5"/><polygon points="5,-120 30,-42 105,-60 52,-5 82,72 10,36 -60,88 -35,14 -115,-32 -32,-35" fill="#1a1c2e" stroke="#2a2c45" stroke-width="1"/><polygon points="0,-35 22,0 0,35 -22,0" fill="#e8ddd4"/><circle cx="0" cy="0" r="5" fill="#1a1c2e"/></g></svg>
       </div>
       <h1>CALEJON</h1>
-      <p>Headwear Collection — Est. 2025</p>
-      <button class="hero-cta" onclick="go('shop')">Koleksiyonu Keşfet</button>
+      <p data-i18n="hero_sub">Headwear Collection — Est. 2025</p>
+      <button class="hero-cta" onclick="go('shop')" data-i18n="hero_cta">Koleksiyonu Keşfet</button>
     </div>
   </section>
-  <div class="sec-h"><div class="bar"></div><h2>Yeni Sezon</h2><p>Premium Headwear</p></div>
+  <div class="sec-h"><div class="bar"></div><h2 data-i18n="sec_new">Yeni Sezon</h2><p data-i18n="sec_premium">Premium Headwear</p></div>
   <div class="p-grid" id="homeGrid"></div>
-  <div class="sec-h"><div class="bar"></div><h2>Blog</h2><p>Haberler & İlham</p></div>
-  <div class="blog-grid" id="homeBlog"></div>
-  <div class="sec-h"><div class="bar"></div><h2>Hakkımızda</h2><p>Hikayemiz</p></div>
+  <div class="sec-h"><div class="bar"></div><h2 data-i18n="sec_about">Hakkımızda</h2><p data-i18n="sec_story">Hikayemiz</p></div>
   <section class="about-sec">
     <div class="about-vis"><svg viewBox="0 0 500 500"><g transform="translate(250,250)"><polygon points="0,-185 38,-62 155,-95 72,-12 120,105 8,52 -95,130 -52,18 -170,-55 -48,-52" fill="#1A1A1A"/><polygon points="5,-120 30,-42 105,-60 52,-5 82,72 10,36 -60,88 -35,14 -115,-32 -32,-35" fill="#EDE8E2"/><polygon points="0,-35 22,0 0,35 -22,0" fill="#1A1A1A"/></g></svg></div>
     <div class="about-txt">
@@ -484,11 +512,21 @@ footer{background:var(--accent);color:var(--bg);padding:60px 48px 0}
 
 <!-- PRIVACY --><div class="pg" id="pg-privacy"><span class="pg-back" onclick="go('home')">← Ana Sayfa</span><h2>Gizlilik Politikası</h2><div id="privContent"><h3>1. Genel</h3><p>Gizliliğinize saygı duyuyoruz.</p><h3>2. Güvenlik</h3><p>SSL şifreleme kullanılmaktadır.</p><h3>3. İade</h3><p>14 gün içinde iade hakkı.</p></div></div>
 
+<!-- SEO BLOG (bottom, collapsible) -->
+<div id="seoBlogSection" style="max-width:1440px;margin:0 auto;padding:0 48px 20px;position:relative;z-index:1">
+  <button id="seoBlogToggle" onclick="toggleSeoBlog()" style="width:100%;padding:14px;background:transparent;border:1px solid var(--border);color:var(--text3);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;transition:all .3s;cursor:pointer">
+    ▼ Blog — <span data-i18n="blog_seo_label">Haberler &amp; İlham</span>
+  </button>
+  <div id="seoBlogContent" style="display:none;padding-top:16px">
+    <div id="seoBlogGrid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;font-size:12px;color:var(--text2);line-height:1.7"></div>
+  </div>
+</div>
+
 <!-- FOOTER -->
 <footer>
   <div class="ft-inner">
     <div class="ft-brand"><div class="ft-logo">CALEJON</div><p>Premium headwear markası. Sokak kültürü ve bireysel tarzın kesişim noktası. Est. 2025.</p></div>
-    <div class="ft-col"><h4>Mağaza</h4><a onclick="go('shop')">Tüm Ürünler</a><a onclick="go('blog')">Blog</a></div>
+    <div class="ft-col"><h4 data-i18n="nav_shop">Mağaza</h4><a onclick="go('shop')" data-i18n="shop_h">Tüm Ürünler</a></div>
     <div class="ft-col"><h4>Bilgi</h4><a onclick="go('about')">Hakkımızda</a><a onclick="go('contact')">İletişim</a><a onclick="go('kvkk')">KVKK</a><a onclick="go('privacy')">Gizlilik</a></div>
     <div class="ft-col"><h4>İletişim</h4><a>info@calejon.com</a><a>Instagram: @calejon</a></div>
   </div>
@@ -687,7 +725,7 @@ footer{background:var(--accent);color:var(--bg);padding:60px 48px 0}
         <h4 style="font-size:14px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:18px;padding-top:20px;border-top:1px solid var(--border)">AI Sohbet Ayarları</h4>
         <div class="fg"><label>Google AI Studio API Key</label><input type="password" id="asApiKey" placeholder="AIzaSy..."></div>
         <div class="fg"><label>AI Model</label><select id="asModel"><option value="gemini-2.0-flash">Gemini 2.0 Flash (Hızlı)</option><option value="gemini-2.0-flash-lite">Gemini 2.0 Flash Lite</option><option value="gemini-1.5-pro">Gemini 1.5 Pro</option></select></div>
-        <div class="fg"><label>Sistem Mesajı (Opsiyonel)</label><textarea id="asSysMsg" rows="3" placeholder="AI'ya rol veya talimat verin...">Sen Calejon markasının akıllı asistanısın. Türkçe cevap ver, kısa ve yardımcı ol.</textarea></div>
+        <div class="fg"><label>Sistem Mesajı (Opsiyonel)</label><textarea id="asSysMsg" rows="3" placeholder="AI'ya rol veya talimat verin...">Sen Calejon markasının Mars temalı flörtöz asistanısın. Türkçe cevap ver, kısa ve tatlı ol. Hafif flört yap, emoji kullan. "Askim" yazılırsa "Haydi koçum yaylan!" de.</textarea></div>
         <button class="btn-s" onclick="saveAiSettings()" style="margin-bottom:20px">AI Ayarlarını Kaydet</button>
 
         <h4 style="font-size:14px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;padding-top:20px;border-top:1px solid var(--border)">Cihaz Kilidi</h4>
@@ -709,10 +747,10 @@ footer{background:var(--accent);color:var(--bg);padding:60px 48px 0}
 <div class="chat-panel" id="chatPanel">
   <div class="chat-hdr">
     <div class="chat-hdr-left">
-      <div class="chat-hdr-dot"></div>
+      <div class="chat-hdr-dot" style="background:#e85d30"></div>
       <div>
-        <h4>Calejon AI</h4>
-        <div class="chat-hdr-sub">Gemini ile güçlendirildi</div>
+        <h4>Mars AI ✦</h4>
+        <div class="chat-hdr-sub">uzaydan selamlar 🪐</div>
       </div>
     </div>
     <button onclick="toggleChat()">✕</button>
@@ -724,20 +762,20 @@ footer{background:var(--accent);color:var(--bg);padding:60px 48px 0}
       <p>Bu sohbet sadece yetkilendirilmiş cihazdan kullanılabilir.</p>
     </div>
     <div id="chatBody">
-      <div class="chat-msg bot">Merhaba! Ben Calejon AI asistanı. Sana nasıl yardımcı olabilirim? ✦<span class="msg-time">şimdi</span></div>
+      <div class="chat-msg bot">Hey! Ben Calejon'un Mars'tan gelen asistanıyım 🪐✦ Sana nasıl yardımcı olabilirim güzellik?<span class="msg-time">şimdi</span></div>
     </div>
     <div class="chat-typing" id="chatTyping"><span></span><span></span><span></span></div>
   </div>
   <div class="chat-input" id="chatInputArea">
-    <input type="text" id="chatIn" placeholder="Mesajınızı yazın..." onkeydown="if(event.key==='Enter')sendChat()">
-    <button onclick="sendChat()">Gönder</button>
+    <input type="text" id="chatIn" placeholder="Mars'a mesaj yaz..." onkeydown="if(event.key==='Enter')sendChat()">
+    <button onclick="sendChat()">🚀</button>
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-const STAR=`<svg viewBox="0 0 500 500"><g transform="translate(250,250)"><polygon points="0,-185 38,-62 155,-95 72,-12 120,105 8,52 -95,130 -52,18 -170,-55 -48,-52" fill="#1A1A1A"/><polygon points="5,-120 30,-42 105,-60 52,-5 82,72 10,36 -60,88 -35,14 -115,-32 -32,-35" fill="#EDE8E2"/><polygon points="0,-35 22,0 0,35 -22,0" fill="#1A1A1A"/></g></svg>`;
+const STAR=`<svg viewBox="0 0 500 500"><g transform="translate(250,250)"><polygon points="0,-185 38,-62 155,-95 72,-12 120,105 8,52 -95,130 -52,18 -170,-55 -48,-52" fill="#2a2a3a"/><polygon points="5,-120 30,-42 105,-60 52,-5 82,72 10,36 -60,88 -35,14 -115,-32 -32,-35" fill="#1a1a2a"/><polygon points="0,-35 22,0 0,35 -22,0" fill="#2a2a3a"/></g></svg>`;
 
 // ===== SITE LOCK =====
 const SITE_PW='3111';
@@ -831,7 +869,12 @@ function cardHTML(p,i){
 }
 function renderHome(){
   document.getElementById('homeGrid').innerHTML=products.filter(p=>p.status!=='hidden').slice(0,4).map(p=>cardHTML(p,products.indexOf(p))).join('');
-  document.getElementById('homeBlog').innerHTML=blogPosts.filter(b=>b.status==='published').slice(0,3).map(b=>blogCardHTML(b)).join('');
+  renderSeoBlog();
+}
+function renderSeoBlog(){
+  const grid=document.getElementById('seoBlogGrid');
+  if(!grid)return;
+  grid.innerHTML=blogPosts.filter(b=>b.status==='published').map(b=>`<div style="background:var(--white);border:1px solid var(--border);padding:16px;cursor:pointer;transition:border .3s" onmouseover="this.style.borderColor='rgba(255,255,255,.15)'" onmouseout="this.style.borderColor=''" onclick="viewBlog(${b.id})"><div style="font-weight:600;font-size:13px;margin-bottom:4px;letter-spacing:.5px;color:var(--text)">${b.title}</div><div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text3);margin-bottom:6px">${formatDate(b.date)} • ${b.cat}</div><div style="font-size:11.5px;color:var(--text2);line-height:1.65;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden">${b.excerpt}</div></div>`).join('');
 }
 function renderShop(){document.getElementById('shopGrid').innerHTML=products.map((p,i)=>cardHTML(p,i)).join('')}
 
@@ -1212,7 +1255,7 @@ function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t
 let chatHistory=[];
 let aiApiKey='';
 let aiModel='gemini-2.0-flash';
-let aiSysMsg='Sen Calejon markasının akıllı asistanısın. Türkçe cevap ver, kısa ve yardımcı ol.';
+let aiSysMsg='Sen Calejon markasının Mars temalı flörtöz asistanısın. Türkçe cevap ver, kısa ve tatlı ol. Hafif flört yap, emoji kullan. "Askim" yazılırsa "Haydi koçum yaylan!" de.';
 let lockedDeviceId='';
 
 // Device fingerprint
@@ -1275,7 +1318,24 @@ function toggleChat(){
   fab.textContent=panel.classList.contains('open')?'✕':'✦';
   if(panel.classList.contains('open')){
     checkChatAccess();
+    spawnChatStars();
     setTimeout(()=>document.getElementById('chatIn').focus(),200);
+  }
+}
+
+function spawnChatStars(){
+  const msgs=document.getElementById('chatMsgs');
+  // Remove old stars
+  msgs.querySelectorAll('.chat-star').forEach(s=>s.remove());
+  for(let i=0;i<12;i++){
+    const star=document.createElement('div');
+    star.className='chat-star';
+    star.style.left=Math.random()*90+'%';
+    star.style.top=Math.random()*90+'%';
+    star.style.animationDelay=Math.random()*3+'s';
+    star.style.animationDuration=(2+Math.random()*3)+'s';
+    star.style.width=star.style.height=(1+Math.random()*2.5)+'px';
+    msgs.appendChild(star);
   }
 }
 
@@ -1290,48 +1350,106 @@ function addMsg(text,role){
   document.getElementById('chatMsgs').scrollTop=99999;
 }
 
+// Flirty local chatbot responses
+const flirtResponses={
+  askim:['Haydi koçum yaylan! 💪🔥','Aşkım dedin mi yüreğim Mars kadar kızardı 🔴✨','Koçum benim, yaylan biraz! Calejon\'lu kafan harika duruyor 😏'],
+  merhaba:['Selaam güzellik! Bugün Mars\'tan taze haberlerim var ✦','Heyy! Hoş geldin, bu uzay senin evin 🪐','Merhaba canım! Nasılsın, şapka almaya mı geldin yoksa beni görmeye mi? 😏'],
+  selam:['Selaaam! Seni görmek Mars\'taki gün batımından güzel 🌅','Hey hey! Gel bakalım yanıma, burada hava güzel 🪐','Selam tatlım! Ne arıyorsun bugün? ✦'],
+  nasılsın:['Mars\'ta hava biraz soğuk ama sen yazdın ısındım 🔥','İyiyim canım, sen yazınca daha da iyi oldum!','Mükemmelim, özellikle sen buradayken ✨'],
+  fiyat:['Şapkalarımız ₺999\'dan başlıyor tatlım! Premium kalite, Mars\'a bile gider gelir 🚀','Fiyatlarımız hep ₺999, ama senin gülüşün paha biçilmez 😉','₺999 ve üzeri alışverişte kargo bedava! Bi\' bak derim ✦'],
+  kargo:['500₺ üzeri ücretsiz kargo var canım! 1-3 iş günü elinde 📦','Kargomuz roket hızında! 1-3 iş günü, Türkiye geneli 🚀','Kargo konusunda merak etme, Mars\'tan bile hızlı gönderiyoruz 😄'],
+  iade:['30 gün iade hakkın var tatlım, rahat ol! 💕','İade mi? 30 gün süren var, ama eminim seveceksin 😉','Merak etme, 30 gün içinde iade edebilirsin. Ama bi\' denersen bırakamazsın 🔥'],
+  şapka:['Şapkalarımız %100 premium kalite! Her biri bir sanat eseri ✦','8 farklı modelimiz var, hangisi senin tarzın? Mağazaya göz at! 🧢','Calejon şapka = sokak stili + premium kalite. Sen hangisini istersin? 😏'],
+  teşekkür:['Rica ederim canım! Sen istedin mi Mars\'ı bile getiririm 🪐','Ne demek tatlım! Her zaman buradayım senin için ✨','Öpüyorum uzaydan! Her zaman buradayım 💫'],
+  güzel:['Sen daha güzelsin! 😍','Güzel diyorsun ama kendini görmüyor musun? ✨','Teşekkürler canım, ama güzellik senin yanında duruyor 💕'],
+  seni:['Ohoo, şimdi kızardım Mars gibi 🔴','Ben de seni... şapka almaya bekliyorum 😏✦','Dur dur, kalp atışım hızlandı biraz 💓🚀'],
+};
+
+const defaultFlirts=[
+  'Hmm ilginç! Ama sen daha ilginçsin 😏 Başka bir şey soracak mısın?',
+  'Bunu Mars\'ta araştırayım... Bu arada mağazamıza göz attın mı? ✦',
+  'Anladım canım! Yardımcı olmak isterdim ama asıl konumuz şapkalar 🧢 Mağazaya bakmak ister misin?',
+  'Vay be! Sen çok tatlısın. Başka sorun varsa buradayım 🪐',
+  'İlginç soru! Ben daha çok şapka ve stil konusunda uzmanım ama senle her şeyi konuşurum 😉',
+  'Hmm, bunu düşünmem lazım... Bu arada Calejon\'un yeni koleksiyonuna baktın mı? 🔥',
+  'Sorunu anladım! Detaylı bilgi için iletişim sayfamızdan bize ulaşabilirsin 💫',
+];
+
+function getLocalResponse(msg){
+  const lower=msg.toLowerCase().replace(/[ıİ]/g,m=>m==='ı'?'i':'i').replace(/[şŞ]/g,'s').replace(/[çÇ]/g,'c').replace(/[üÜ]/g,'u').replace(/[öÖ]/g,'o').replace(/[ğĞ]/g,'g');
+  // Check keywords
+  for(const[key,responses] of Object.entries(flirtResponses)){
+    if(lower.includes(key)){
+      return responses[Math.floor(Math.random()*responses.length)];
+    }
+  }
+  // check some more patterns
+  if(lower.match(/seviyorum|asigim|askim|canim/))return flirtResponses.askim[Math.floor(Math.random()*flirtResponses.askim.length)];
+  if(lower.match(/urun|model|cap|bere|sapka/))return flirtResponses['şapka'][Math.floor(Math.random()*flirtResponses['şapka'].length)];
+  if(lower.match(/para|ucuz|indirim|kampanya/))return 'İndirim mi dedin? İlk siparişinde %10 indirim kodu alabilirsin! CALEJON10 kodunu dene 🎉';
+  if(lower.match(/siparis|al[ıi]|sat[ıi]n/))return 'Sipariş vermek mi istiyorsun? Mağazadan ürünü seç, sepete ekle ve tamamla! Çok kolay 🛒✦';
+  if(lower.match(/ne yapiyorsun|ne yapıyorsun|naber/))return 'Mars\'ta oturup seni bekliyorum ne yapayım 🪐 Sen nasılsın tatlım?';
+  if(lower.match(/bay|hos[cç]a|g[oö]r[uü]s/))return 'Gitme daha! Ama gidiyorsan, yıldızlar sana yol göstersin ✦💫 Tekrar gel!';
+  
+  return defaultFlirts[Math.floor(Math.random()*defaultFlirts.length)];
+}
+
 async function sendChat(){
   const input=document.getElementById('chatIn');
   const msg=input.value.trim();
   if(!msg)return;
   if(isDeviceLocked()){toast('Bu cihazdan erişim engellendi');return}
-  if(!aiApiKey){toast('API anahtarı ayarlanmamış. Admin panelinden girin.');return}
   
   input.value='';
   addMsg(msg,'user');
-  chatHistory.push({role:'user',parts:[{text:msg}]});
   
   // Show typing
   document.getElementById('chatTyping').style.display='block';
   document.getElementById('chatMsgs').scrollTop=99999;
   
-  try{
-    const contents=[...chatHistory];
-    const body={contents};
-    if(aiSysMsg){body.systemInstruction={parts:[{text:aiSysMsg}]}}
-    body.generationConfig={maxOutputTokens:1024,temperature:0.8};
-    
-    const url='https://generativelanguage.googleapis.com/v1beta/models/'+aiModel+':generateContent?key='+aiApiKey;
-    const res=await fetch(url,{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify(body)
-    });
-    
-    const data=await res.json();
-    document.getElementById('chatTyping').style.display='none';
-    
-    if(data.error){
-      addMsg('⚠ Hata: '+(data.error.message||'API hatası'),'bot');
-      return;
+  // If API key is set, use Gemini API
+  if(aiApiKey){
+    chatHistory.push({role:'user',parts:[{text:msg}]});
+    try{
+      const contents=[...chatHistory];
+      const body={contents};
+      const flirtSys='Sen Calejon markasının Mars temalı flörtöz asistanısın. Türkçe cevap ver. Kısa ve tatlı ol. Müşteriye hafif flört yap. Emoji kullan. Eğer kullanıcı "askim" yazarsa "Haydi koçum yaylan!" de. '+(aiSysMsg||'');
+      body.systemInstruction={parts:[{text:flirtSys}]};
+      body.generationConfig={maxOutputTokens:1024,temperature:0.9};
+      
+      const url='https://generativelanguage.googleapis.com/v1beta/models/'+aiModel+':generateContent?key='+aiApiKey;
+      const res=await fetch(url,{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify(body)
+      });
+      
+      const data=await res.json();
+      document.getElementById('chatTyping').style.display='none';
+      
+      if(data.error){
+        // Fallback to local
+        const reply=getLocalResponse(msg);
+        setTimeout(()=>{document.getElementById('chatTyping').style.display='none';addMsg(reply,'bot')},800);
+        return;
+      }
+      
+      const reply=data.candidates?.[0]?.content?.parts?.[0]?.text||getLocalResponse(msg);
+      chatHistory.push({role:'model',parts:[{text:reply}]});
+      addMsg(reply,'bot');
+    }catch(err){
+      document.getElementById('chatTyping').style.display='none';
+      const reply=getLocalResponse(msg);
+      addMsg(reply,'bot');
     }
-    
-    const reply=data.candidates?.[0]?.content?.parts?.[0]?.text||'Yanıt alınamadı.';
-    chatHistory.push({role:'model',parts:[{text:reply}]});
-    addMsg(reply,'bot');
-  }catch(err){
-    document.getElementById('chatTyping').style.display='none';
-    addMsg('⚠ Bağlantı hatası: '+err.message,'bot');
+  }else{
+    // Local flirty chatbot
+    const delay=600+Math.random()*800;
+    setTimeout(()=>{
+      document.getElementById('chatTyping').style.display='none';
+      const reply=getLocalResponse(msg);
+      addMsg(reply,'bot');
+    },delay);
   }
 }
 
@@ -1352,6 +1470,115 @@ openAdm=function(){
   document.getElementById('asSysMsg').value=aiSysMsg;
   updateDeviceStatusUI();
 };
+
+// ===== STAR FIELD BACKGROUND =====
+(function initStarField(){
+  const c=document.getElementById('starField');if(!c)return;
+  const ctx=c.getContext('2d');
+  let stars=[];
+  function resize(){c.width=window.innerWidth;c.height=window.innerHeight;initStars()}
+  function initStars(){
+    stars=[];
+    const count=Math.floor((c.width*c.height)/4000);
+    for(let i=0;i<count;i++){
+      stars.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.4+.3,a:Math.random(),s:Math.random()*.0008+.0002,d:Math.random()>.5?1:-1});
+    }
+    // Add a few "planets"
+    for(let i=0;i<3;i++){
+      stars.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*20+8,a:Math.random()*.08+.02,s:0,d:0,planet:true,
+        color:`rgba(${120+Math.random()*100|0},${30+Math.random()*60|0},${20+Math.random()*40|0},`});
+    }
+  }
+  function draw(){
+    ctx.clearRect(0,0,c.width,c.height);
+    stars.forEach(s=>{
+      if(s.planet){
+        ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+        ctx.fillStyle=s.color+s.a+')';ctx.fill();
+        // glow
+        const g=ctx.createRadialGradient(s.x,s.y,s.r,s.x,s.y,s.r*3);
+        g.addColorStop(0,s.color+(s.a*.5)+')');g.addColorStop(1,'transparent');
+        ctx.fillStyle=g;ctx.fillRect(s.x-s.r*3,s.y-s.r*3,s.r*6,s.r*6);
+      }else{
+        s.a+=s.s*s.d;
+        if(s.a>=1||s.a<=0)s.d*=-1;
+        ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+        ctx.fillStyle=`rgba(220,210,200,${s.a})`;ctx.fill();
+      }
+    });
+    requestAnimationFrame(draw);
+  }
+  resize();window.addEventListener('resize',resize);draw();
+})();
+
+// ===== LANGUAGE SYSTEM =====
+let currentLang='tr';
+const i18n={
+  tr:{
+    nav_home:'Ana Sayfa',nav_shop:'Mağaza',nav_about:'Hakkımızda',nav_contact:'İletişim',
+    hero_sub:'Headwear Collection — Est. 2025',hero_cta:'Koleksiyonu Keşfet',
+    sec_new:'Yeni Sezon',sec_premium:'Premium Headwear',sec_about:'Hakkımızda',sec_story:'Hikayemiz',
+    blog_seo_label:'Haberler & İlham',
+    cart_title:'Sepet',cart_empty:'Sepetiniz boş',cart_total:'Toplam',cart_checkout:'Siparişi Tamamla',
+    add_cart:'Sepete Ekle',sold_out:'Tükendi',
+    about_short:'Calejon, 2025 yılında sokak kültürü ve bireysel tarzın kesişim noktasında doğmuş bir headwear markasıdır. Her bir şapka, detaylara olan tutkumuzun ve kaliteye olan bağlılığımızın bir yansımasıdır.',
+    about_line2:'Asimetrik yıldız logomuz, sıradan kalıpların dışına çıkma cesaretimizi temsil eder.',
+    about_sig:'— Calejon Ekibi',
+    contact_h:'İletişim',contact_p:'Sorularınız için bize ulaşın.',
+    about_h:'Hakkımızda',
+    shop_h:'Tüm Ürünler',shop_sub:'Koleksiyon',
+    ep_title:'CALEJON',ep_discount:'%10 İNDİRİM',ep_sub:'İlk Siparişinize Özel',
+    ep_desc:'E-posta adresinizi bırakın, ilk siparişinizde geçerli %10 indirim kodunuzu hemen alın!',
+    ep_skip:'Hayır, teşekkürler',
+    ft_desc:'Premium headwear markası. Sokak kültürü ve bireysel tarzın kesişim noktası. Est. 2025.',
+  },
+  en:{
+    nav_home:'Home',nav_shop:'Shop',nav_about:'About',nav_contact:'Contact',
+    hero_sub:'Headwear Collection — Est. 2025',hero_cta:'Explore Collection',
+    sec_new:'New Season',sec_premium:'Premium Headwear',sec_about:'About Us',sec_story:'Our Story',
+    blog_seo_label:'News & Inspiration',
+    cart_title:'Cart',cart_empty:'Your cart is empty',cart_total:'Total',cart_checkout:'Complete Order',
+    add_cart:'Add to Cart',sold_out:'Sold Out',
+    about_short:'Calejon is a headwear brand born at the intersection of street culture and individual style in 2025. Each cap is a reflection of our passion for details and commitment to quality.',
+    about_line2:'Our asymmetric star logo represents the courage to break free from ordinary molds.',
+    about_sig:'— Calejon Team',
+    contact_h:'Contact',contact_p:'Get in touch with us.',
+    about_h:'About Us',
+    shop_h:'All Products',shop_sub:'Collection',
+    ep_title:'CALEJON',ep_discount:'10% OFF',ep_sub:'For Your First Order',
+    ep_desc:'Leave your email and get your 10% discount code for your first order!',
+    ep_skip:'No, thanks',
+    ft_desc:'Premium headwear brand. Where street culture meets individual style. Est. 2025.',
+  }
+};
+
+function toggleLang(){
+  currentLang=currentLang==='tr'?'en':'tr';
+  document.getElementById('langBtn').textContent=currentLang.toUpperCase();
+  document.getElementById('mobLangLink').textContent=currentLang==='tr'?'🌐 English':'🌐 Türkçe';
+  applyLang();
+  renderHome();renderShop();
+}
+function applyLang(){
+  const t=i18n[currentLang];
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key=el.getAttribute('data-i18n');
+    if(t[key])el.textContent=t[key];
+  });
+  // Dynamic elements
+  const as=document.getElementById('aboutShortTxt');if(as)as.textContent=t.about_short;
+  const ft=document.querySelector('.ft-brand p');if(ft)ft.textContent=t.ft_desc;
+}
+
+// ===== SEO BLOG TOGGLE =====
+let seoBlogOpen=false;
+function toggleSeoBlog(){
+  seoBlogOpen=!seoBlogOpen;
+  document.getElementById('seoBlogContent').style.display=seoBlogOpen?'block':'none';
+  document.getElementById('seoBlogToggle').innerHTML=seoBlogOpen
+    ?'▲ Blog — <span data-i18n="blog_seo_label">'+(currentLang==='tr'?'Haberler & İlham':'News & Inspiration')+'</span>'
+    :'▼ Blog — <span data-i18n="blog_seo_label">'+(currentLang==='tr'?'Haberler & İlham':'News & Inspiration')+'</span>';
+}
 
 // ===== INIT =====
 document.body.style.overflow='hidden'; // Lock scroll until password
