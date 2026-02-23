@@ -27,7 +27,7 @@ header{position:sticky;top:0;z-index:100;background:rgba(10,11,20,.92);backdrop-
 .logo-a{display:flex;align-items:center;gap:12px;cursor:pointer}
 .logo-star{width:32px;height:32px}
 .logo-t{font-weight:800;font-size:21px;letter-spacing:7px;text-transform:uppercase}
-nav{display:flex;align-items:center;gap:32px}
+nav{display:grid;grid-template-columns:1fr 1fr;gap:4px 28px;text-align:center}
 nav a{font-size:11.5px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;position:relative;padding:4px 0;transition:opacity .3s;cursor:pointer}
 nav a:hover{opacity:.5}
 nav a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1.5px;background:var(--text);transition:width .3s}
@@ -70,7 +70,7 @@ nav a:hover::after{width:100%}
 .lang-btn:hover{border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.05)}
 
 /* STAR FIELD CANVAS */
-#starField{position:fixed;inset:0;z-index:0;pointer-events:none}
+#starField{position:fixed;inset:0;z-index:0}
 
 /* PRODUCTS */
 .p-grid{max-width:1440px;margin:0 auto;padding:0 48px 88px;display:grid;grid-template-columns:repeat(4,1fr);gap:20px;position:relative;z-index:1}
@@ -79,14 +79,14 @@ nav a:hover::after{width:100%}
 .p-img{width:100%;aspect-ratio:1;background:var(--bg2);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
 .p-img svg{width:55%;opacity:.12;transition:all .5s}
 .p-card:hover .p-img svg{opacity:.22;transform:scale(1.06) rotate(4deg)}
-.p-code{position:absolute;top:10px;left:10px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:1.5px;color:var(--text3);background:rgba(245,240,235,.92);padding:3px 8px;z-index:2}
+.p-code{position:absolute;top:10px;left:10px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:1.5px;color:var(--text);background:rgba(20,21,42,.85);padding:3px 8px;z-index:2;border:1px solid var(--border)}
 .p-badge{position:absolute;top:10px;right:10px;font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--white);background:var(--text);padding:4px 10px;z-index:2}
 .p-info{padding:14px 16px;border-top:1px solid var(--border)}
 .p-name{font-weight:700;font-size:13.5px;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:6px}
 .p-price{font-family:'JetBrains Mono',monospace;font-size:13.5px;font-weight:500}
 .p-add{width:100%;margin-top:10px;padding:11px;background:var(--text);color:var(--bg);border:none;font-size:10.5px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;transition:all .3s;opacity:0;transform:translateY(6px)}
 .p-card:hover .p-add{opacity:1;transform:translateY(0)}
-.p-add:hover{background:#333}
+.p-add:hover{background:rgba(232,226,218,.85)}
 
 /* ABOUT */
 .about-sec{max-width:1440px;margin:0 auto;padding:0 48px 100px;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;position:relative;z-index:1}
@@ -358,12 +358,6 @@ footer{background:#060710;color:var(--text);padding:60px 48px 0;border-top:1px s
 .chat-msgs{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px;min-height:300px;max-height:400px;background:#060810;position:relative;overflow-x:hidden}
 .chat-msgs::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 90%,rgba(180,60,20,.15) 0%,transparent 45%),radial-gradient(ellipse at 20% 20%,rgba(80,40,140,.08) 0%,transparent 40%),radial-gradient(circle at 50% 110%,rgba(200,80,30,.1) 0%,transparent 50%);pointer-events:none;z-index:0}
 .chat-msgs>*{position:relative;z-index:1}
-/* Floating planets */
-.chat-planet{position:absolute;border-radius:50%;z-index:0;pointer-events:none;animation:floatPlanet 20s ease-in-out infinite}
-.chat-planet.mars{width:80px;height:80px;bottom:-15px;right:-10px;background:radial-gradient(circle at 35% 35%,#c45a2a,#8b3a1a,#5a2010);box-shadow:0 0 30px rgba(200,80,30,.2),inset -8px -8px 20px rgba(0,0,0,.4);animation-duration:25s}
-.chat-planet.jupiter{width:50px;height:50px;top:10px;left:-8px;background:radial-gradient(circle at 40% 30%,#c4a882,#9a7a5a,#6a5030);box-shadow:0 0 20px rgba(180,150,100,.1),inset -5px -5px 12px rgba(0,0,0,.3);opacity:.6;animation-duration:30s;animation-delay:-5s}
-.chat-planet.neptune{width:30px;height:30px;top:50%;right:5px;background:radial-gradient(circle at 35% 35%,#4a6aaa,#2a4a7a,#1a2a4a);box-shadow:0 0 15px rgba(60,100,180,.1),inset -3px -3px 8px rgba(0,0,0,.3);opacity:.4;animation-duration:35s;animation-delay:-10s}
-@keyframes floatPlanet{0%,100%{transform:translateY(0) scale(1)}25%{transform:translateY(-8px) scale(1.02)}50%{transform:translateY(4px) scale(.98)}75%{transform:translateY(-4px) scale(1.01)}}
 .chat-msg{max-width:85%;padding:11px 15px;font-size:13px;line-height:1.6;word-break:break-word;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
 .chat-msg.bot{align-self:flex-start;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.08);border-radius:2px 14px 14px 14px;color:#e8ddd4}
 .chat-msg.user{align-self:flex-end;background:linear-gradient(135deg,rgba(180,80,30,.5),rgba(140,50,20,.4));color:#f5e8df;border:1px solid rgba(255,120,50,.15);border-radius:14px 2px 14px 14px}
@@ -377,7 +371,9 @@ footer{background:#060710;color:var(--text);padding:60px 48px 0;border-top:1px s
 .chat-img{max-width:85%;align-self:flex-start;position:relative;z-index:1}
 .chat-img canvas{width:100%;border-radius:8px;border:1px solid rgba(255,255,255,.08)}
 .chat-img .img-label{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,.3);margin-top:4px;text-align:center}
-.chat-input{display:flex;gap:0;border-top:1px solid rgba(255,255,255,.06);padding:10px 12px;background:#0d0d18}
+.chat-input{display:flex;gap:0;border-top:1px solid rgba(255,255,255,.06);padding:10px 12px;background:#0d0d18;align-items:center}
+.chat-upload-btn{width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:16px;cursor:pointer;opacity:.5;transition:opacity .3s;flex-shrink:0;border-radius:8px}
+.chat-upload-btn:hover{opacity:1;background:rgba(255,255,255,.05)}
 .chat-input input{flex:1;padding:10px 14px;border:1px solid rgba(255,255,255,.1);font-size:13px;font-family:'Outfit',sans-serif;outline:none;background:rgba(255,255,255,.05);transition:border .3s;color:#e8ddd4;border-radius:8px 0 0 8px}
 .chat-input input::placeholder{color:rgba(255,255,255,.25)}
 .chat-input input:focus{border-color:rgba(255,120,50,.4)}
@@ -445,8 +441,8 @@ footer{background:#060710;color:var(--text);padding:60px 48px 0;border-top:1px s
     <nav>
       <a onclick="go('home')" data-i18n="nav_home">Ana Sayfa</a>
       <a onclick="go('shop')" data-i18n="nav_shop">Mağaza</a>
-      <a onclick="go('about')" data-i18n="nav_about">Hakkımızda</a>
       <a onclick="go('contact')" data-i18n="nav_contact">İletişim</a>
+      <a onclick="handleUserBtn()" data-i18n="nav_account">Hesabım</a>
     </nav>
     <div class="h-right">
       <button class="lang-btn" id="langBtn" onclick="toggleLang()" title="TR / EN">TR</button>
@@ -473,10 +469,9 @@ footer{background:#060710;color:var(--text);padding:60px 48px 0;border-top:1px s
   <button class="mob-close" onclick="toggleMob()">✕</button>
   <a onclick="go('home');toggleMob()" data-i18n="nav_home">Ana Sayfa</a>
   <a onclick="go('shop');toggleMob()" data-i18n="nav_shop">Mağaza</a>
-  <a onclick="go('about');toggleMob()" data-i18n="nav_about">Hakkımızda</a>
   <a onclick="go('contact');toggleMob()" data-i18n="nav_contact">İletişim</a>
+  <a onclick="handleUserBtn();toggleMob()" data-i18n="nav_account">Hesabım</a>
   <a onclick="toggleLang();toggleMob()" id="mobLangLink">🌐 English</a>
-  <a onclick="handleUserBtn();toggleMob()" id="mobUserLink">Giriş Yap</a>
 </div>
 
 <!-- ===== HOME ===== -->
@@ -494,33 +489,23 @@ footer{background:#060710;color:var(--text);padding:60px 48px 0;border-top:1px s
   </section>
   <div class="sec-h"><div class="bar"></div><h2 data-i18n="sec_new">Yeni Sezon</h2><p data-i18n="sec_premium">Premium Headwear</p></div>
   <div class="p-grid" id="homeGrid"></div>
-  <div class="sec-h"><div class="bar"></div><h2 data-i18n="sec_about">Hakkımızda</h2><p data-i18n="sec_story">Hikayemiz</p></div>
-  <section class="about-sec">
-    <div class="about-vis"><svg viewBox="0 0 500 500"><g transform="translate(250,250)"><polygon points="0,-185 38,-62 155,-95 72,-12 120,105 8,52 -95,130 -52,18 -170,-55 -48,-52" fill="#1A1A1A"/><polygon points="5,-120 30,-42 105,-60 52,-5 82,72 10,36 -60,88 -35,14 -115,-32 -32,-35" fill="#EDE8E2"/><polygon points="0,-35 22,0 0,35 -22,0" fill="#1A1A1A"/></g></svg></div>
-    <div class="about-txt">
-      <h3>Calejon</h3>
-      <p id="aboutShortTxt">Calejon, 2025 yılında sokak kültürü ve bireysel tarzın kesişim noktasında doğmuş bir headwear markasıdır. Her bir şapka, detaylara olan tutkumuzun ve kaliteye olan bağlılığımızın bir yansımasıdır.</p>
-      <p>Asimetrik yıldız logomuz, sıradan kalıpların dışına çıkma cesaretimizi temsil eder.</p>
-      <div class="sig">— Calejon Ekibi</div>
-    </div>
-  </section>
 </div>
 
-<!-- SHOP --><div class="pg pg-wide" id="pg-shop"><span class="pg-back" onclick="go('home')">← Ana Sayfa</span><div class="sec-h" style="padding-top:0"><div class="bar"></div><h2>Tüm Ürünler</h2><p>Koleksiyon</p></div><div class="p-grid" id="shopGrid" style="max-width:100%;padding:0 0 40px"></div></div>
+<!-- SHOP --><div class="pg pg-wide" id="pg-shop"><span class="pg-back" onclick="go('home')" data-i18n="back">← Geri</span><div class="sec-h" style="padding-top:0"><div class="bar"></div><h2 data-i18n="shop_h">Tüm Ürünler</h2><p data-i18n="shop_sub">Koleksiyon</p></div><div class="p-grid" id="shopGrid" style="max-width:100%;padding:0 0 40px"></div></div>
 
-<!-- BLOG LIST --><div class="pg pg-wide" id="pg-blog"><span class="pg-back" onclick="go('home')">← Ana Sayfa</span><div class="sec-h" style="padding-top:0"><div class="bar"></div><h2>Blog</h2><p>Haberler & İlham</p></div><div class="blog-grid" id="blogGrid" style="max-width:100%;padding:0 0 40px"></div></div>
+<!-- BLOG LIST --><div class="pg pg-wide" id="pg-blog"><span class="pg-back" onclick="go('home')" data-i18n="back">← Geri</span><div class="sec-h" style="padding-top:0"><div class="bar"></div><h2>Blog</h2><p data-i18n="blog_seo_label">Haberler &amp; İlham</p></div><div class="blog-grid" id="blogGrid" style="max-width:100%;padding:0 0 40px"></div></div>
 
-<!-- BLOG DETAIL --><div class="pg" id="pg-blogdetail"><span class="pg-back" onclick="go('blog')">← Blog</span><div class="blog-detail" id="blogDetail"></div></div>
+<!-- BLOG DETAIL --><div class="pg" id="pg-blogdetail"><span class="pg-back" onclick="go('home')" data-i18n="back">← Geri</span><div class="blog-detail" id="blogDetail"></div></div>
 
-<!-- ABOUT --><div class="pg" id="pg-about"><span class="pg-back" onclick="go('home')">← Ana Sayfa</span><h2>Hakkımızda</h2><div id="aboutFullTxt"><p>Calejon, 2025 yılında Türkiye'de kurulan bir premium headwear markasıdır. Sokak kültürünün enerjisini, minimalist tasarım anlayışıyla birleştiriyoruz.</p><p>Markamızın adı "Calejon" — dar geçit, sokak anlamına gelir. Tıpkı dar sokaklardaki sanatsal ruh gibi, biz de her şapkada bir hikaye anlatıyoruz.</p><h3>Misyonumuz</h3><p>Premium kalitede, özgün tasarımlı şapkalar üreterek; sokak modasını yeniden tanımlamak.</p><h3>Vizyonumuz</h3><p>Türkiye'den dünyaya uzanan, küresel streetwear sahnesinde tanınan bir headwear markası olmak.</p></div></div>
+<!-- ABOUT --><div class="pg" id="pg-about"><span class="pg-back" onclick="go('home')" data-i18n="back">← Geri</span><h2 data-i18n="about_h">Hakkımızda</h2><div id="aboutFullTxt"><p data-i18n="about_p1">Calejon, 2025 yılında Türkiye'de kurulan bir premium headwear markasıdır. Sokak kültürünün enerjisini, minimalist tasarım anlayışıyla birleştiriyoruz.</p><p data-i18n="about_p2">Markamızın adı "Calejon" — dar geçit, sokak anlamına gelir. Tıpkı dar sokaklardaki sanatsal ruh gibi, biz de her şapkada bir hikaye anlatıyoruz.</p><h3 data-i18n="about_mission">Misyonumuz</h3><p data-i18n="about_mission_p">Premium kalitede, özgün tasarımlı şapkalar üreterek; sokak modasını yeniden tanımlamak.</p><h3 data-i18n="about_vision">Vizyonumuz</h3><p data-i18n="about_vision_p">Türkiye'den dünyaya uzanan, küresel streetwear sahnesinde tanınan bir headwear markası olmak.</p></div></div>
 
-<!-- CONTACT --><div class="pg" id="pg-contact"><span class="pg-back" onclick="go('home')">← Ana Sayfa</span><h2>İletişim</h2><p>Sorularınız için bize ulaşın.</p><h3 style="font-size:14px;font-weight:600;letter-spacing:3px;text-transform:uppercase;margin:28px 0 8px">E-posta</h3><p id="contactEmail">info@calejon.com</p><h3 style="font-size:14px;font-weight:600;letter-spacing:3px;text-transform:uppercase;margin:28px 0 8px">Sosyal Medya</h3><p id="contactSocial">Instagram: @calejon</p><h3 style="font-size:14px;font-weight:600;letter-spacing:3px;text-transform:uppercase;margin:28px 0 8px">Adres</h3><p id="contactAddr">Türkiye</p><div class="contact-form"><input type="text" placeholder="Adınız" id="cfName"><input type="email" placeholder="E-posta" id="cfEmail"><textarea placeholder="Mesajınız" id="cfMsg"></textarea><button class="contact-send" onclick="sendMsg()">Gönder</button></div></div>
+<!-- CONTACT --><div class="pg" id="pg-contact"><span class="pg-back" onclick="go('home')" data-i18n="back">← Geri</span><h2 data-i18n="contact_h">İletişim</h2><p data-i18n="contact_p">Sorularınız için bize ulaşın. En kısa sürede dönüş yapacağız.</p><h3 style="font-size:14px;font-weight:600;letter-spacing:3px;text-transform:uppercase;margin:28px 0 8px" data-i18n="contact_email_h">E-posta</h3><p id="contactEmail">info@calejon.com</p><h3 style="font-size:14px;font-weight:600;letter-spacing:3px;text-transform:uppercase;margin:28px 0 8px" data-i18n="contact_social_h">Sosyal Medya</h3><p id="contactSocial">Instagram: @calejon</p><h3 style="font-size:14px;font-weight:600;letter-spacing:3px;text-transform:uppercase;margin:28px 0 8px" data-i18n="contact_addr_h">Adres</h3><p id="contactAddr">Türkiye</p><div class="contact-form"><input type="text" data-i18n="contact_name_ph" placeholder="Adınız" id="cfName"><input type="email" data-i18n="contact_email_ph" placeholder="E-posta adresiniz" id="cfEmail"><textarea data-i18n="contact_msg_ph" placeholder="Mesajınız" id="cfMsg"></textarea><button class="contact-send" onclick="sendMsg()" data-i18n="contact_send">Gönder</button></div></div>
 
-<!-- ACCOUNT --><div class="pg" id="pg-account"><span class="pg-back" onclick="go('home')">← Ana Sayfa</span><h2>Hesabım</h2><div id="accountContent"></div></div>
+<!-- ACCOUNT --><div class="pg" id="pg-account"><span class="pg-back" onclick="go('home')" data-i18n="back">← Geri</span><h2 data-i18n="account_h">Hesabım</h2><div id="accountContent"></div></div>
 
-<!-- KVKK --><div class="pg" id="pg-kvkk"><span class="pg-back" onclick="go('home')">← Ana Sayfa</span><h2>KVKK Aydınlatma Metni</h2><div id="kvkkContent"><h3>1. Veri Sorumlusu</h3><p>Calejon Headwear Co. olarak, 6698 sayılı KVKK kapsamında, kişisel verilerinizin korunmasına önem vermekteyiz.</p><h3>2. Toplanan Veriler</h3><p>Kimlik, iletişim, alışveriş ve dijital iz bilgileri.</p><h3>3. Haklarınız</h3><p>KVKK 11. madde uyarınca tüm haklara sahipsiniz. Talepler: info@calejon.com</p></div></div>
+<!-- KVKK --><div class="pg" id="pg-kvkk"><span class="pg-back" onclick="go('home')" data-i18n="back">← Geri</span><h2 data-i18n="kvkk_h">KVKK Aydınlatma Metni</h2><div id="kvkkContent"><h3>1. Veri Sorumlusu</h3><p>Calejon Headwear Co. olarak, 6698 sayılı KVKK kapsamında, kişisel verilerinizin korunmasına önem vermekteyiz.</p><h3>2. Toplanan Veriler</h3><p>Kimlik, iletişim, alışveriş ve dijital iz bilgileri.</p><h3>3. Haklarınız</h3><p>KVKK 11. madde uyarınca tüm haklara sahipsiniz. Talepler: info@calejon.com</p></div></div>
 
-<!-- PRIVACY --><div class="pg" id="pg-privacy"><span class="pg-back" onclick="go('home')">← Ana Sayfa</span><h2>Gizlilik Politikası</h2><div id="privContent"><h3>1. Genel</h3><p>Gizliliğinize saygı duyuyoruz.</p><h3>2. Güvenlik</h3><p>SSL şifreleme kullanılmaktadır.</p><h3>3. İade</h3><p>14 gün içinde iade hakkı.</p></div></div>
+<!-- PRIVACY --><div class="pg" id="pg-privacy"><span class="pg-back" onclick="go('home')" data-i18n="back">← Geri</span><h2 data-i18n="privacy_h">Gizlilik Politikası</h2><div id="privContent"><h3>1. Genel</h3><p>Gizliliğinize saygı duyuyoruz.</p><h3>2. Güvenlik</h3><p>SSL şifreleme kullanılmaktadır.</p><h3>3. İade</h3><p>14 gün içinde iade hakkı.</p></div></div>
 
 <!-- SEO BLOG (bottom, collapsible) -->
 <div id="seoBlogSection" style="max-width:1440px;margin:0 auto;padding:0 48px 20px;position:relative;z-index:1">
@@ -537,8 +522,8 @@ footer{background:#060710;color:var(--text);padding:60px 48px 0;border-top:1px s
   <div class="ft-inner">
     <div class="ft-brand"><div class="ft-logo">CALEJON</div><p>Premium headwear markası. Sokak kültürü ve bireysel tarzın kesişim noktası. Est. 2025.</p></div>
     <div class="ft-col"><h4 data-i18n="nav_shop">Mağaza</h4><a onclick="go('shop')" data-i18n="shop_h">Tüm Ürünler</a></div>
-    <div class="ft-col"><h4>Bilgi</h4><a onclick="go('about')">Hakkımızda</a><a onclick="go('contact')">İletişim</a><a onclick="go('kvkk')">KVKK</a><a onclick="go('privacy')">Gizlilik</a></div>
-    <div class="ft-col"><h4>İletişim</h4><a>info@calejon.com</a><a>Instagram: @calejon</a></div>
+    <div class="ft-col"><h4 data-i18n="ft_info">Bilgi</h4><a onclick="go('about')" data-i18n="ft_about">Hakkımızda</a><a onclick="go('contact')" data-i18n="ft_contact">İletişim</a><a onclick="go('kvkk')">KVKK</a><a onclick="go('privacy')" data-i18n="ft_privacy">Gizlilik</a></div>
+    <div class="ft-col"><h4 data-i18n="ft_comm">İletişim</h4><a>info@calejon.com</a><a>Instagram: @calejon</a></div>
   </div>
   <div class="ft-mid"><button class="ft-admin" onclick="openAdmLogin()">⚙ YÖNETİM PANELİ</button></div>
   <div class="ft-bottom"><span>© 2025 Calejon Headwear Co.</span><span>Made with ✦</span></div>
@@ -766,10 +751,6 @@ footer{background:#060710;color:var(--text);padding:60px 48px 0;border-top:1px s
     <button onclick="toggleChat()">✕</button>
   </div>
   <div class="chat-msgs" id="chatMsgs">
-    <!-- Floating planets -->
-    <div class="chat-planet mars"></div>
-    <div class="chat-planet jupiter"></div>
-    <div class="chat-planet neptune"></div>
     <div id="chatLock" class="chat-lock" style="display:none">
       <div class="chat-lock-icon">🔒</div>
       <h5>Erişim Engellendi</h5>
@@ -781,6 +762,10 @@ footer{background:#060710;color:var(--text);padding:60px 48px 0;border-top:1px s
     <div class="chat-typing" id="chatTyping"><span></span><span></span><span></span></div>
   </div>
   <div class="chat-input" id="chatInputArea">
+    <label class="chat-upload-btn" title="Resim yükle">
+      📷
+      <input type="file" id="chatFileIn" accept="image/*" onchange="handleChatImage(this)" style="display:none">
+    </label>
     <input type="text" id="chatIn" placeholder="Mars'a mesaj yaz..." onkeydown="if(event.key==='Enter')sendChat()">
     <button onclick="sendChat()">🚀</button>
   </div>
@@ -995,13 +980,10 @@ function logoutUser(){
 }
 function updateUserUI(){
   const badge=document.getElementById('userNameBadge');
-  const mobLink=document.getElementById('mobUserLink');
   if(currentUser){
     badge.textContent=currentUser.name.split(' ')[0];badge.style.display='';
-    mobLink.textContent='Hesabım';mobLink.onclick=()=>{go('account');toggleMob()};
   }else{
     badge.textContent='';badge.style.display='none';
-    mobLink.textContent='Giriş Yap';mobLink.onclick=()=>{handleUserBtn();toggleMob()};
   }
 }
 function renderAccount(){
@@ -1041,8 +1023,10 @@ function tryAdmLogin(){
 function openAdm(){
   document.getElementById('admOv').classList.add('open');
   renderDash();renderAdmProds();renderAdmBlog();renderAdmMembers();renderAdmEmails();renderMsgs();
-  document.getElementById('aaShort').value=document.getElementById('aboutShortTxt').textContent;
-  document.getElementById('aaFull').value=document.getElementById('aboutFullTxt').innerHTML.trim();
+  const aboutEl=document.getElementById('aboutShortTxt');
+  document.getElementById('aaShort').value=aboutEl?aboutEl.textContent:'';
+  const aboutFull=document.getElementById('aboutFullTxt');
+  document.getElementById('aaFull').value=aboutFull?aboutFull.innerHTML.trim():'';
   document.getElementById('acEmail').value=document.getElementById('contactEmail').textContent;
   document.getElementById('acSocial').value=document.getElementById('contactSocial').textContent;
   document.getElementById('acAddr').value=document.getElementById('contactAddr').textContent;
@@ -1248,8 +1232,10 @@ function renderMsgs(){
 
 // Content admin
 function saveAbout(){
-  document.getElementById('aboutShortTxt').textContent=document.getElementById('aaShort').value;
-  document.getElementById('aboutFullTxt').innerHTML=document.getElementById('aaFull').value;
+  const el=document.getElementById('aboutShortTxt');
+  if(el)el.textContent=document.getElementById('aaShort').value;
+  const full=document.getElementById('aboutFullTxt');
+  if(full)full.innerHTML=document.getElementById('aaFull').value;
   toast('Hakkımızda güncellendi ✓');
 }
 function saveContactInfo(){
@@ -1676,84 +1662,305 @@ openAdm=function(){
   updateDeviceStatusUI();
 };
 
-// ===== STAR FIELD BACKGROUND =====
-(function initStarField(){
+// ===== INTERACTIVE SPACE BACKGROUND =====
+(function initSpaceBg(){
   const c=document.getElementById('starField');if(!c)return;
   const ctx=c.getContext('2d');
   let stars=[];
-  function resize(){c.width=window.innerWidth;c.height=window.innerHeight;initStars()}
+  let planets=[];
+  let mouse={x:-999,y:-999};
+
+  const planetDefs=[
+    {name:'Mars',baseX:.82,baseY:.22,r:28,colors:['#d45a2a','#a84420','#7a3018','#4a1808'],ring:false,speed:.003},
+    {name:'Saturn',baseX:.15,baseY:.35,r:22,colors:['#c4a872','#9a7a5a','#6a5030','#3a2818'],ring:true,speed:.002},
+    {name:'Neptune',baseX:.72,baseY:.75,r:16,colors:['#4a7aba','#2a5a9a','#1a3a6a','#0a1a3a'],ring:false,speed:.004},
+    {name:'Jupiter',baseX:.35,baseY:.68,r:34,colors:['#c49a72','#a47a52','#7a5a3a','#4a3020'],ring:false,speed:.0015},
+    {name:'Venus',baseX:.55,baseY:.15,r:14,colors:['#d4a040','#b48030','#8a6020','#5a3810'],ring:false,speed:.005},
+  ];
+
+  function resize(){
+    c.width=window.innerWidth;c.height=window.innerHeight;
+    initStars();
+    planets=planetDefs.map(d=>({
+      ...d,x:d.baseX*c.width,y:d.baseY*c.height,
+      angle:Math.random()*Math.PI*2,spinSpeed:0,spinning:false,hover:false
+    }));
+  }
+
   function initStars(){
     stars=[];
-    const count=Math.floor((c.width*c.height)/4000);
+    const count=Math.floor((c.width*c.height)/5000);
     for(let i=0;i<count;i++){
-      stars.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.4+.3,a:Math.random(),s:Math.random()*.0008+.0002,d:Math.random()>.5?1:-1});
-    }
-    // Add a few "planets"
-    for(let i=0;i<3;i++){
-      stars.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*20+8,a:Math.random()*.08+.02,s:0,d:0,planet:true,
-        color:`rgba(${120+Math.random()*100|0},${30+Math.random()*60|0},${20+Math.random()*40|0},`});
+      stars.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.2+.2,a:Math.random(),s:Math.random()*.001+.0003,d:Math.random()>.5?1:-1});
     }
   }
-  function draw(){
-    ctx.clearRect(0,0,c.width,c.height);
-    stars.forEach(s=>{
-      if(s.planet){
-        ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
-        ctx.fillStyle=s.color+s.a+')';ctx.fill();
-        // glow
-        const g=ctx.createRadialGradient(s.x,s.y,s.r,s.x,s.y,s.r*3);
-        g.addColorStop(0,s.color+(s.a*.5)+')');g.addColorStop(1,'transparent');
-        ctx.fillStyle=g;ctx.fillRect(s.x-s.r*3,s.y-s.r*3,s.r*6,s.r*6);
-      }else{
-        s.a+=s.s*s.d;
-        if(s.a>=1||s.a<=0)s.d*=-1;
-        ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
-        ctx.fillStyle=`rgba(220,210,200,${s.a})`;ctx.fill();
+
+  c.style.pointerEvents='auto';
+  c.style.cursor='default';
+
+  c.addEventListener('mousemove',e=>{
+    const rect=c.getBoundingClientRect();
+    mouse.x=e.clientX-rect.left;mouse.y=e.clientY-rect.top;
+    let onPlanet=false;
+    planets.forEach(p=>{
+      const dist=Math.sqrt((mouse.x-p.x)**2+(mouse.y-p.y)**2);
+      p.hover=dist<p.r*1.5;
+      if(p.hover)onPlanet=true;
+    });
+    c.style.cursor=onPlanet?'pointer':'default';
+  });
+
+  c.addEventListener('click',e=>{
+    const rect=c.getBoundingClientRect();
+    const cx=e.clientX-rect.left,cy=e.clientY-rect.top;
+    planets.forEach(p=>{
+      const dist=Math.sqrt((cx-p.x)**2+(cy-p.y)**2);
+      if(dist<p.r*1.5){
+        p.spinning=true;
+        p.spinSpeed=.15;
       }
     });
+  });
+
+  function drawPlanet(p){
+    ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.angle);
+
+    // Glow
+    const glw=ctx.createRadialGradient(0,0,p.r*.5,0,0,p.r*2.5);
+    glw.addColorStop(0,p.colors[0].replace(')',',0.06)').replace('#','')?p.colors[0]+'18':'rgba(200,100,40,0.06)');
+    glw.addColorStop(1,'transparent');
+    ctx.fillStyle=glw;
+    ctx.beginPath();ctx.arc(0,0,p.r*2.5,0,Math.PI*2);ctx.fill();
+
+    // Planet body
+    const g=ctx.createRadialGradient(-p.r*.3,-p.r*.3,p.r*.1,0,0,p.r);
+    g.addColorStop(0,p.colors[0]);g.addColorStop(.4,p.colors[1]);
+    g.addColorStop(.8,p.colors[2]);g.addColorStop(1,p.colors[3]);
+    ctx.beginPath();ctx.arc(0,0,p.r,0,Math.PI*2);ctx.fillStyle=g;ctx.fill();
+
+    // Surface details
+    for(let i=0;i<5;i++){
+      const sx=(Math.sin(p.angle*3+i*1.2))*p.r*.5;
+      const sy=(Math.cos(p.angle*2+i*1.7))*p.r*.4;
+      const sr=p.r*.12+Math.sin(i)*p.r*.05;
+      ctx.beginPath();ctx.arc(sx,sy,sr,0,Math.PI*2);
+      ctx.fillStyle='rgba(0,0,0,0.12)';ctx.fill();
+    }
+
+    // Light reflection
+    const lg=ctx.createRadialGradient(-p.r*.35,-p.r*.35,p.r*.05,-p.r*.2,-p.r*.2,p.r*.6);
+    lg.addColorStop(0,'rgba(255,255,255,0.15)');lg.addColorStop(1,'transparent');
+    ctx.beginPath();ctx.arc(0,0,p.r,0,Math.PI*2);ctx.fillStyle=lg;ctx.fill();
+
+    // Ring
+    if(p.ring){
+      ctx.save();ctx.scale(1,.35);
+      ctx.beginPath();ctx.arc(0,0,p.r*1.7,0,Math.PI*2);
+      ctx.strokeStyle='rgba(200,180,150,0.2)';ctx.lineWidth=4;ctx.stroke();
+      ctx.beginPath();ctx.arc(0,0,p.r*2,0,Math.PI*2);
+      ctx.strokeStyle='rgba(200,180,150,0.1)';ctx.lineWidth=2;ctx.stroke();
+      ctx.restore();
+    }
+
+    // Hover effect
+    if(p.hover){
+      ctx.beginPath();ctx.arc(0,0,p.r*1.4,0,Math.PI*2);
+      ctx.strokeStyle='rgba(255,255,255,0.08)';ctx.lineWidth=1;ctx.stroke();
+    }
+
+    ctx.restore();
+
+    // Spin physics
+    if(p.spinning){
+      p.angle+=p.spinSpeed;
+      p.spinSpeed*=.985;
+      if(p.spinSpeed<.001){p.spinning=false;p.spinSpeed=0}
+    }else{
+      p.angle+=p.speed;
+    }
+  }
+
+  function draw(){
+    ctx.clearRect(0,0,c.width,c.height);
+    // Stars
+    stars.forEach(s=>{
+      s.a+=s.s*s.d;
+      if(s.a>=1||s.a<=0)s.d*=-1;
+      ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(220,215,210,${Math.max(0,s.a)})`;ctx.fill();
+    });
+    // Planets
+    planets.forEach(drawPlanet);
     requestAnimationFrame(draw);
   }
   resize();window.addEventListener('resize',resize);draw();
 })();
 
+// ===== CHAT IMAGE → FACE IN SUN =====
+function handleChatImage(input){
+  const file=input.files[0];if(!file)return;
+  input.value='';
+  const reader=new FileReader();
+  reader.onload=function(e){
+    const img=new Image();
+    img.onload=function(){
+      addMsg('📷 Resim yüklendi...','user');
+      document.getElementById('chatTyping').style.display='block';
+      document.getElementById('chatMsgs').scrollTop=99999;
+      setTimeout(()=>{
+        document.getElementById('chatTyping').style.display='none';
+        generateSunFace(img);
+        addMsg('Yüzünü güneşin içine koydum! ☀️ Evrende en parlak sen parlıyorsun 🌟✨','bot');
+      },1200);
+    };
+    img.src=e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function generateSunFace(faceImg){
+  const canvas=document.createElement('canvas');
+  canvas.width=320;canvas.height=320;
+  const ctx=canvas.getContext('2d');
+
+  // Deep space background
+  const bg=ctx.createRadialGradient(160,160,80,160,160,220);
+  bg.addColorStop(0,'#0a0820');bg.addColorStop(1,'#040410');
+  ctx.fillStyle=bg;ctx.fillRect(0,0,320,320);
+
+  // Stars
+  for(let i=0;i<80;i++){
+    ctx.beginPath();
+    ctx.arc(Math.random()*320,Math.random()*320,Math.random()*1.2+.2,0,Math.PI*2);
+    ctx.fillStyle=`rgba(255,255,240,${Math.random()*.6+.2})`;
+    ctx.fill();
+  }
+
+  // Sun outer glow
+  for(let i=4;i>=0;i--){
+    const r=90+i*18;
+    const g=ctx.createRadialGradient(160,160,50,160,160,r);
+    g.addColorStop(0,`rgba(255,200,50,${.03+i*.01})`);
+    g.addColorStop(.6,`rgba(255,140,20,${.02+i*.008})`);
+    g.addColorStop(1,'transparent');
+    ctx.fillStyle=g;
+    ctx.fillRect(0,0,320,320);
+  }
+
+  // Sun corona rays
+  ctx.save();ctx.translate(160,160);
+  for(let i=0;i<24;i++){
+    ctx.rotate(Math.PI*2/24);
+    const rayLen=65+Math.random()*30;
+    const gr=ctx.createLinearGradient(0,-55,0,-55-rayLen);
+    gr.addColorStop(0,'rgba(255,180,40,0.3)');
+    gr.addColorStop(1,'transparent');
+    ctx.beginPath();ctx.moveTo(-3,-55);ctx.lineTo(0,-55-rayLen);ctx.lineTo(3,-55);ctx.closePath();
+    ctx.fillStyle=gr;ctx.fill();
+  }
+  ctx.restore();
+
+  // Sun body
+  const sunG=ctx.createRadialGradient(148,148,10,160,160,56);
+  sunG.addColorStop(0,'#fff8e0');sunG.addColorStop(.3,'#ffdd44');
+  sunG.addColorStop(.7,'#ff9900');sunG.addColorStop(1,'#cc5500');
+  ctx.beginPath();ctx.arc(160,160,56,0,Math.PI*2);
+  ctx.fillStyle=sunG;ctx.fill();
+
+  // Face image clipped into circle
+  ctx.save();
+  ctx.beginPath();ctx.arc(160,160,44,0,Math.PI*2);ctx.clip();
+  // Calculate crop to center the face
+  const iw=faceImg.width,ih=faceImg.height;
+  const scale=Math.max(88/iw,88/ih);
+  const sw=iw*scale,sh=ih*scale;
+  ctx.drawImage(faceImg,160-sw/2,160-sh/2,sw,sh);
+  ctx.restore();
+
+  // Circle border around face
+  ctx.beginPath();ctx.arc(160,160,44,0,Math.PI*2);
+  ctx.strokeStyle='rgba(255,220,100,0.5)';ctx.lineWidth=2;ctx.stroke();
+
+  // Inner glow on face
+  const fg=ctx.createRadialGradient(160,160,30,160,160,46);
+  fg.addColorStop(0,'transparent');fg.addColorStop(1,'rgba(255,180,40,0.2)');
+  ctx.beginPath();ctx.arc(160,160,44,0,Math.PI*2);ctx.fillStyle=fg;ctx.fill();
+
+  // Small planets
+  // Mars
+  const mg=ctx.createRadialGradient(268,78,2,272,82,12);
+  mg.addColorStop(0,'#d45a2a');mg.addColorStop(1,'#6a2010');
+  ctx.beginPath();ctx.arc(272,82,12,0,Math.PI*2);ctx.fillStyle=mg;ctx.fill();
+  // Blue planet
+  const bp=ctx.createRadialGradient(56,254,2,60,258,8);
+  bp.addColorStop(0,'#5a8aca');bp.addColorStop(1,'#1a2a5a');
+  ctx.beginPath();ctx.arc(60,258,8,0,Math.PI*2);ctx.fillStyle=bp;ctx.fill();
+
+  // Label
+  ctx.font='700 8px JetBrains Mono,monospace';
+  ctx.fillStyle='rgba(255,255,255,0.2)';
+  ctx.textAlign='right';
+  ctx.fillText('CALEJON AI ☀',312,312);
+
+  // Add to chat
+  const body=document.getElementById('chatBody');
+  const div=document.createElement('div');
+  div.className='chat-img';
+  div.appendChild(canvas);
+  const lbl=document.createElement('div');
+  lbl.className='img-label';
+  lbl.textContent='☀ güneşin içinde parlıyorsun';
+  div.appendChild(lbl);
+  body.appendChild(div);
+  document.getElementById('chatMsgs').scrollTop=99999;
+}
+
 // ===== LANGUAGE SYSTEM =====
 let currentLang='tr';
 const i18n={
   tr:{
-    nav_home:'Ana Sayfa',nav_shop:'Mağaza',nav_about:'Hakkımızda',nav_contact:'İletişim',
+    nav_home:'Ana Sayfa',nav_shop:'Mağaza',nav_contact:'İletişim',nav_account:'Hesabım',
     hero_sub:'Headwear Collection — Est. 2025',hero_cta:'Koleksiyonu Keşfet',
-    sec_new:'Yeni Sezon',sec_premium:'Premium Headwear',sec_about:'Hakkımızda',sec_story:'Hikayemiz',
+    sec_new:'Yeni Sezon',sec_premium:'Premium Headwear',
     blog_seo_label:'Haberler & İlham',
     cart_title:'Sepet',cart_empty:'Sepetiniz boş',cart_total:'Toplam',cart_checkout:'Siparişi Tamamla',
     add_cart:'Sepete Ekle',sold_out:'Tükendi',
-    about_short:'Calejon, 2025 yılında sokak kültürü ve bireysel tarzın kesişim noktasında doğmuş bir headwear markasıdır. Her bir şapka, detaylara olan tutkumuzun ve kaliteye olan bağlılığımızın bir yansımasıdır.',
-    about_line2:'Asimetrik yıldız logomuz, sıradan kalıpların dışına çıkma cesaretimizi temsil eder.',
-    about_sig:'— Calejon Ekibi',
-    contact_h:'İletişim',contact_p:'Sorularınız için bize ulaşın.',
-    about_h:'Hakkımızda',
+    contact_h:'İletişim',contact_p:'Sorularınız için bize ulaşın. En kısa sürede dönüş yapacağız.',
+    contact_email_h:'E-posta',contact_social_h:'Sosyal Medya',contact_addr_h:'Adres',
+    contact_name_ph:'Adınız',contact_email_ph:'E-posta adresiniz',contact_msg_ph:'Mesajınız',contact_send:'Gönder',
     shop_h:'Tüm Ürünler',shop_sub:'Koleksiyon',
     ep_title:'CALEJON',ep_discount:'%10 İNDİRİM',ep_sub:'İlk Siparişinize Özel',
     ep_desc:'E-posta adresinizi bırakın, ilk siparişinizde geçerli %10 indirim kodunuzu hemen alın!',
     ep_skip:'Hayır, teşekkürler',
     ft_desc:'Premium headwear markası. Sokak kültürü ve bireysel tarzın kesişim noktası. Est. 2025.',
+    ft_info:'Bilgi',ft_about:'Hakkımızda',ft_contact:'İletişim',ft_privacy:'Gizlilik',
+    ft_comm:'İletişim',
+    about_h:'Hakkımızda',about_p1:'Calejon, 2025 yılında Türkiye\'de kurulan bir premium headwear markasıdır. Sokak kültürünün enerjisini, minimalist tasarım anlayışıyla birleştiriyoruz.',about_p2:'Markamızın adı "Calejon" — dar geçit, sokak anlamına gelir. Tıpkı dar sokaklardaki sanatsal ruh gibi, biz de her şapkada bir hikaye anlatıyoruz.',about_mission:'Misyonumuz',about_mission_p:'Premium kalitede, özgün tasarımlı şapkalar üreterek sokak modasını yeniden tanımlamak.',about_vision:'Vizyonumuz',about_vision_p:'Türkiye\'den dünyaya uzanan, küresel streetwear sahnesinde tanınan bir headwear markası olmak.',
+    kvkk_h:'KVKK Aydınlatma Metni',privacy_h:'Gizlilik Politikası',
+    account_h:'Hesabım',
+    back:'← Geri',
   },
   en:{
-    nav_home:'Home',nav_shop:'Shop',nav_about:'About',nav_contact:'Contact',
+    nav_home:'Home',nav_shop:'Shop',nav_contact:'Contact',nav_account:'Account',
     hero_sub:'Headwear Collection — Est. 2025',hero_cta:'Explore Collection',
-    sec_new:'New Season',sec_premium:'Premium Headwear',sec_about:'About Us',sec_story:'Our Story',
+    sec_new:'New Season',sec_premium:'Premium Headwear',
     blog_seo_label:'News & Inspiration',
     cart_title:'Cart',cart_empty:'Your cart is empty',cart_total:'Total',cart_checkout:'Complete Order',
     add_cart:'Add to Cart',sold_out:'Sold Out',
-    about_short:'Calejon is a headwear brand born at the intersection of street culture and individual style in 2025. Each cap is a reflection of our passion for details and commitment to quality.',
-    about_line2:'Our asymmetric star logo represents the courage to break free from ordinary molds.',
-    about_sig:'— Calejon Team',
-    contact_h:'Contact',contact_p:'Get in touch with us.',
-    about_h:'About Us',
+    contact_h:'Contact',contact_p:'Get in touch with us. We\'ll get back to you as soon as possible.',
+    contact_email_h:'Email',contact_social_h:'Social Media',contact_addr_h:'Address',
+    contact_name_ph:'Your Name',contact_email_ph:'Your Email',contact_msg_ph:'Your Message',contact_send:'Send',
     shop_h:'All Products',shop_sub:'Collection',
     ep_title:'CALEJON',ep_discount:'10% OFF',ep_sub:'For Your First Order',
     ep_desc:'Leave your email and get your 10% discount code for your first order!',
     ep_skip:'No, thanks',
     ft_desc:'Premium headwear brand. Where street culture meets individual style. Est. 2025.',
+    ft_info:'Info',ft_about:'About Us',ft_contact:'Contact',ft_privacy:'Privacy',
+    ft_comm:'Contact',
+    about_h:'About Us',about_p1:'Calejon is a premium headwear brand founded in Turkey in 2025. We combine the energy of street culture with a minimalist design approach.',about_p2:'Our brand name "Calejon" means a narrow alley, a street. Just like the artistic spirit found in narrow streets, we tell a story with every cap.',about_mission:'Our Mission',about_mission_p:'Redefining street fashion by producing premium quality, original designed caps.',about_vision:'Our Vision',about_vision_p:'To become a globally recognized headwear brand extending from Turkey to the world streetwear scene.',
+    kvkk_h:'Data Protection Policy',privacy_h:'Privacy Policy',
+    account_h:'My Account',
+    back:'← Back',
   }
 };
 
@@ -1768,10 +1975,11 @@ function applyLang(){
   const t=i18n[currentLang];
   document.querySelectorAll('[data-i18n]').forEach(el=>{
     const key=el.getAttribute('data-i18n');
-    if(t[key])el.textContent=t[key];
+    if(t[key]){
+      if(el.tagName==='INPUT'||el.tagName==='TEXTAREA')el.placeholder=t[key];
+      else el.textContent=t[key];
+    }
   });
-  // Dynamic elements
-  const as=document.getElementById('aboutShortTxt');if(as)as.textContent=t.about_short;
   const ft=document.querySelector('.ft-brand p');if(ft)ft.textContent=t.ft_desc;
 }
 
