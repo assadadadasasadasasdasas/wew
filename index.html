@@ -8,24 +8,24 @@
 <style>
 /* ====== THEME VARIABLES ====== */
 :root, [data-theme="dark"] {
-  --bg:#080706; --surface:#0f0e0c; --surface2:#161412;
-  --border:rgba(193,163,120,0.12); --gold:#c1a378; --gold-light:#d4bc96;
-  --gold-dim:rgba(193,163,120,0.4); --text:#e8e2d8;
-  --text-dim:rgba(232,226,216,0.45); --text-mid:rgba(232,226,216,0.65);
-  --accent:#8b3a3a; --success:#5a8a5a;
-  --card-bg:#0f0e0c; --input-bg:#111; --input-border:#222;
-  --shadow:rgba(0,0,0,0.4); --invert:0;
-  --watermark:rgba(255,255,0,0.02);
+  --bg:#111; --surface:#1a1a1a; --surface2:#222;
+  --border:rgba(255,120,0,0.15); --gold:#ff7800; --gold-light:#ff9933;
+  --gold-dim:rgba(255,120,0,0.4); --text:#f5f5f5;
+  --text-dim:rgba(245,245,245,0.5); --text-mid:rgba(245,245,245,0.7);
+  --accent:#ff5500; --success:#4caf50;
+  --card-bg:#1e1e1e; --input-bg:#161616; --input-border:#333;
+  --shadow:rgba(0,0,0,0.5); --invert:0;
+  --watermark:rgba(255,200,0,0.015);
 }
 [data-theme="light"] {
-  --bg:#f5f2ed; --surface:#ffffff; --surface2:#f0ebe3;
-  --border:rgba(120,100,70,0.15); --gold:#8a6d3b; --gold-light:#a0813f;
-  --gold-dim:rgba(120,100,70,0.4); --text:#1a1714;
-  --text-dim:rgba(26,23,20,0.5); --text-mid:rgba(26,23,20,0.7);
-  --accent:#a04040; --success:#3a7a3a;
-  --card-bg:#fff; --input-bg:#f8f5f0; --input-border:#d5d0c8;
-  --shadow:rgba(0,0,0,0.08); --invert:1;
-  --watermark:rgba(0,0,180,0.025);
+  --bg:#fff; --surface:#f9f9f9; --surface2:#f2f2f2;
+  --border:rgba(255,120,0,0.15); --gold:#e86800; --gold-light:#ff7800;
+  --gold-dim:rgba(232,104,0,0.35); --text:#1a1a1a;
+  --text-dim:rgba(26,26,26,0.5); --text-mid:rgba(26,26,26,0.7);
+  --accent:#cc4400; --success:#388e3c;
+  --card-bg:#fff; --input-bg:#fafafa; --input-border:#ddd;
+  --shadow:rgba(0,0,0,0.06); --invert:1;
+  --watermark:rgba(255,120,0,0.015);
 }
 
 * { margin:0; padding:0; box-sizing:border-box; }
@@ -38,7 +38,7 @@ body::before {
   color:var(--watermark); word-break:break-all; overflow:hidden;
   transform:rotate(-15deg) scale(1.3); transform-origin:center;
 }
-::selection { background:rgba(193,163,120,.25); }
+::selection { background:rgba(255,120,0,.25); }
 ::-webkit-scrollbar { width:5px; }
 ::-webkit-scrollbar-track { background:var(--bg); }
 ::-webkit-scrollbar-thumb { background:var(--gold-dim); border-radius:3px; }
@@ -58,6 +58,42 @@ nav {
   backdrop-filter:blur(12px);
 }
 section, footer, .wheel-overlay { position:relative; z-index:1; }
+/* TAB PAGES */
+.tab-page { display:none; }
+.tab-page.active { display:block; }
+/* HAPPY CUSTOMERS */
+.cust-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px;max-width:1100px;margin:30px auto 0;}
+.cust-card{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;padding:22px;transition:all .3s;}
+.cust-card:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 8px 24px var(--shadow);}
+.cust-stars{color:var(--gold);font-size:14px;margin-bottom:6px;}
+.cust-text{font-size:13px;color:var(--text-mid);line-height:1.7;font-style:italic;margin-bottom:10px;}
+.cust-info{display:flex;align-items:center;gap:10px;}
+.cust-av{width:38px;height:38px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:15px;color:#fff;font-weight:700;}
+.cust-name{font-size:13px;font-weight:600;}.cust-role{font-size:11px;color:var(--text-dim);}
+/* WORLD CUP */
+.wc-section{padding:40px 24px;text-align:center;}
+.wc-tabs{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:20px auto;}
+.wc-tab{padding:10px 18px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text-dim);cursor:pointer;font-size:12px;letter-spacing:1px;transition:all .2s;font-family:'DM Sans',sans-serif;}
+.wc-tab.active,.wc-tab:hover{background:var(--gold);color:#111;border-color:var(--gold);}
+.wc-panel{display:none;max-width:1000px;margin:20px auto;text-align:left;}
+.wc-panel.active{display:block;}
+.wc-card{background:var(--card-bg);border:1px solid var(--border);border-radius:8px;padding:16px;margin-bottom:10px;cursor:pointer;transition:all .2s;}
+.wc-card:hover{border-color:var(--gold);}
+.wc-card-head{display:flex;justify-content:space-between;align-items:center;}
+.wc-card-title{font-family:'Playfair Display',serif;font-size:16px;}
+.wc-card-badge{background:var(--gold);color:#111;padding:3px 10px;border-radius:4px;font-size:11px;font-weight:600;}
+.wc-card-body{display:none;margin-top:12px;font-size:13px;color:var(--text-mid);line-height:1.8;border-top:1px solid var(--border);padding-top:12px;}
+.wc-card.open .wc-card-body{display:block;}
+.wc-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px;}
+.wc-table th{background:var(--surface2);padding:8px;text-align:left;font-size:11px;letter-spacing:1px;color:var(--text-dim);}
+.wc-table td{padding:8px;border-bottom:1px solid var(--border);}
+.wc-news{background:var(--card-bg);border:1px solid var(--border);border-radius:8px;padding:14px;margin-bottom:8px;cursor:pointer;transition:all .2s;}
+.wc-news:hover{border-color:var(--gold);}
+.wc-news-head{display:flex;justify-content:space-between;align-items:center;font-size:13px;}
+.wc-news-date{font-size:11px;color:var(--gold);font-weight:600;}
+.wc-news-body{display:none;margin-top:10px;font-size:13px;color:var(--text-mid);line-height:1.8;border-top:1px solid var(--border);padding-top:10px;}
+.wc-news.open .wc-news-body{display:block;}
+
 .logo {
   font-family:'Playfair Display',serif;font-size:24px;letter-spacing:10px;cursor:pointer;
   color:var(--gold);font-weight:400;
@@ -65,9 +101,9 @@ section, footer, .wheel-overlay { position:relative; z-index:1; }
 .nav-links { display:flex;gap:24px;align-items:center; }
 .nav-links a {
   font-size:10px;letter-spacing:2px;color:var(--text-dim);text-decoration:none;
-  text-transform:uppercase;cursor:pointer;transition:color .3s;
+  text-transform:uppercase;cursor:pointer;transition:all .3s;padding:6px 0;border-bottom:2px solid transparent;
 }
-.nav-links a:hover { color:var(--gold); }
+.nav-links a:hover,.nav-links a.nav-active { color:var(--gold);border-bottom-color:var(--gold); }
 .theme-toggle {
   width:36px;height:36px;border-radius:50%;background:var(--surface);
   border:1px solid var(--border);color:var(--gold);font-size:16px;
@@ -91,7 +127,7 @@ section, footer, .wheel-overlay { position:relative; z-index:1; }
 
 /* HERO */
 .hero { height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative; }
-.hero-bg { position:absolute;inset:0;background:radial-gradient(ellipse at 30% 20%,rgba(193,163,120,.05) 0%,transparent 60%); }
+.hero-bg { position:absolute;inset:0;background:radial-gradient(ellipse at 30% 20%,rgba(255,120,0,.05) 0%,transparent 60%); }
 .hero-hat { animation:float 5s ease-in-out infinite;margin-bottom:28px; }
 .hero h1 {
   font-family:'Playfair Display',serif;font-size:clamp(48px,8vw,100px);
@@ -102,17 +138,17 @@ section, footer, .wheel-overlay { position:relative; z-index:1; }
 }
 .hero-sub { font-size:12px;letter-spacing:6px;color:var(--gold-dim);margin:16px 0 40px;text-transform:uppercase;font-weight:300; }
 .btn-gold {
-  padding:14px 40px;background:linear-gradient(135deg,var(--gold),#a08050);border:none;
-  color:#080706;font-size:11px;letter-spacing:3px;font-weight:600;cursor:pointer;
+  padding:14px 40px;background:linear-gradient(135deg,var(--gold),#cc5500);border:none;
+  color:#111;font-size:11px;letter-spacing:3px;font-weight:600;cursor:pointer;
   text-transform:uppercase;font-family:'DM Sans',sans-serif;transition:all .4s;
 }
-.btn-gold:hover { transform:translateY(-2px);box-shadow:0 10px 30px rgba(193,163,120,.2); }
+.btn-gold:hover { transform:translateY(-2px);box-shadow:0 10px 30px rgba(255,120,0,.2); }
 .btn-outline {
   padding:14px 40px;background:transparent;border:1px solid var(--gold-dim);color:var(--gold);
   font-size:11px;letter-spacing:3px;cursor:pointer;text-transform:uppercase;
   font-family:'DM Sans',sans-serif;transition:all .4s;
 }
-.btn-outline:hover { border-color:var(--gold);background:rgba(193,163,120,.06); }
+.btn-outline:hover { border-color:var(--gold);background:rgba(255,120,0,.06); }
 
 /* PRODUCTS */
 .products { padding:100px 36px; }
@@ -120,8 +156,8 @@ section, footer, .wheel-overlay { position:relative; z-index:1; }
 .product-card {
   border:1px solid var(--border);background:var(--card-bg);overflow:hidden;cursor:pointer;transition:all .4s;position:relative;
 }
-.product-card:hover { border-color:rgba(193,163,120,.3);transform:translateY(-3px); }
-.product-img { padding:40px 0;text-align:center;background:radial-gradient(circle,rgba(193,163,120,.03),transparent); }
+.product-card:hover { border-color:rgba(255,120,0,.3);transform:translateY(-3px); }
+.product-img { padding:40px 0;text-align:center;background:radial-gradient(circle,rgba(255,120,0,.03),transparent); }
 .product-info { padding:20px 24px; }
 .product-name { font-family:'Playfair Display',serif;font-size:18px;letter-spacing:2px;margin-bottom:4px; }
 .product-desc { font-size:12px;color:var(--text-dim);font-weight:300;margin-bottom:10px; }
@@ -132,9 +168,9 @@ section, footer, .wheel-overlay { position:relative; z-index:1; }
   background:var(--bg);color:var(--text-dim);font-size:11px;cursor:pointer;
   font-family:'DM Sans',sans-serif;letter-spacing:1px;transition:all .2s;
 }
-.filter-btn.active,.filter-btn:hover { border-color:var(--gold);color:var(--gold);background:rgba(193,163,120,.06); }
+.filter-btn.active,.filter-btn:hover { border-color:var(--gold);color:var(--gold);background:rgba(255,120,0,.06); }
 .product-card .add-cart {
-  padding:8px 16px;background:var(--gold);color:#080706;border:none;border-radius:4px;
+  padding:8px 16px;background:var(--gold);color:#111;border:none;border-radius:4px;
   font-size:10px;cursor:pointer;font-weight:600;font-family:'DM Sans',sans-serif;
   letter-spacing:1px;transition:all .2s;
 }
@@ -152,7 +188,7 @@ section, footer, .wheel-overlay { position:relative; z-index:1; }
   background:var(--bg);color:var(--text-dim);font-size:11px;cursor:pointer;margin:0 3px;
   font-family:'DM Sans',sans-serif;
 }
-.page-btn.active { border-color:var(--gold);color:var(--gold);background:rgba(193,163,120,.06); }
+.page-btn.active { border-color:var(--gold);color:var(--gold);background:rgba(255,120,0,.06); }
 .bulk-item {
   display:flex;justify-content:space-between;align-items:center;
   padding:10px 0;border-bottom:1px solid var(--border);font-size:13px;
@@ -167,7 +203,7 @@ section, footer, .wheel-overlay { position:relative; z-index:1; }
 .tryon-wrap { max-width:680px;margin:0 auto; }
 .tryon-hats { display:flex;gap:10px;margin:20px 0; }
 .tryon-hat { flex:1;padding:12px;border:1px solid var(--input-border);background:var(--bg);cursor:pointer;text-align:center;border-radius:6px;transition:all .2s; }
-.tryon-hat.active { border-color:var(--gold);background:rgba(193,163,120,.04); }
+.tryon-hat.active { border-color:var(--gold);background:rgba(255,120,0,.04); }
 .tryon-hat p { font-size:11px;margin-top:4px; }
 .upload-area { border:2px dashed var(--input-border);border-radius:8px;padding:50px 20px;text-align:center;cursor:pointer;background:var(--bg);transition:border-color .3s; }
 .upload-area:hover { border-color:var(--gold-dim); }
@@ -178,7 +214,7 @@ section, footer, .wheel-overlay { position:relative; z-index:1; }
 .sz-btn:hover { border-color:var(--gold-dim); }
 .tryon-btns { display:flex;gap:10px;margin-top:14px; }
 .tryon-btns button { flex:1;padding:12px;border-radius:6px;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif; }
-.tryon-dl { background:var(--gold);color:#080706;border:none;font-weight:600; }
+.tryon-dl { background:var(--gold);color:#111;border:none;font-weight:600; }
 .tryon-reset { background:transparent;color:var(--text-dim);border:1px solid var(--input-border); }
 .share-row { display:flex;gap:6px;margin-top:10px;justify-content:center;flex-wrap:wrap; }
 .share-btn { padding:6px 14px;border-radius:4px;border:1px solid var(--input-border);background:var(--bg);color:var(--text-dim);font-size:10px;cursor:pointer;letter-spacing:1px;transition:all .2s; }
@@ -207,7 +243,7 @@ section, footer, .wheel-overlay { position:relative; z-index:1; }
 .chat-messages { height:280px;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px; }
 .msg { max-width:82%;padding:10px 14px;border-radius:12px;font-size:13px;line-height:1.7;font-weight:300; }
 .msg.bot { align-self:flex-start;background:var(--surface2);border-bottom-left-radius:4px;color:var(--text-mid); }
-.msg.user { align-self:flex-end;background:rgba(193,163,120,.12);border-bottom-right-radius:4px;color:var(--text); }
+.msg.user { align-self:flex-end;background:rgba(255,120,0,.12);border-bottom-right-radius:4px;color:var(--text); }
 .msg.typing .dots { display:inline-flex;gap:4px; }
 .msg.typing .dots span { width:5px;height:5px;border-radius:50%;background:var(--gold-dim);animation:pulse 1.2s ease-in-out infinite; }
 .msg.typing .dots span:nth-child(2){animation-delay:.2s}
@@ -225,7 +261,7 @@ section, footer, .wheel-overlay { position:relative; z-index:1; }
 .forum-new.open{display:block}
 .forum-new input,.forum-new textarea { width:100%;padding:10px 12px;background:var(--input-bg);border:1px solid var(--input-border);border-radius:4px;color:var(--text);font-size:13px;font-family:'DM Sans',sans-serif;margin-bottom:8px;outline:none;resize:vertical; }
 .forum-new textarea{min-height:70px}
-.forum-new button { padding:9px 20px;background:var(--gold);color:#080706;border:none;border-radius:4px;cursor:pointer;font-size:11px;font-family:'DM Sans',sans-serif;font-weight:600; }
+.forum-new button { padding:9px 20px;background:var(--gold);color:#111;border:none;border-radius:4px;cursor:pointer;font-size:11px;font-family:'DM Sans',sans-serif;font-weight:600; }
 .forum-thread { border:1px solid var(--border);background:var(--bg);border-radius:6px;margin-bottom:10px;overflow:hidden; }
 .thread-header { padding:14px 16px;cursor:pointer;display:flex;justify-content:space-between;align-items:center; }
 .thread-title { font-size:14px; }
@@ -236,7 +272,7 @@ section, footer, .wheel-overlay { position:relative; z-index:1; }
 .thread-body p { font-size:13px;color:var(--text-dim);line-height:1.8;font-weight:300;margin-bottom:10px; }
 .reply-box { display:flex;gap:6px;margin-top:8px; }
 .reply-box input { flex:1;padding:8px 10px;background:var(--input-bg);border:1px solid var(--input-border);border-radius:4px;color:var(--text);font-size:12px;font-family:'DM Sans',sans-serif;outline:none; }
-.reply-box button { padding:8px 14px;background:var(--gold);color:#080706;border:none;border-radius:4px;cursor:pointer;font-size:10px;font-weight:600; }
+.reply-box button { padding:8px 14px;background:var(--gold);color:#111;border:none;border-radius:4px;cursor:pointer;font-size:10px;font-weight:600; }
 .reply-item { padding:8px 12px;margin-top:6px;background:var(--surface2);border-radius:4px;border-left:2px solid var(--gold-dim); }
 .reply-item .ra { font-size:10px;color:var(--gold);margin-bottom:2px; }
 .reply-item .rt { font-size:12px;color:var(--text-dim);line-height:1.6; }
@@ -248,7 +284,7 @@ section, footer, .wheel-overlay { position:relative; z-index:1; }
 .game-card h3 { font-family:'Playfair Display',serif;font-size:18px;padding:16px;letter-spacing:2px; }
 .game-card canvas { display:block;width:100%;background:#111;cursor:pointer; }
 .game-controls { padding:12px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap; }
-.game-btn { padding:8px 16px;background:var(--gold);color:#080706;border:none;border-radius:4px;font-size:11px;cursor:pointer;font-weight:600;font-family:'DM Sans',sans-serif; }
+.game-btn { padding:8px 16px;background:var(--gold);color:#111;border:none;border-radius:4px;font-size:11px;cursor:pointer;font-weight:600;font-family:'DM Sans',sans-serif; }
 .game-btn.sec { background:transparent;color:var(--text-dim);border:1px solid var(--input-border); }
 .game-score { font-size:12px;color:var(--gold);letter-spacing:2px;padding:4px 12px; }
 
@@ -264,7 +300,7 @@ section, footer, .wheel-overlay { position:relative; z-index:1; }
 .newsletter { padding:60px 36px;text-align:center;border-top:1px solid var(--border);background:var(--surface); }
 .nl-form { display:flex;gap:0;max-width:400px;margin:24px auto 0;border:1px solid var(--border);overflow:hidden; }
 .nl-form input { flex:1;padding:12px 16px;background:transparent;border:none;color:var(--text);font-size:13px;font-family:'DM Sans',sans-serif;outline:none; }
-.nl-form button { padding:12px 24px;background:var(--gold);color:#080706;border:none;font-size:10px;letter-spacing:2px;cursor:pointer;font-weight:600;text-transform:uppercase; }
+.nl-form button { padding:12px 24px;background:var(--gold);color:#111;border:none;font-size:10px;letter-spacing:2px;cursor:pointer;font-weight:600;text-transform:uppercase; }
 
 /* LEGAL */
 .legal { padding:80px 36px; }
@@ -285,7 +321,7 @@ footer { padding:50px 36px 24px;border-top:1px solid var(--border); }
   border:1px solid var(--border);background:var(--card-bg);border-radius:6px;
   overflow:hidden;cursor:pointer;transition:all .3s;
 }
-.blog-card:hover { border-color:rgba(193,163,120,.3);transform:translateY(-2px); }
+.blog-card:hover { border-color:rgba(255,120,0,.3);transform:translateY(-2px); }
 .blog-card-img {
   height:120px;display:flex;align-items:center;justify-content:center;
   font-size:40px;background:var(--surface2);
@@ -330,7 +366,7 @@ footer { padding:50px 36px 24px;border-top:1px solid var(--border); }
 #snakeCanvas { display:block;width:100%;background:#0a0a0a;cursor:pointer; }
 .snake-controls { padding:14px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap; }
 .snake-dir { width:48px;height:48px;border-radius:8px;border:1px solid var(--input-border);background:var(--bg);color:var(--gold);font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center; }
-.snake-dir:active { background:rgba(193,163,120,.1); }
+.snake-dir:active { background:rgba(255,120,0,.1); }
 .snake-dpad { display:grid;grid-template-columns:48px 48px 48px;grid-template-rows:48px 48px;gap:4px;margin:0 auto; }
 .snake-info { padding:8px 14px;font-size:10px;color:var(--text-dim);letter-spacing:1px;border-top:1px solid var(--border); }
 
@@ -346,12 +382,12 @@ footer { padding:50px 36px 24px;border-top:1px solid var(--border); }
 .shop-meta { font-size:12px;color:var(--text-dim);line-height:1.8; }
 .shop-sizes { display:flex;gap:6px; }
 .shop-size { width:42px;height:42px;border:1px solid var(--input-border);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px;cursor:pointer;color:var(--text-dim);transition:all .2s; }
-.shop-size.active,.shop-size:hover { border-color:var(--gold);color:var(--gold);background:rgba(193,163,120,.06); }
+.shop-size.active,.shop-size:hover { border-color:var(--gold);color:var(--gold);background:rgba(255,120,0,.06); }
 .shop-colors { display:flex;gap:6px;flex-wrap:wrap; }
 .shop-color { width:28px;height:28px;border-radius:50%;border:2px solid transparent;cursor:pointer;transition:all .2s; }
 .shop-color.active { border-color:var(--gold);box-shadow:0 0 0 2px var(--gold); }
-.shop-add-btn { padding:16px;background:linear-gradient(135deg,var(--gold),#a08050);border:none;border-radius:8px;color:#080706;font-size:13px;letter-spacing:2px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .3s; }
-.shop-add-btn:hover { transform:translateY(-1px);box-shadow:0 6px 20px rgba(193,163,120,.25); }
+.shop-add-btn { padding:16px;background:linear-gradient(135deg,var(--gold),#cc5500);border:none;border-radius:8px;color:#111;font-size:13px;letter-spacing:2px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .3s; }
+.shop-add-btn:hover { transform:translateY(-1px);box-shadow:0 6px 20px rgba(255,120,0,.25); }
 
 @media(max-width:768px) {
   .nav-links{display:none} .hamburger{display:block}
@@ -377,7 +413,7 @@ footer { padding:50px 36px 24px;border-top:1px solid var(--border); }
 }
 .wheel-box h2 {
   font-family:'Playfair Display',serif;font-size:28px;letter-spacing:4px;
-  color:#c1a378;margin-bottom:4px;
+  color:#ff7800;margin-bottom:4px;
 }
 .wheel-box .wheel-sub {
   font-size:13px;color:rgba(255,255,255,.5);font-weight:300;margin-bottom:18px;line-height:1.6;
@@ -395,16 +431,16 @@ footer { padding:50px 36px 24px;border-top:1px solid var(--border); }
 .wheel-pointer {
   position:absolute;top:-8px;left:50%;transform:translateX(-50%);
   width:0;height:0;border-left:14px solid transparent;border-right:14px solid transparent;
-  border-top:28px solid #c1a378;z-index:2;filter:drop-shadow(0 2px 6px rgba(0,0,0,.5));
+  border-top:28px solid #ff7800;z-index:2;filter:drop-shadow(0 2px 6px rgba(0,0,0,.5));
 }
 .wheel-center {
   position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,#c1a378,#8a6d3b);
+  width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,#ff7800,#cc5500);
   display:flex;align-items:center;justify-content:center;z-index:3;
-  font-size:18px;box-shadow:0 0 20px rgba(193,163,120,.3);
+  font-size:18px;box-shadow:0 0 20px rgba(255,120,0,.3);
 }
 .wheel-form {
-  display:flex;gap:0;border:1px solid rgba(193,163,120,.3);border-radius:6px;overflow:hidden;
+  display:flex;gap:0;border:1px solid rgba(255,120,0,.3);border-radius:6px;overflow:hidden;
   max-width:320px;margin:0 auto 12px;
 }
 .wheel-form input {
@@ -413,8 +449,8 @@ footer { padding:50px 36px 24px;border-top:1px solid var(--border); }
 }
 .wheel-form input::placeholder { color:rgba(255,255,255,.3); }
 .wheel-form button {
-  padding:14px 22px;background:linear-gradient(135deg,#c1a378,#8a6d3b);border:none;
-  color:#080706;font-size:12px;letter-spacing:2px;font-weight:700;cursor:pointer;
+  padding:14px 22px;background:linear-gradient(135deg,#ff7800,#cc5500);border:none;
+  color:#111;font-size:12px;letter-spacing:2px;font-weight:700;cursor:pointer;
   font-family:'DM Sans',sans-serif;text-transform:uppercase;white-space:nowrap;
   transition:opacity .2s;
 }
@@ -429,18 +465,18 @@ footer { padding:50px 36px 24px;border-top:1px solid var(--border); }
 }
 .wheel-result.show { display:block;animation:fadeUp .6s ease-out; }
 .wheel-result h3 {
-  font-family:'Playfair Display',serif;font-size:36px;color:#c1a378;margin-bottom:8px;
+  font-family:'Playfair Display',serif;font-size:36px;color:#ff7800;margin-bottom:8px;
 }
 .wheel-result .code-box {
-  display:inline-block;padding:12px 28px;background:rgba(193,163,120,.1);
-  border:2px dashed rgba(193,163,120,.4);border-radius:8px;margin:12px 0;
-  font-size:20px;letter-spacing:6px;color:#c1a378;font-weight:600;
+  display:inline-block;padding:12px 28px;background:rgba(255,120,0,.1);
+  border:2px dashed rgba(255,120,0,.4);border-radius:8px;margin:12px 0;
+  font-size:20px;letter-spacing:6px;color:#ff7800;font-weight:600;
 }
 .wheel-result p { font-size:13px;color:rgba(255,255,255,.5);line-height:1.7; }
 .wheel-result .cta-btn {
   display:inline-block;margin-top:16px;padding:14px 40px;
-  background:linear-gradient(135deg,#c1a378,#8a6d3b);border:none;border-radius:6px;
-  color:#080706;font-size:12px;letter-spacing:2px;font-weight:700;cursor:pointer;
+  background:linear-gradient(135deg,#ff7800,#cc5500);border:none;border-radius:6px;
+  color:#111;font-size:12px;letter-spacing:2px;font-weight:700;cursor:pointer;
   font-family:'DM Sans',sans-serif;text-transform:uppercase;
 }
 .confetti-piece {
@@ -491,17 +527,19 @@ footer { padding:50px 36px 24px;border-top:1px solid var(--border); }
 
 <!-- NAV -->
 <nav>
-  <div class="logo" onclick="goTo('hero')">CALEJON</div>
+  <div class="logo" onclick="showTab('hero')" style="display:flex;align-items:center;gap:8px;cursor:pointer;">
+    <svg width="32" height="32" viewBox="0 0 64 64"><path d="M32,4 C28,8 18,10 12,18 C6,26 8,38 14,44 L22,40 C18,36 16,30 20,24 C24,18 30,16 32,14 C34,16 40,18 44,24 C48,30 46,36 42,40 L50,44 C56,38 58,26 52,18 C46,10 36,8 32,4Z" fill="var(--gold)"/><circle cx="26" cy="20" r="1.5" fill="var(--bg)"/><circle cx="38" cy="20" r="1.5" fill="var(--bg)"/><path d="M20,42 L32,58 L44,42 C40,46 36,48 32,48 C28,48 24,46 20,42Z" fill="var(--gold)" opacity=".6"/></svg>
+    <span style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;letter-spacing:3px;">CALEJON</span>
+  </div>
   <div class="nav-links">
-    <a onclick="goTo('snake')" style="color:#4ecdc4;">🐍 Yılan</a>
-    <a onclick="goTo('quickbar')">Anı Defteri</a>
-    <a href="https://youtube.com/@calejon" target="_blank" style="color:#ff4444;">▶ YouTube</a>
-    <a onclick="goTo('products')">Koleksiyon</a>
-    <a onclick="goTo('tryon')">Sanal Dene</a>
-    <a onclick="goTo('ai')">Asistan</a>
-    <a onclick="goTo('games')">Oyunlar</a>
-    <a onclick="goTo('blog')">Blog</a>
-    <a onclick="goTo('legal')">Yasal</a>
+    <a onclick="showTab('hero')">Ana Sayfa</a>
+    <a onclick="showTab('products')">Mağaza</a>
+    <a onclick="showTab('tryon')">Sanal Dene</a>
+    <a onclick="showTab('ai')">AI</a>
+    <a onclick="showTab('snake')">🐍 Yılan</a>
+    <a onclick="showTab('games')">Oyunlar</a>
+    <a onclick="showTab('blog')">Blog</a>
+    <a onclick="showTab('worldcup')">⚽ Kupası</a>
     <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn" title="Tema Değiştir">☀</button>
   </div>
   <div style="display:flex;gap:10px;align-items:center;">
@@ -510,27 +548,28 @@ footer { padding:50px 36px 24px;border-top:1px solid var(--border); }
   </div>
 </nav>
 <div class="mobile-menu" id="mobMenu">
-  <a onclick="goTo('snake');toggleMenu()" style="color:#4ecdc4;">🐍 Yılan Oyunu</a>
-  <a onclick="goTo('quickbar');toggleMenu()">📓 Anı Defteri</a>
-  <a href="https://youtube.com/@calejon" target="_blank" style="color:#ff4444;">▶ YouTube</a>
-  <a onclick="goTo('products');toggleMenu()">Koleksiyon</a>
-  <a onclick="goTo('tryon');toggleMenu()">Sanal Dene</a>
-  <a onclick="goTo('aigen');toggleMenu()">AI Görsel</a>
-  <a onclick="goTo('ai');toggleMenu()">AI Asistan</a>
-  <a onclick="goTo('games');toggleMenu()">Oyunlar</a>
-  <a onclick="goTo('blog');toggleMenu()">Blog</a>
-  <a onclick="goTo('forum');toggleMenu()">Forum</a>
-  <a onclick="goTo('legal');toggleMenu()">Yasal</a>
+  <a onclick="showTab('hero');toggleMenu()">🏠 Ana Sayfa</a>
+  <a onclick="showTab('products');toggleMenu()">🛒 Mağaza</a>
+  <a onclick="showTab('tryon');toggleMenu()">🪞 Sanal Dene</a>
+  <a onclick="showTab('ai');toggleMenu()">🤖 AI</a>
+  <a onclick="showTab('snake');toggleMenu()">🐍 Yılan</a>
+  <a onclick="showTab('games');toggleMenu()">🎮 Oyunlar</a>
+  <a onclick="showTab('blog');toggleMenu()">📝 Blog</a>
+  <a onclick="showTab('worldcup');toggleMenu()">⚽ Dünya Kupası</a>
+  <a onclick="showTab('quickbar');toggleMenu()">📓 Anı & YouTube</a>
+  <a onclick="showTab('forum');toggleMenu()">📋 Forum & Yasal</a>
 </div>
 
+<div class="tab-page active" id="page-hero">
 <!-- HERO -->
 <section class="hero" id="hero">
   <div class="hero-bg"></div>
   <div style="position:relative;z-index:2;">
     <div class="hero-hat">
-      <svg width="140" height="100" viewBox="0 0 180 130"><ellipse cx="90" cy="98" rx="78" ry="22" fill="rgba(193,163,120,.12)"/><ellipse cx="90" cy="94" rx="73" ry="20" fill="var(--surface)" stroke="rgba(193,163,120,.2)" stroke-width=".5"/><path d="M22,88 Q14,34 44,14 Q90,-12 136,14 Q166,34 158,88Z" fill="var(--surface)" stroke="rgba(193,163,120,.15)" stroke-width=".5"/><rect x="22" y="74" width="136" height="10" rx="2" fill="rgba(193,163,120,.15)"/></svg>
+      <svg width="140" height="100" viewBox="0 0 180 130"><ellipse cx="90" cy="98" rx="78" ry="22" fill="rgba(255,120,0,.12)"/><ellipse cx="90" cy="94" rx="73" ry="20" fill="var(--surface)" stroke="rgba(255,120,0,.2)" stroke-width=".5"/><path d="M22,88 Q14,34 44,14 Q90,-12 136,14 Q166,34 158,88Z" fill="var(--surface)" stroke="rgba(255,120,0,.15)" stroke-width=".5"/><rect x="22" y="74" width="136" height="10" rx="2" fill="rgba(255,120,0,.15)"/></svg>
     </div>
     <h1>CALEJON</h1>
+    <p style="font-size:11px;letter-spacing:6px;color:var(--text-dim);margin-top:-5px;">E S T . 2 0 2 4</p>
     <p class="hero-sub">Yapay Zeka ile Şapkanı Keşfet</p>
     <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
       <button class="btn-gold" onclick="goTo('tryon')">Şapka Dene</button>
@@ -539,6 +578,24 @@ footer { padding:50px 36px 24px;border-top:1px solid var(--border); }
   </div>
 </section>
 
+
+<!-- MUTLU MÜŞTERİLER -->
+<section style="padding:50px 24px;">
+  <div style="text-align:center;">
+    <span class="section-label">MÜŞTERİ YORUMLARI</span>
+    <h2 class="section-title" style="font-size:clamp(22px,3vw,32px);">Mutlu Müşterilerimiz</h2>
+  </div>
+  <div class="cust-grid">
+    <div class="cust-card"><div class="cust-stars">★★★★★</div><div class="cust-text">"Calejon şapkam 6 aydır her gün kullanıyorum, organik pamuk kalitesi fark yaratıyor. Kesinlikle tavsiye ederim!"</div><div class="cust-info"><div class="cust-av">A</div><div><div class="cust-name">Ahmet Yılmaz</div><div class="cust-role">İstanbul · Midnight Classic</div></div></div></div>
+    <div class="cust-card"><div class="cust-stars">★★★★★</div><div class="cust-text">"AI sanal deneme sayesinde internetten şapka almaktan korkmadım. Sipariş verdim, tam beklediğim gibi geldi!"</div><div class="cust-info"><div class="cust-av">Z</div><div><div class="cust-name">Zeynep Kaya</div><div class="cust-role">Ankara · Arctic Essential</div></div></div></div>
+    <div class="cust-card"><div class="cust-stars">★★★★★</div><div class="cust-text">"Kurumsal etkinliğimiz için 50 şapka sipariş ettik. Logo baskısı profesyonel, teslimat hızlı, toplu indirim avantajlı."</div><div class="cust-info"><div class="cust-av">M</div><div><div class="cust-name">Mehmet Demir</div><div class="cust-role">İzmir · Kurumsal Sipariş</div></div></div></div>
+    <div class="cust-card"><div class="cust-stars">★★★★★</div><div class="cust-text">"Sevgilime hediye aldım, paketleme o kadar güzeldi ki ayrı bir mutluluk oldu. Kalite premium markalara taş çıkartır."</div><div class="cust-info"><div class="cust-av">E</div><div><div class="cust-name">Elif Şahin</div><div class="cust-role">Bursa · Terra Signature</div></div></div></div>
+    <div class="cust-card"><div class="cust-stars">★★★★☆</div><div class="cust-text">"Bucket modelini aldım, yaz güneşinde hem şık hem koruyucu. Organik pamuk gerçekten terletmiyor."</div><div class="cust-info"><div class="cust-av">C</div><div><div class="cust-name">Can Özkan</div><div class="cust-role">Antalya · Bucket Şapka</div></div></div></div>
+    <div class="cust-card"><div class="cust-stars">★★★★★</div><div class="cust-text">"3 farklı model aldım, hepsi mükemmel. El yapımı olduğu belli, dikişler pürüzsüz. Müşteri hizmetleri de harika."</div><div class="cust-info"><div class="cust-av">S</div><div><div class="cust-name">Selin Arslan</div><div class="cust-role">Trabzon · Fedora + Dad Hat</div></div></div></div>
+  </div>
+</section>
+</div>
+<div class="tab-page" id="page-snake">
 <!-- SNAKE GAME -->
 <section class="snake-section" id="snake">
   <span class="section-label">🐍 CALEJON YILAN OYUNU</span>
@@ -564,6 +621,7 @@ footer { padding:50px 36px 24px;border-top:1px solid var(--border); }
   </div>
 </section>
 
+</div>
 <!-- SHOP MODAL -->
 <div class="shop-modal" id="shopModal">
   <button class="shop-close" onclick="closeShop()">✕</button>
@@ -590,7 +648,7 @@ footer { padding:50px 36px 24px;border-top:1px solid var(--border); }
       </div>
       <div style="display:flex;gap:8px;">
         <button class="shop-add-btn" style="flex:1;" id="shopAddBtn">SEPETE EKLE</button>
-        <button class="shop-add-btn" style="flex:0;padding:16px 20px;background:transparent;border:1px solid var(--gold-dim);color:var(--gold);" onclick="closeShop();goTo('tryon');">DENE</button>
+        <button class="shop-add-btn" style="flex:0;padding:16px 20px;background:transparent;border:1px solid var(--gold-dim);color:var(--gold);" onclick="closeShop();showTab('tryon');">DENE</button>
       </div>
       <div id="shopQtyCtrl" style="display:none;text-align:center;">
         <div class="qty-ctrl" style="justify-content:center;gap:12px;">
@@ -603,6 +661,7 @@ footer { padding:50px 36px 24px;border-top:1px solid var(--border); }
   </div>
 </div>
 
+<div class="tab-page" id="page-quick">
 <!-- QUICKBAR: YOUTUBE + ANI DEFTERİ -->
 <section id="quickbar" style="padding:60px 36px;">
   <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:24px;">
@@ -672,7 +731,7 @@ footer { padding:50px 36px 24px;border-top:1px solid var(--border); }
               <option value="💭">💭 Düşünceli</option>
               <option value="🎩">🎩 Şapkalı</option>
             </select>
-            <button onclick="saveAni()" style="flex:1;padding:8px;background:var(--gold);color:#080706;border:none;border-radius:4px;font-size:11px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;letter-spacing:1px;">KAYDET</button>
+            <button onclick="saveAni()" style="flex:1;padding:8px;background:var(--gold);color:#111;border:none;border-radius:4px;font-size:11px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;letter-spacing:1px;">KAYDET</button>
           </div>
         </div>
         <!-- Anı listesi -->
@@ -684,6 +743,8 @@ footer { padding:50px 36px 24px;border-top:1px solid var(--border); }
   </div>
 </section>
 
+</div>
+<div class="tab-page" id="page-shop">
 <!-- PRODUCTS CATALOG -->
 <section class="products" id="products">
   <div style="text-align:center;">
@@ -742,7 +803,7 @@ footer { padding:50px 36px 24px;border-top:1px solid var(--border); }
       <button onclick="closeBulk()" style="background:none;border:none;color:var(--text-dim);font-size:22px;cursor:pointer;">✕</button>
     </div>
     <!-- Bulk discount info -->
-    <div style="padding:14px;background:rgba(193,163,120,.06);border:1px solid var(--border);border-radius:6px;margin-bottom:16px;">
+    <div style="padding:14px;background:rgba(255,120,0,.06);border:1px solid var(--border);border-radius:6px;margin-bottom:16px;">
       <p style="font-size:12px;color:var(--gold);font-weight:600;letter-spacing:1px;margin-bottom:6px;">TOPLU SİPARİŞ İNDİRİMLERİ</p>
       <p style="font-size:12px;color:var(--text-dim);line-height:1.8;">
         5-9 adet → <strong style="color:var(--gold);">%10</strong> indirim &nbsp;|&nbsp;
@@ -771,6 +832,8 @@ footer { padding:50px 36px 24px;border-top:1px solid var(--border); }
   </div>
 </div>
 
+</div>
+<div class="tab-page" id="page-tryon">
 <!-- TRY-ON -->
 <section class="tryon" id="tryon">
   <div class="tryon-wrap">
@@ -810,6 +873,8 @@ footer { padding:50px 36px 24px;border-top:1px solid var(--border); }
   </div>
 </section>
 
+</div>
+<div class="tab-page" id="page-ai">
 <!-- AI IMAGE GEN -->
 <section class="ai-gen" id="aigen">
   <div class="ai-gen-wrap">
@@ -862,7 +927,7 @@ footer { padding:50px 36px 24px;border-top:1px solid var(--border); }
     </div>
     <div id="apiSetup" style="padding:18px;text-align:center;">
       <p style="font-size:12px;color:var(--text-dim);line-height:1.8;margin-bottom:12px;">Gerçek AI chatbot için <a href="https://aistudio.google.com/apikey" target="_blank" style="color:var(--gold);">Google Gemini API anahtarı al</a> (ücretsiz)</p>
-      <div style="display:flex;gap:6px;"><input type="password" id="apiKeyInput" placeholder="API anahtarı yapıştır..." style="flex:1;padding:10px;background:var(--input-bg);border:1px solid var(--input-border);border-radius:4px;color:var(--text);font-size:12px;font-family:'DM Sans',sans-serif;outline:none;"><button onclick="connectAI()" style="padding:10px 16px;background:var(--gold);color:#080706;border:none;border-radius:4px;cursor:pointer;font-size:11px;font-weight:600;">Bağla</button></div>
+      <div style="display:flex;gap:6px;"><input type="password" id="apiKeyInput" placeholder="API anahtarı yapıştır..." style="flex:1;padding:10px;background:var(--input-bg);border:1px solid var(--input-border);border-radius:4px;color:var(--text);font-size:12px;font-family:'DM Sans',sans-serif;outline:none;"><button onclick="connectAI()" style="padding:10px 16px;background:var(--gold);color:#111;border:none;border-radius:4px;cursor:pointer;font-size:11px;font-weight:600;">Bağla</button></div>
       <button onclick="skipAI()" style="margin-top:8px;background:none;border:none;color:#555;font-size:10px;cursor:pointer;text-decoration:underline;">API olmadan devam et</button>
     </div>
     <div id="chatArea" style="display:none;">
@@ -872,6 +937,8 @@ footer { padding:50px 36px 24px;border-top:1px solid var(--border); }
   </div>
 </section>
 
+</div>
+<div class="tab-page" id="page-games">
 <!-- GAMES -->
 <section class="games" id="games">
   <div style="text-align:center;">
@@ -904,6 +971,8 @@ footer { padding:50px 36px 24px;border-top:1px solid var(--border); }
   </div>
 </section>
 
+</div>
+<div class="tab-page" id="page-blog">
 <!-- SEO BLOG -->
 <section class="blog" id="blog" style="padding:80px 36px;">
   <div style="text-align:center;">
@@ -949,6 +1018,8 @@ footer { padding:50px 36px 24px;border-top:1px solid var(--border); }
   </div>
 </section>
 
+</div>
+<div class="tab-page" id="page-forum">
 <!-- FORUM -->
 <section class="forum" id="forum">
   <div style="text-align:center;"><span class="section-label">TOPLULUK</span><h2 class="section-title" style="font-size:clamp(24px,3vw,38px);">Forum</h2></div>
@@ -986,21 +1057,252 @@ footer { padding:50px 36px 24px;border-top:1px solid var(--border); }
       <button class="legal-tab" onclick="showLegal(3,this)">KVKK</button>
       <button class="legal-tab" onclick="showLegal(4,this)">Çerez</button>
     </div>
-    <div class="legal-content active" id="lt0"><h3>Kullanım Şartları</h3><p>İşbu şartlar Calejon web sitesi ve hizmetlerinin kullanımını düzenler. Siteyi kullanarak şartları kabul etmiş sayılırsınız. Site "olduğu gibi" sunulur. Forum ve topluluklarda hakaret, spam ve yanıltıcı içerik yasaktır.</p><h3>Fikri Mülkiyet</h3><p>Sitedeki tüm içerikler Calejon'un mülkiyetindedir. İzinsiz kopyalama ve ticari kullanım yasaktır. AI tarafından üretilen görseller kişisel kullanım içindir.</p></div>
-    <div class="legal-content" id="lt1"><h3>Gizlilik Politikası</h3><p>Fotoğraflarınız sunucuya gönderilmez, tarayıcınızda işlenir. Forum ve hesap bilgileri (ad, e-posta) yalnızca hizmet sunumu için kullanılır. Veriler üçüncü taraflarla paylaşılmaz. SSL şifreleme ile korunur.</p></div>
-    <div class="legal-content" id="lt2"><h3>İade Politikası</h3><p>14 gün içinde koşulsuz iade. Ürün kullanılmamış ve etiketli olmalı. Limited edition yalnızca değişim. İade kargo müşteriye ait. Ödeme iadesi 5-10 iş günü.</p></div>
-    <div class="legal-content" id="lt3"><h3>KVKK Aydınlatma</h3><p>6698 sayılı KVKK kapsamında veri sorumlusu Calejon Tekstil A.Ş.'dir. Kimlik, iletişim, işlem bilgileri işlenir. Fotoğraflar saklanmaz. Haklarınız: öğrenme, düzeltme, silme, itiraz. Başvuru: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="49223f2222092a28252c232627672a2624">[email&#160;protected]</a></p></div>
-    <div class="legal-content" id="lt4"><h3>Çerez Politikası</h3><p>Zorunlu, analiz ve tercih çerezleri kullanılır. Tarayıcı ayarlarından yönetebilirsiniz. Bazı özellikler çerez olmadan çalışmayabilir.</p></div>
+    <div class="legal-content active" id="lt0"><h3>Kullanım Şartları</h3><p>İşbu şartlar Calejon web sitesi ve hizmetlerinin kullanımını düzenler. Siteyi kullanarak şartları kabul etmiş sayılırsınız.</p></div>
+    <div class="legal-content" id="lt1"><h3>Gizlilik Politikası</h3><p>Fotoğraflarınız sunucuya gönderilmez, tarayıcınızda işlenir. Veriler üçüncü taraflarla paylaşılmaz.</p></div>
+    <div class="legal-content" id="lt2"><h3>İade Politikası</h3><p>14 gün içinde koşulsuz iade. Ürün kullanılmamış ve etiketli olmalı.</p></div>
+    <div class="legal-content" id="lt3"><h3>KVKK Aydınlatma</h3><p>6698 sayılı KVKK kapsamında veri sorumlusu Calejon Tekstil A.Ş.'dir.</p></div>
+    <div class="legal-content" id="lt4"><h3>Çerez Politikası</h3><p>Zorunlu, analiz ve tercih çerezleri kullanılır.</p></div>
   </div>
 </section>
+
+</div>
+
+
+<!-- WORLD CUP SECTION -->
+<div class="tab-page" id="page-worldcup">
+<section class="wc-section" id="worldcup">
+  <span class="section-label">⚽ FIFA DÜNYA KUPASI</span>
+  <h2 class="section-title" style="font-size:clamp(24px,3.5vw,38px);">Dünya Kupası Ansiklopedisi</h2>
+  <p class="section-desc" style="margin:0 auto 16px;">2026 fikstürü, tüm zamanların sonuçları ve 20 yıllık haberleri</p>
+
+  <div class="wc-tabs">
+    <button class="wc-tab active" onclick="showWC('wc2026')">🏆 2026 Fikstür</button>
+    <button class="wc-tab" onclick="showWC('wcpast')">📜 Tüm Sonuçlar</button>
+    <button class="wc-tab" onclick="showWC('wcnews')">📰 20 Yıl Haberler</button>
+  </div>
+
+  <!-- 2026 FİKSTÜR -->
+  <div class="wc-panel active" id="wc2026">
+    <div style="text-align:center;margin-bottom:20px;">
+      <h3 style="font-family:'Playfair Display',serif;font-size:22px;">🇺🇸🇨🇦🇲🇽 2026 FIFA Dünya Kupası</h3>
+      <p style="font-size:13px;color:var(--text-dim);">11 Haziran – 19 Temmuz 2026 · 48 Takım · 104 Maç · 16 Şehir</p>
+    </div>
+
+    <div class="wc-card open" onclick="this.classList.toggle('open')">
+      <div class="wc-card-head"><span class="wc-card-title">A Grubu</span><span class="wc-card-badge">Mexico City</span></div>
+      <div class="wc-card-body">🇲🇽 Meksika · 🇰🇷 Güney Kore · 🇿🇦 Güney Afrika · Playoff D Galibi<br><b>Açılış:</b> 11 Haz — Meksika vs Güney Afrika (Estadio Azteca)</div>
+    </div>
+    <div class="wc-card" onclick="this.classList.toggle('open')">
+      <div class="wc-card-head"><span class="wc-card-title">B Grubu</span><span class="wc-card-badge">Toronto</span></div>
+      <div class="wc-card-body">🇨🇦 Kanada · 🇨🇭 İsviçre · 🇶🇦 Katar · Playoff A Galibi<br><b>12 Haz:</b> Kanada vs Playoff A Galibi (BMO Field)</div>
+    </div>
+    <div class="wc-card" onclick="this.classList.toggle('open')">
+      <div class="wc-card-head"><span class="wc-card-title">C Grubu</span><span class="wc-card-badge">🔥 Brezilya-Fas</span></div>
+      <div class="wc-card-body">🇧🇷 Brezilya · 🇲🇦 Fas · 🏴 İskoçya · 🇭🇹 Haiti</div>
+    </div>
+    <div class="wc-card" onclick="this.classList.toggle('open')">
+      <div class="wc-card-head"><span class="wc-card-title">D Grubu</span><span class="wc-card-badge">ABD Ev Sahibi</span></div>
+      <div class="wc-card-body">🇺🇸 ABD · 🇦🇺 Avustralya · 🇵🇾 Paraguay · Playoff C Galibi<br><b>12 Haz:</b> ABD vs Paraguay (SoFi Stadium, LA)</div>
+    </div>
+    <div class="wc-card" onclick="this.classList.toggle('open')">
+      <div class="wc-card-head"><span class="wc-card-title">E Grubu</span><span class="wc-card-badge">Almanya</span></div>
+      <div class="wc-card-body">🇩🇪 Almanya · 🇪🇨 Ekvador · 🇨🇮 Fildişi Sahili · 🇨🇼 Curaçao</div>
+    </div>
+    <div class="wc-card" onclick="this.classList.toggle('open')">
+      <div class="wc-card-head"><span class="wc-card-title">F Grubu</span><span class="wc-card-badge">🔥 Hollanda-Japonya</span></div>
+      <div class="wc-card-body">🇳🇱 Hollanda · 🇯🇵 Japonya · 🇹🇳 Tunus · Playoff B Galibi</div>
+    </div>
+    <div class="wc-card" onclick="this.classList.toggle('open')">
+      <div class="wc-card-head"><span class="wc-card-title">G Grubu</span><span class="wc-card-badge">Belçika</span></div>
+      <div class="wc-card-body">🇧🇪 Belçika · 🇮🇷 İran · 🇪🇬 Mısır · 🇳🇿 Yeni Zelanda</div>
+    </div>
+    <div class="wc-card" onclick="this.classList.toggle('open')">
+      <div class="wc-card-head"><span class="wc-card-title">H Grubu</span><span class="wc-card-badge">İspanya #1</span></div>
+      <div class="wc-card-body">🇪🇸 İspanya · 🇺🇾 Uruguay · 🇸🇦 Suudi Arabistan · 🇨🇻 Cabo Verde</div>
+    </div>
+    <div class="wc-card" onclick="this.classList.toggle('open')">
+      <div class="wc-card-head"><span class="wc-card-title">I Grubu</span><span class="wc-card-badge">Fransa</span></div>
+      <div class="wc-card-body">🇫🇷 Fransa · 🇸🇳 Senegal · 🇳🇴 Norveç · FIFA Playoff 2 Galibi</div>
+    </div>
+    <div class="wc-card" onclick="this.classList.toggle('open')">
+      <div class="wc-card-head"><span class="wc-card-title">J Grubu</span><span class="wc-card-badge">Arjantin #2</span></div>
+      <div class="wc-card-body">🇦🇷 Arjantin · 🇦🇹 Avusturya · 🇩🇿 Cezayir · 🇯🇴 Ürdün</div>
+    </div>
+    <div class="wc-card" onclick="this.classList.toggle('open')">
+      <div class="wc-card-head"><span class="wc-card-title">K Grubu</span><span class="wc-card-badge">Portekiz</span></div>
+      <div class="wc-card-body">🇵🇹 Portekiz · 🇨🇴 Kolombiya · 🇺🇿 Özbekistan · FIFA Playoff 1 Galibi</div>
+    </div>
+    <div class="wc-card" onclick="this.classList.toggle('open')">
+      <div class="wc-card-head"><span class="wc-card-title">L Grubu</span><span class="wc-card-badge">💀 Ölüm Grubu</span></div>
+      <div class="wc-card-body">🏴 İngiltere · 🇭🇷 Hırvatistan · 🇵🇦 Panama · 🇬🇭 Gana</div>
+    </div>
+
+    <div style="margin-top:20px;padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:8px;">
+      <h4 style="font-family:'Playfair Display',serif;margin-bottom:8px;">📅 Önemli Tarihler</h4>
+      <p style="font-size:12px;color:var(--text-mid);line-height:2;">
+        <b>11 Haz:</b> Açılış — Meksika vs G.Afrika (Azteca) · <b>12 Haz:</b> ABD vs Paraguay (LA) · Kanada vs Playoff (Toronto)<br>
+        <b>13-28 Haz:</b> Grup Aşaması · <b>30 Haz-2 Tem:</b> Son 32 · <b>4-7 Tem:</b> Son 16<br>
+        <b>10-12 Tem:</b> Çeyrek Final · <b>14 Tem:</b> Yarı Final 1 (Dallas) · <b>15 Tem:</b> Yarı Final 2 (Atlanta)<br>
+        <b>18 Tem:</b> 3.lük Maçı (Miami) · <b style="color:var(--gold);">19 Tem: FİNAL (MetLife Stadium, New Jersey)</b>
+      </p>
+    </div>
+  </div>
+
+  <!-- TÜM ZAMANLAR SONUÇLARI -->
+  <div class="wc-panel" id="wcpast">
+    <h3 style="font-family:'Playfair Display',serif;font-size:20px;text-align:center;margin-bottom:16px;">🏆 Tüm Zamanların Dünya Kupası Sonuçları (1930-2022)</h3>
+    <table class="wc-table">
+      <thead><tr><th>Yıl</th><th>Ev Sahibi</th><th>Şampiyon</th><th>Final</th><th>İkinci</th><th>3.</th></tr></thead>
+      <tbody>
+        <tr><td><b>2022</b></td><td>🇶🇦 Katar</td><td>🇦🇷 Arjantin</td><td>3-3 (pen 4-2)</td><td>🇫🇷 Fransa</td><td>🇭🇷 Hırvatistan</td></tr>
+        <tr><td><b>2018</b></td><td>🇷🇺 Rusya</td><td>🇫🇷 Fransa</td><td>4-2</td><td>🇭🇷 Hırvatistan</td><td>🇧🇪 Belçika</td></tr>
+        <tr><td><b>2014</b></td><td>🇧🇷 Brezilya</td><td>🇩🇪 Almanya</td><td>1-0 (uzatma)</td><td>🇦🇷 Arjantin</td><td>🇳🇱 Hollanda</td></tr>
+        <tr><td><b>2010</b></td><td>🇿🇦 G.Afrika</td><td>🇪🇸 İspanya</td><td>1-0 (uzatma)</td><td>🇳🇱 Hollanda</td><td>🇩🇪 Almanya</td></tr>
+        <tr><td><b>2006</b></td><td>🇩🇪 Almanya</td><td>🇮🇹 İtalya</td><td>1-1 (pen 5-3)</td><td>🇫🇷 Fransa</td><td>🇩🇪 Almanya</td></tr>
+        <tr><td><b>2002</b></td><td>🇰🇷🇯🇵</td><td>🇧🇷 Brezilya</td><td>2-0</td><td>🇩🇪 Almanya</td><td>🇹🇷 Türkiye</td></tr>
+        <tr><td><b>1998</b></td><td>🇫🇷 Fransa</td><td>🇫🇷 Fransa</td><td>3-0</td><td>🇧🇷 Brezilya</td><td>🇭🇷 Hırvatistan</td></tr>
+        <tr><td><b>1994</b></td><td>🇺🇸 ABD</td><td>🇧🇷 Brezilya</td><td>0-0 (pen 3-2)</td><td>🇮🇹 İtalya</td><td>🇸🇪 İsveç</td></tr>
+        <tr><td><b>1990</b></td><td>🇮🇹 İtalya</td><td>🇩🇪 B.Almanya</td><td>1-0</td><td>🇦🇷 Arjantin</td><td>🇮🇹 İtalya</td></tr>
+        <tr><td><b>1986</b></td><td>🇲🇽 Meksika</td><td>🇦🇷 Arjantin</td><td>3-2</td><td>🇩🇪 B.Almanya</td><td>🇫🇷 Fransa</td></tr>
+        <tr><td><b>1982</b></td><td>🇪🇸 İspanya</td><td>🇮🇹 İtalya</td><td>3-1</td><td>🇩🇪 B.Almanya</td><td>🇵🇱 Polonya</td></tr>
+        <tr><td><b>1978</b></td><td>🇦🇷 Arjantin</td><td>🇦🇷 Arjantin</td><td>3-1 (uzatma)</td><td>🇳🇱 Hollanda</td><td>🇧🇷 Brezilya</td></tr>
+        <tr><td><b>1974</b></td><td>🇩🇪 B.Almanya</td><td>🇩🇪 B.Almanya</td><td>2-1</td><td>🇳🇱 Hollanda</td><td>🇵🇱 Polonya</td></tr>
+        <tr><td><b>1970</b></td><td>🇲🇽 Meksika</td><td>🇧🇷 Brezilya</td><td>4-1</td><td>🇮🇹 İtalya</td><td>🇩🇪 B.Almanya</td></tr>
+        <tr><td><b>1966</b></td><td>🏴 İngiltere</td><td>🏴 İngiltere</td><td>4-2 (uzatma)</td><td>🇩🇪 B.Almanya</td><td>🇵🇹 Portekiz</td></tr>
+        <tr><td><b>1962</b></td><td>🇨🇱 Şili</td><td>🇧🇷 Brezilya</td><td>3-1</td><td>🇨🇿 Çekoslovakya</td><td>🇨🇱 Şili</td></tr>
+        <tr><td><b>1958</b></td><td>🇸🇪 İsveç</td><td>🇧🇷 Brezilya</td><td>5-2</td><td>🇸🇪 İsveç</td><td>🇫🇷 Fransa</td></tr>
+        <tr><td><b>1954</b></td><td>🇨🇭 İsviçre</td><td>🇩🇪 B.Almanya</td><td>3-2</td><td>🇭🇺 Macaristan</td><td>🇦🇹 Avusturya</td></tr>
+        <tr><td><b>1950</b></td><td>🇧🇷 Brezilya</td><td>🇺🇾 Uruguay</td><td>2-1*</td><td>🇧🇷 Brezilya</td><td>🇸🇪 İsveç</td></tr>
+        <tr><td><b>1938</b></td><td>🇫🇷 Fransa</td><td>🇮🇹 İtalya</td><td>4-2</td><td>🇭🇺 Macaristan</td><td>🇧🇷 Brezilya</td></tr>
+        <tr><td><b>1934</b></td><td>🇮🇹 İtalya</td><td>🇮🇹 İtalya</td><td>2-1 (uzatma)</td><td>🇨🇿 Çekoslovakya</td><td>🇩🇪 Almanya</td></tr>
+        <tr><td><b>1930</b></td><td>🇺🇾 Uruguay</td><td>🇺🇾 Uruguay</td><td>4-2</td><td>🇦🇷 Arjantin</td><td>🇺🇸 ABD</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:11px;color:var(--text-dim);margin-top:8px;">* 1950'de final grubu formatı uygulandı, belirleyici maç skoru gösterilmiştir.</p>
+
+    <div style="margin-top:20px;padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:8px;">
+      <h4 style="font-family:'Playfair Display',serif;margin-bottom:10px;">🏆 Şampiyonluk Tablosu</h4>
+      <p style="font-size:13px;line-height:2;">
+        🇧🇷 <b>Brezilya:</b> 5 kupa (1958, 62, 70, 94, 2002)<br>
+        🇩🇪 <b>Almanya:</b> 4 kupa (1954, 74, 90, 2014)<br>
+        🇮🇹 <b>İtalya:</b> 4 kupa (1934, 38, 82, 2006)<br>
+        🇦🇷 <b>Arjantin:</b> 3 kupa (1978, 86, 2022)<br>
+        🇫🇷 <b>Fransa:</b> 2 kupa (1998, 2018)<br>
+        🇺🇾 <b>Uruguay:</b> 2 kupa (1930, 50)<br>
+        🏴 <b>İngiltere:</b> 1 kupa (1966) · 🇪🇸 <b>İspanya:</b> 1 kupa (2010)
+      </p>
+    </div>
+  </div>
+
+  <!-- 20 YIL HABERLER -->
+  <div class="wc-panel" id="wcnews">
+    <h3 style="font-family:'Playfair Display',serif;font-size:20px;text-align:center;margin-bottom:16px;">📰 Dünya Kupası: 20 Yıllık Haberler (2006-2026)</h3>
+
+    <div class="wc-news" onclick="this.classList.toggle('open')">
+      <div class="wc-news-head"><span>🇩🇪 Zidane'ın Kafa Atması ve İtalya'nın Zaferi</span><span class="wc-news-date">9 Tem 2006</span></div>
+      <div class="wc-news-body">Berlin'deki Dünya Kupası finalinde Fransa'nın efsanesi Zinedine Zidane, 110. dakikada İtalya'nın Marco Materazzi'sine sözlü tahrik sonrası göğsüne kafa attı ve kırmızı kart gördü. Kariyerinin son maçında sahayı böyle terk etti. İtalya penaltılarla 5-3 kazanarak 4. kupasını aldı. Zidane bu olaya rağmen turnuvanın Altın Top'unu kazandı.</div>
+    </div>
+    <div class="wc-news" onclick="this.classList.toggle('open')">
+      <div class="wc-news-head"><span>🇿🇦 Afrika Kıtasında İlk Dünya Kupası</span><span class="wc-news-date">11 Haz 2010</span></div>
+      <div class="wc-news-body">Güney Afrika, turnuvaya ev sahipliği yapan ilk Afrika ülkesi oldu. Siphiwe Tshabalala'nın açılış golü tarihe geçti. Vuvuzela borazanları turnuvanın simgesi oldu. Nelson Mandela son kez kamuoyu önüne çıktı.</div>
+    </div>
+    <div class="wc-news" onclick="this.classList.toggle('open')">
+      <div class="wc-news-head"><span>🇪🇸 İspanya İlk Dünya Kupasını Kazandı</span><span class="wc-news-date">11 Tem 2010</span></div>
+      <div class="wc-news-body">İspanya, Hollanda'yı uzatmalarda 1-0 yendi. Andrés Iniesta'nın 116. dakika golü final tarihinin en geç golü oldu. İspanya, kendi toprakları dışında kupa kazanan ilk Avrupa takımı oldu. Ahtapot Paul tüm maç sonuçlarını doğru bildi.</div>
+    </div>
+    <div class="wc-news" onclick="this.classList.toggle('open')">
+      <div class="wc-news-head"><span>🇶🇦 Katar ve Rusya Dünya Kupası Ev Sahipliğini Aldı</span><span class="wc-news-date">2 Ara 2010</span></div>
+      <div class="wc-news-body">FIFA'nın tartışmalı kararıyla 2018 Rusya'ya, 2022 Katar'a verildi. Katar'ın seçilmesi dünyayı şaşırttı — stadyum yok, yaz 50°C. Rüşvet iddiaları anında gündeme geldi. Bu karar futbol tarihinin en tartışmalı anlarından biri oldu.</div>
+    </div>
+    <div class="wc-news" onclick="this.classList.toggle('open')">
+      <div class="wc-news-head"><span>🇧🇷 Almanya 7-1 Brezilya — "Mineirazo"</span><span class="wc-news-date">8 Tem 2014</span></div>
+      <div class="wc-news-body">Dünya Kupası tarihinin en şok edici sonucu. Almanya, ev sahibi Brezilya'yı yarı finalde ilk 29 dakikada 5 gol atarak 7-1 yendi. Brezilya sakatlanan Neymar ve cezalı kaptan Thiago Silva'dan yoksundu. Miroslav Klose 16. Dünya Kupası golüyle tüm zamanların en golcü oyuncusu oldu.</div>
+    </div>
+    <div class="wc-news" onclick="this.classList.toggle('open')">
+      <div class="wc-news-head"><span>🇩🇪 Almanya 4. Kupasını Kazandı</span><span class="wc-news-date">13 Tem 2014</span></div>
+      <div class="wc-news-body">Almanya, Maracanã'da Arjantin'i Mario Götze'nin 113. dakika golüyle 1-0 yendi. Avrupa'dan Amerika kıtasında kupa kazanan ilk takım oldu. Messi Altın Top'u aldı ama finali kaybetti.</div>
+    </div>
+    <div class="wc-news" onclick="this.classList.toggle('open')">
+      <div class="wc-news-head"><span>⚖️ FIFAgate: Zürich'te Büyük Baskın</span><span class="wc-news-date">27 May 2015</span></div>
+      <div class="wc-news-body">İsviçre polisi, ABD makamlarının talebiyle Zürich'teki lüks otelde şafak baskınıyla 7 FIFA yetkilisini tutukladı. 24 yıl boyunca 150 milyon dolarlık rüşvet, şantaj ve kara para aklama suçlamaları. Spor tarihinin en büyük yolsuzluk skandalı başladı.</div>
+    </div>
+    <div class="wc-news" onclick="this.classList.toggle('open')">
+      <div class="wc-news-head"><span>👋 Blatter İstifa Etti, Infantino Başkan Oldu</span><span class="wc-news-date">2015-2016</span></div>
+      <div class="wc-news-body">Sepp Blatter tutuklamalardan 2 gün sonra yeniden seçildi ama hemen istifa niyetini açıkladı. Blatter ve UEFA Başkanı Platini'ye 6 yıl men cezası verildi. 26 Şubat 2016'da Gianni Infantino yeni FIFA başkanı seçildi.</div>
+    </div>
+    <div class="wc-news" onclick="this.classList.toggle('open')">
+      <div class="wc-news-head"><span>📐 48 Takımlı Format Onaylandı</span><span class="wc-news-date">10 Oca 2017</span></div>
+      <div class="wc-news-body">FIFA, 2026'dan itibaren Dünya Kupası'nı 32'den 48 takıma genişletme kararını oybirliğiyle aldı. 12 grup × 4 takım formatı ile 104 maç oynanacak. Daha fazla ülkeye şans, ama turnuva 39 güne uzadı.</div>
+    </div>
+    <div class="wc-news" onclick="this.classList.toggle('open')">
+      <div class="wc-news-head"><span>📹 VAR İlk Kez Dünya Kupasında Kullanıldı</span><span class="wc-news-date">14 Haz 2018</span></div>
+      <div class="wc-news-body">Video Yardımcı Hakem (VAR) sistemi Rusya'da tarihte ilk kez Dünya Kupası'nda uygulandı. Doğru karar oranı %99,3'e yükseldi. Rekor 29 penaltı verildi. Futbolda teknoloji devriminin başlangıcı oldu.</div>
+    </div>
+    <div class="wc-news" onclick="this.classList.toggle('open')">
+      <div class="wc-news-head"><span>🇩🇪 Şampiyon Almanya Gruptan Elendi!</span><span class="wc-news-date">27 Haz 2018</span></div>
+      <div class="wc-news-body">Şampiyon Almanya, Güney Kore'ye 2-0 yenilerek 1938'den beri ilk kez grup aşamasında elendi. Dünya futbolunda deprem etkisi yarattı. "Şampiyon laneti" kavramı güçlendi.</div>
+    </div>
+    <div class="wc-news" onclick="this.classList.toggle('open')">
+      <div class="wc-news-head"><span>🇫🇷 Mbappé Sahneye Çıktı, Fransa Şampiyon</span><span class="wc-news-date">15 Tem 2018</span></div>
+      <div class="wc-news-body">19 yaşındaki Kylian Mbappé dünyaya kendini tanıttı. Fransa, Hırvatistan'ı 4-2 yenerek 2. kupasını kazandı. Mbappé finalde gol atan ikinci genç oyuncu oldu (Pelé'den sonra). 4 milyonluk Hırvatistan ilk kez finalde.</div>
+    </div>
+    <div class="wc-news" onclick="this.classList.toggle('open')">
+      <div class="wc-news-head"><span>🇺🇸🇨🇦🇲🇽 2026 Ev Sahipliği United Bid'e Verildi</span><span class="wc-news-date">13 Haz 2018</span></div>
+      <div class="wc-news-body">Moskova'daki FIFA Kongresi'nde ABD-Kanada-Meksika ortak adaylığı, Fas'ı 134-65 oyla yenerek 2026 ev sahipliğini kazandı. Tarihteki ilk 3 ülkeli Dünya Kupası olacak.</div>
+    </div>
+    <div class="wc-news" onclick="this.classList.toggle('open')">
+      <div class="wc-news-head"><span>🏗️ Katar'da Göçmen İşçi Krizi</span><span class="wc-news-date">2011-2022</span></div>
+      <div class="wc-news-body">Stadyum inşaatları için Güney Asya ve Afrika'dan gelen yüz binlerce göçmen işçi sömürüye maruz kaldı. Guardian gazetesi 2010'dan bu yana 6.500+ göçmen işçinin öldüğünü raporladı. Katar sadece 3 iş kazası ölümü kabul etti. Dünya genelinde büyük protestolar yaşandı.</div>
+    </div>
+    <div class="wc-news" onclick="this.classList.toggle('open')">
+      <div class="wc-news-head"><span>❄️ İlk Kış Dünya Kupası Katar'da Başladı</span><span class="wc-news-date">20 Kas 2022</span></div>
+      <div class="wc-news-body">Katar, Kasım-Aralık'ta oynanan ilk Dünya Kupası'na ev sahipliği yaptı. LGBTİ+ hakları, alkol yasakları (turnuvadan 2 gün önce stadyumlarda bira satışı yasaklandı) tartışma konusu olmaya devam etti. Avrupa liglerinin ortasında oynanan ilk turnuva.</div>
+    </div>
+    <div class="wc-news" onclick="this.classList.toggle('open')">
+      <div class="wc-news-head"><span>🇸🇦 Suudi Arabistan Arjantin'i Devirdi!</span><span class="wc-news-date">22 Kas 2022</span></div>
+      <div class="wc-news-body">Tarihin en büyük sürprizlerinden biri: 51. sıradaki Suudi Arabistan, 36 maçlık yenilmezlik serisindeki Arjantin'i 2-1 yendi. Suudi Kralı ulusal tatil ilan etti. Ertesi gün Japonya da Almanya'yı 2-1 yendi.</div>
+    </div>
+    <div class="wc-news" onclick="this.classList.toggle('open')">
+      <div class="wc-news-head"><span>🇲🇦 Fas Yarı Finale Çıkan İlk Afrika Takımı Oldu</span><span class="wc-news-date">Ara 2022</span></div>
+      <div class="wc-news-body">Fas, yarı finale ulaşan ilk Afrika ve ilk Arap takımı oldu. Belçika'yı 2-0, İspanya'yı penaltılarla, Portekiz'i 1-0 elediler. Yarı finalde Fransa'ya 0-2 yenildiler ama tüm Afrika kıtasının gururu oldular.</div>
+    </div>
+    <div class="wc-news" onclick="this.classList.toggle('open')">
+      <div class="wc-news-head"><span>👩‍⚖️ Dünya Kupasında İlk Kadın Hakemler</span><span class="wc-news-date">Ara 2022</span></div>
+      <div class="wc-news-body">Stéphanie Frappart (Fransa), Salima Mukansanga (Ruanda) ve Yoshimi Yamashita (Japonya), erkekler Dünya Kupası'nda görev alan ilk kadın hakemler oldu. Futbolda cinsiyet eşitliği açısından tarihi bir adım.</div>
+    </div>
+    <div class="wc-news" onclick="this.classList.toggle('open')">
+      <div class="wc-news-head"><span>🇦🇷 Messi Tahtına Oturdu — Tarihin En İyi Finali</span><span class="wc-news-date">18 Ara 2022</span></div>
+      <div class="wc-news-body">Arjantin 3-3 Fransa, penaltılarla 4-2 Arjantin. Messi 2 gol, Mbappé hat-trick yaptı. 35 yaşındaki Messi kariyerinde eksik kalan tek kupayı kazanarak "tarihin en iyisi" tartışmasında tahtını pekiştirdi. Arjantin'in 3. kupası. Tarihin en çok izlenen final maçı.</div>
+    </div>
+    <div class="wc-news" onclick="this.classList.toggle('open')">
+      <div class="wc-news-head"><span>📋 2026 Formatı ve Maç Programı Kesinleşti</span><span class="wc-news-date">2023-2024</span></div>
+      <div class="wc-news-body">FIFA, 2026 için 12 grup × 4 takım formatını onayladı (16 grup × 3 modeli terk edildi). 104 maçın 16 şehirdeki tam programı açıklandı. MetLife Stadium'daki final 19 Temmuz 2026 olarak belirlendi. Turnuva 39 gün sürecek.</div>
+    </div>
+    <div class="wc-news" onclick="this.classList.toggle('open')">
+      <div class="wc-news-head"><span>🎰 2026 Kura Çekildi — 48 Takım 12 Gruba Ayrıldı</span><span class="wc-news-date">5 Ara 2025</span></div>
+      <div class="wc-news-body">Washington D.C.'deki Kennedy Center'da kura çekildi. Sunucu Kevin Hart ve Heidi Klum, kurayı çeken Rio Ferdinand. ABD Başkanı Trump, Meksika Devlet Başkanı Sheinbaum ve Kanada Başbakanı Carney törene katıldı. İngiltere-Hırvatistan "ölüm grubu" ilan edildi. 42 takım kesin, 6 playoff yeri Mart 2026'da belirlenecek.</div>
+    </div>
+    <div class="wc-news" onclick="this.classList.toggle('open')">
+      <div class="wc-news-head"><span>⚽ 2026'ya Son Hazırlıklar</span><span class="wc-news-date">Şubat 2026</span></div>
+      <div class="wc-news-body">UEFA'dan 4 playoff (İtalya, Türkiye, Ukrayna, Danimarka yolları) ve 2 kıtalararası playoff ile kalan 6 yer Mart 2026'da belirlenecek. Messi (38) ve Ronaldo (41) muhtemelen son Dünya Kupalarına çıkacak. Curaçao, Cabo Verde, Ürdün ve Özbekistan tarihlerinde ilk kez katılacak. Estadio Azteca 3 farklı Dünya Kupası'na ev sahipliği yapan tek stadyum olacak.</div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- WC FOOTER BUTTON -->
+<div style="text-align:center;padding:30px 24px;background:var(--surface);">
+  <button onclick="showTab('worldcup')" style="padding:16px 40px;background:linear-gradient(135deg,var(--gold),#ff5500);border:none;border-radius:10px;color:#fff;font-size:15px;font-weight:700;letter-spacing:2px;cursor:pointer;font-family:'DM Sans',sans-serif;box-shadow:0 4px 20px rgba(255,120,0,0.3);transition:all .3s;">⚽ DÜNYA KUPASI ANSİKLOPEDİSİ</button>
+  <p style="font-size:11px;color:var(--text-dim);margin-top:8px;">2026 Fikstür · Tüm Sonuçlar (1930-2022) · 20 Yıllık Haberler</p>
+</div>
 
 <!-- FOOTER -->
 <footer>
   <div class="footer-grid">
-    <div class="footer-col"><h4>Marka</h4><a onclick="goTo('hero')">Ana Sayfa</a><a onclick="goTo('products')">Koleksiyon</a><a onclick="goTo('aigen')">AI Görsel</a></div>
-    <div class="footer-col"><h4>Destek</h4><a href="#">SSS</a><a href="#">Beden Rehberi</a><a href="/cdn-cgi/l/email-protection#6703021413020c2704060b020d08094904080a"><span class="__cf_email__" data-cfemail="e581809691808ea5868489808f8a8bcb868a88">[email&#160;protected]</span></a></div>
-    <div class="footer-col"><h4>Yasal</h4><a onclick="goTo('legal')">Kullanım Şartları</a><a onclick="goTo('legal')">Gizlilik</a><a onclick="goTo('legal')">KVKK</a></div>
-    <div class="footer-col"><h4>İletişim</h4><a href="/cdn-cgi/l/email-protection#fe97909891be9d9f929b949190d09d9193"><span class="__cf_email__" data-cfemail="d4bdbab2bb94b7b5b8b1bebbbafab7bbb9">[email&#160;protected]</span></a><a href="#">İstanbul, Türkiye</a></div>
+    <div class="footer-col"><h4>Marka</h4><a onclick="showTab('hero')">Ana Sayfa</a><a onclick="showTab('products')">Mağaza</a><a onclick="showTab('blog')">Blog</a></div>
+    <div class="footer-col"><h4>Destek</h4><a onclick="showTab('forum')">Forum & Yasal</a><a onclick="showTab('ai')">AI Asistan</a><a onclick="showTab('tryon')">Sanal Deneme</a></div>
+    <div class="footer-col"><h4>Eğlence</h4><a onclick="showTab('snake')">🐍 Yılan Oyunu</a><a onclick="showTab('games')">🎮 Diğer Oyunlar</a><a onclick="showTab('worldcup')">⚽ Dünya Kupası</a></div>
+    <div class="footer-col"><h4>İletişim</h4><a href="mailto:info@calejon.com">info@calejon.com</a><a href="#">İstanbul, Türkiye</a><a href="https://youtube.com/@calejon" target="_blank" style="color:#ff4444;">▶ YouTube</a></div>
   </div>
   <div class="footer-bottom">© 2026 CALEJON — TÜM HAKLARI SAKLIDIR</div>
 </footer>
@@ -1010,6 +1312,20 @@ footer { padding:50px 36px 24px;border-top:1px solid var(--border); }
 // ====================== UTILS ======================
 function goTo(id){document.getElementById(id).scrollIntoView({behavior:'smooth'});}
 function toggleMenu(){document.getElementById('mobMenu').classList.toggle('open');}
+
+// TAB NAVIGATION
+var tabMap={'hero':'page-hero','snake':'page-snake','quickbar':'page-quick','products':'page-shop','tryon':'page-tryon','ai':'page-ai','games':'page-games','blog':'page-blog','forum':'page-forum','worldcup':'page-worldcup'};
+function showTab(name){
+  var pages=document.querySelectorAll('.tab-page');
+  pages.forEach(function(p){p.classList.remove('active');});
+  var pid=tabMap[name]||('page-'+name);
+  var el=document.getElementById(pid);
+  if(el){el.classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
+  // close mobile menu
+  document.getElementById('mobMenu').classList.remove('open');
+  // highlight active nav
+  document.querySelectorAll('.nav-links a').forEach(function(a){a.classList.remove('nav-active');});
+}
 
 // ====================== THEME ======================
 function toggleTheme(){
@@ -1101,20 +1417,20 @@ var pwups=['🎩','👒','🧢','💎','⭐'];
 function rstSnk(){snk=[{x:10,y:10},{x:9,y:10},{x:8,y:10}];sdir={x:1,y:0};ndir={x:1,y:0};sscore=0;speed=1;ticks2=0;placeF();document.getElementById('snkScore').textContent='0';document.getElementById('snkSpeed').textContent='1';}
 function placeF(){var ok=false;while(!ok){food={x:Math.floor(Math.random()*COLS),y:Math.floor(Math.random()*ROWS)};ok=true;for(var i=0;i<snk.length;i++)if(snk[i].x===food.x&&snk[i].y===food.y){ok=false;break;}}foodType=Math.floor(Math.random()*pwups.length);}
 function drawSnk(){
-  snkCx.fillStyle='#0a0a0a';snkCx.fillRect(0,0,480,480);
-  snkCx.strokeStyle='rgba(193,163,120,.04)';snkCx.lineWidth=.5;
+  snkCx.fillStyle='#111';snkCx.fillRect(0,0,480,480);
+  snkCx.strokeStyle='rgba(255,120,0,.04)';snkCx.lineWidth=.5;
   for(var i=0;i<=COLS;i++){snkCx.beginPath();snkCx.moveTo(i*GRID,0);snkCx.lineTo(i*GRID,480);snkCx.stroke();}
   for(var i=0;i<=ROWS;i++){snkCx.beginPath();snkCx.moveTo(0,i*GRID);snkCx.lineTo(480,i*GRID);snkCx.stroke();}
   snkCx.font='18px serif';snkCx.textAlign='center';snkCx.textBaseline='middle';
   snkCx.fillText(pwups[foodType],food.x*GRID+GRID/2,food.y*GRID+GRID/2);
   snkCx.beginPath();snkCx.arc(food.x*GRID+GRID/2,food.y*GRID+GRID/2,14,0,Math.PI*2);
-  snkCx.fillStyle='rgba(193,163,120,'+(0.05+Math.sin(ticks2*.1)*.04)+')';snkCx.fill();
+  snkCx.fillStyle='rgba(255,120,0,'+(0.05+Math.sin(ticks2*.1)*.04)+')';snkCx.fill();
   for(var i=snk.length-1;i>=0;i--){
     var s=snk[i],op=1-i/(snk.length*1.5);
-    if(i===0){snkCx.fillStyle='#c1a378';snkCx.beginPath();snkCx.roundRect(s.x*GRID+1,s.y*GRID+1,GRID-2,GRID-2,6);snkCx.fill();snkCx.fillStyle='#080706';var ex1=s.x*GRID+GRID*.3,ex2=s.x*GRID+GRID*.7,ey=s.y*GRID+GRID*.4;snkCx.beginPath();snkCx.arc(ex1,ey,2.5,0,Math.PI*2);snkCx.fill();snkCx.beginPath();snkCx.arc(ex2,ey,2.5,0,Math.PI*2);snkCx.fill();snkCx.fillStyle='#1a1a1a';snkCx.fillRect(s.x*GRID+3,s.y*GRID-2,GRID-6,5);snkCx.fillRect(s.x*GRID+6,s.y*GRID-7,GRID-12,7);}
-    else{var g=snkCx.createLinearGradient(s.x*GRID,s.y*GRID,s.x*GRID+GRID,s.y*GRID+GRID);g.addColorStop(0,'rgba(193,163,120,'+op+')');g.addColorStop(1,'rgba(160,128,80,'+op+')');snkCx.fillStyle=g;snkCx.beginPath();snkCx.roundRect(s.x*GRID+2,s.y*GRID+2,GRID-4,GRID-4,4);snkCx.fill();}
+    if(i===0){snkCx.fillStyle='#ff7800';snkCx.beginPath();snkCx.roundRect(s.x*GRID+1,s.y*GRID+1,GRID-2,GRID-2,6);snkCx.fill();snkCx.fillStyle='#111';var ex1=s.x*GRID+GRID*.3,ex2=s.x*GRID+GRID*.7,ey=s.y*GRID+GRID*.4;snkCx.beginPath();snkCx.arc(ex1,ey,2.5,0,Math.PI*2);snkCx.fill();snkCx.beginPath();snkCx.arc(ex2,ey,2.5,0,Math.PI*2);snkCx.fill();snkCx.fillStyle='#1a1a1a';snkCx.fillRect(s.x*GRID+3,s.y*GRID-2,GRID-6,5);snkCx.fillRect(s.x*GRID+6,s.y*GRID-7,GRID-12,7);}
+    else{var g=snkCx.createLinearGradient(s.x*GRID,s.y*GRID,s.x*GRID+GRID,s.y*GRID+GRID);g.addColorStop(0,'rgba(255,120,0,'+op+')');g.addColorStop(1,'rgba(255,120,0,'+op+')');snkCx.fillStyle=g;snkCx.beginPath();snkCx.roundRect(s.x*GRID+2,s.y*GRID+2,GRID-4,GRID-4,4);snkCx.fill();}
   }
-  if(!gameOn2&&sscore>0){snkCx.fillStyle='rgba(0,0,0,.7)';snkCx.fillRect(0,180,480,120);snkCx.fillStyle='#c1a378';snkCx.font='bold 28px Playfair Display';snkCx.textAlign='center';snkCx.fillText('OYUN BİTTİ!',240,220);snkCx.font='16px DM Sans';snkCx.fillStyle='rgba(232,226,216,.6)';snkCx.fillText('Skor: '+sscore+(sscore>=highScore2?' — YENİ REKOR! 🏆':''),240,252);}
+  if(!gameOn2&&sscore>0){snkCx.fillStyle='rgba(0,0,0,.7)';snkCx.fillRect(0,180,480,120);snkCx.fillStyle='#ff7800';snkCx.font='bold 28px Playfair Display';snkCx.textAlign='center';snkCx.fillText('OYUN BİTTİ!',240,220);snkCx.font='16px DM Sans';snkCx.fillStyle='rgba(232,226,216,.6)';snkCx.fillText('Skor: '+sscore+(sscore>=highScore2?' — YENİ REKOR! 🏆':''),240,252);}
 }
 function updSnk(){
   ticks2++;sdir=ndir;var head={x:snk[0].x+sdir.x,y:snk[0].y+sdir.y};
@@ -1631,6 +1947,7 @@ function toggleForumNew(){document.getElementById('forumNew').classList.toggle('
 function postThread(){var t=document.getElementById('fTitle').value.trim(),b=document.getElementById('fBody').value.trim();if(!t||!b)return;threads.unshift({title:t,author:'Sen',body:b,replies:[]});document.getElementById('fTitle').value='';document.getElementById('fBody').value='';toggleForumNew();renderThreads();}
 function subNL(){var e=document.getElementById('nlEmail').value.trim();if(!e||e.indexOf('@')===-1)return;document.getElementById('nlMsg').textContent='✓ Kayıt yapıldı! İndirim kodu: CALEJON10';document.getElementById('nlMsg').style.display='block';document.getElementById('nlEmail').value='';}
 function showLegal(i,el){for(var n=0;n<5;n++)document.getElementById('lt'+n).classList.remove('active');document.querySelectorAll('.legal-tab').forEach(function(e){e.classList.remove('active');});document.getElementById('lt'+i).classList.add('active');el.classList.add('active');}
+function showWC(id){document.querySelectorAll('.wc-panel').forEach(function(p){p.classList.remove('active');});document.querySelectorAll('.wc-tab').forEach(function(t){t.classList.remove('active');});document.getElementById(id).classList.add('active');event.target.classList.add('active');}
 
 // ====================== GAME 1: AIR HOCKEY ======================
 var hkCv=document.getElementById('hockeyCanvas'),hkCx=hkCv.getContext('2d');
@@ -1638,14 +1955,14 @@ var hkW=360,hkH=500,hkBall,hkP,hkAI,hkScore,hkRunning=false,hkAnim;
 function rstHockeyState(){hkBall={x:180,y:250,vx:3,vy:3,r:10};hkP={x:180,y:440,r:24};hkAI={x:180,y:60,r:24};hkScore={p:0,ai:0};}
 function drawHockey(){
   hkCx.fillStyle='#1a2a1a';hkCx.fillRect(0,0,hkW,hkH);
-  hkCx.strokeStyle='rgba(193,163,120,.2)';hkCx.lineWidth=2;hkCx.beginPath();hkCx.moveTo(0,hkH/2);hkCx.lineTo(hkW,hkH/2);hkCx.stroke();
+  hkCx.strokeStyle='rgba(255,120,0,.2)';hkCx.lineWidth=2;hkCx.beginPath();hkCx.moveTo(0,hkH/2);hkCx.lineTo(hkW,hkH/2);hkCx.stroke();
   hkCx.beginPath();hkCx.arc(hkW/2,hkH/2,50,0,Math.PI*2);hkCx.stroke();
   // Goals
-  hkCx.fillStyle='rgba(193,163,120,.15)';hkCx.fillRect(120,0,120,6);hkCx.fillRect(120,hkH-6,120,6);
+  hkCx.fillStyle='rgba(255,120,0,.15)';hkCx.fillRect(120,0,120,6);hkCx.fillRect(120,hkH-6,120,6);
   // Ball
   hkCx.beginPath();hkCx.arc(hkBall.x,hkBall.y,hkBall.r,0,Math.PI*2);hkCx.fillStyle='#e8e2d8';hkCx.fill();
   // Player
-  hkCx.beginPath();hkCx.arc(hkP.x,hkP.y,hkP.r,0,Math.PI*2);hkCx.fillStyle='#c1a378';hkCx.fill();
+  hkCx.beginPath();hkCx.arc(hkP.x,hkP.y,hkP.r,0,Math.PI*2);hkCx.fillStyle='#ff7800';hkCx.fill();
   // AI
   hkCx.beginPath();hkCx.arc(hkAI.x,hkAI.y,hkAI.r,0,Math.PI*2);hkCx.fillStyle='#8b3a3a';hkCx.fill();
 }
@@ -1681,10 +1998,10 @@ function rstPlatform(){
 }
 function drawPlatform(){
   pfCx.fillStyle='#0a0a14';pfCx.fillRect(0,0,pfW,pfH);
-  pfPlats.forEach(function(p){pfCx.fillStyle='#2a2520';pfCx.fillRect(p.x,p.y,p.w,p.h);pfCx.fillStyle='rgba(193,163,120,.3)';pfCx.fillRect(p.x,p.y,p.w,2);});
-  pfCoins.forEach(function(c){if(!c.got){pfCx.fillStyle='#c1a378';pfCx.beginPath();pfCx.arc(c.x+6,c.y+6,6,0,Math.PI*2);pfCx.fill();}});
+  pfPlats.forEach(function(p){pfCx.fillStyle='#2a2520';pfCx.fillRect(p.x,p.y,p.w,p.h);pfCx.fillStyle='rgba(255,120,0,.3)';pfCx.fillRect(p.x,p.y,p.w,2);});
+  pfCoins.forEach(function(c){if(!c.got){pfCx.fillStyle='#ff7800';pfCx.beginPath();pfCx.arc(c.x+6,c.y+6,6,0,Math.PI*2);pfCx.fill();}});
   // Player (hat-wearing character)
-  pfCx.fillStyle='#c1a378';pfCx.fillRect(pfPlayer.x,pfPlayer.y,pfPlayer.w,pfPlayer.h);
+  pfCx.fillStyle='#ff7800';pfCx.fillRect(pfPlayer.x,pfPlayer.y,pfPlayer.w,pfPlayer.h);
   // tiny hat on player
   pfCx.fillStyle='#1a1a1a';pfCx.fillRect(pfPlayer.x-3,pfPlayer.y-6,pfPlayer.w+6,5);pfCx.fillRect(pfPlayer.x+2,pfPlayer.y-12,pfPlayer.w-4,8);
 }
@@ -1721,13 +2038,13 @@ function drawFootball(){
   // Goal line
   fbCx.strokeStyle='rgba(255,255,255,.3)';fbCx.lineWidth=2;fbCx.beginPath();fbCx.moveTo(88,160);fbCx.lineTo(272,160);fbCx.stroke();
   // GK
-  fbCx.fillStyle='#c1a378';fbCx.fillRect(fbGK.x,fbGK.y,fbGK.w,fbGK.h);
+  fbCx.fillStyle='#ff7800';fbCx.fillRect(fbGK.x,fbGK.y,fbGK.w,fbGK.h);
   // ball hat detail
   fbCx.fillStyle='#222';fbCx.fillRect(fbGK.x+5,fbGK.y-5,fbGK.w-10,8);
   // Ball
   fbCx.beginPath();fbCx.arc(fbBall.x,fbBall.y,fbBall.r,0,Math.PI*2);fbCx.fillStyle='#fff';fbCx.fill();fbCx.strokeStyle='#333';fbCx.lineWidth=1;fbCx.stroke();
   // Aim line
-  if(fbState==='aim'){fbCx.strokeStyle='rgba(193,163,120,.3)';fbCx.setLineDash([4,4]);fbCx.beginPath();fbCx.moveTo(fbBall.x,fbBall.y);fbCx.lineTo(fbBall.x,90);fbCx.stroke();fbCx.setLineDash([]);}
+  if(fbState==='aim'){fbCx.strokeStyle='rgba(255,120,0,.3)';fbCx.setLineDash([4,4]);fbCx.beginPath();fbCx.moveTo(fbBall.x,fbBall.y);fbCx.lineTo(fbBall.x,90);fbCx.stroke();fbCx.setLineDash([]);}
   // Status
   fbCx.fillStyle='rgba(255,255,255,.5)';fbCx.font='14px DM Sans';fbCx.textAlign='center';
   if(fbState==='goal')fbCx.fillText('GOL! 🎉',180,220);
@@ -1790,18 +2107,18 @@ function drawWheel(){
   var cx=320,cy=320,r=300,n=wheelSegs.length,arc=Math.PI*2/n;
   wCx.clearRect(0,0,640,640);
   // Outer glow
-  wCx.beginPath();wCx.arc(cx,cy,r+8,0,Math.PI*2);wCx.strokeStyle='rgba(193,163,120,.2)';wCx.lineWidth=3;wCx.stroke();
+  wCx.beginPath();wCx.arc(cx,cy,r+8,0,Math.PI*2);wCx.strokeStyle='rgba(255,120,0,.2)';wCx.lineWidth=3;wCx.stroke();
   for(var i=0;i<n;i++){
     var a=arc*i-Math.PI/2,s=wheelSegs[i];
     // Segment fill
     wCx.beginPath();wCx.moveTo(cx,cy);wCx.arc(cx,cy,r,a,a+arc);wCx.closePath();
     wCx.fillStyle=s.color;wCx.fill();
-    wCx.strokeStyle='rgba(193,163,120,.12)';wCx.lineWidth=1;wCx.stroke();
+    wCx.strokeStyle='rgba(255,120,0,.12)';wCx.lineWidth=1;wCx.stroke();
     // Light dots on rim
     var da=a+arc/2,dx=cx+Math.cos(da)*(r-10),dy=cy+Math.sin(da)*(r-10);
-    wCx.beginPath();wCx.arc(dx,dy,4,0,Math.PI*2);wCx.fillStyle=i%2?'#c1a378':'#8a6d3b';wCx.fill();
+    wCx.beginPath();wCx.arc(dx,dy,4,0,Math.PI*2);wCx.fillStyle=i%2?'#ff7800':'#cc5500';wCx.fill();
     // Text
-    wCx.save();wCx.translate(cx,cy);wCx.rotate(a+arc/2);wCx.textAlign='center';wCx.fillStyle='#c1a378';
+    wCx.save();wCx.translate(cx,cy);wCx.rotate(a+arc/2);wCx.textAlign='center';wCx.fillStyle='#ff7800';
     var lines=s.text.split('\n');
     if(lines.length>1){wCx.font='bold 16px Playfair Display';wCx.fillText(lines[0],r*.6,-6);wCx.fillText(lines[1],r*.6,14);}
     else{wCx.font='bold 26px Playfair Display';wCx.fillText(s.text,r*.6,9);}
@@ -1809,7 +2126,7 @@ function drawWheel(){
   }
   // Inner ring
   wCx.beginPath();wCx.arc(cx,cy,38,0,Math.PI*2);wCx.fillStyle='#0a0a08';wCx.fill();
-  wCx.strokeStyle='rgba(193,163,120,.3)';wCx.lineWidth=2;wCx.stroke();
+  wCx.strokeStyle='rgba(255,120,0,.3)';wCx.lineWidth=2;wCx.stroke();
 }
 drawWheel();
 
@@ -1874,7 +2191,7 @@ function closeWheel(){
   sessionStorage.setItem('clj_wheel','1');
 }
 function fireConfetti(){
-  var cols=['#c1a378','#d4bc96','#8a6d3b','#e8e2d8','#ff6b6b','#4ecdc4','#ffe66d','#a08050'];
+  var cols=['#ff7800','#ff9933','#cc5500','#e8e2d8','#ff6b6b','#4ecdc4','#ffe66d','#cc5500'];
   for(var i=0;i<50;i++){
     var p=document.createElement('div');p.className='confetti-piece';
     p.style.left=Math.random()*100+'vw';p.style.top='-10px';
