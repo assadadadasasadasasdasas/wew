@@ -57,7 +57,7 @@ nav {
   background:linear-gradient(to bottom,var(--bg),transparent);
   backdrop-filter:blur(12px);
 }
-section, footer, .wheel-overlay { position:relative; z-index:1; }
+section, footer { position:relative; z-index:1; }
 /* TAB PAGES */
 .tab-page { display:none; }
 .tab-page.active { display:block; }
@@ -398,132 +398,72 @@ footer { padding:50px 36px 24px;border-top:1px solid var(--border); }
   .shop-inner { grid-template-columns:1fr !important;margin:20px 12px; }
 }
 
-/* ====== SPIN WHEEL POPUP ====== */
-.wheel-overlay {
-  position:fixed;inset:0;z-index:10000;
-  background:rgba(0,0,0,.92);backdrop-filter:blur(16px);
-  display:flex;align-items:center;justify-content:center;
-  animation:fadeIn .6s ease-out;
-  transition:opacity .5s;
-}
-.wheel-overlay.closing { opacity:0;pointer-events:none; }
-.wheel-box {
-  text-align:center;max-width:420px;width:90%;padding:20px;
-  position:relative;
-}
-.wheel-box h2 {
-  font-family:'Playfair Display',serif;font-size:28px;letter-spacing:4px;
-  color:#ff7800;margin-bottom:4px;
-}
-.wheel-box .wheel-sub {
-  font-size:13px;color:rgba(255,255,255,.5);font-weight:300;margin-bottom:18px;line-height:1.6;
-}
-.wheel-container {
-  position:relative;width:320px;height:320px;margin:0 auto 20px;
-}
-.wheel-canvas-wrap {
-  width:320px;height:320px;position:relative;
-}
-#wheelCanvas {
-  width:320px;height:320px;
-  transition:transform 4s cubic-bezier(0.17,0.67,0.12,0.99);
-}
-.wheel-pointer {
-  position:absolute;top:-8px;left:50%;transform:translateX(-50%);
-  width:0;height:0;border-left:14px solid transparent;border-right:14px solid transparent;
-  border-top:28px solid #ff7800;z-index:2;filter:drop-shadow(0 2px 6px rgba(0,0,0,.5));
-}
-.wheel-center {
-  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,#ff7800,#cc5500);
-  display:flex;align-items:center;justify-content:center;z-index:3;
-  font-size:18px;box-shadow:0 0 20px rgba(255,120,0,.3);
-}
-.wheel-form {
-  display:flex;gap:0;border:1px solid rgba(255,120,0,.3);border-radius:6px;overflow:hidden;
-  max-width:320px;margin:0 auto 12px;
-}
-.wheel-form input {
-  flex:1;padding:14px 16px;background:rgba(255,255,255,.06);border:none;
-  color:#fff;font-size:14px;font-family:'DM Sans',sans-serif;outline:none;
-}
-.wheel-form input::placeholder { color:rgba(255,255,255,.3); }
-.wheel-form button {
-  padding:14px 22px;background:linear-gradient(135deg,#ff7800,#cc5500);border:none;
-  color:#111;font-size:12px;letter-spacing:2px;font-weight:700;cursor:pointer;
-  font-family:'DM Sans',sans-serif;text-transform:uppercase;white-space:nowrap;
-  transition:opacity .2s;
-}
-.wheel-form button:disabled { opacity:.5;cursor:not-allowed; }
-.wheel-skip {
-  background:none;border:none;color:rgba(255,255,255,.25);font-size:11px;
-  cursor:pointer;text-decoration:underline;margin-top:4px;font-family:'DM Sans',sans-serif;
-}
-.wheel-skip:hover { color:rgba(255,255,255,.5); }
-.wheel-result {
-  display:none;padding:20px;
-}
-.wheel-result.show { display:block;animation:fadeUp .6s ease-out; }
-.wheel-result h3 {
-  font-family:'Playfair Display',serif;font-size:36px;color:#ff7800;margin-bottom:8px;
-}
-.wheel-result .code-box {
-  display:inline-block;padding:12px 28px;background:rgba(255,120,0,.1);
-  border:2px dashed rgba(255,120,0,.4);border-radius:8px;margin:12px 0;
-  font-size:20px;letter-spacing:6px;color:#ff7800;font-weight:600;
-}
-.wheel-result p { font-size:13px;color:rgba(255,255,255,.5);line-height:1.7; }
-.wheel-result .cta-btn {
-  display:inline-block;margin-top:16px;padding:14px 40px;
-  background:linear-gradient(135deg,#ff7800,#cc5500);border:none;border-radius:6px;
-  color:#111;font-size:12px;letter-spacing:2px;font-weight:700;cursor:pointer;
-  font-family:'DM Sans',sans-serif;text-transform:uppercase;
-}
-.confetti-piece {
-  position:fixed;width:8px;height:8px;z-index:10001;pointer-events:none;
-  animation:confettiFall 3s ease-out forwards;
-}
-@keyframes confettiFall {
-  0% { transform:translateY(0) rotate(0deg) scale(1);opacity:1; }
-  100% { transform:translateY(100vh) rotate(720deg) scale(0);opacity:0; }
-}
+/* ====== ADMIN PANEL ====== */
+.adm-login{max-width:400px;margin:80px auto;text-align:center;padding:40px;background:var(--surface);border:1px solid var(--border);border-radius:12px;}
+.adm-login h2{font-family:'Playfair Display',serif;font-size:28px;margin-bottom:8px;}
+.adm-login input{width:100%;padding:14px;background:var(--input-bg);border:1px solid var(--input-border);border-radius:6px;color:var(--text);font-size:14px;margin:16px 0;outline:none;font-family:'DM Sans',sans-serif;text-align:center;letter-spacing:3px;}
+.adm-login button{padding:14px 40px;background:var(--gold);color:#111;border:none;border-radius:6px;font-weight:700;font-size:14px;cursor:pointer;letter-spacing:2px;font-family:'DM Sans',sans-serif;}
+.adm-wrap{display:none;max-width:1200px;margin:0 auto;padding:20px;}
+.adm-wrap.active{display:block;}
+.adm-topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;flex-wrap:wrap;gap:12px;}
+.adm-topbar h2{font-family:'Playfair Display',serif;font-size:24px;}
+.adm-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:24px;border-bottom:1px solid var(--border);padding-bottom:12px;}
+.adm-tab{padding:10px 18px;border:none;border-radius:6px 6px 0 0;background:transparent;color:var(--text-dim);cursor:pointer;font-size:12px;letter-spacing:1px;font-family:'DM Sans',sans-serif;font-weight:600;transition:all .2s;text-transform:uppercase;}
+.adm-tab.active,.adm-tab:hover{background:var(--gold);color:#111;}
+.adm-panel{display:none;}
+.adm-panel.active{display:block;}
+.adm-stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin-bottom:24px;}
+.adm-stat{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px;text-align:center;transition:all .3s;}
+.adm-stat:hover{border-color:var(--gold);transform:translateY(-2px);}
+.adm-stat-icon{font-size:28px;margin-bottom:8px;}
+.adm-stat-num{font-size:32px;font-weight:700;color:var(--gold);font-family:'Playfair Display',serif;}
+.adm-stat-label{font-size:11px;color:var(--text-dim);letter-spacing:2px;text-transform:uppercase;margin-top:4px;}
+.adm-stat-change{font-size:11px;margin-top:6px;}
+.adm-stat-change.up{color:#4caf50;}
+.adm-stat-change.down{color:#f44336;}
+.adm-table-wrap{overflow-x:auto;margin-bottom:20px;}
+.adm-table{width:100%;border-collapse:collapse;font-size:12px;}
+.adm-table th{background:var(--surface2);padding:12px 10px;text-align:left;font-size:10px;letter-spacing:1.5px;color:var(--text-dim);text-transform:uppercase;position:sticky;top:0;}
+.adm-table td{padding:10px;border-bottom:1px solid var(--border);vertical-align:middle;}
+.adm-table tr:hover{background:var(--surface2);}
+.adm-badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:600;letter-spacing:.5px;}
+.adm-badge.green{background:rgba(76,175,80,.15);color:#4caf50;}
+.adm-badge.orange{background:rgba(255,120,0,.15);color:#ff9933;}
+.adm-badge.red{background:rgba(244,67,54,.15);color:#f44336;}
+.adm-badge.blue{background:rgba(33,150,243,.15);color:#2196f3;}
+.adm-btn{padding:6px 14px;border:1px solid var(--border);border-radius:4px;background:var(--surface);color:var(--text);font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;}
+.adm-btn:hover{border-color:var(--gold);color:var(--gold);}
+.adm-btn.primary{background:var(--gold);color:#111;border-color:var(--gold);}
+.adm-btn.danger{border-color:#f44336;color:#f44336;}
+.adm-btn.danger:hover{background:#f44336;color:#fff;}
+.adm-chart{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px;margin-bottom:20px;}
+.adm-chart h4{font-family:'Playfair Display',serif;margin-bottom:14px;font-size:16px;}
+.adm-bar-chart{display:flex;align-items:flex-end;gap:6px;height:160px;padding:0 4px;}
+.adm-bar{flex:1;background:linear-gradient(to top,var(--gold),var(--gold-light));border-radius:4px 4px 0 0;min-width:20px;position:relative;transition:all .3s;cursor:pointer;}
+.adm-bar:hover{opacity:.8;}
+.adm-bar span{position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);font-size:9px;color:var(--text-dim);white-space:nowrap;}
+.adm-bar em{position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-size:10px;color:var(--gold);font-style:normal;font-weight:600;}
+.adm-search{padding:10px 16px;background:var(--input-bg);border:1px solid var(--input-border);border-radius:6px;color:var(--text);font-size:13px;width:250px;outline:none;font-family:'DM Sans',sans-serif;}
+.adm-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px;margin-bottom:16px;}
+.adm-card h4{font-family:'Playfair Display',serif;margin-bottom:12px;}
+.adm-grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.adm-grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;}
+@media(max-width:768px){.adm-grid2,.adm-grid3{grid-template-columns:1fr;}.adm-search{width:100%;}}
+.adm-form-row{display:flex;gap:10px;margin-bottom:10px;flex-wrap:wrap;}
+.adm-form-row label{font-size:11px;color:var(--text-dim);letter-spacing:1px;display:block;margin-bottom:4px;text-transform:uppercase;}
+.adm-form-row input,.adm-form-row select,.adm-form-row textarea{padding:10px;background:var(--input-bg);border:1px solid var(--input-border);border-radius:4px;color:var(--text);font-size:13px;font-family:'DM Sans',sans-serif;outline:none;width:100%;}
+.adm-alert{padding:14px 18px;border-radius:8px;font-size:12px;margin-bottom:12px;display:flex;align-items:center;gap:10px;}
+.adm-alert.warn{background:rgba(255,120,0,.1);border:1px solid rgba(255,120,0,.3);color:var(--gold-light);}
+.adm-alert.info{background:rgba(33,150,243,.1);border:1px solid rgba(33,150,243,.3);color:#64b5f6;}
+.adm-alert.ok{background:rgba(76,175,80,.1);border:1px solid rgba(76,175,80,.3);color:#81c784;}
+.adm-donut-wrap{display:flex;align-items:center;gap:20px;justify-content:center;}
+.adm-legend{font-size:12px;line-height:2.2;}
+.adm-legend span{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:6px;vertical-align:middle;}
+.adm-recent{max-height:300px;overflow-y:auto;}
+.adm-recent-item{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);font-size:12px;}
 </style>
 </head>
 <body>
-
-<!-- ====== SPIN WHEEL POPUP ====== -->
-<div class="wheel-overlay" id="wheelOverlay">
-  <div class="wheel-box">
-    <h2>CALEJON</h2>
-    <p class="wheel-sub">Çarkı çevir, özel indirimini kazan!<br>İndirim kodun e-postana gönderilecek.</p>
-
-    <div class="wheel-container">
-      <div class="wheel-pointer"></div>
-      <div class="wheel-canvas-wrap">
-        <canvas id="wheelCanvas" width="640" height="640"></canvas>
-        <div class="wheel-center">🎩</div>
-      </div>
-    </div>
-
-    <!-- Email form -->
-    <div id="wheelForm">
-      <div class="wheel-form">
-        <input type="email" id="wheelEmail" placeholder="E-posta adresini gir...">
-        <button id="wheelSpinBtn" onclick="spinWheel()">ÇEVİR!</button>
-      </div>
-      <button class="wheel-skip" onclick="closeWheel()">Şimdilik geç →</button>
-    </div>
-
-    <!-- Result -->
-    <div class="wheel-result" id="wheelResult">
-      <h3 id="wheelPrize"></h3>
-      <p>Tebrikler! İndirim kodun:</p>
-      <div class="code-box" id="wheelCode"></div>
-      <p id="wheelEmailMsg"></p>
-      <button class="cta-btn" onclick="closeWheel()">Alışverişe Başla →</button>
-    </div>
-  </div>
-</div>
 
 <!-- NAV -->
 <nav>
@@ -1290,6 +1230,207 @@ footer { padding:50px 36px 24px;border-top:1px solid var(--border); }
 </section>
 </div>
 
+<!-- ADMIN PANEL -->
+<div class="tab-page" id="page-admin">
+<section style="padding:30px 20px;min-height:100vh;">
+
+<!-- LOGIN GATE -->
+<div class="adm-login" id="admLogin">
+  <div style="font-size:40px;margin-bottom:10px;">🔐</div>
+  <h2>Admin Paneli</h2>
+  <p style="font-size:12px;color:var(--text-dim);">Yönetim paneline erişmek için şifre girin</p>
+  <input type="password" id="admPass" placeholder="••••••••" onkeydown="if(event.key==='Enter')admDoLogin()">
+  <br>
+  <button onclick="admDoLogin()">GİRİŞ YAP</button>
+  <p id="admLoginErr" style="color:#f44336;font-size:11px;margin-top:10px;display:none;">Yanlış şifre!</p>
+  <p style="font-size:10px;color:var(--text-dim);margin-top:16px;">Demo şifre: <b>calejon2026</b></p>
+</div>
+
+<!-- ADMIN MAIN -->
+<div class="adm-wrap" id="admMain">
+  <div class="adm-topbar">
+    <h2>⚙️ Yönetim Paneli</h2>
+    <div style="display:flex;gap:8px;align-items:center;">
+      <span style="font-size:12px;color:var(--text-dim);">👤 Admin</span>
+      <button class="adm-btn danger" onclick="admLogout()">Çıkış</button>
+    </div>
+  </div>
+
+  <div class="adm-tabs">
+    <button class="adm-tab active" onclick="admShowTab('admDash',this)">📊 Dashboard</button>
+    <button class="adm-tab" onclick="admShowTab('admProducts',this)">📦 Ürünler</button>
+    <button class="adm-tab" onclick="admShowTab('admOrders',this)">🛒 Siparişler</button>
+    <button class="adm-tab" onclick="admShowTab('admCustomers',this)">👥 Müşteriler</button>
+    <button class="adm-tab" onclick="admShowTab('admBlog',this)">📝 Blog</button>
+    <button class="adm-tab" onclick="admShowTab('admAnalytics',this)">📈 Analitik</button>
+    <button class="adm-tab" onclick="admShowTab('admSettings',this)">⚙️ Ayarlar</button>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div class="adm-panel active" id="admDash">
+    <div class="adm-stats" id="admStatsGrid"></div>
+    <div class="adm-grid2">
+      <div class="adm-chart">
+        <h4>📊 Aylık Satışlar (2026)</h4>
+        <div class="adm-bar-chart" id="admSalesChart"></div>
+      </div>
+      <div class="adm-chart">
+        <h4>🍩 Kategori Dağılımı</h4>
+        <div class="adm-donut-wrap">
+          <canvas id="admDonut" width="140" height="140"></canvas>
+          <div class="adm-legend" id="admDonutLegend"></div>
+        </div>
+      </div>
+    </div>
+    <div class="adm-grid2">
+      <div class="adm-card">
+        <h4>🔥 Son Siparişler</h4>
+        <div class="adm-recent" id="admRecentOrders"></div>
+      </div>
+      <div class="adm-card">
+        <h4>⚠️ Stok Uyarıları</h4>
+        <div id="admAlerts"></div>
+      </div>
+    </div>
+    <div class="adm-card">
+      <h4>🏆 En Çok Satan Ürünler</h4>
+      <div class="adm-table-wrap"><table class="adm-table"><thead><tr><th>#</th><th>Ürün</th><th>Kategori</th><th>Satış</th><th>Gelir</th><th>Stok</th></tr></thead><tbody id="admTopProducts"></tbody></table></div>
+    </div>
+  </div>
+
+  <!-- PRODUCTS -->
+  <div class="adm-panel" id="admProducts">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:16px;">
+      <div style="display:flex;gap:8px;align-items:center;">
+        <input class="adm-search" id="admProdSearch" placeholder="🔍 Ürün ara..." oninput="admFilterProducts()">
+        <select id="admProdCat" onchange="admFilterProducts()" style="padding:10px;background:var(--input-bg);border:1px solid var(--input-border);border-radius:6px;color:var(--text);font-size:12px;">
+          <option value="all">Tümü</option><option value="hat">Şapkalar</option><option value="tshirt">Tişörtler</option>
+        </select>
+      </div>
+      <button class="adm-btn primary" onclick="admAddProduct()">+ Yeni Ürün Ekle</button>
+    </div>
+    <div class="adm-alert info">📦 Toplam <b id="admProdCount">1000</b> ürün · <span id="admProdHat">500</span> şapka · <span id="admProdTee">500</span> tişört</div>
+    <div class="adm-table-wrap" style="max-height:500px;overflow-y:auto;"><table class="adm-table"><thead><tr><th>ID</th><th>Ürün</th><th>Kategori</th><th>Fiyat</th><th>Stok</th><th>Durum</th><th>İşlem</th></tr></thead><tbody id="admProdTable"></tbody></table></div>
+    <div style="text-align:center;margin-top:12px;"><button class="adm-btn" id="admProdMore" onclick="admLoadMoreProducts()">Daha Fazla Yükle ↓</button></div>
+  </div>
+
+  <!-- ORDERS -->
+  <div class="adm-panel" id="admOrders">
+    <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;">
+      <button class="adm-btn primary" onclick="admFilterOrders('all')">Tümü</button>
+      <button class="adm-btn" onclick="admFilterOrders('new')">🆕 Yeni</button>
+      <button class="adm-btn" onclick="admFilterOrders('processing')">⏳ Hazırlanıyor</button>
+      <button class="adm-btn" onclick="admFilterOrders('shipped')">🚚 Kargoda</button>
+      <button class="adm-btn" onclick="admFilterOrders('delivered')">✅ Teslim</button>
+      <button class="adm-btn" onclick="admFilterOrders('cancelled')">❌ İptal</button>
+    </div>
+    <div class="adm-stats" style="margin-bottom:16px;" id="admOrderStats"></div>
+    <div class="adm-table-wrap" style="max-height:500px;overflow-y:auto;"><table class="adm-table"><thead><tr><th>Sipariş #</th><th>Müşteri</th><th>Ürünler</th><th>Tutar</th><th>Tarih</th><th>Durum</th><th>İşlem</th></tr></thead><tbody id="admOrderTable"></tbody></table></div>
+  </div>
+
+  <!-- CUSTOMERS -->
+  <div class="adm-panel" id="admCustomers">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:16px;">
+      <input class="adm-search" id="admCustSearch" placeholder="🔍 Müşteri ara..." oninput="admFilterCustomers()">
+      <button class="adm-btn primary" onclick="admExportCustomers()">📥 CSV İndir</button>
+    </div>
+    <div class="adm-stats" id="admCustStats"></div>
+    <div class="adm-table-wrap" style="max-height:500px;overflow-y:auto;"><table class="adm-table"><thead><tr><th>#</th><th>İsim</th><th>E-posta</th><th>Sipariş</th><th>Toplam</th><th>Kayıt</th><th>Durum</th></tr></thead><tbody id="admCustTable"></tbody></table></div>
+  </div>
+
+  <!-- BLOG -->
+  <div class="adm-panel" id="admBlog">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:16px;">
+      <input class="adm-search" id="admBlogSearch" placeholder="🔍 Blog yazısı ara..." oninput="admFilterBlog()">
+      <button class="adm-btn primary" onclick="admNewBlogPost()">+ Yeni Yazı</button>
+    </div>
+    <div class="adm-alert info">📝 Toplam <b id="admBlogCount">0</b> blog yazısı yayında</div>
+    <div class="adm-table-wrap" style="max-height:500px;overflow-y:auto;"><table class="adm-table"><thead><tr><th>#</th><th>Başlık</th><th>Etiketler</th><th>Görüntülenme</th><th>Tarih</th><th>Durum</th><th>İşlem</th></tr></thead><tbody id="admBlogTable"></tbody></table></div>
+  </div>
+
+  <!-- ANALYTICS -->
+  <div class="adm-panel" id="admAnalytics">
+    <div class="adm-stats" id="admAnalyticsStats"></div>
+    <div class="adm-grid2">
+      <div class="adm-chart">
+        <h4>👁️ Günlük Ziyaretçi (Son 14 Gün)</h4>
+        <div class="adm-bar-chart" id="admVisitorChart"></div>
+      </div>
+      <div class="adm-chart">
+        <h4>📱 Cihaz Dağılımı</h4>
+        <div class="adm-donut-wrap">
+          <canvas id="admDeviceDonut" width="140" height="140"></canvas>
+          <div class="adm-legend" id="admDeviceLegend"></div>
+        </div>
+      </div>
+    </div>
+    <div class="adm-grid2">
+      <div class="adm-card">
+        <h4>🌍 En Çok Ziyaret Eden Şehirler</h4>
+        <div id="admCityList"></div>
+      </div>
+      <div class="adm-card">
+        <h4>📄 En Popüler Sayfalar</h4>
+        <div id="admPageList"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SETTINGS -->
+  <div class="adm-panel" id="admSettings">
+    <div class="adm-grid2">
+      <div class="adm-card">
+        <h4>🏪 Mağaza Bilgileri</h4>
+        <div class="adm-form-row"><div style="flex:1;"><label>Mağaza Adı</label><input type="text" value="CALEJON"></div></div>
+        <div class="adm-form-row"><div style="flex:1;"><label>Slogan</label><input type="text" value="Premium Şapka & Tişört"></div></div>
+        <div class="adm-form-row"><div style="flex:1;"><label>E-posta</label><input type="email" value="info@calejon.com"></div></div>
+        <div class="adm-form-row"><div style="flex:1;"><label>Telefon</label><input type="tel" value="+90 212 555 0000"></div></div>
+        <div class="adm-form-row"><div style="flex:1;"><label>Adres</label><textarea rows="2">İstanbul, Türkiye</textarea></div></div>
+        <button class="adm-btn primary" style="margin-top:8px;" onclick="alert('✅ Ayarlar kaydedildi!')">💾 Kaydet</button>
+      </div>
+      <div class="adm-card">
+        <h4>💰 Ödeme & Kargo</h4>
+        <div class="adm-form-row"><div style="flex:1;"><label>Para Birimi</label><select><option>₺ TRY</option><option>$ USD</option><option>€ EUR</option></select></div></div>
+        <div class="adm-form-row"><div style="flex:1;"><label>Ücretsiz Kargo Limiti (₺)</label><input type="number" value="500"></div></div>
+        <div class="adm-form-row"><div style="flex:1;"><label>Kargo Ücreti (₺)</label><input type="number" value="29.90"></div></div>
+        <div class="adm-form-row"><div style="flex:1;"><label>KDV Oranı (%)</label><input type="number" value="20"></div></div>
+        <button class="adm-btn primary" style="margin-top:8px;" onclick="alert('✅ Ödeme ayarları kaydedildi!')">💾 Kaydet</button>
+      </div>
+    </div>
+    <div class="adm-grid2" style="margin-top:16px;">
+      <div class="adm-card">
+        <h4>🎨 Tema & Görünüm</h4>
+        <div class="adm-form-row"><div style="flex:1;"><label>Ana Renk</label><input type="color" value="#ff7800" style="height:40px;cursor:pointer;"></div><div style="flex:1;"><label>Vurgu Renk</label><input type="color" value="#ff5500" style="height:40px;cursor:pointer;"></div></div>
+        <div class="adm-form-row"><div style="flex:1;"><label>Varsayılan Tema</label><select><option>Dark</option><option>Light</option></select></div></div>
+        <button class="adm-btn primary" style="margin-top:8px;" onclick="alert('✅ Tema ayarları kaydedildi!')">💾 Kaydet</button>
+      </div>
+      <div class="adm-card">
+        <h4>🔔 Bildirimler</h4>
+        <div style="font-size:13px;line-height:2.4;">
+          <label style="display:flex;align-items:center;gap:8px;cursor:pointer;text-transform:none;letter-spacing:0;"><input type="checkbox" checked> Yeni sipariş bildirimi</label>
+          <label style="display:flex;align-items:center;gap:8px;cursor:pointer;text-transform:none;letter-spacing:0;"><input type="checkbox" checked> Düşük stok uyarısı</label>
+          <label style="display:flex;align-items:center;gap:8px;cursor:pointer;text-transform:none;letter-spacing:0;"><input type="checkbox" checked> Yeni müşteri kaydı</label>
+          <label style="display:flex;align-items:center;gap:8px;cursor:pointer;text-transform:none;letter-spacing:0;"><input type="checkbox"> Günlük rapor e-postası</label>
+          <label style="display:flex;align-items:center;gap:8px;cursor:pointer;text-transform:none;letter-spacing:0;"><input type="checkbox"> Haftalık özet</label>
+        </div>
+        <button class="adm-btn primary" style="margin-top:8px;" onclick="alert('✅ Bildirim ayarları kaydedildi!')">💾 Kaydet</button>
+      </div>
+    </div>
+    <div class="adm-card" style="margin-top:16px;">
+      <h4>🗄️ Veri Yönetimi</h4>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <button class="adm-btn" onclick="alert('📥 Ürün verileri dışa aktarıldı (CSV)')">📥 Ürünleri Dışa Aktar</button>
+        <button class="adm-btn" onclick="alert('📥 Sipariş verileri dışa aktarıldı')">📥 Siparişleri Dışa Aktar</button>
+        <button class="adm-btn" onclick="alert('📥 Müşteri verileri dışa aktarıldı')">📥 Müşterileri Dışa Aktar</button>
+        <button class="adm-btn" onclick="admBackup()">💾 Tam Yedek Al</button>
+        <button class="adm-btn danger" onclick="if(confirm('Tüm veriler silinecek!'))alert('🗑️ Veriler sıfırlandı')">🗑️ Verileri Sıfırla</button>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+</div>
+
 <!-- WC FOOTER BUTTON -->
 <div style="text-align:center;padding:30px 24px;background:var(--surface);">
   <button onclick="showTab('worldcup')" style="padding:16px 40px;background:linear-gradient(135deg,var(--gold),#ff5500);border:none;border-radius:10px;color:#fff;font-size:15px;font-weight:700;letter-spacing:2px;cursor:pointer;font-family:'DM Sans',sans-serif;box-shadow:0 4px 20px rgba(255,120,0,0.3);transition:all .3s;">⚽ DÜNYA KUPASI ANSİKLOPEDİSİ</button>
@@ -1302,19 +1443,19 @@ footer { padding:50px 36px 24px;border-top:1px solid var(--border); }
     <div class="footer-col"><h4>Marka</h4><a onclick="showTab('hero')">Ana Sayfa</a><a onclick="showTab('products')">Mağaza</a><a onclick="showTab('blog')">Blog</a></div>
     <div class="footer-col"><h4>Destek</h4><a onclick="showTab('forum')">Forum & Yasal</a><a onclick="showTab('ai')">AI Asistan</a><a onclick="showTab('tryon')">Sanal Deneme</a></div>
     <div class="footer-col"><h4>Eğlence</h4><a onclick="showTab('snake')">🐍 Yılan Oyunu</a><a onclick="showTab('games')">🎮 Diğer Oyunlar</a><a onclick="showTab('worldcup')">⚽ Dünya Kupası</a></div>
-    <div class="footer-col"><h4>İletişim</h4><a href="mailto:info@calejon.com">info@calejon.com</a><a href="#">İstanbul, Türkiye</a><a href="https://youtube.com/@calejon" target="_blank" style="color:#ff4444;">▶ YouTube</a></div>
+    <div class="footer-col"><h4>İletişim</h4><a href="/cdn-cgi/l/email-protection#a9c0c7cfc6e9cac8c5ccc3c6c787cac6c4"><span class="__cf_email__" data-cfemail="95fcfbf3fad5f6f4f9f0fffafbbbf6faf8">[email&#160;protected]</span></a><a href="#">İstanbul, Türkiye</a><a href="https://youtube.com/@calejon" target="_blank" style="color:#ff4444;">▶ YouTube</a></div>
   </div>
-  <div class="footer-bottom">© 2026 CALEJON — TÜM HAKLARI SAKLIDIR</div>
+  <div class="footer-bottom">© 2026 CALEJON — TÜM HAKLARI SAKLIDIR &nbsp;·&nbsp; <a onclick="showTab('admin')" style="color:var(--text-dim);cursor:pointer;font-size:10px;text-decoration:none;">⚙️ Admin</a></div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@latest/vision_bundle.js" crossorigin="anonymous"></script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@latest/vision_bundle.js" crossorigin="anonymous"></script>
 <script>
 // ====================== UTILS ======================
 function goTo(id){document.getElementById(id).scrollIntoView({behavior:'smooth'});}
 function toggleMenu(){document.getElementById('mobMenu').classList.toggle('open');}
 
 // TAB NAVIGATION
-var tabMap={'hero':'page-hero','snake':'page-snake','quickbar':'page-quick','products':'page-shop','tryon':'page-tryon','ai':'page-ai','games':'page-games','blog':'page-blog','forum':'page-forum','worldcup':'page-worldcup'};
+var tabMap={'hero':'page-hero','snake':'page-snake','quickbar':'page-quick','products':'page-shop','tryon':'page-tryon','ai':'page-ai','games':'page-games','blog':'page-blog','forum':'page-forum','worldcup':'page-worldcup','admin':'page-admin'};
 function showTab(name){
   var pages=document.querySelectorAll('.tab-page');
   pages.forEach(function(p){p.classList.remove('active');});
@@ -2087,123 +2228,282 @@ function startFootball(){cancelAnimationFrame(fbAnim3);rstFootball();fbLoop();}
 function resetFootball(){cancelAnimationFrame(fbAnim3);rstFootball();drawFootball();document.getElementById('footballScore').textContent='Gol: 0 / 5 — Kaçan: 0';}
 rstFootball();drawFootball();
 
-// ====================== SPIN WHEEL ======================
-var wheelSegs = [
-  { text:'%5', discount:5, color:'#2a2218' },
-  { text:'%10', discount:10, color:'#1a1a14' },
-  { text:'%15', discount:15, color:'#2a2218' },
-  { text:'%20', discount:20, color:'#1a1a14' },
-  { text:'%25', discount:25, color:'#2a2218' },
-  { text:'%30', discount:30, color:'#1a1a14' },
-  { text:'%35', discount:35, color:'#2a2218' },
-  { text:'%40', discount:40, color:'#1a1a14' },
-  { text:'%50', discount:50, color:'#2a2218' },
-  { text:'Kargo\nBedava', discount:0, color:'#1a1a14' }
-];
-var wCv=document.getElementById('wheelCanvas'),wCx=wCv.getContext('2d');
-var wSpun=false;
+// ====================== ADMIN PANEL ======================
+var admLoggedIn=false;
+var admProdPage=0;
+var admProdPageSize=30;
 
-function drawWheel(){
-  var cx=320,cy=320,r=300,n=wheelSegs.length,arc=Math.PI*2/n;
-  wCx.clearRect(0,0,640,640);
-  // Outer glow
-  wCx.beginPath();wCx.arc(cx,cy,r+8,0,Math.PI*2);wCx.strokeStyle='rgba(255,120,0,.2)';wCx.lineWidth=3;wCx.stroke();
-  for(var i=0;i<n;i++){
-    var a=arc*i-Math.PI/2,s=wheelSegs[i];
-    // Segment fill
-    wCx.beginPath();wCx.moveTo(cx,cy);wCx.arc(cx,cy,r,a,a+arc);wCx.closePath();
-    wCx.fillStyle=s.color;wCx.fill();
-    wCx.strokeStyle='rgba(255,120,0,.12)';wCx.lineWidth=1;wCx.stroke();
-    // Light dots on rim
-    var da=a+arc/2,dx=cx+Math.cos(da)*(r-10),dy=cy+Math.sin(da)*(r-10);
-    wCx.beginPath();wCx.arc(dx,dy,4,0,Math.PI*2);wCx.fillStyle=i%2?'#ff7800':'#cc5500';wCx.fill();
-    // Text
-    wCx.save();wCx.translate(cx,cy);wCx.rotate(a+arc/2);wCx.textAlign='center';wCx.fillStyle='#ff7800';
-    var lines=s.text.split('\n');
-    if(lines.length>1){wCx.font='bold 16px Playfair Display';wCx.fillText(lines[0],r*.6,-6);wCx.fillText(lines[1],r*.6,14);}
-    else{wCx.font='bold 26px Playfair Display';wCx.fillText(s.text,r*.6,9);}
-    wCx.restore();
-  }
-  // Inner ring
-  wCx.beginPath();wCx.arc(cx,cy,38,0,Math.PI*2);wCx.fillStyle='#0a0a08';wCx.fill();
-  wCx.strokeStyle='rgba(255,120,0,.3)';wCx.lineWidth=2;wCx.stroke();
-}
-drawWheel();
+// Fake data generators
+var admNames=['Ahmet Yılmaz','Zeynep Kaya','Mehmet Demir','Elif Şahin','Can Özkan','Selin Arslan','Ali Çelik','Ayşe Yıldız','Burak Koç','Deniz Aydın','Emre Güneş','Fatma Şen','Gökhan Kurt','Hande Aktaş','İbrahim Öz','Jale Duman','Kemal Tunç','Leyla Kara','Murat Başar','Naz Erdem','Oğuz Polat','Pınar Sarı','Recep Tan','Sema Ateş','Tolga Işık','Ülkü Çam','Volkan Bay','Yasemin Er','Zafer Usta','Berna Ak'];
+var admCities=['İstanbul','Ankara','İzmir','Bursa','Antalya','Trabzon','Konya','Adana','Gaziantep','Kayseri','Mersin','Eskişehir','Samsun','Denizli','Diyarbakır'];
+var admStatuses=['new','processing','shipped','delivered','delivered','delivered','cancelled'];
+var admStatusTR={'new':'🆕 Yeni','processing':'⏳ Hazırlanıyor','shipped':'🚚 Kargoda','delivered':'✅ Teslim','cancelled':'❌ İptal'};
+var admStatusCls={'new':'orange','processing':'blue','shipped':'orange','delivered':'green','cancelled':'red'};
 
-// Skip if already spun this session
-if(sessionStorage.getItem('clj_wheel')){document.getElementById('wheelOverlay').style.display='none';}
-
-function spinWheel(){
-  var email=document.getElementById('wheelEmail').value.trim();
-  if(!email||email.indexOf('@')===-1){document.getElementById('wheelEmail').style.borderColor='#a04040';document.getElementById('wheelEmail').placeholder='Geçerli e-posta girin!';return;}
-  if(wSpun)return;wSpun=true;
-  document.getElementById('wheelSpinBtn').disabled=true;
-  document.getElementById('wheelSpinBtn').textContent='Dönüyor...';
-  // Weighted random pick (lower discounts more likely)
-  var w=[20,16,14,12,10,8,6,5,5,4],total=0,cum=0,win=0;
-  for(var i=0;i<w.length;i++)total+=w[i];
-  var rnd=Math.random()*total;
-  for(var i=0;i<w.length;i++){cum+=w[i];if(rnd<=cum){win=i;break;}}
-  // Spin animation
-  var segDeg=360/wheelSegs.length;
-  var target=360-(win*segDeg+segDeg/2);
-  var spins=(5+Math.floor(Math.random()*3))*360+target;
-  wCv.style.transform='rotate('+spins+'deg)';
-  // After spin
-  setTimeout(function(){
-    var seg=wheelSegs[win];
-    var code=genCode(seg);
-    fireConfetti();
-    document.getElementById('wheelForm').style.display='none';
-    document.getElementById('wheelPrize').textContent=(seg.discount>0?seg.text:' Kargo Bedava')+' İNDİRİM!';
-    document.getElementById('wheelCode').textContent=code;
-    document.getElementById('wheelEmailMsg').textContent='Kod '+email+' adresine gönderildi!';
-    document.getElementById('wheelResult').className='wheel-result show';
-    sendDiscount(email,seg,code);
-    sessionStorage.setItem('clj_wheel','1');
-  },4300);
-}
-function genCode(seg){
-  var pre=seg.discount>0?'CLJ'+seg.discount:'CLJKARGO';
-  var ch='ABCDEFGHJKLMNPQRSTUVWXYZ23456789',suf='';
-  for(var i=0;i<4;i++)suf+=ch[Math.floor(Math.random()*ch.length)];
-  return pre+suf;
-}
-function sendDiscount(email,seg,code){
-  // Web3Forms (free) — get key at https://web3forms.com
-  fetch('https://api.web3forms.com/submit',{
-    method:'POST',headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({
-      access_key:'YOUR_WEB3FORMS_KEY',
-      to:email, from_name:'Calejon',
-      subject:'🎩 Calejon İndirim: '+(seg.discount>0?seg.text:'Kargo Bedava'),
-      message:'Tebrikler!\n\nİndirim: '+(seg.discount>0?seg.text:'Kargo Bedava')+'\nKodun: '+code+'\n\ncalejon.com\'da kullanabilirsin!\n\n— Calejon'
-    })
-  }).catch(function(){});
-  // Save lead locally
-  var leads=JSON.parse(localStorage.getItem('clj_leads')||'[]');
-  leads.push({email:email,discount:seg.text,code:code,date:new Date().toISOString()});
-  localStorage.setItem('clj_leads',JSON.stringify(leads));
-}
-function closeWheel(){
-  var o=document.getElementById('wheelOverlay');o.classList.add('closing');
-  setTimeout(function(){o.style.display='none';},500);
-  sessionStorage.setItem('clj_wheel','1');
-}
-function fireConfetti(){
-  var cols=['#ff7800','#ff9933','#cc5500','#e8e2d8','#ff6b6b','#4ecdc4','#ffe66d','#cc5500'];
-  for(var i=0;i<50;i++){
-    var p=document.createElement('div');p.className='confetti-piece';
-    p.style.left=Math.random()*100+'vw';p.style.top='-10px';
-    p.style.background=cols[Math.floor(Math.random()*cols.length)];
-    p.style.width=(4+Math.random()*8)+'px';p.style.height=(4+Math.random()*8)+'px';
-    p.style.borderRadius=Math.random()>.5?'50%':'2px';
-    p.style.animationDuration=(2+Math.random()*2)+'s';
-    p.style.animationDelay=(Math.random()*.5)+'s';
-    document.body.appendChild(p);
-    setTimeout(function(el){el.remove();}.bind(null,p),4500);
+function admDoLogin(){
+  var p=document.getElementById('admPass').value;
+  if(p==='calejon2026'){
+    admLoggedIn=true;
+    document.getElementById('admLogin').style.display='none';
+    document.getElementById('admMain').classList.add('active');
+    admInitDashboard();
+  } else {
+    document.getElementById('admLoginErr').style.display='block';
+    document.getElementById('admPass').value='';
   }
 }
+function admLogout(){
+  admLoggedIn=false;
+  document.getElementById('admLogin').style.display='block';
+  document.getElementById('admMain').classList.remove('active');
+  document.getElementById('admPass').value='';
+  document.getElementById('admLoginErr').style.display='none';
+}
+function admShowTab(id,btn){
+  document.querySelectorAll('.adm-panel').forEach(function(p){p.classList.remove('active');});
+  document.querySelectorAll('.adm-tab').forEach(function(t){t.classList.remove('active');});
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// DASHBOARD
+function admInitDashboard(){
+  // Stats
+  var stats=[
+    {icon:'💰',num:'₺847,320',label:'Toplam Gelir',change:'+12.5%',up:true},
+    {icon:'🛒',num:'1,284',label:'Toplam Sipariş',change:'+8.3%',up:true},
+    {icon:'👥',num:'3,847',label:'Müşteri',change:'+15.2%',up:true},
+    {icon:'📦',num:'1,000',label:'Ürün',change:'—',up:true},
+    {icon:'⭐',num:'4.8',label:'Ort. Puan',change:'+0.2',up:true},
+    {icon:'🔄',num:'%3.2',label:'İade Oranı',change:'-0.5%',up:false}
+  ];
+  var sg=document.getElementById('admStatsGrid');sg.innerHTML='';
+  stats.forEach(function(s){
+    sg.innerHTML+='<div class="adm-stat"><div class="adm-stat-icon">'+s.icon+'</div><div class="adm-stat-num">'+s.num+'</div><div class="adm-stat-label">'+s.label+'</div><div class="adm-stat-change '+(s.up?'up':'down')+'">'+s.change+'</div></div>';
+  });
+
+  // Sales chart
+  var months=['Oca','Şub','Mar','Nis','May','Haz','Tem','Ağu','Eyl','Eki','Kas','Ara'];
+  var sales=[68,72,85,92,78,105,0,0,0,0,0,0];
+  var sc=document.getElementById('admSalesChart');sc.innerHTML='';
+  var mx=Math.max.apply(null,sales)||1;
+  months.forEach(function(m,i){
+    var h=sales[i]?Math.max((sales[i]/mx)*140,8):4;
+    sc.innerHTML+='<div class="adm-bar" style="height:'+h+'px;'+(i>5?'opacity:.3;background:var(--border);':'')+'"><em>'+(sales[i]?'₺'+sales[i]+'K':'')+'</em><span>'+m+'</span></div>';
+  });
+
+  // Donut
+  admDrawDonut('admDonut','admDonutLegend',[
+    {label:'Şapka',val:58,color:'#ff7800'},
+    {label:'Tişört',val:35,color:'#ff9933'},
+    {label:'Aksesuar',val:7,color:'#cc5500'}
+  ]);
+
+  // Recent orders
+  var ro=document.getElementById('admRecentOrders');ro.innerHTML='';
+  for(var i=0;i<8;i++){
+    var st=admStatuses[Math.floor(Math.random()*admStatuses.length)];
+    ro.innerHTML+='<div class="adm-recent-item"><span>'+admNames[i%admNames.length]+'</span><span class="adm-badge '+admStatusCls[st]+'">'+admStatusTR[st]+'</span><span style="color:var(--gold);">₺'+(120+Math.floor(Math.random()*800))+'</span></div>';
+  }
+
+  // Alerts
+  var al=document.getElementById('admAlerts');al.innerHTML='';
+  al.innerHTML+='<div class="adm-alert warn">⚠️ <b>Arctic Essential — S beden</b> stokta 3 adet kaldı</div>';
+  al.innerHTML+='<div class="adm-alert warn">⚠️ <b>Midnight Classic — M beden</b> stokta 5 adet kaldı</div>';
+  al.innerHTML+='<div class="adm-alert info">ℹ️ <b>12 yeni sipariş</b> onay bekliyor</div>';
+  al.innerHTML+='<div class="adm-alert ok">✅ Kargo entegrasyonu aktif — son güncelleme: 2 saat önce</div>';
+
+  // Top products
+  var tp=document.getElementById('admTopProducts');tp.innerHTML='';
+  var tops=[
+    {n:'Midnight Classic Fedora',c:'Şapka',s:284,r:'₺127,800',st:45},
+    {n:'Arctic Essential Bucket',c:'Şapka',s:216,r:'₺75,600',st:23},
+    {n:'Terra Signature Dad Hat',c:'Şapka',s:189,r:'₺56,700',st:67},
+    {n:'Ocean Breeze Tee',c:'Tişört',s:156,r:'₺46,800',st:89},
+    {n:'Urban Edge Snapback',c:'Şapka',s:142,r:'₺49,700',st:34},
+    {n:'Sunrise Cotton Tee',c:'Tişört',s:128,r:'₺38,400',st:112},
+    {n:'Forest Trail Beanie',c:'Şapka',s:117,r:'₺35,100',st:52},
+    {n:'Desert Storm Cap',c:'Şapka',s:103,r:'₺30,900',st:18}
+  ];
+  tops.forEach(function(p,i){
+    var scls=p.st<25?'red':(p.st<50?'orange':'green');
+    tp.innerHTML+='<tr><td><b>'+(i+1)+'</b></td><td>'+p.n+'</td><td>'+p.c+'</td><td><b>'+p.s+'</b></td><td style="color:var(--gold);">'+p.r+'</td><td><span class="adm-badge '+scls+'">'+p.st+' adet</span></td></tr>';
+  });
+
+  // Init other tabs
+  admInitProducts();
+  admInitOrders();
+  admInitCustomers();
+  admInitBlog();
+  admInitAnalytics();
+}
+
+// DONUT CHART
+function admDrawDonut(canvasId,legendId,data){
+  var c=document.getElementById(canvasId);if(!c)return;
+  var ctx=c.getContext('2d'),cx=70,cy=70,r=55,ir=30,total=0;
+  data.forEach(function(d){total+=d.val;});
+  var start=-Math.PI/2;
+  ctx.clearRect(0,0,140,140);
+  data.forEach(function(d){
+    var sl=d.val/total*Math.PI*2;
+    ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,r,start,start+sl);ctx.closePath();
+    ctx.fillStyle=d.color;ctx.fill();start+=sl;
+  });
+  ctx.beginPath();ctx.arc(cx,cy,ir,0,Math.PI*2);ctx.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--surface').trim()||'#1a1a1a';ctx.fill();
+  ctx.font='bold 16px DM Sans';ctx.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--text').trim()||'#f5f5f5';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('1000',cx,cy);
+  var lg=document.getElementById(legendId);if(lg){lg.innerHTML='';
+    data.forEach(function(d){lg.innerHTML+='<div><span style="background:'+d.color+'"></span>'+d.label+': '+d.val+'%</div>';});
+  }
+}
+
+// PRODUCTS
+function admInitProducts(){
+  admProdPage=0;admLoadMoreProducts();
+  document.getElementById('admProdCount').textContent=typeof allProducts!=='undefined'?allProducts.length:'1000';
+}
+function admLoadMoreProducts(){
+  if(typeof allProducts==='undefined')return;
+  var tb=document.getElementById('admProdTable');
+  var start=admProdPage*admProdPageSize;
+  var end=Math.min(start+admProdPageSize,allProducts.length);
+  for(var i=start;i<end;i++){
+    var p=allProducts[i];
+    var stk=20+Math.floor(Math.random()*150);
+    var scls=stk<25?'red':(stk<50?'orange':'green');
+    var status=stk<5?'Tükendi':(stk<25?'Az Stok':'Aktif');
+    var stcls=stk<5?'red':(stk<25?'orange':'green');
+    tb.innerHTML+='<tr><td style="font-size:10px;color:var(--text-dim);">'+p.id+'</td><td><b>'+p.name+'</b></td><td><span class="adm-badge '+(p.cat==='hat'?'orange':'blue')+'">'+(p.cat==='hat'?'🎩 Şapka':'👕 Tişört')+'</span></td><td style="color:var(--gold);">₺'+p.price+'</td><td><span class="adm-badge '+scls+'">'+stk+'</span></td><td><span class="adm-badge '+stcls+'">'+status+'</span></td><td><button class="adm-btn" onclick="admEditProduct(\''+p.id+'\')">✏️</button> <button class="adm-btn danger" onclick="admDeleteProduct(this)">🗑️</button></td></tr>';
+  }
+  admProdPage++;
+  if(end>=allProducts.length)document.getElementById('admProdMore').style.display='none';
+}
+function admFilterProducts(){
+  var q=document.getElementById('admProdSearch').value.toLowerCase();
+  var cat=document.getElementById('admProdCat').value;
+  var rows=document.querySelectorAll('#admProdTable tr');
+  rows.forEach(function(r){
+    var txt=r.textContent.toLowerCase();
+    var catMatch=cat==='all'||txt.indexOf(cat==='hat'?'şapka':'tişört')>-1;
+    r.style.display=(txt.indexOf(q)>-1&&catMatch)?'':'none';
+  });
+}
+function admEditProduct(id){alert('✏️ Ürün düzenleme: '+id+'\n(Demo modda aktif değil)');}
+function admDeleteProduct(btn){if(confirm('Bu ürünü silmek istediğinizden emin misiniz?')){btn.closest('tr').remove();}}
+function admAddProduct(){alert('➕ Yeni ürün ekleme formu\n(Demo modda aktif değil)');}
+
+// ORDERS
+function admInitOrders(){
+  var os=document.getElementById('admOrderStats');os.innerHTML='';
+  var sc=[{icon:'📋',num:'1,284',label:'Toplam'},{icon:'🆕',num:'12',label:'Yeni'},{icon:'⏳',num:'34',label:'Hazırlanıyor'},{icon:'🚚',num:'67',label:'Kargoda'},{icon:'✅',num:'1,148',label:'Teslim'},{icon:'❌',num:'23',label:'İptal'}];
+  sc.forEach(function(s){os.innerHTML+='<div class="adm-stat" style="padding:14px;"><div class="adm-stat-icon" style="font-size:20px;">'+s.icon+'</div><div class="adm-stat-num" style="font-size:22px;">'+s.num+'</div><div class="adm-stat-label">'+s.label+'</div></div>';});
+  admFilterOrders('all');
+}
+function admFilterOrders(filter){
+  var tb=document.getElementById('admOrderTable');tb.innerHTML='';
+  for(var i=0;i<25;i++){
+    var st=admStatuses[Math.floor(Math.random()*admStatuses.length)];
+    if(filter!=='all'&&st!==filter)continue;
+    var d=new Date(2026,Math.floor(Math.random()*2),1+Math.floor(Math.random()*28));
+    var items=1+Math.floor(Math.random()*4);
+    var total=items*(150+Math.floor(Math.random()*500));
+    tb.innerHTML+='<tr><td><b>#CLJ-'+(10000+i)+'</b></td><td>'+admNames[i%admNames.length]+'</td><td>'+items+' ürün</td><td style="color:var(--gold);">₺'+total.toLocaleString('tr')+'</td><td>'+d.toLocaleDateString('tr')+'</td><td><span class="adm-badge '+admStatusCls[st]+'">'+admStatusTR[st]+'</span></td><td><button class="adm-btn" onclick="admOrderDetail('+i+')">👁️</button></td></tr>';
+  }
+}
+function admOrderDetail(i){alert('📋 Sipariş Detayı: #CLJ-'+(10000+i)+'\n\nMüşteri: '+admNames[i%admNames.length]+'\nŞehir: '+admCities[i%admCities.length]+'\n\n(Demo modda tam detay aktif değil)');}
+
+// CUSTOMERS
+function admInitCustomers(){
+  var cs=document.getElementById('admCustStats');cs.innerHTML='';
+  [{icon:'👥',num:'3,847',label:'Toplam'},{icon:'🆕',num:'234',label:'Bu Ay'},{icon:'💰',num:'₺220',label:'Ort. Sipariş'},{icon:'📧',num:'2,156',label:'Bülten Abonesi'}].forEach(function(s){
+    cs.innerHTML+='<div class="adm-stat" style="padding:14px;"><div class="adm-stat-icon" style="font-size:20px;">'+s.icon+'</div><div class="adm-stat-num" style="font-size:22px;">'+s.num+'</div><div class="adm-stat-label">'+s.label+'</div></div>';
+  });
+  var ct=document.getElementById('admCustTable');ct.innerHTML='';
+  for(var i=0;i<20;i++){
+    var orders=Math.floor(Math.random()*12);
+    var total=orders*(200+Math.floor(Math.random()*600));
+    var d=new Date(2025,Math.floor(Math.random()*12),1+Math.floor(Math.random()*28));
+    var st=orders>5?'VIP':(orders>0?'Aktif':'Yeni');
+    var scls=orders>5?'green':(orders>0?'blue':'orange');
+    ct.innerHTML+='<tr><td>'+(i+1)+'</td><td><b>'+admNames[i%admNames.length]+'</b></td><td style="font-size:11px;">'+admNames[i%admNames.length].toLowerCase().replace(' ','.')+'@email.com</td><td>'+orders+'</td><td style="color:var(--gold);">₺'+total.toLocaleString('tr')+'</td><td>'+d.toLocaleDateString('tr')+'</td><td><span class="adm-badge '+scls+'">'+st+'</span></td></tr>';
+  }
+}
+function admFilterCustomers(){
+  var q=document.getElementById('admCustSearch').value.toLowerCase();
+  document.querySelectorAll('#admCustTable tr').forEach(function(r){r.style.display=r.textContent.toLowerCase().indexOf(q)>-1?'':'none';});
+}
+function admExportCustomers(){alert('📥 Müşteri listesi CSV olarak indirildi\n(Demo modda aktif değil)');}
+
+// BLOG
+function admInitBlog(){
+  if(typeof blogPosts==='undefined')return;
+  document.getElementById('admBlogCount').textContent=blogPosts.length;
+  var bt=document.getElementById('admBlogTable');bt.innerHTML='';
+  var shown=Math.min(blogPosts.length,30);
+  for(var i=0;i<shown;i++){
+    var p=blogPosts[i];
+    var views=100+Math.floor(Math.random()*5000);
+    var d=new Date(2025,11+Math.floor(i/15),1+Math.floor(Math.random()*28));
+    bt.innerHTML+='<tr><td>'+(i+1)+'</td><td style="max-width:250px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"><b>'+p.t+'</b></td><td><span style="font-size:10px;color:var(--text-dim);">'+(p.tags?p.tags.slice(0,2).join(', '):'')+'</span></td><td>'+views.toLocaleString('tr')+'</td><td>'+d.toLocaleDateString('tr')+'</td><td><span class="adm-badge green">Yayında</span></td><td><button class="adm-btn" onclick="admEditBlog('+i+')">✏️</button> <button class="adm-btn danger" onclick="this.closest(\'tr\').remove()">🗑️</button></td></tr>';
+  }
+}
+function admFilterBlog(){
+  var q=document.getElementById('admBlogSearch').value.toLowerCase();
+  document.querySelectorAll('#admBlogTable tr').forEach(function(r){r.style.display=r.textContent.toLowerCase().indexOf(q)>-1?'':'none';});
+}
+function admEditBlog(i){alert('✏️ Blog düzenleme: '+(typeof blogPosts!=='undefined'?blogPosts[i].t:'')+'\n(Demo modda aktif değil)');}
+function admNewBlogPost(){alert('➕ Yeni blog yazısı oluşturma\n(Demo modda aktif değil)');}
+
+// ANALYTICS
+function admInitAnalytics(){
+  var as=document.getElementById('admAnalyticsStats');as.innerHTML='';
+  [{icon:'👁️',num:'48,920',label:'Aylık Ziyaret',change:'+22%',up:true},{icon:'📱',num:'%68',label:'Mobil Oran',change:'+5%',up:true},{icon:'⏱️',num:'3:24',label:'Ort. Süre',change:'+0:18',up:true},{icon:'🔄',num:'%2.8',label:'Dönüşüm',change:'+0.4%',up:true}].forEach(function(s){
+    as.innerHTML+='<div class="adm-stat"><div class="adm-stat-icon">'+s.icon+'</div><div class="adm-stat-num">'+s.num+'</div><div class="adm-stat-label">'+s.label+'</div><div class="adm-stat-change '+(s.up?'up':'down')+'">'+s.change+'</div></div>';
+  });
+
+  // Visitor chart
+  var vc=document.getElementById('admVisitorChart');vc.innerHTML='';
+  var days=['8Şub','9','10','11','12','13','14','15','16','17','18','19','20','21'];
+  var vis=[1240,1180,1350,1420,1280,980,890,1310,1450,1520,1380,1190,1050,1600];
+  var mx=Math.max.apply(null,vis);
+  days.forEach(function(d,i){
+    var h=Math.max((vis[i]/mx)*140,8);
+    vc.innerHTML+='<div class="adm-bar" style="height:'+h+'px;"><em>'+vis[i]+'</em><span>'+d+'</span></div>';
+  });
+
+  // Device donut
+  admDrawDonut('admDeviceDonut','admDeviceLegend',[
+    {label:'Mobil',val:68,color:'#ff7800'},
+    {label:'Masaüstü',val:26,color:'#ff9933'},
+    {label:'Tablet',val:6,color:'#cc5500'}
+  ]);
+
+  // Cities
+  var cl=document.getElementById('admCityList');cl.innerHTML='';
+  var cities=[{c:'İstanbul',v:12400},{c:'Ankara',v:5800},{c:'İzmir',v:4200},{c:'Bursa',v:2800},{c:'Antalya',v:2400},{c:'Trabzon',v:1900},{c:'Konya',v:1600},{c:'Adana',v:1200}];
+  cities.forEach(function(c,i){
+    var pct=Math.round(c.v/484.2)/100;
+    cl.innerHTML+='<div class="adm-recent-item"><span><b>'+(i+1)+'.</b> '+c.c+'</span><span>'+c.v.toLocaleString('tr')+' <span style="color:var(--text-dim);">('+pct+'%)</span></span></div>';
+  });
+
+  // Pages
+  var pl=document.getElementById('admPageList');pl.innerHTML='';
+  [{p:'Ana Sayfa',v:18200},{p:'Mağaza',v:12400},{p:'Sanal Deneme',v:8900},{p:'Blog',v:6200},{p:'Dünya Kupası',v:4800},{p:'Yılan Oyunu',v:3400},{p:'AI Asistan',v:2800}].forEach(function(pg,i){
+    pl.innerHTML+='<div class="adm-recent-item"><span><b>'+(i+1)+'.</b> '+pg.p+'</span><span>'+pg.v.toLocaleString('tr')+' görüntülenme</span></div>';
+  });
+}
+
+function admBackup(){
+  var data={
+    products:typeof allProducts!=='undefined'?allProducts.length:0,
+    blog:typeof blogPosts!=='undefined'?blogPosts.length:0,
+    leads:JSON.parse(localStorage.getItem('clj_leads')||'[]').length,
+    orders:JSON.parse(localStorage.getItem('clj_orders')||'[]').length,
+    date:new Date().toISOString()
+  };
+  alert('💾 Yedek alındı!\n\nÜrünler: '+data.products+'\nBlog: '+data.blog+'\nMüşteri: '+data.leads+'\nSipariş: '+data.orders+'\nTarih: '+data.date);
+}
+
 </script>
 </body>
 </html>
