@@ -236,19 +236,43 @@ footer{background:var(--accent);color:var(--bg);padding:60px 48px 0}
 .pef h4{font-size:15px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:18px}
 
 /* Image upload zone */
-.img-upload{margin-bottom:18px}
-.img-upload label{display:block;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-bottom:7px}
-.img-drop{border:2px dashed var(--border);background:var(--white);padding:32px;text-align:center;cursor:pointer;transition:all .3s;position:relative;min-height:140px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px}
-.img-drop:hover,.img-drop.dragover{border-color:var(--text);background:var(--bg2)}
-.img-drop .drop-icon{font-size:32px;opacity:.3}
-.img-drop .drop-text{font-size:12px;color:var(--text3);letter-spacing:1px}
-.img-drop .drop-hint{font-size:10px;color:var(--text3);opacity:.6}
-.img-drop input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer}
-.img-preview{position:relative;display:none;margin-top:10px}
-.img-preview img{width:100%;max-height:280px;object-fit:cover;border:1px solid var(--border)}
-.img-preview .img-rm{position:absolute;top:8px;right:8px;width:28px;height:28px;background:var(--text);color:var(--bg);border:none;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;transition:background .3s}
-.img-preview .img-rm:hover{background:var(--danger)}
-.img-preview .img-info{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text3);margin-top:6px;letter-spacing:1px}
+.img-upload{margin-bottom:20px}
+.img-upload>label{display:block;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-bottom:8px}
+.img-zone{border:2px dashed var(--border);background:var(--white);padding:28px 24px;text-align:center;transition:all .3s;position:relative}
+.img-zone:hover{border-color:var(--text)}
+.img-zone.dragover{border-color:var(--text);background:var(--bg2)}
+.img-zone-icon{font-size:36px;margin-bottom:10px;opacity:.25}
+.img-zone-title{font-size:13px;font-weight:600;margin-bottom:6px;letter-spacing:1px}
+.img-zone-hint{font-size:11px;color:var(--text3);margin-bottom:16px}
+.img-zone-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;align-items:center}
+.img-file-btn{display:inline-flex;align-items:center;gap:6px;padding:10px 22px;background:var(--text);color:var(--bg);border:none;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;transition:background .3s;cursor:pointer}
+.img-file-btn:hover{background:#333}
+.img-file-btn input{display:none}
+.img-or{font-size:11px;color:var(--text3);letter-spacing:1px}
+.img-url-wrap{display:flex;gap:0;max-width:320px;width:100%;margin-top:10px}
+.img-url-wrap input{flex:1;padding:10px 14px;border:1px solid var(--border);border-right:none;font-size:12px;font-family:'Outfit',sans-serif;outline:none;background:var(--bg);min-width:0}
+.img-url-wrap input:focus{border-color:var(--text)}
+.img-url-wrap button{padding:10px 16px;background:var(--text);color:var(--bg);border:none;font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;white-space:nowrap;transition:background .3s}
+.img-url-wrap button:hover{background:#333}
+
+/* Image preview */
+.img-prev{display:none;margin-top:12px;position:relative;border:1px solid var(--border);background:var(--bg2)}
+.img-prev-inner{display:flex;gap:16px;padding:14px;align-items:center}
+.img-prev-pic{width:120px;height:120px;overflow:hidden;flex-shrink:0;border:1px solid var(--border);background:var(--white)}
+.img-prev-pic img{width:100%;height:100%;object-fit:cover;display:block}
+.img-prev-details{flex:1;min-width:0}
+.img-prev-name{font-size:13px;font-weight:600;margin-bottom:4px;letter-spacing:.5px;word-break:break-all}
+.img-prev-size{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text3);letter-spacing:1px;margin-bottom:10px}
+.img-prev-bar{width:100%;height:4px;background:var(--bg3);border-radius:2px;overflow:hidden;margin-bottom:12px}
+.img-prev-bar .fill{height:100%;background:var(--success);border-radius:2px;animation:barLoad .5s ease-out}
+@keyframes barLoad{from{width:0}to{width:100%}}
+.img-prev-btns{display:flex;gap:8px}
+.img-change-btn{padding:7px 14px;background:none;border:1px solid var(--border);font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--text);transition:all .3s;cursor:pointer}
+.img-change-btn:hover{border-color:var(--text)}
+.img-change-btn input{display:none}
+.img-remove-btn{padding:7px 14px;background:none;border:1px solid var(--danger);font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--danger);transition:all .3s;cursor:pointer}
+.img-remove-btn:hover{background:var(--danger);color:#fff}
+
 /* Product card with real image */
 .p-img img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;z-index:1}
 .p-img.has-img svg{display:none}
@@ -494,20 +518,40 @@ footer{background:var(--accent);color:var(--bg);padding:60px 48px 0}
         <div class="apl" id="admProdList"></div>
         <div class="pef" id="prodEdit">
           <h4 id="peTitle">Düzenle</h4>
+
+          <!-- IMAGE UPLOAD -->
           <div class="img-upload">
             <label>Ürün Görseli</label>
-            <div class="img-drop" id="imgDrop" ondragover="event.preventDefault();this.classList.add('dragover')" ondragleave="this.classList.remove('dragover')" ondrop="handleDrop(event)">
-              <div class="drop-icon">📷</div>
-              <div class="drop-text">Görsel yüklemek için tıklayın veya sürükleyin</div>
-              <div class="drop-hint">JPG, PNG, WEBP — Max 5MB</div>
-              <input type="file" id="peImg" accept="image/*" onchange="handleImgSelect(event)">
+            <div class="img-zone" id="imgZone" ondragover="event.preventDefault();this.classList.add('dragover')" ondragleave="this.classList.remove('dragover')" ondrop="handleDrop(event)">
+              <div class="img-zone-icon">📷</div>
+              <div class="img-zone-title">Ürün görseli ekleyin</div>
+              <div class="img-zone-hint">Sürükle-bırak veya aşağıdaki seçenekleri kullanın</div>
+              <div class="img-zone-actions">
+                <label class="img-file-btn">📁 Dosya Seç<input type="file" id="peImg" accept="image/jpeg,image/png,image/webp,image/gif" onchange="handleFileBtn(this)"></label>
+                <span class="img-or">veya</span>
+                <label class="img-file-btn" style="background:none;color:var(--text);border:1.5px solid var(--text)" onclick="toggleUrlInput()">🔗 URL Yapıştır</label>
+              </div>
+              <div class="img-url-wrap" id="imgUrlWrap" style="display:none;margin:14px auto 0">
+                <input type="text" id="imgUrlInput" placeholder="https://ornek.com/gorsel.jpg" onkeydown="if(event.key==='Enter')loadImgUrl()">
+                <button onclick="loadImgUrl()">Yükle</button>
+              </div>
             </div>
-            <div class="img-preview" id="imgPreview">
-              <img id="imgPreviewSrc" src="">
-              <button class="img-rm" onclick="removeImg()">✕</button>
-              <div class="img-info" id="imgInfo"></div>
+            <div class="img-prev" id="imgPrev">
+              <div class="img-prev-inner">
+                <div class="img-prev-pic"><img id="imgPrevSrc" src=""></div>
+                <div class="img-prev-details">
+                  <div class="img-prev-name" id="imgPrevName">gorsel.jpg</div>
+                  <div class="img-prev-size" id="imgPrevSize">128 KB</div>
+                  <div class="img-prev-bar"><div class="fill" style="width:100%"></div></div>
+                  <div class="img-prev-btns">
+                    <label class="img-change-btn">🔄 Değiştir<input type="file" accept="image/jpeg,image/png,image/webp,image/gif" onchange="handleFileBtn(this)"></label>
+                    <button class="img-remove-btn" onclick="removeImg()">🗑 Kaldır</button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
+
           <div class="fr"><div class="fg"><label>Kod</label><input id="peCode" readonly style="background:var(--bg2)"></div><div class="fg"><label>Fiyat (₺)</label><input type="number" id="pePrice"></div></div>
           <div class="fg"><label>Ürün Adı</label><input id="peName"></div>
           <div class="fg"><label>Açıklama</label><textarea id="peDesc"></textarea></div>
@@ -838,17 +882,13 @@ function editProd(i){
   document.getElementById('pePrice').value=p.price;document.getElementById('peColor').value=p.color;
   document.getElementById('peDesc').value=p.desc;document.getElementById('peBadge').value=p.badge||'';
   document.getElementById('peStatus').value=p.status;
-  // Show image preview if exists
+  // Image state
   if(p.img){
-    document.getElementById('imgPreview').style.display='block';
-    document.getElementById('imgPreviewSrc').src=p.img;
-    document.getElementById('imgInfo').textContent='Mevcut görsel yüklü';
-    document.getElementById('imgDrop').style.display='none';
+    showImgPreview(p.img,'Mevcut görsel','');
   }else{
-    document.getElementById('imgPreview').style.display='none';
-    document.getElementById('imgDrop').style.display='flex';
+    hideImgPreview();
   }
-  document.getElementById('peImg').value='';
+  document.getElementById('imgUrlWrap').style.display='none';
   document.getElementById('prodEdit').style.display='block';
   document.getElementById('prodEdit').scrollIntoView({behavior:'smooth'});
 }
@@ -862,34 +902,82 @@ function saveProd(){
 function cancelProd(){document.getElementById('prodEdit').style.display='none';editIdx=-1;tempImg=''}
 
 // ===== IMAGE HANDLING =====
-function handleImgSelect(e){
-  const file=e.target.files[0];if(file)processImgFile(file);
+function handleFileBtn(input){
+  const file=input.files[0];
+  if(file)processImgFile(file);
+  input.value='';
 }
 function handleDrop(e){
   e.preventDefault();e.currentTarget.classList.remove('dragover');
-  const file=e.dataTransfer.files[0];if(file)processImgFile(file);
+  const file=e.dataTransfer.files[0];
+  if(file)processImgFile(file);
 }
 function processImgFile(file){
-  if(!file.type.startsWith('image/')){toast('Sadece görsel dosyalar yüklenebilir');return}
+  if(!file.type.match(/^image\/(jpeg|png|webp|gif)$/)){toast('Desteklenen format: JPG, PNG, WEBP, GIF');return}
   if(file.size>5*1024*1024){toast('Dosya 5MB\'dan küçük olmalı');return}
   const reader=new FileReader();
-  reader.onload=function(e){
-    tempImg=e.target.result;
-    document.getElementById('imgPreview').style.display='block';
-    document.getElementById('imgPreviewSrc').src=tempImg;
+  reader.onload=function(ev){
+    tempImg=ev.target.result;
     const kb=Math.round(file.size/1024);
-    document.getElementById('imgInfo').textContent=`${file.name} — ${kb}KB`;
-    document.getElementById('imgDrop').style.display='none';
-    toast('Görsel yüklendi ✓');
+    const sizeStr=kb>1024?(kb/1024).toFixed(1)+' MB':kb+' KB';
+    showImgPreview(tempImg,file.name,sizeStr);
+    toast('✓ Görsel yüklendi');
   };
   reader.readAsDataURL(file);
 }
+function toggleUrlInput(){
+  const el=document.getElementById('imgUrlWrap');
+  el.style.display=el.style.display==='none'?'flex':'none';
+  if(el.style.display==='flex')document.getElementById('imgUrlInput').focus();
+}
+function loadImgUrl(){
+  const url=document.getElementById('imgUrlInput').value.trim();
+  if(!url){toast('Bir URL girin');return}
+  // Test image loading
+  const img=new Image();
+  img.crossOrigin='anonymous';
+  img.onload=function(){
+    // Try to convert to base64 via canvas
+    try{
+      const canvas=document.createElement('canvas');
+      canvas.width=img.naturalWidth;canvas.height=img.naturalHeight;
+      const ctx=canvas.getContext('2d');ctx.drawImage(img,0,0);
+      tempImg=canvas.toDataURL('image/jpeg',0.9);
+    }catch(e){
+      // If CORS fails, just use the URL directly
+      tempImg=url;
+    }
+    showImgPreview(tempImg,url.split('/').pop()||'gorsel','URL');
+    document.getElementById('imgUrlInput').value='';
+    document.getElementById('imgUrlWrap').style.display='none';
+    toast('✓ Görsel yüklendi');
+  };
+  img.onerror=function(){
+    // If image fails to load natively, still set URL
+    tempImg=url;
+    showImgPreview(url,url.split('/').pop()||'gorsel','URL');
+    document.getElementById('imgUrlInput').value='';
+    document.getElementById('imgUrlWrap').style.display='none';
+    toast('✓ URL kaydedildi');
+  };
+  img.src=url;
+}
+function showImgPreview(src,name,size){
+  document.getElementById('imgPrev').style.display='block';
+  document.getElementById('imgPrevSrc').src=src;
+  document.getElementById('imgPrevName').textContent=name;
+  document.getElementById('imgPrevSize').textContent=size;
+  document.getElementById('imgZone').style.display='none';
+}
+function hideImgPreview(){
+  document.getElementById('imgPrev').style.display='none';
+  document.getElementById('imgPrevSrc').src='';
+  document.getElementById('imgZone').style.display='';
+}
 function removeImg(){
   tempImg='';
-  document.getElementById('imgPreview').style.display='none';
-  document.getElementById('imgPreviewSrc').src='';
-  document.getElementById('imgDrop').style.display='flex';
-  document.getElementById('peImg').value='';
+  hideImgPreview();
+  toast('Görsel kaldırıldı');
 }
 
 // Blog admin
