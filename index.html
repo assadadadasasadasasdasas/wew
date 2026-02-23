@@ -313,6 +313,23 @@ footer{background:var(--accent);color:var(--bg);padding:60px 48px 0}
 .login-box .lc{width:100%;padding:14px;background:none;color:var(--text3);border:1px solid var(--border);font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;transition:all .3s}.login-box .lc:hover{border-color:var(--text);color:var(--text)}
 .login-err{color:var(--danger);font-size:11px;margin-top:4px;display:none}
 
+/* SITE LOCK */
+.site-lock{position:fixed;inset:0;background:var(--accent);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:28px;transition:opacity .5s,visibility .5s}
+.site-lock.unlocked{opacity:0;visibility:hidden;pointer-events:none}
+.site-lock-inner{text-align:center;animation:fadeUp .6s ease-out}
+.site-lock svg{width:80px;height:80px;margin-bottom:24px;animation:spinSlow 80s linear infinite}
+.site-lock h2{color:var(--bg);font-size:28px;font-weight:900;letter-spacing:10px;text-transform:uppercase;margin-bottom:6px}
+.site-lock .sl-sub{font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(245,240,235,.35);letter-spacing:4px;text-transform:uppercase;margin-bottom:36px}
+.site-lock .sl-input-wrap{display:flex;gap:10px;justify-content:center;margin-bottom:14px}
+.site-lock .sl-digit{width:52px;height:60px;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);color:var(--bg);font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:700;text-align:center;outline:none;transition:border .3s;letter-spacing:2px;-webkit-appearance:none;-moz-appearance:textfield}
+.site-lock .sl-digit:focus{border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.1)}
+.site-lock .sl-digit::placeholder{color:rgba(245,240,235,.15)}
+.site-lock .sl-btn{padding:14px 48px;background:var(--bg);color:var(--text);border:none;font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;transition:all .3s;margin-top:8px}
+.site-lock .sl-btn:hover{background:var(--bg2);letter-spacing:6px}
+.site-lock .sl-err{color:#F87171;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:2px;height:18px;margin-top:10px;transition:opacity .3s}
+.site-lock .sl-hint{font-size:10px;color:rgba(245,240,235,.15);letter-spacing:2px;margin-top:28px;font-family:'JetBrains Mono',monospace}
+@keyframes lockShake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+
 .toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--text);color:var(--bg);padding:13px 28px;font-size:12px;font-weight:500;letter-spacing:2px;z-index:700;transition:transform .4s cubic-bezier(.4,0,.2,1);pointer-events:none;white-space:nowrap}.toast.show{transform:translateX(-50%) translateY(0)}
 
 /* AI CHAT WIDGET */
@@ -356,6 +373,24 @@ footer{background:var(--accent);color:var(--bg);padding:60px 48px 0}
 </style>
 </head>
 <body>
+
+<!-- SITE LOCK SCREEN -->
+<div class="site-lock" id="siteLock">
+  <div class="site-lock-inner">
+    <svg viewBox="0 0 500 500"><g transform="translate(250,250)"><polygon points="0,-185 38,-62 155,-95 72,-12 120,105 8,52 -95,130 -52,18 -170,-55 -48,-52" fill="#F5F0EB"/><polygon points="5,-120 30,-42 105,-60 52,-5 82,72 10,36 -60,88 -35,14 -115,-32 -32,-35" fill="#222"/><polygon points="0,-35 22,0 0,35 -22,0" fill="#F5F0EB"/></g></svg>
+    <h2>Calejon</h2>
+    <div class="sl-sub">Headwear Co. — Private Access</div>
+    <div class="sl-input-wrap" id="slInputWrap">
+      <input class="sl-digit" id="sl1" type="password" maxlength="1" inputmode="numeric" pattern="[0-9]*" placeholder="•" oninput="slNext(this,1)" onkeydown="slKey(event,0)" autofocus>
+      <input class="sl-digit" id="sl2" type="password" maxlength="1" inputmode="numeric" pattern="[0-9]*" placeholder="•" oninput="slNext(this,2)" onkeydown="slKey(event,1)">
+      <input class="sl-digit" id="sl3" type="password" maxlength="1" inputmode="numeric" pattern="[0-9]*" placeholder="•" oninput="slNext(this,3)" onkeydown="slKey(event,2)">
+      <input class="sl-digit" id="sl4" type="password" maxlength="1" inputmode="numeric" pattern="[0-9]*" placeholder="•" oninput="slCheck()" onkeydown="slKey(event,3)">
+    </div>
+    <button class="sl-btn" onclick="slCheck()">Giriş</button>
+    <div class="sl-err" id="slErr"></div>
+    <div class="sl-hint">şifre gerekli</div>
+  </div>
+</div>
 
 <!-- TICKER -->
 <div class="ticker"><div class="ticker-track"><span>Ücretsiz Kargo 500₺ Üzeri</span><span>Yeni Koleksiyon</span><span>Türkiye Geneli Teslimat</span><span>%100 Premium Kalite</span><span>1-3 İş Günü Kargo</span><span>30 Gün İade Hakkı</span><span>Ücretsiz Kargo 500₺ Üzeri</span><span>Yeni Koleksiyon</span><span>Türkiye Geneli Teslimat</span><span>%100 Premium Kalite</span><span>1-3 İş Günü Kargo</span><span>30 Gün İade Hakkı</span></div></div>
@@ -703,6 +738,42 @@ footer{background:var(--accent);color:var(--bg);padding:60px 48px 0}
 
 <script>
 const STAR=`<svg viewBox="0 0 500 500"><g transform="translate(250,250)"><polygon points="0,-185 38,-62 155,-95 72,-12 120,105 8,52 -95,130 -52,18 -170,-55 -48,-52" fill="#1A1A1A"/><polygon points="5,-120 30,-42 105,-60 52,-5 82,72 10,36 -60,88 -35,14 -115,-32 -32,-35" fill="#EDE8E2"/><polygon points="0,-35 22,0 0,35 -22,0" fill="#1A1A1A"/></g></svg>`;
+
+// ===== SITE LOCK =====
+const SITE_PW='3111';
+let siteUnlocked=false;
+
+function slNext(el,nextIdx){
+  if(el.value.length===1&&nextIdx<=3){
+    document.getElementById('sl'+(nextIdx+1)).focus();
+  }
+}
+function slKey(e,idx){
+  if(e.key==='Backspace'&&!e.target.value&&idx>0){
+    document.getElementById('sl'+(idx)).focus();
+  }
+  if(e.key==='Enter')slCheck();
+}
+function slCheck(){
+  const code=document.getElementById('sl1').value+document.getElementById('sl2').value+document.getElementById('sl3').value+document.getElementById('sl4').value;
+  if(code.length<4)return;
+  if(code===SITE_PW){
+    siteUnlocked=true;
+    document.getElementById('siteLock').classList.add('unlocked');
+    document.body.style.overflow='';
+    setTimeout(()=>{document.getElementById('siteLock').style.display='none'},600);
+    showEp();
+  }else{
+    document.getElementById('slErr').textContent='Yanlış şifre';
+    document.getElementById('slInputWrap').style.animation='lockShake .4s ease';
+    setTimeout(()=>{
+      document.getElementById('slInputWrap').style.animation='';
+      document.getElementById('sl1').value='';document.getElementById('sl2').value='';
+      document.getElementById('sl3').value='';document.getElementById('sl4').value='';
+      document.getElementById('sl1').focus();
+    },500);
+  }
+}
 
 // ===== STATE =====
 let adminPw='calejon2025',admLoggedIn=false,editIdx=-1,blogEditIdx=-1;
@@ -1283,8 +1354,10 @@ openAdm=function(){
 };
 
 // ===== INIT =====
+document.body.style.overflow='hidden'; // Lock scroll until password
+document.getElementById('sl1').focus();
 go('home');
-showEp();
+// showEp() is called after successful unlock in slCheck()
 </script>
 </body>
 </html>
