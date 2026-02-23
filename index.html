@@ -71,8 +71,8 @@ nav a:hover::after{width:100%}
 .p-img{width:100%;aspect-ratio:1;background:var(--bg2);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
 .p-img svg{width:55%;opacity:.12;transition:all .5s}
 .p-card:hover .p-img svg{opacity:.22;transform:scale(1.06) rotate(4deg)}
-.p-code{position:absolute;top:10px;left:10px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:1.5px;color:var(--text3);background:rgba(245,240,235,.92);padding:3px 8px}
-.p-badge{position:absolute;top:10px;right:10px;font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--white);background:var(--text);padding:4px 10px}
+.p-code{position:absolute;top:10px;left:10px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:1.5px;color:var(--text3);background:rgba(245,240,235,.92);padding:3px 8px;z-index:2}
+.p-badge{position:absolute;top:10px;right:10px;font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--white);background:var(--text);padding:4px 10px;z-index:2}
 .p-info{padding:14px 16px;border-top:1px solid var(--border)}
 .p-name{font-weight:700;font-size:13.5px;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:6px}
 .p-price{font-family:'JetBrains Mono',monospace;font-size:13.5px;font-weight:500}
@@ -235,6 +235,31 @@ footer{background:var(--accent);color:var(--bg);padding:60px 48px 0}
 .pef{display:none;border-top:1px solid var(--border);padding-top:24px;margin-top:8px}
 .pef h4{font-size:15px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:18px}
 
+/* Image upload zone */
+.img-upload{margin-bottom:18px}
+.img-upload label{display:block;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-bottom:7px}
+.img-drop{border:2px dashed var(--border);background:var(--white);padding:32px;text-align:center;cursor:pointer;transition:all .3s;position:relative;min-height:140px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px}
+.img-drop:hover,.img-drop.dragover{border-color:var(--text);background:var(--bg2)}
+.img-drop .drop-icon{font-size:32px;opacity:.3}
+.img-drop .drop-text{font-size:12px;color:var(--text3);letter-spacing:1px}
+.img-drop .drop-hint{font-size:10px;color:var(--text3);opacity:.6}
+.img-drop input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer}
+.img-preview{position:relative;display:none;margin-top:10px}
+.img-preview img{width:100%;max-height:280px;object-fit:cover;border:1px solid var(--border)}
+.img-preview .img-rm{position:absolute;top:8px;right:8px;width:28px;height:28px;background:var(--text);color:var(--bg);border:none;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;transition:background .3s}
+.img-preview .img-rm:hover{background:var(--danger)}
+.img-preview .img-info{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text3);margin-top:6px;letter-spacing:1px}
+/* Product card with real image */
+.p-img img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;z-index:1}
+.p-img.has-img svg{display:none}
+/* Cart item with real image */
+.c-item-img img{width:100%;height:100%;object-fit:cover}
+.c-item-img.has-img svg{display:none}
+/* Admin product thumbnail */
+.api-thumb{width:40px;height:40px;background:var(--bg2);border:1px solid var(--border);overflow:hidden;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.api-thumb img{width:100%;height:100%;object-fit:cover}
+.api-thumb svg{width:70%;opacity:.12}
+
 /* Email list in admin */
 .email-list-item{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:var(--white);border:1px solid var(--border);margin-bottom:6px;font-size:13px}
 .email-list-item .el-email{font-weight:500}
@@ -268,7 +293,7 @@ footer{background:var(--accent);color:var(--bg);padding:60px 48px 0}
 
 /* RESPONSIVE */
 @media(max-width:1024px){.p-grid,.blog-grid{grid-template-columns:repeat(2,1fr)}.about-sec{grid-template-columns:1fr;gap:40px}.ft-inner{grid-template-columns:1fr 1fr}.dash-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:768px){.h-inner{padding:0 20px}nav{display:none}.hamburger{display:flex}.p-grid,.blog-grid{grid-template-columns:repeat(2,1fr);gap:10px;padding:0 16px 60px}.sec-h{padding:60px 20px 36px}.about-sec{padding:0 20px 60px}.hero-star-wrap{width:160px;height:160px}.ft-inner{grid-template-columns:1fr;gap:28px}footer{padding:48px 20px 0}.c-drawer{width:100%;right:-100%}.p-add{opacity:1;transform:translateY(0)}.fr{grid-template-columns:1fr}.adm{width:100%;max-height:100vh;height:100vh}.api{grid-template-columns:50px 1fr 60px 40px}.api .st{display:none}.dash-grid{grid-template-columns:1fr 1fr}.member-item{grid-template-columns:1fr 1fr}.blog-grid{grid-template-columns:1fr}.user-name-badge{display:none!important}}
+@media(max-width:768px){.h-inner{padding:0 20px}nav{display:none}.hamburger{display:flex}.p-grid,.blog-grid{grid-template-columns:repeat(2,1fr);gap:10px;padding:0 16px 60px}.sec-h{padding:60px 20px 36px}.about-sec{padding:0 20px 60px}.hero-star-wrap{width:160px;height:160px}.ft-inner{grid-template-columns:1fr;gap:28px}footer{padding:48px 20px 0}.c-drawer{width:100%;right:-100%}.p-add{opacity:1;transform:translateY(0)}.fr{grid-template-columns:1fr}.adm{width:100%;max-height:100vh;height:100vh}.api{grid-template-columns:34px 50px 1fr 60px 40px!important}.api .st{display:none}.dash-grid{grid-template-columns:1fr 1fr}.member-item{grid-template-columns:1fr 1fr}.blog-grid{grid-template-columns:1fr}.user-name-badge{display:none!important}}
 </style>
 </head>
 <body>
@@ -357,11 +382,11 @@ footer{background:var(--accent);color:var(--bg);padding:60px 48px 0}
 
 <!-- ABOUT --><div class="pg" id="pg-about"><span class="pg-back" onclick="go('home')">← Ana Sayfa</span><h2>Hakkımızda</h2><div id="aboutFullTxt"><p>Calejon, 2025 yılında Türkiye'de kurulan bir premium headwear markasıdır. Sokak kültürünün enerjisini, minimalist tasarım anlayışıyla birleştiriyoruz.</p><p>Markamızın adı "Calejon" — dar geçit, sokak anlamına gelir. Tıpkı dar sokaklardaki sanatsal ruh gibi, biz de her şapkada bir hikaye anlatıyoruz.</p><h3>Misyonumuz</h3><p>Premium kalitede, özgün tasarımlı şapkalar üreterek; sokak modasını yeniden tanımlamak.</p><h3>Vizyonumuz</h3><p>Türkiye'den dünyaya uzanan, küresel streetwear sahnesinde tanınan bir headwear markası olmak.</p></div></div>
 
-<!-- CONTACT --><div class="pg" id="pg-contact"><span class="pg-back" onclick="go('home')">← Ana Sayfa</span><h2>İletişim</h2><p>Sorularınız için bize ulaşın.</p><h3 style="font-size:14px;font-weight:600;letter-spacing:3px;text-transform:uppercase;margin:28px 0 8px">E-posta</h3><p id="contactEmail">info@calejon.com</p><h3 style="font-size:14px;font-weight:600;letter-spacing:3px;text-transform:uppercase;margin:28px 0 8px">Sosyal Medya</h3><p id="contactSocial">Instagram: @calejon</p><h3 style="font-size:14px;font-weight:600;letter-spacing:3px;text-transform:uppercase;margin:28px 0 8px">Adres</h3><p id="contactAddr">Türkiye</p><div class="contact-form"><input type="text" placeholder="Adınız" id="cfName"><input type="email" placeholder="E-posta" id="cfEmail"><textarea placeholder="Mesajınız" id="cfMsg"></textarea><button class="contact-send" onclick="sendMsg()">Gönder</button></div></div>
+<!-- CONTACT --><div class="pg" id="pg-contact"><span class="pg-back" onclick="go('home')">← Ana Sayfa</span><h2>İletişim</h2><p>Sorularınız için bize ulaşın.</p><h3 style="font-size:14px;font-weight:600;letter-spacing:3px;text-transform:uppercase;margin:28px 0 8px">E-posta</h3><p id="contactEmail"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c7aea9a1a887a4a6aba2ada8a9e9a4a8aa">[email&#160;protected]</a></p><h3 style="font-size:14px;font-weight:600;letter-spacing:3px;text-transform:uppercase;margin:28px 0 8px">Sosyal Medya</h3><p id="contactSocial">Instagram: @calejon</p><h3 style="font-size:14px;font-weight:600;letter-spacing:3px;text-transform:uppercase;margin:28px 0 8px">Adres</h3><p id="contactAddr">Türkiye</p><div class="contact-form"><input type="text" placeholder="Adınız" id="cfName"><input type="email" placeholder="E-posta" id="cfEmail"><textarea placeholder="Mesajınız" id="cfMsg"></textarea><button class="contact-send" onclick="sendMsg()">Gönder</button></div></div>
 
 <!-- ACCOUNT --><div class="pg" id="pg-account"><span class="pg-back" onclick="go('home')">← Ana Sayfa</span><h2>Hesabım</h2><div id="accountContent"></div></div>
 
-<!-- KVKK --><div class="pg" id="pg-kvkk"><span class="pg-back" onclick="go('home')">← Ana Sayfa</span><h2>KVKK Aydınlatma Metni</h2><div id="kvkkContent"><h3>1. Veri Sorumlusu</h3><p>Calejon Headwear Co. olarak, 6698 sayılı KVKK kapsamında, kişisel verilerinizin korunmasına önem vermekteyiz.</p><h3>2. Toplanan Veriler</h3><p>Kimlik, iletişim, alışveriş ve dijital iz bilgileri.</p><h3>3. Haklarınız</h3><p>KVKK 11. madde uyarınca tüm haklara sahipsiniz. Talepler: info@calejon.com</p></div></div>
+<!-- KVKK --><div class="pg" id="pg-kvkk"><span class="pg-back" onclick="go('home')">← Ana Sayfa</span><h2>KVKK Aydınlatma Metni</h2><div id="kvkkContent"><h3>1. Veri Sorumlusu</h3><p>Calejon Headwear Co. olarak, 6698 sayılı KVKK kapsamında, kişisel verilerinizin korunmasına önem vermekteyiz.</p><h3>2. Toplanan Veriler</h3><p>Kimlik, iletişim, alışveriş ve dijital iz bilgileri.</p><h3>3. Haklarınız</h3><p>KVKK 11. madde uyarınca tüm haklara sahipsiniz. Talepler: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a8c1c6cec7e8cbc9c4cdc2c7c686cbc7c5">[email&#160;protected]</a></p></div></div>
 
 <!-- PRIVACY --><div class="pg" id="pg-privacy"><span class="pg-back" onclick="go('home')">← Ana Sayfa</span><h2>Gizlilik Politikası</h2><div id="privContent"><h3>1. Genel</h3><p>Gizliliğinize saygı duyuyoruz.</p><h3>2. Güvenlik</h3><p>SSL şifreleme kullanılmaktadır.</p><h3>3. İade</h3><p>14 gün içinde iade hakkı.</p></div></div>
 
@@ -371,7 +396,7 @@ footer{background:var(--accent);color:var(--bg);padding:60px 48px 0}
     <div class="ft-brand"><div class="ft-logo">CALEJON</div><p>Premium headwear markası. Sokak kültürü ve bireysel tarzın kesişim noktası. Est. 2025.</p></div>
     <div class="ft-col"><h4>Mağaza</h4><a onclick="go('shop')">Tüm Ürünler</a><a onclick="go('blog')">Blog</a></div>
     <div class="ft-col"><h4>Bilgi</h4><a onclick="go('about')">Hakkımızda</a><a onclick="go('contact')">İletişim</a><a onclick="go('kvkk')">KVKK</a><a onclick="go('privacy')">Gizlilik</a></div>
-    <div class="ft-col"><h4>İletişim</h4><a>info@calejon.com</a><a>Instagram: @calejon</a></div>
+    <div class="ft-col"><h4>İletişim</h4><a><span class="__cf_email__" data-cfemail="066f6860694665676a636c69682865696b">[email&#160;protected]</span></a><a>Instagram: @calejon</a></div>
   </div>
   <div class="ft-mid"><button class="ft-admin" onclick="openAdmLogin()">⚙ YÖNETİM PANELİ</button></div>
   <div class="ft-bottom"><span>© 2025 Calejon Headwear Co.</span><span>Made with ✦</span></div>
@@ -469,6 +494,20 @@ footer{background:var(--accent);color:var(--bg);padding:60px 48px 0}
         <div class="apl" id="admProdList"></div>
         <div class="pef" id="prodEdit">
           <h4 id="peTitle">Düzenle</h4>
+          <div class="img-upload">
+            <label>Ürün Görseli</label>
+            <div class="img-drop" id="imgDrop" ondragover="event.preventDefault();this.classList.add('dragover')" ondragleave="this.classList.remove('dragover')" ondrop="handleDrop(event)">
+              <div class="drop-icon">📷</div>
+              <div class="drop-text">Görsel yüklemek için tıklayın veya sürükleyin</div>
+              <div class="drop-hint">JPG, PNG, WEBP — Max 5MB</div>
+              <input type="file" id="peImg" accept="image/*" onchange="handleImgSelect(event)">
+            </div>
+            <div class="img-preview" id="imgPreview">
+              <img id="imgPreviewSrc" src="">
+              <button class="img-rm" onclick="removeImg()">✕</button>
+              <div class="img-info" id="imgInfo"></div>
+            </div>
+          </div>
           <div class="fr"><div class="fg"><label>Kod</label><input id="peCode" readonly style="background:var(--bg2)"></div><div class="fg"><label>Fiyat (₺)</label><input type="number" id="pePrice"></div></div>
           <div class="fg"><label>Ürün Adı</label><input id="peName"></div>
           <div class="fg"><label>Açıklama</label><textarea id="peDesc"></textarea></div>
@@ -537,7 +576,7 @@ footer{background:var(--accent);color:var(--bg);padding:60px 48px 0}
 
 <div class="toast" id="toast"></div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const STAR=`<svg viewBox="0 0 500 500"><g transform="translate(250,250)"><polygon points="0,-185 38,-62 155,-95 72,-12 120,105 8,52 -95,130 -52,18 -170,-55 -48,-52" fill="#1A1A1A"/><polygon points="5,-120 30,-42 105,-60 52,-5 82,72 10,36 -60,88 -35,14 -115,-32 -32,-35" fill="#EDE8E2"/><polygon points="0,-35 22,0 0,35 -22,0" fill="#1A1A1A"/></g></svg>`;
 
 // ===== STATE =====
@@ -547,15 +586,17 @@ let currentUser=null; // {name,email,pass,date,orders}
 let users=[]; // registered users
 
 const products=[
-  {code:'CLJ-001',name:'001',price:999,color:'Siyah',desc:'Asimetrik yıldız logolu klasik şapka. %100 pamuk.',badge:'YENİ',status:'active'},
-  {code:'CLJ-002',name:'002',price:999,color:'Gece Mavisi',desc:'Gece mavisi premium şapka. Altın detaylı yıldız nakış.',badge:'SINIRLI',status:'active'},
-  {code:'CLJ-003',name:'003',price:999,color:'Haki',desc:'Haki yeşil sokak tarzı şapka. Vintage yıkama efekti.',badge:'',status:'active'},
-  {code:'CLJ-004',name:'004',price:999,color:'Beyaz',desc:'Sade beyaz şapka, ton-sur-ton yıldız nakış.',badge:'',status:'active'},
-  {code:'CLJ-005',name:'005',price:999,color:'Siyah',desc:'Mat siyah premium şapka. 3D kabartma yıldız logo.',badge:'POPÜLER',status:'active'},
-  {code:'CLJ-006',name:'006',price:999,color:'Taş Grisi',desc:'Vintage yıkama efektli taş grisi şapka.',badge:'',status:'active'},
-  {code:'CLJ-007',name:'007',price:999,color:'Siyah/Kırmızı',desc:'Özel kolaborasyon şapka. Kırmızı kontrast dikişler.',badge:'COLLAB',status:'active'},
-  {code:'CLJ-008',name:'008',price:999,color:'Lacivert',desc:'Günlük kullanım lacivert şapka. Flex-fit.',badge:'',status:'active'},
+  {code:'CLJ-001',name:'001',price:999,color:'Siyah',desc:'Asimetrik yıldız logolu klasik şapka. %100 pamuk.',badge:'YENİ',status:'active',img:''},
+  {code:'CLJ-002',name:'002',price:999,color:'Gece Mavisi',desc:'Gece mavisi premium şapka. Altın detaylı yıldız nakış.',badge:'SINIRLI',status:'active',img:''},
+  {code:'CLJ-003',name:'003',price:999,color:'Haki',desc:'Haki yeşil sokak tarzı şapka. Vintage yıkama efekti.',badge:'',status:'active',img:''},
+  {code:'CLJ-004',name:'004',price:999,color:'Beyaz',desc:'Sade beyaz şapka, ton-sur-ton yıldız nakış.',badge:'',status:'active',img:''},
+  {code:'CLJ-005',name:'005',price:999,color:'Siyah',desc:'Mat siyah premium şapka. 3D kabartma yıldız logo.',badge:'POPÜLER',status:'active',img:''},
+  {code:'CLJ-006',name:'006',price:999,color:'Taş Grisi',desc:'Vintage yıkama efektli taş grisi şapka.',badge:'',status:'active',img:''},
+  {code:'CLJ-007',name:'007',price:999,color:'Siyah/Kırmızı',desc:'Özel kolaborasyon şapka. Kırmızı kontrast dikişler.',badge:'COLLAB',status:'active',img:''},
+  {code:'CLJ-008',name:'008',price:999,color:'Lacivert',desc:'Günlük kullanım lacivert şapka. Flex-fit.',badge:'',status:'active',img:''},
 ];
+
+let tempImg=''; // temp image base64 for current edit
 
 let blogPosts=[
   {id:1,title:'Calejon 2025 Yaz Koleksiyonu Yolda',cat:'Koleksiyon',date:'2025-06-15',excerpt:'Bu yaz sokakları kasıp kavuracak yeni modellerimiz çok yakında sizlerle. Asimetrik yıldız temasını farklı renk ve dokularda yorumladık.',content:'<p>2025 yaz sezonu için hazırladığımız koleksiyon, sokak kültürünün enerjisini yaz güneşiyle buluşturuyor.</p><p>Yeni renk paletimiz toprak tonlarından cesur kontrastlara uzanıyor. Her model, Calejon\'un imza asimetrik yıldız motifini farklı bir teknikle sunuyor.</p><p>Koleksiyon Temmuz ayında tüm satış kanallarımızda yerini alacak. Takipte kalın!</p>',status:'published'},
@@ -584,8 +625,10 @@ function go(page){
 function cardHTML(p,i){
   if(p.status==='hidden')return'';
   const sold=p.status==='soldout';
+  const imgContent=p.img?`<img src="${p.img}" alt="${p.name}">`:'';
+  const hasImg=p.img?'has-img':'';
   return`<div class="p-card"${sold?' style="opacity:.55"':''}>
-    <div class="p-img">${STAR}<span class="p-code">${p.code}</span>${p.badge?`<span class="p-badge">${p.badge}</span>`:''}</div>
+    <div class="p-img ${hasImg}">${STAR}${imgContent}<span class="p-code">${p.code}</span>${p.badge?`<span class="p-badge">${p.badge}</span>`:''}</div>
     <div class="p-info"><div class="p-name">${p.name}</div><div style="font-size:11px;color:var(--text3);margin-bottom:4px">${p.color}</div>
     <div class="p-price">${sold?'Tükendi':'₺'+p.price}</div>
     ${!sold?`<button class="p-add" onclick="event.stopPropagation();addCart(${i})">Sepete Ekle</button>`:''}</div></div>`;
@@ -625,7 +668,10 @@ function updateCart(){
   badge.textContent=tot;badge.style.display=tot>0?'flex':'none';
   const ct=document.getElementById('cItems');
   if(!cart.length){ct.innerHTML='<div class="c-empty">Sepetiniz boş</div>'}
-  else{ct.innerHTML=cart.map(c=>`<div class="c-item"><div class="c-item-img">${STAR}</div><div class="c-item-info"><div class="c-item-name">${c.name}</div><div class="c-item-code">${c.code} • ${c.color}</div><div class="c-item-price">₺${c.price*c.qty}</div></div><div class="c-item-qty"><button onclick="qtyCart('${c.code}',-1)">−</button><span>${c.qty}</span><button onclick="qtyCart('${c.code}',1)">+</button></div><button class="c-item-rm" onclick="cart=cart.filter(x=>x.code!=='${c.code}');updateCart()">✕</button></div>`).join('')}
+  else{ct.innerHTML=cart.map(c=>{
+    const cImg=c.img?`<div class="c-item-img has-img"><img src="${c.img}"></div>`:`<div class="c-item-img">${STAR}</div>`;
+    return`<div class="c-item">${cImg}<div class="c-item-info"><div class="c-item-name">${c.name}</div><div class="c-item-code">${c.code} • ${c.color}</div><div class="c-item-price">₺${c.price*c.qty}</div></div><div class="c-item-qty"><button onclick="qtyCart('${c.code}',-1)">−</button><span>${c.qty}</span><button onclick="qtyCart('${c.code}',1)">+</button></div><button class="c-item-rm" onclick="cart=cart.filter(x=>x.code!=='${c.code}');updateCart()">✕</button></div>`;
+  }).join('')}
   document.getElementById('cTotal').textContent='₺'+cart.reduce((s,c)=>s+c.price*c.qty,0);
 }
 function toggleCart(){document.getElementById('cOv').classList.toggle('open');document.getElementById('cDr').classList.toggle('open')}
@@ -779,24 +825,72 @@ function renderDash(){
 
 // Products admin
 function renderAdmProds(){
-  document.getElementById('admProdList').innerHTML=products.map((p,i)=>`<div class="api" onclick="editProd(${i})"><span class="cd">${p.code}</span><span class="nm">${p.name}</span><span class="st" style="color:${p.status==='active'?'var(--success)':p.status==='soldout'?'var(--danger)':'var(--text3)'};background:${p.status==='active'?'#DCFCE7':p.status==='soldout'?'#FEE2E2':'var(--bg2)'}">${p.status==='active'?'Aktif':p.status==='soldout'?'Tükendi':'Gizli'}</span><span class="pr">₺${p.price}</span><span class="ct">${cartTrack[p.code]||0}🛒</span></div>`).join('');
+  document.getElementById('admProdList').innerHTML=products.map((p,i)=>{
+    const thumb=p.img?`<div class="api-thumb"><img src="${p.img}"></div>`:`<div class="api-thumb"><svg viewBox="0 0 500 500"><g transform="translate(250,250)"><polygon points="0,-185 38,-62 155,-95 72,-12 120,105 8,52 -95,130 -52,18 -170,-55 -48,-52" fill="#1A1A1A"/></g></svg></div>`;
+    return`<div class="api" onclick="editProd(${i})" style="grid-template-columns:44px 60px 1fr 70px 70px 55px">${thumb}<span class="cd">${p.code}</span><span class="nm">${p.name}</span><span class="st" style="color:${p.status==='active'?'var(--success)':p.status==='soldout'?'var(--danger)':'var(--text3)'};background:${p.status==='active'?'#DCFCE7':p.status==='soldout'?'#FEE2E2':'var(--bg2)'}">${p.status==='active'?'Aktif':p.status==='soldout'?'Tükendi':'Gizli'}</span><span class="pr">₺${p.price}</span><span class="ct">${cartTrack[p.code]||0}🛒</span></div>`;
+  }).join('');
 }
 function editProd(i){
   editIdx=i;const p=products[i];
+  tempImg=p.img||'';
   document.getElementById('peTitle').textContent=p.code+' — Düzenle';
   document.getElementById('peCode').value=p.code;document.getElementById('peName').value=p.name;
   document.getElementById('pePrice').value=p.price;document.getElementById('peColor').value=p.color;
   document.getElementById('peDesc').value=p.desc;document.getElementById('peBadge').value=p.badge||'';
   document.getElementById('peStatus').value=p.status;
+  // Show image preview if exists
+  if(p.img){
+    document.getElementById('imgPreview').style.display='block';
+    document.getElementById('imgPreviewSrc').src=p.img;
+    document.getElementById('imgInfo').textContent='Mevcut görsel yüklü';
+    document.getElementById('imgDrop').style.display='none';
+  }else{
+    document.getElementById('imgPreview').style.display='none';
+    document.getElementById('imgDrop').style.display='flex';
+  }
+  document.getElementById('peImg').value='';
   document.getElementById('prodEdit').style.display='block';
   document.getElementById('prodEdit').scrollIntoView({behavior:'smooth'});
 }
 function saveProd(){
   if(editIdx<0)return;
-  products[editIdx]={...products[editIdx],name:document.getElementById('peName').value,price:parseInt(document.getElementById('pePrice').value)||0,color:document.getElementById('peColor').value,desc:document.getElementById('peDesc').value,badge:document.getElementById('peBadge').value,status:document.getElementById('peStatus').value};
-  renderAdmProds();renderHome();document.getElementById('prodEdit').style.display='none';editIdx=-1;toast('Ürün kaydedildi ✓');
+  products[editIdx]={...products[editIdx],name:document.getElementById('peName').value,price:parseInt(document.getElementById('pePrice').value)||0,color:document.getElementById('peColor').value,desc:document.getElementById('peDesc').value,badge:document.getElementById('peBadge').value,status:document.getElementById('peStatus').value,img:tempImg};
+  // Update cart items with new image
+  cart.forEach(c=>{if(c.code===products[editIdx].code)c.img=tempImg});
+  renderAdmProds();renderHome();updateCart();document.getElementById('prodEdit').style.display='none';editIdx=-1;tempImg='';toast('Ürün kaydedildi ✓');
 }
-function cancelProd(){document.getElementById('prodEdit').style.display='none';editIdx=-1}
+function cancelProd(){document.getElementById('prodEdit').style.display='none';editIdx=-1;tempImg=''}
+
+// ===== IMAGE HANDLING =====
+function handleImgSelect(e){
+  const file=e.target.files[0];if(file)processImgFile(file);
+}
+function handleDrop(e){
+  e.preventDefault();e.currentTarget.classList.remove('dragover');
+  const file=e.dataTransfer.files[0];if(file)processImgFile(file);
+}
+function processImgFile(file){
+  if(!file.type.startsWith('image/')){toast('Sadece görsel dosyalar yüklenebilir');return}
+  if(file.size>5*1024*1024){toast('Dosya 5MB\'dan küçük olmalı');return}
+  const reader=new FileReader();
+  reader.onload=function(e){
+    tempImg=e.target.result;
+    document.getElementById('imgPreview').style.display='block';
+    document.getElementById('imgPreviewSrc').src=tempImg;
+    const kb=Math.round(file.size/1024);
+    document.getElementById('imgInfo').textContent=`${file.name} — ${kb}KB`;
+    document.getElementById('imgDrop').style.display='none';
+    toast('Görsel yüklendi ✓');
+  };
+  reader.readAsDataURL(file);
+}
+function removeImg(){
+  tempImg='';
+  document.getElementById('imgPreview').style.display='none';
+  document.getElementById('imgPreviewSrc').src='';
+  document.getElementById('imgDrop').style.display='flex';
+  document.getElementById('peImg').value='';
+}
 
 // Blog admin
 function renderAdmBlog(){
@@ -865,18 +959,4 @@ function saveContactInfo(){
   document.getElementById('contactEmail').textContent=document.getElementById('acEmail').value;
   document.getElementById('contactSocial').textContent=document.getElementById('acSocial').value;
   document.getElementById('contactAddr').textContent=document.getElementById('acAddr').value;
-  toast('İletişim güncellendi ✓');
-}
-function saveSettings(){
-  const np=document.getElementById('asPass').value;if(np.length>0)adminPw=np;
-  toast(np?'Şifre güncellendi ✓':'Kaydedildi ✓');
-}
-
-function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2800)}
-
-// ===== INIT =====
-go('home');
-showEp(); // Show email popup after delay
-</script>
-</body>
-</html>
+  toast('İletişim
