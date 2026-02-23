@@ -1,44 +1,44 @@
 <!DOCTYPE html>
-<html lang="tr" data-theme="dark">
+<html lang="tr" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CALEJON — Premium Şapka</title>
+<title>CALEJON — Premium Şapka & Tişört</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 /* ====== THEME VARIABLES ====== */
 :root, [data-theme="dark"] {
   --bg:#111; --surface:#1a1a1a; --surface2:#222;
-  --border:rgba(255,120,0,0.15); --gold:#ff7800; --gold-light:#ff9933;
-  --gold-dim:rgba(255,120,0,0.4); --text:#f5f5f5;
-  --text-dim:rgba(245,245,245,0.5); --text-mid:rgba(245,245,245,0.7);
-  --accent:#ff5500; --success:#4caf50;
-  --card-bg:#1e1e1e; --input-bg:#161616; --input-border:#333;
-  --shadow:rgba(0,0,0,0.5); --invert:0;
-  --watermark:rgba(255,200,0,0.015);
+  --border:rgba(29,185,84,0.12); --gold:#1db954; --gold-light:#4cdf82;
+  --gold-dim:rgba(29,185,84,0.35); --text:#f5f5f5;
+  --text-dim:rgba(245,245,245,0.45); --text-mid:rgba(245,245,245,0.7);
+  --accent:#15803d; --success:#4caf50;
+  --card-bg:#1a1a1a; --input-bg:#161616; --input-border:#2a2a2a;
+  --shadow:rgba(0,0,0,0.3); --invert:0;
+  --watermark:rgba(29,185,84,0.015);
 }
 [data-theme="light"] {
-  --bg:#fff; --surface:#f9f9f9; --surface2:#f2f2f2;
-  --border:rgba(255,120,0,0.15); --gold:#e86800; --gold-light:#ff7800;
-  --gold-dim:rgba(232,104,0,0.35); --text:#1a1a1a;
-  --text-dim:rgba(26,26,26,0.5); --text-mid:rgba(26,26,26,0.7);
-  --accent:#cc4400; --success:#388e3c;
-  --card-bg:#fff; --input-bg:#fafafa; --input-border:#ddd;
-  --shadow:rgba(0,0,0,0.06); --invert:1;
-  --watermark:rgba(255,120,0,0.015);
+  --bg:#fff; --surface:#fafafa; --surface2:#f5f5f5;
+  --border:rgba(0,0,0,0.08); --gold:#1db954; --gold-light:#17a34a;
+  --gold-dim:rgba(29,185,84,0.25); --text:#111;
+  --text-dim:rgba(0,0,0,0.4); --text-mid:rgba(0,0,0,0.6);
+  --accent:#15803d; --success:#16a34a;
+  --card-bg:#fff; --input-bg:#fafafa; --input-border:#e5e5e5;
+  --shadow:rgba(0,0,0,0.05); --invert:1;
+  --watermark:rgba(29,185,84,0.02);
 }
 
 * { margin:0; padding:0; box-sizing:border-box; }
 html { scroll-behavior:smooth; }
 body { background:var(--bg); color:var(--text); font-family:'DM Sans',sans-serif; overflow-x:hidden; transition:background .4s,color .4s; position:relative; }
 body::before {
-  content:'FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE FENERBAHÇE';
+  content:'CALEJON ⚽ PREMIUM ⚽ CALEJON ⚽ PREMIUM ⚽ CALEJON ⚽ PREMIUM ⚽ CALEJON ⚽ PREMIUM ⚽ CALEJON ⚽ PREMIUM ⚽ CALEJON ⚽ PREMIUM ⚽ CALEJON ⚽ PREMIUM ⚽ CALEJON ⚽ PREMIUM ⚽ CALEJON ⚽ PREMIUM ⚽ CALEJON ⚽ PREMIUM ⚽ CALEJON ⚽ PREMIUM ⚽ CALEJON ⚽ PREMIUM ⚽ CALEJON ⚽ PREMIUM ⚽ CALEJON ⚽ PREMIUM ⚽ CALEJON ⚽ PREMIUM ⚽ CALEJON ⚽ PREMIUM ⚽ CALEJON ⚽ PREMIUM ⚽ CALEJON ⚽ PREMIUM ⚽ CALEJON ⚽ PREMIUM ⚽ CALEJON ⚽ PREMIUM ⚽ CALEJON ⚽ PREMIUM ⚽ CALEJON ⚽ PREMIUM ⚽ CALEJON ⚽ PREMIUM ⚽ CALEJON ⚽ PREMIUM ⚽ CALEJON ⚽ PREMIUM ⚽ CALEJON ⚽ PREMIUM ⚽ CALEJON ⚽ PREMIUM ⚽ CALEJON ⚽ PREMIUM ⚽ CALEJON ⚽ PREMIUM ⚽ CALEJON ⚽ PREMIUM ⚽ CALEJON ⚽ PREMIUM ⚽ CALEJON ⚽ PREMIUM ⚽ CALEJON ⚽ PREMIUM ⚽ CALEJON ⚽ PREMIUM ⚽ CALEJON ⚽ PREMIUM ⚽ CALEJON ⚽ PREMIUM ⚽ CALEJON ⚽ PREMIUM ⚽ CALEJON ⚽ PREMIUM ⚽ CALEJON ⚽ PREMIUM ⚽ CALEJON ⚽ PREMIUM ⚽ CALEJON ⚽ PREMIUM ⚽ CALEJON ⚽ PREMIUM ⚽ CALEJON ⚽ PREMIUM ⚽ CALEJON ⚽ PREMIUM ⚽ CALEJON ⚽ PREMIUM ⚽ CALEJON ⚽ PREMIUM ⚽ CALEJON ⚽ PREMIUM ⚽ CALEJON ⚽ PREMIUM ⚽ CALEJON ⚽ PREMIUM ⚽ CALEJON ⚽ PREMIUM ⚽';
   position:fixed; inset:0; z-index:0; pointer-events:none;
   font-size:18px; font-weight:700; letter-spacing:12px; line-height:2.8;
   color:var(--watermark); word-break:break-all; overflow:hidden;
   transform:rotate(-15deg) scale(1.3); transform-origin:center;
 }
-::selection { background:rgba(255,120,0,.25); }
+::selection { background:rgba(29,185,84,.25); }
 ::-webkit-scrollbar { width:5px; }
 ::-webkit-scrollbar-track { background:var(--bg); }
 ::-webkit-scrollbar-thumb { background:var(--gold-dim); border-radius:3px; }
@@ -53,9 +53,10 @@ body::before {
 /* NAV */
 nav {
   position:fixed;top:0;left:0;right:0;z-index:500;
-  padding:16px 32px;display:flex;justify-content:space-between;align-items:center;
-  background:linear-gradient(to bottom,var(--bg),transparent);
-  backdrop-filter:blur(12px);
+  padding:14px 32px;display:flex;justify-content:space-between;align-items:center;
+  background:var(--bg);
+  border-bottom:1px solid var(--border);
+  backdrop-filter:blur(16px);
 }
 section, footer { position:relative; z-index:1; }
 /* TAB PAGES */
@@ -126,8 +127,8 @@ section, footer { position:relative; z-index:1; }
 .divider { width:50px;height:1px;background:linear-gradient(90deg,var(--gold),transparent);margin:12px 0; }
 
 /* HERO */
-.hero { height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative; }
-.hero-bg { position:absolute;inset:0;background:radial-gradient(ellipse at 30% 20%,rgba(255,120,0,.05) 0%,transparent 60%); }
+.hero { height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden; }
+.hero-bg { position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(29,185,84,.04) 0%,transparent 70%); }
 .hero-hat { animation:float 5s ease-in-out infinite;margin-bottom:28px; }
 .hero h1 {
   font-family:'Playfair Display',serif;font-size:clamp(48px,8vw,100px);
@@ -138,17 +139,17 @@ section, footer { position:relative; z-index:1; }
 }
 .hero-sub { font-size:12px;letter-spacing:6px;color:var(--gold-dim);margin:16px 0 40px;text-transform:uppercase;font-weight:300; }
 .btn-gold {
-  padding:14px 40px;background:linear-gradient(135deg,var(--gold),#cc5500);border:none;
-  color:#111;font-size:11px;letter-spacing:3px;font-weight:600;cursor:pointer;
-  text-transform:uppercase;font-family:'DM Sans',sans-serif;transition:all .4s;
+  padding:14px 40px;background:var(--gold);border:none;border-radius:4px;
+  color:#fff;font-size:11px;letter-spacing:3px;font-weight:600;cursor:pointer;
+  text-transform:uppercase;font-family:'DM Sans',sans-serif;transition:all .3s;
 }
-.btn-gold:hover { transform:translateY(-2px);box-shadow:0 10px 30px rgba(255,120,0,.2); }
+.btn-gold:hover { opacity:.9;transform:translateY(-1px);box-shadow:0 6px 20px rgba(29,185,84,.15); }
 .btn-outline {
-  padding:14px 40px;background:transparent;border:1px solid var(--gold-dim);color:var(--gold);
+  padding:14px 40px;background:transparent;border:1px solid var(--border);color:var(--text);border-radius:4px;
   font-size:11px;letter-spacing:3px;cursor:pointer;text-transform:uppercase;
-  font-family:'DM Sans',sans-serif;transition:all .4s;
+  font-family:'DM Sans',sans-serif;transition:all .3s;
 }
-.btn-outline:hover { border-color:var(--gold);background:rgba(255,120,0,.06); }
+.btn-outline:hover { border-color:var(--gold);color:var(--gold); }
 
 /* PRODUCTS */
 .products { padding:100px 36px; }
@@ -156,8 +157,8 @@ section, footer { position:relative; z-index:1; }
 .product-card {
   border:1px solid var(--border);background:var(--card-bg);overflow:hidden;cursor:pointer;transition:all .4s;position:relative;
 }
-.product-card:hover { border-color:rgba(255,120,0,.3);transform:translateY(-3px); }
-.product-img { padding:40px 0;text-align:center;background:radial-gradient(circle,rgba(255,120,0,.03),transparent); }
+.product-card:hover { border-color:rgba(29,185,84,.3);transform:translateY(-3px); }
+.product-img { padding:40px 0;text-align:center;background:radial-gradient(circle,rgba(29,185,84,.03),transparent); }
 .product-info { padding:20px 24px; }
 .product-name { font-family:'Playfair Display',serif;font-size:18px;letter-spacing:2px;margin-bottom:4px; }
 .product-desc { font-size:12px;color:var(--text-dim);font-weight:300;margin-bottom:10px; }
@@ -168,7 +169,7 @@ section, footer { position:relative; z-index:1; }
   background:var(--bg);color:var(--text-dim);font-size:11px;cursor:pointer;
   font-family:'DM Sans',sans-serif;letter-spacing:1px;transition:all .2s;
 }
-.filter-btn.active,.filter-btn:hover { border-color:var(--gold);color:var(--gold);background:rgba(255,120,0,.06); }
+.filter-btn.active,.filter-btn:hover { border-color:var(--gold);color:var(--gold);background:rgba(29,185,84,.06); }
 .product-card .add-cart {
   padding:8px 16px;background:var(--gold);color:#111;border:none;border-radius:4px;
   font-size:10px;cursor:pointer;font-weight:600;font-family:'DM Sans',sans-serif;
@@ -188,7 +189,7 @@ section, footer { position:relative; z-index:1; }
   background:var(--bg);color:var(--text-dim);font-size:11px;cursor:pointer;margin:0 3px;
   font-family:'DM Sans',sans-serif;
 }
-.page-btn.active { border-color:var(--gold);color:var(--gold);background:rgba(255,120,0,.06); }
+.page-btn.active { border-color:var(--gold);color:var(--gold);background:rgba(29,185,84,.06); }
 .bulk-item {
   display:flex;justify-content:space-between;align-items:center;
   padding:10px 0;border-bottom:1px solid var(--border);font-size:13px;
@@ -203,7 +204,7 @@ section, footer { position:relative; z-index:1; }
 .tryon-wrap { max-width:680px;margin:0 auto; }
 .tryon-hats { display:flex;gap:10px;margin:20px 0; }
 .tryon-hat { flex:1;padding:12px;border:1px solid var(--input-border);background:var(--bg);cursor:pointer;text-align:center;border-radius:6px;transition:all .2s; }
-.tryon-hat.active { border-color:var(--gold);background:rgba(255,120,0,.04); }
+.tryon-hat.active { border-color:var(--gold);background:rgba(29,185,84,.04); }
 .tryon-hat p { font-size:11px;margin-top:4px; }
 .upload-area { border:2px dashed var(--input-border);border-radius:8px;padding:50px 20px;text-align:center;cursor:pointer;background:var(--bg);transition:border-color .3s; }
 .upload-area:hover { border-color:var(--gold-dim); }
@@ -243,7 +244,7 @@ section, footer { position:relative; z-index:1; }
 .chat-messages { height:280px;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px; }
 .msg { max-width:82%;padding:10px 14px;border-radius:12px;font-size:13px;line-height:1.7;font-weight:300; }
 .msg.bot { align-self:flex-start;background:var(--surface2);border-bottom-left-radius:4px;color:var(--text-mid); }
-.msg.user { align-self:flex-end;background:rgba(255,120,0,.12);border-bottom-right-radius:4px;color:var(--text); }
+.msg.user { align-self:flex-end;background:rgba(29,185,84,.12);border-bottom-right-radius:4px;color:var(--text); }
 .msg.typing .dots { display:inline-flex;gap:4px; }
 .msg.typing .dots span { width:5px;height:5px;border-radius:50%;background:var(--gold-dim);animation:pulse 1.2s ease-in-out infinite; }
 .msg.typing .dots span:nth-child(2){animation-delay:.2s}
@@ -321,7 +322,7 @@ footer { padding:50px 36px 24px;border-top:1px solid var(--border); }
   border:1px solid var(--border);background:var(--card-bg);border-radius:6px;
   overflow:hidden;cursor:pointer;transition:all .3s;
 }
-.blog-card:hover { border-color:rgba(255,120,0,.3);transform:translateY(-2px); }
+.blog-card:hover { border-color:rgba(29,185,84,.3);transform:translateY(-2px); }
 .blog-card-img {
   height:120px;display:flex;align-items:center;justify-content:center;
   font-size:40px;background:var(--surface2);
@@ -366,7 +367,7 @@ footer { padding:50px 36px 24px;border-top:1px solid var(--border); }
 #snakeCanvas { display:block;width:100%;background:#0a0a0a;cursor:pointer; }
 .snake-controls { padding:14px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap; }
 .snake-dir { width:48px;height:48px;border-radius:8px;border:1px solid var(--input-border);background:var(--bg);color:var(--gold);font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center; }
-.snake-dir:active { background:rgba(255,120,0,.1); }
+.snake-dir:active { background:rgba(29,185,84,.1); }
 .snake-dpad { display:grid;grid-template-columns:48px 48px 48px;grid-template-rows:48px 48px;gap:4px;margin:0 auto; }
 .snake-info { padding:8px 14px;font-size:10px;color:var(--text-dim);letter-spacing:1px;border-top:1px solid var(--border); }
 
@@ -382,12 +383,12 @@ footer { padding:50px 36px 24px;border-top:1px solid var(--border); }
 .shop-meta { font-size:12px;color:var(--text-dim);line-height:1.8; }
 .shop-sizes { display:flex;gap:6px; }
 .shop-size { width:42px;height:42px;border:1px solid var(--input-border);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px;cursor:pointer;color:var(--text-dim);transition:all .2s; }
-.shop-size.active,.shop-size:hover { border-color:var(--gold);color:var(--gold);background:rgba(255,120,0,.06); }
+.shop-size.active,.shop-size:hover { border-color:var(--gold);color:var(--gold);background:rgba(29,185,84,.06); }
 .shop-colors { display:flex;gap:6px;flex-wrap:wrap; }
 .shop-color { width:28px;height:28px;border-radius:50%;border:2px solid transparent;cursor:pointer;transition:all .2s; }
 .shop-color.active { border-color:var(--gold);box-shadow:0 0 0 2px var(--gold); }
-.shop-add-btn { padding:16px;background:linear-gradient(135deg,var(--gold),#cc5500);border:none;border-radius:8px;color:#111;font-size:13px;letter-spacing:2px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .3s; }
-.shop-add-btn:hover { transform:translateY(-1px);box-shadow:0 6px 20px rgba(255,120,0,.25); }
+.shop-add-btn { padding:16px;background:var(--gold);border:none;border-radius:4px;color:#fff;font-size:13px;letter-spacing:2px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .3s; }
+.shop-add-btn:hover { opacity:.9;box-shadow:0 4px 12px rgba(29,185,84,.15); }
 
 @media(max-width:768px) {
   .nav-links{display:none} .hamburger{display:block}
@@ -428,7 +429,7 @@ footer { padding:50px 36px 24px;border-top:1px solid var(--border); }
 .adm-table tr:hover{background:var(--surface2);}
 .adm-badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:600;letter-spacing:.5px;}
 .adm-badge.green{background:rgba(76,175,80,.15);color:#4caf50;}
-.adm-badge.orange{background:rgba(255,120,0,.15);color:#ff9933;}
+.adm-badge.orange{background:rgba(29,185,84,.15);color:#4cdf82;}
 .adm-badge.red{background:rgba(244,67,54,.15);color:#f44336;}
 .adm-badge.blue{background:rgba(33,150,243,.15);color:#2196f3;}
 .adm-btn{padding:6px 14px;border:1px solid var(--border);border-radius:4px;background:var(--surface);color:var(--text);font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;}
@@ -453,7 +454,7 @@ footer { padding:50px 36px 24px;border-top:1px solid var(--border); }
 .adm-form-row label{font-size:11px;color:var(--text-dim);letter-spacing:1px;display:block;margin-bottom:4px;text-transform:uppercase;}
 .adm-form-row input,.adm-form-row select,.adm-form-row textarea{padding:10px;background:var(--input-bg);border:1px solid var(--input-border);border-radius:4px;color:var(--text);font-size:13px;font-family:'DM Sans',sans-serif;outline:none;width:100%;}
 .adm-alert{padding:14px 18px;border-radius:8px;font-size:12px;margin-bottom:12px;display:flex;align-items:center;gap:10px;}
-.adm-alert.warn{background:rgba(255,120,0,.1);border:1px solid rgba(255,120,0,.3);color:var(--gold-light);}
+.adm-alert.warn{background:rgba(29,185,84,.1);border:1px solid rgba(29,185,84,.3);color:var(--gold-light);}
 .adm-alert.info{background:rgba(33,150,243,.1);border:1px solid rgba(33,150,243,.3);color:#64b5f6;}
 .adm-alert.ok{background:rgba(76,175,80,.1);border:1px solid rgba(76,175,80,.3);color:#81c784;}
 .adm-donut-wrap{display:flex;align-items:center;gap:20px;justify-content:center;}
@@ -468,34 +469,33 @@ footer { padding:50px 36px 24px;border-top:1px solid var(--border); }
 <!-- NAV -->
 <nav>
   <div class="logo" onclick="showTab('hero')" style="display:flex;align-items:center;gap:8px;cursor:pointer;">
-    <svg width="32" height="32" viewBox="0 0 64 64"><path d="M32,4 C28,8 18,10 12,18 C6,26 8,38 14,44 L22,40 C18,36 16,30 20,24 C24,18 30,16 32,14 C34,16 40,18 44,24 C48,30 46,36 42,40 L50,44 C56,38 58,26 52,18 C46,10 36,8 32,4Z" fill="var(--gold)"/><circle cx="26" cy="20" r="1.5" fill="var(--bg)"/><circle cx="38" cy="20" r="1.5" fill="var(--bg)"/><path d="M20,42 L32,58 L44,42 C40,46 36,48 32,48 C28,48 24,46 20,42Z" fill="var(--gold)" opacity=".6"/></svg>
-    <span style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;letter-spacing:3px;">CALEJON</span>
+    <svg width="28" height="28" viewBox="0 0 64 64"><circle cx="32" cy="32" r="28" fill="none" stroke="var(--gold)" stroke-width="2.5"/><polygon points="32,14 42,22 39,34 25,34 22,22" fill="none" stroke="var(--gold)" stroke-width="1.5" opacity=".5"/><circle cx="32" cy="32" r="5" fill="var(--gold)" opacity=".3"/></svg>
+    <span style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;letter-spacing:4px;">CALEJON</span>
   </div>
   <div class="nav-links">
     <a onclick="showTab('hero')">Ana Sayfa</a>
+    <a onclick="showTab('worldcup')">⚽ Dünya Kupası</a>
     <a onclick="showTab('products')">Mağaza</a>
-    <a onclick="showTab('tryon')">Sanal Dene</a>
-    <a onclick="showTab('ai')">AI</a>
     <a onclick="showTab('snake')">🐍 Yılan</a>
     <a onclick="showTab('games')">Oyunlar</a>
+    <a onclick="showTab('ai')">AI</a>
     <a onclick="showTab('blog')">Blog</a>
-    <a onclick="showTab('worldcup')">⚽ Kupası</a>
-    <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn" title="Tema Değiştir">☀</button>
+    <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn" title="Tema Değiştir">🌙</button>
   </div>
   <div style="display:flex;gap:10px;align-items:center;">
-    <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn2" title="Tema">☀</button>
+    <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn2" title="Tema">🌙</button>
     <button class="hamburger" onclick="toggleMenu()">☰</button>
   </div>
 </nav>
 <div class="mobile-menu" id="mobMenu">
   <a onclick="showTab('hero');toggleMenu()">🏠 Ana Sayfa</a>
+  <a onclick="showTab('worldcup');toggleMenu()">⚽ Dünya Kupası</a>
   <a onclick="showTab('products');toggleMenu()">🛒 Mağaza</a>
-  <a onclick="showTab('tryon');toggleMenu()">🪞 Sanal Dene</a>
-  <a onclick="showTab('ai');toggleMenu()">🤖 AI</a>
   <a onclick="showTab('snake');toggleMenu()">🐍 Yılan</a>
   <a onclick="showTab('games');toggleMenu()">🎮 Oyunlar</a>
+  <a onclick="showTab('ai');toggleMenu()">🤖 AI Asistan</a>
   <a onclick="showTab('blog');toggleMenu()">📝 Blog</a>
-  <a onclick="showTab('worldcup');toggleMenu()">⚽ Dünya Kupası</a>
+  <a onclick="showTab('tryon');toggleMenu()">🪞 Sanal Dene</a>
   <a onclick="showTab('quickbar');toggleMenu()">📓 Anı & YouTube</a>
   <a onclick="showTab('forum');toggleMenu()">📋 Forum & Yasal</a>
 </div>
@@ -506,32 +506,32 @@ footer { padding:50px 36px 24px;border-top:1px solid var(--border); }
   <div class="hero-bg"></div>
   <div style="position:relative;z-index:2;">
     <div class="hero-hat">
-      <svg width="140" height="100" viewBox="0 0 180 130"><ellipse cx="90" cy="98" rx="78" ry="22" fill="rgba(255,120,0,.12)"/><ellipse cx="90" cy="94" rx="73" ry="20" fill="var(--surface)" stroke="rgba(255,120,0,.2)" stroke-width=".5"/><path d="M22,88 Q14,34 44,14 Q90,-12 136,14 Q166,34 158,88Z" fill="var(--surface)" stroke="rgba(255,120,0,.15)" stroke-width=".5"/><rect x="22" y="74" width="136" height="10" rx="2" fill="rgba(255,120,0,.15)"/></svg>
+      <svg width="120" height="120" viewBox="0 0 120 120"><circle cx="60" cy="60" r="50" fill="var(--surface)" stroke="var(--gold)" stroke-width="2"/><polygon points="60,20 75,38 72,58 48,58 45,38" fill="none" stroke="var(--gold)" stroke-width="1.5" opacity=".6"/><line x1="60" y1="20" x2="60" y2="10" stroke="var(--gold)" stroke-width="1" opacity=".3"/><line x1="75" y1="38" x2="95" y2="28" stroke="var(--gold)" stroke-width="1" opacity=".3"/><line x1="72" y1="58" x2="90" y2="72" stroke="var(--gold)" stroke-width="1" opacity=".3"/><line x1="48" y1="58" x2="30" y2="72" stroke="var(--gold)" stroke-width="1" opacity=".3"/><line x1="45" y1="38" x2="25" y2="28" stroke="var(--gold)" stroke-width="1" opacity=".3"/><circle cx="60" cy="60" r="8" fill="var(--gold)" opacity=".2"/></svg>
     </div>
     <h1>CALEJON</h1>
-    <p style="font-size:11px;letter-spacing:6px;color:var(--text-dim);margin-top:-5px;">E S T . 2 0 2 4</p>
-    <p class="hero-sub">Yapay Zeka ile Şapkanı Keşfet</p>
+    <p style="font-size:11px;letter-spacing:6px;color:var(--text-dim);margin-top:-5px;">P R E M I U M &nbsp; Ş A P K A &nbsp; & &nbsp; T İ Ş Ö R T</p>
+    <p class="hero-sub">Kaliteli giyim, futbol tutkusu, yapay zeka deneyimi.</p>
     <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
-      <button class="btn-gold" onclick="goTo('tryon')">Şapka Dene</button>
-      <button class="btn-outline" onclick="goTo('aigen')">AI Görsel Üret</button>
+      <button class="btn-gold" onclick="showTab('products')">Mağazaya Git</button>
+      <button class="btn-outline" onclick="showTab('worldcup')">⚽ Dünya Kupası</button>
     </div>
   </div>
 </section>
 
 
-<!-- MUTLU MÜŞTERİLER -->
+<!-- TOPLULUK -->
 <section style="padding:50px 24px;">
   <div style="text-align:center;">
-    <span class="section-label">MÜŞTERİ YORUMLARI</span>
-    <h2 class="section-title" style="font-size:clamp(22px,3vw,32px);">Mutlu Müşterilerimiz</h2>
+    <span class="section-label">TOPLULUK</span>
+    <h2 class="section-title" style="font-size:clamp(22px,3vw,32px);">Müşterilerimizden</h2>
   </div>
   <div class="cust-grid">
-    <div class="cust-card"><div class="cust-stars">★★★★★</div><div class="cust-text">"Calejon şapkam 6 aydır her gün kullanıyorum, organik pamuk kalitesi fark yaratıyor. Kesinlikle tavsiye ederim!"</div><div class="cust-info"><div class="cust-av">A</div><div><div class="cust-name">Ahmet Yılmaz</div><div class="cust-role">İstanbul · Midnight Classic</div></div></div></div>
-    <div class="cust-card"><div class="cust-stars">★★★★★</div><div class="cust-text">"AI sanal deneme sayesinde internetten şapka almaktan korkmadım. Sipariş verdim, tam beklediğim gibi geldi!"</div><div class="cust-info"><div class="cust-av">Z</div><div><div class="cust-name">Zeynep Kaya</div><div class="cust-role">Ankara · Arctic Essential</div></div></div></div>
-    <div class="cust-card"><div class="cust-stars">★★★★★</div><div class="cust-text">"Kurumsal etkinliğimiz için 50 şapka sipariş ettik. Logo baskısı profesyonel, teslimat hızlı, toplu indirim avantajlı."</div><div class="cust-info"><div class="cust-av">M</div><div><div class="cust-name">Mehmet Demir</div><div class="cust-role">İzmir · Kurumsal Sipariş</div></div></div></div>
-    <div class="cust-card"><div class="cust-stars">★★★★★</div><div class="cust-text">"Sevgilime hediye aldım, paketleme o kadar güzeldi ki ayrı bir mutluluk oldu. Kalite premium markalara taş çıkartır."</div><div class="cust-info"><div class="cust-av">E</div><div><div class="cust-name">Elif Şahin</div><div class="cust-role">Bursa · Terra Signature</div></div></div></div>
-    <div class="cust-card"><div class="cust-stars">★★★★☆</div><div class="cust-text">"Bucket modelini aldım, yaz güneşinde hem şık hem koruyucu. Organik pamuk gerçekten terletmiyor."</div><div class="cust-info"><div class="cust-av">C</div><div><div class="cust-name">Can Özkan</div><div class="cust-role">Antalya · Bucket Şapka</div></div></div></div>
-    <div class="cust-card"><div class="cust-stars">★★★★★</div><div class="cust-text">"3 farklı model aldım, hepsi mükemmel. El yapımı olduğu belli, dikişler pürüzsüz. Müşteri hizmetleri de harika."</div><div class="cust-info"><div class="cust-av">S</div><div><div class="cust-name">Selin Arslan</div><div class="cust-role">Trabzon · Fedora + Dad Hat</div></div></div></div>
+    <div class="cust-card"><div class="cust-stars">★★★★★</div><div class="cust-text">"Calejon şapkam 6 aydır her gün yanımda. Organik pamuk kalitesi gerçekten fark yaratıyor, tavsiye ederim!"</div><div class="cust-info"><div class="cust-av">A</div><div><div class="cust-name">Ahmet Yılmaz</div><div class="cust-role">İstanbul · Midnight Classic</div></div></div></div>
+    <div class="cust-card"><div class="cust-stars">★★★★★</div><div class="cust-text">"Dünya Kupası arşivi muhteşem! Alışveriş yaptım, bir de saatlerce futbol tarihi okudum. Harika bir site."</div><div class="cust-info"><div class="cust-av">Z</div><div><div class="cust-name">Zeynep Kaya</div><div class="cust-role">Ankara · Futbol & Moda</div></div></div></div>
+    <div class="cust-card"><div class="cust-stars">★★★★★</div><div class="cust-text">"Kurumsal etkinlik için 50 şapka sipariş ettik. Logo baskısı profesyonel, teslimat hızlı. Toplu indirim avantajlı."</div><div class="cust-info"><div class="cust-av">M</div><div><div class="cust-name">Mehmet Demir</div><div class="cust-role">İzmir · Kurumsal Sipariş</div></div></div></div>
+    <div class="cust-card"><div class="cust-stars">★★★★★</div><div class="cust-text">"AI sanal deneme sayesinde internetten şapka almaktan korkmadım. Sipariş verdim, tam beklediğim gibi geldi!"</div><div class="cust-info"><div class="cust-av">E</div><div><div class="cust-name">Elif Şahin</div><div class="cust-role">Bursa · Terra Signature</div></div></div></div>
+    <div class="cust-card"><div class="cust-stars">★★★★☆</div><div class="cust-text">"Yılan oyunu bağımlılık yapıyor, penaltı oyunu da eğlenceli. Üstüne tişört siparişi verdim, kalite süper!"</div><div class="cust-info"><div class="cust-av">C</div><div><div class="cust-name">Can Özkan</div><div class="cust-role">Antalya · Oyun Sever</div></div></div></div>
+    <div class="cust-card"><div class="cust-stars">★★★★★</div><div class="cust-text">"3 farklı model aldım, hepsi mükemmel. El yapımı dikişler pürüzsüz, müşteri hizmetleri çok ilgili."</div><div class="cust-info"><div class="cust-av">S</div><div><div class="cust-name">Selin Arslan</div><div class="cust-role">Trabzon · Fedora + Dad Hat</div></div></div></div>
   </div>
 </section>
 </div>
@@ -609,7 +609,7 @@ footer { padding:50px 36px 24px;border-top:1px solid var(--border); }
     <!-- YOUTUBE BLOCK -->
     <div style="border:1px solid var(--border);background:var(--card-bg);border-radius:8px;overflow:hidden;">
       <div style="padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;">
-        <span style="color:#ff4444;font-size:20px;">▶</span>
+        <span style="color:#e74c3c;font-size:20px;">▶</span>
         <span style="font-size:12px;letter-spacing:2px;color:var(--text-mid);">CALEJON YOUTUBE</span>
       </div>
       <div style="padding:24px 20px;text-align:center;">
@@ -618,7 +618,7 @@ footer { padding:50px 36px 24px;border-top:1px solid var(--border); }
         <p style="font-size:13px;color:var(--text-dim);line-height:1.8;margin-bottom:20px;">
           Stil rehberleri, şapka incelemeleri, kombinasyon videoları, backstage ve daha fazlası YouTube kanalımızda!
         </p>
-        <a href="https://youtube.com/@calejon" target="_blank" style="display:inline-block;padding:14px 36px;background:#ff4444;color:#fff;text-decoration:none;font-size:12px;letter-spacing:2px;font-weight:700;border-radius:6px;transition:all .3s;">
+        <a href="https://youtube.com/@calejon" target="_blank" style="display:inline-block;padding:14px 36px;background:#e74c3c;color:#fff;text-decoration:none;font-size:12px;letter-spacing:2px;font-weight:700;border-radius:6px;transition:all .3s;">
           ▶ YOUTUBE'A GİT
         </a>
         <div style="margin-top:20px;display:grid;grid-template-columns:1fr 1fr;gap:10px;">
@@ -743,7 +743,7 @@ footer { padding:50px 36px 24px;border-top:1px solid var(--border); }
       <button onclick="closeBulk()" style="background:none;border:none;color:var(--text-dim);font-size:22px;cursor:pointer;">✕</button>
     </div>
     <!-- Bulk discount info -->
-    <div style="padding:14px;background:rgba(255,120,0,.06);border:1px solid var(--border);border-radius:6px;margin-bottom:16px;">
+    <div style="padding:14px;background:rgba(29,185,84,.06);border:1px solid var(--border);border-radius:6px;margin-bottom:16px;">
       <p style="font-size:12px;color:var(--gold);font-weight:600;letter-spacing:1px;margin-bottom:6px;">TOPLU SİPARİŞ İNDİRİMLERİ</p>
       <p style="font-size:12px;color:var(--text-dim);line-height:1.8;">
         5-9 adet → <strong style="color:var(--gold);">%10</strong> indirim &nbsp;|&nbsp;
@@ -1400,7 +1400,7 @@ footer { padding:50px 36px 24px;border-top:1px solid var(--border); }
     <div class="adm-grid2" style="margin-top:16px;">
       <div class="adm-card">
         <h4>🎨 Tema & Görünüm</h4>
-        <div class="adm-form-row"><div style="flex:1;"><label>Ana Renk</label><input type="color" value="#ff7800" style="height:40px;cursor:pointer;"></div><div style="flex:1;"><label>Vurgu Renk</label><input type="color" value="#ff5500" style="height:40px;cursor:pointer;"></div></div>
+        <div class="adm-form-row"><div style="flex:1;"><label>Ana Renk</label><input type="color" value="#1db954" style="height:40px;cursor:pointer;"></div><div style="flex:1;"><label>Vurgu Renk</label><input type="color" value="#15803d" style="height:40px;cursor:pointer;"></div></div>
         <div class="adm-form-row"><div style="flex:1;"><label>Varsayılan Tema</label><select><option>Dark</option><option>Light</option></select></div></div>
         <button class="adm-btn primary" style="margin-top:8px;" onclick="alert('✅ Tema ayarları kaydedildi!')">💾 Kaydet</button>
       </div>
@@ -1433,7 +1433,7 @@ footer { padding:50px 36px 24px;border-top:1px solid var(--border); }
 
 <!-- WC FOOTER BUTTON -->
 <div style="text-align:center;padding:30px 24px;background:var(--surface);">
-  <button onclick="showTab('worldcup')" style="padding:16px 40px;background:linear-gradient(135deg,var(--gold),#ff5500);border:none;border-radius:10px;color:#fff;font-size:15px;font-weight:700;letter-spacing:2px;cursor:pointer;font-family:'DM Sans',sans-serif;box-shadow:0 4px 20px rgba(255,120,0,0.3);transition:all .3s;">⚽ DÜNYA KUPASI ANSİKLOPEDİSİ</button>
+  <button onclick="showTab('worldcup')" style="padding:16px 40px;background:var(--gold);border:none;border-radius:4px;color:#fff;font-size:14px;font-weight:600;letter-spacing:2px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .3s;">⚽ DÜNYA KUPASI ANSİKLOPEDİSİ</button>
   <p style="font-size:11px;color:var(--text-dim);margin-top:8px;">2026 Fikstür · Tüm Sonuçlar (1930-2022) · 20 Yıllık Haberler</p>
 </div>
 
@@ -1443,7 +1443,7 @@ footer { padding:50px 36px 24px;border-top:1px solid var(--border); }
     <div class="footer-col"><h4>Marka</h4><a onclick="showTab('hero')">Ana Sayfa</a><a onclick="showTab('products')">Mağaza</a><a onclick="showTab('blog')">Blog</a></div>
     <div class="footer-col"><h4>Destek</h4><a onclick="showTab('forum')">Forum & Yasal</a><a onclick="showTab('ai')">AI Asistan</a><a onclick="showTab('tryon')">Sanal Deneme</a></div>
     <div class="footer-col"><h4>Eğlence</h4><a onclick="showTab('snake')">🐍 Yılan Oyunu</a><a onclick="showTab('games')">🎮 Diğer Oyunlar</a><a onclick="showTab('worldcup')">⚽ Dünya Kupası</a></div>
-    <div class="footer-col"><h4>İletişim</h4><a href="/cdn-cgi/l/email-protection#a9c0c7cfc6e9cac8c5ccc3c6c787cac6c4"><span class="__cf_email__" data-cfemail="95fcfbf3fad5f6f4f9f0fffafbbbf6faf8">[email&#160;protected]</span></a><a href="#">İstanbul, Türkiye</a><a href="https://youtube.com/@calejon" target="_blank" style="color:#ff4444;">▶ YouTube</a></div>
+    <div class="footer-col"><h4>İletişim</h4><a href="/cdn-cgi/l/email-protection#a9c0c7cfc6e9cac8c5ccc3c6c787cac6c4"><span class="__cf_email__" data-cfemail="95fcfbf3fad5f6f4f9f0fffafbbbf6faf8">[email&#160;protected]</span></a><a href="#">İstanbul, Türkiye</a><a href="https://youtube.com/@calejon" target="_blank" style="color:#e74c3c;">▶ YouTube</a></div>
   </div>
   <div class="footer-bottom">© 2026 CALEJON — TÜM HAKLARI SAKLIDIR &nbsp;·&nbsp; <a onclick="showTab('admin')" style="color:var(--text-dim);cursor:pointer;font-size:10px;text-decoration:none;">⚙️ Admin</a></div>
 </footer>
@@ -1559,19 +1559,19 @@ function rstSnk(){snk=[{x:10,y:10},{x:9,y:10},{x:8,y:10}];sdir={x:1,y:0};ndir={x
 function placeF(){var ok=false;while(!ok){food={x:Math.floor(Math.random()*COLS),y:Math.floor(Math.random()*ROWS)};ok=true;for(var i=0;i<snk.length;i++)if(snk[i].x===food.x&&snk[i].y===food.y){ok=false;break;}}foodType=Math.floor(Math.random()*pwups.length);}
 function drawSnk(){
   snkCx.fillStyle='#111';snkCx.fillRect(0,0,480,480);
-  snkCx.strokeStyle='rgba(255,120,0,.04)';snkCx.lineWidth=.5;
+  snkCx.strokeStyle='rgba(29,185,84,.04)';snkCx.lineWidth=.5;
   for(var i=0;i<=COLS;i++){snkCx.beginPath();snkCx.moveTo(i*GRID,0);snkCx.lineTo(i*GRID,480);snkCx.stroke();}
   for(var i=0;i<=ROWS;i++){snkCx.beginPath();snkCx.moveTo(0,i*GRID);snkCx.lineTo(480,i*GRID);snkCx.stroke();}
   snkCx.font='18px serif';snkCx.textAlign='center';snkCx.textBaseline='middle';
   snkCx.fillText(pwups[foodType],food.x*GRID+GRID/2,food.y*GRID+GRID/2);
   snkCx.beginPath();snkCx.arc(food.x*GRID+GRID/2,food.y*GRID+GRID/2,14,0,Math.PI*2);
-  snkCx.fillStyle='rgba(255,120,0,'+(0.05+Math.sin(ticks2*.1)*.04)+')';snkCx.fill();
+  snkCx.fillStyle='rgba(29,185,84,'+(0.05+Math.sin(ticks2*.1)*.04)+')';snkCx.fill();
   for(var i=snk.length-1;i>=0;i--){
     var s=snk[i],op=1-i/(snk.length*1.5);
-    if(i===0){snkCx.fillStyle='#ff7800';snkCx.beginPath();snkCx.roundRect(s.x*GRID+1,s.y*GRID+1,GRID-2,GRID-2,6);snkCx.fill();snkCx.fillStyle='#111';var ex1=s.x*GRID+GRID*.3,ex2=s.x*GRID+GRID*.7,ey=s.y*GRID+GRID*.4;snkCx.beginPath();snkCx.arc(ex1,ey,2.5,0,Math.PI*2);snkCx.fill();snkCx.beginPath();snkCx.arc(ex2,ey,2.5,0,Math.PI*2);snkCx.fill();snkCx.fillStyle='#1a1a1a';snkCx.fillRect(s.x*GRID+3,s.y*GRID-2,GRID-6,5);snkCx.fillRect(s.x*GRID+6,s.y*GRID-7,GRID-12,7);}
-    else{var g=snkCx.createLinearGradient(s.x*GRID,s.y*GRID,s.x*GRID+GRID,s.y*GRID+GRID);g.addColorStop(0,'rgba(255,120,0,'+op+')');g.addColorStop(1,'rgba(255,120,0,'+op+')');snkCx.fillStyle=g;snkCx.beginPath();snkCx.roundRect(s.x*GRID+2,s.y*GRID+2,GRID-4,GRID-4,4);snkCx.fill();}
+    if(i===0){snkCx.fillStyle='#1db954';snkCx.beginPath();snkCx.roundRect(s.x*GRID+1,s.y*GRID+1,GRID-2,GRID-2,6);snkCx.fill();snkCx.fillStyle='#111';var ex1=s.x*GRID+GRID*.3,ex2=s.x*GRID+GRID*.7,ey=s.y*GRID+GRID*.4;snkCx.beginPath();snkCx.arc(ex1,ey,2.5,0,Math.PI*2);snkCx.fill();snkCx.beginPath();snkCx.arc(ex2,ey,2.5,0,Math.PI*2);snkCx.fill();snkCx.fillStyle='#1a1a1a';snkCx.fillRect(s.x*GRID+3,s.y*GRID-2,GRID-6,5);snkCx.fillRect(s.x*GRID+6,s.y*GRID-7,GRID-12,7);}
+    else{var g=snkCx.createLinearGradient(s.x*GRID,s.y*GRID,s.x*GRID+GRID,s.y*GRID+GRID);g.addColorStop(0,'rgba(29,185,84,'+op+')');g.addColorStop(1,'rgba(29,185,84,'+op+')');snkCx.fillStyle=g;snkCx.beginPath();snkCx.roundRect(s.x*GRID+2,s.y*GRID+2,GRID-4,GRID-4,4);snkCx.fill();}
   }
-  if(!gameOn2&&sscore>0){snkCx.fillStyle='rgba(0,0,0,.7)';snkCx.fillRect(0,180,480,120);snkCx.fillStyle='#ff7800';snkCx.font='bold 28px Playfair Display';snkCx.textAlign='center';snkCx.fillText('OYUN BİTTİ!',240,220);snkCx.font='16px DM Sans';snkCx.fillStyle='rgba(232,226,216,.6)';snkCx.fillText('Skor: '+sscore+(sscore>=highScore2?' — YENİ REKOR! 🏆':''),240,252);}
+  if(!gameOn2&&sscore>0){snkCx.fillStyle='rgba(0,0,0,.7)';snkCx.fillRect(0,180,480,120);snkCx.fillStyle='#1db954';snkCx.font='bold 28px Playfair Display';snkCx.textAlign='center';snkCx.fillText('OYUN BİTTİ!',240,220);snkCx.font='16px DM Sans';snkCx.fillStyle='rgba(232,226,216,.6)';snkCx.fillText('Skor: '+sscore+(sscore>=highScore2?' — YENİ REKOR! 🏆':''),240,252);}
 }
 function updSnk(){
   ticks2++;sdir=ndir;var head={x:snk[0].x+sdir.x,y:snk[0].y+sdir.y};
@@ -2096,14 +2096,14 @@ var hkW=360,hkH=500,hkBall,hkP,hkAI,hkScore,hkRunning=false,hkAnim;
 function rstHockeyState(){hkBall={x:180,y:250,vx:3,vy:3,r:10};hkP={x:180,y:440,r:24};hkAI={x:180,y:60,r:24};hkScore={p:0,ai:0};}
 function drawHockey(){
   hkCx.fillStyle='#1a2a1a';hkCx.fillRect(0,0,hkW,hkH);
-  hkCx.strokeStyle='rgba(255,120,0,.2)';hkCx.lineWidth=2;hkCx.beginPath();hkCx.moveTo(0,hkH/2);hkCx.lineTo(hkW,hkH/2);hkCx.stroke();
+  hkCx.strokeStyle='rgba(29,185,84,.2)';hkCx.lineWidth=2;hkCx.beginPath();hkCx.moveTo(0,hkH/2);hkCx.lineTo(hkW,hkH/2);hkCx.stroke();
   hkCx.beginPath();hkCx.arc(hkW/2,hkH/2,50,0,Math.PI*2);hkCx.stroke();
   // Goals
-  hkCx.fillStyle='rgba(255,120,0,.15)';hkCx.fillRect(120,0,120,6);hkCx.fillRect(120,hkH-6,120,6);
+  hkCx.fillStyle='rgba(29,185,84,.15)';hkCx.fillRect(120,0,120,6);hkCx.fillRect(120,hkH-6,120,6);
   // Ball
   hkCx.beginPath();hkCx.arc(hkBall.x,hkBall.y,hkBall.r,0,Math.PI*2);hkCx.fillStyle='#e8e2d8';hkCx.fill();
   // Player
-  hkCx.beginPath();hkCx.arc(hkP.x,hkP.y,hkP.r,0,Math.PI*2);hkCx.fillStyle='#ff7800';hkCx.fill();
+  hkCx.beginPath();hkCx.arc(hkP.x,hkP.y,hkP.r,0,Math.PI*2);hkCx.fillStyle='#1db954';hkCx.fill();
   // AI
   hkCx.beginPath();hkCx.arc(hkAI.x,hkAI.y,hkAI.r,0,Math.PI*2);hkCx.fillStyle='#8b3a3a';hkCx.fill();
 }
@@ -2139,10 +2139,10 @@ function rstPlatform(){
 }
 function drawPlatform(){
   pfCx.fillStyle='#0a0a14';pfCx.fillRect(0,0,pfW,pfH);
-  pfPlats.forEach(function(p){pfCx.fillStyle='#2a2520';pfCx.fillRect(p.x,p.y,p.w,p.h);pfCx.fillStyle='rgba(255,120,0,.3)';pfCx.fillRect(p.x,p.y,p.w,2);});
-  pfCoins.forEach(function(c){if(!c.got){pfCx.fillStyle='#ff7800';pfCx.beginPath();pfCx.arc(c.x+6,c.y+6,6,0,Math.PI*2);pfCx.fill();}});
+  pfPlats.forEach(function(p){pfCx.fillStyle='#2a2520';pfCx.fillRect(p.x,p.y,p.w,p.h);pfCx.fillStyle='rgba(29,185,84,.3)';pfCx.fillRect(p.x,p.y,p.w,2);});
+  pfCoins.forEach(function(c){if(!c.got){pfCx.fillStyle='#1db954';pfCx.beginPath();pfCx.arc(c.x+6,c.y+6,6,0,Math.PI*2);pfCx.fill();}});
   // Player (hat-wearing character)
-  pfCx.fillStyle='#ff7800';pfCx.fillRect(pfPlayer.x,pfPlayer.y,pfPlayer.w,pfPlayer.h);
+  pfCx.fillStyle='#1db954';pfCx.fillRect(pfPlayer.x,pfPlayer.y,pfPlayer.w,pfPlayer.h);
   // tiny hat on player
   pfCx.fillStyle='#1a1a1a';pfCx.fillRect(pfPlayer.x-3,pfPlayer.y-6,pfPlayer.w+6,5);pfCx.fillRect(pfPlayer.x+2,pfPlayer.y-12,pfPlayer.w-4,8);
 }
@@ -2179,13 +2179,13 @@ function drawFootball(){
   // Goal line
   fbCx.strokeStyle='rgba(255,255,255,.3)';fbCx.lineWidth=2;fbCx.beginPath();fbCx.moveTo(88,160);fbCx.lineTo(272,160);fbCx.stroke();
   // GK
-  fbCx.fillStyle='#ff7800';fbCx.fillRect(fbGK.x,fbGK.y,fbGK.w,fbGK.h);
+  fbCx.fillStyle='#1db954';fbCx.fillRect(fbGK.x,fbGK.y,fbGK.w,fbGK.h);
   // ball hat detail
   fbCx.fillStyle='#222';fbCx.fillRect(fbGK.x+5,fbGK.y-5,fbGK.w-10,8);
   // Ball
   fbCx.beginPath();fbCx.arc(fbBall.x,fbBall.y,fbBall.r,0,Math.PI*2);fbCx.fillStyle='#fff';fbCx.fill();fbCx.strokeStyle='#333';fbCx.lineWidth=1;fbCx.stroke();
   // Aim line
-  if(fbState==='aim'){fbCx.strokeStyle='rgba(255,120,0,.3)';fbCx.setLineDash([4,4]);fbCx.beginPath();fbCx.moveTo(fbBall.x,fbBall.y);fbCx.lineTo(fbBall.x,90);fbCx.stroke();fbCx.setLineDash([]);}
+  if(fbState==='aim'){fbCx.strokeStyle='rgba(29,185,84,.3)';fbCx.setLineDash([4,4]);fbCx.beginPath();fbCx.moveTo(fbBall.x,fbBall.y);fbCx.lineTo(fbBall.x,90);fbCx.stroke();fbCx.setLineDash([]);}
   // Status
   fbCx.fillStyle='rgba(255,255,255,.5)';fbCx.font='14px DM Sans';fbCx.textAlign='center';
   if(fbState==='goal')fbCx.fillText('GOL! 🎉',180,220);
@@ -2294,9 +2294,9 @@ function admInitDashboard(){
 
   // Donut
   admDrawDonut('admDonut','admDonutLegend',[
-    {label:'Şapka',val:58,color:'#ff7800'},
-    {label:'Tişört',val:35,color:'#ff9933'},
-    {label:'Aksesuar',val:7,color:'#cc5500'}
+    {label:'Şapka',val:58,color:'#1db954'},
+    {label:'Tişört',val:35,color:'#4cdf82'},
+    {label:'Aksesuar',val:7,color:'#0d6b30'}
   ]);
 
   // Recent orders
@@ -2473,9 +2473,9 @@ function admInitAnalytics(){
 
   // Device donut
   admDrawDonut('admDeviceDonut','admDeviceLegend',[
-    {label:'Mobil',val:68,color:'#ff7800'},
-    {label:'Masaüstü',val:26,color:'#ff9933'},
-    {label:'Tablet',val:6,color:'#cc5500'}
+    {label:'Mobil',val:68,color:'#1db954'},
+    {label:'Masaüstü',val:26,color:'#4cdf82'},
+    {label:'Tablet',val:6,color:'#0d6b30'}
   ]);
 
   // Cities
